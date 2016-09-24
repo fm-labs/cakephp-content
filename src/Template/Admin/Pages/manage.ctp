@@ -23,28 +23,51 @@ $this->assign('title', $content->title);
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <i class="fa fa-page"></i>
+            <i class="fa fa-file-o"></i>
             <strong><?= __d('content', 'Page'); ?></strong>
             <?= h($content->title); ?>
         </div>
         <div class="panel-body">
 
-            Public URL:
-            <?= $this->Ui->link(
-                $this->Html->Url->build($content->url, true),
-                $content->url,
-                ['target' => '_blank', 'data-icon' => 'external']
-            ); ?>
-            <div class="actions">
+            <div class="row">
+                <div class="col-md-8">
 
-                <?= $this->Html->link(__d('content', 'Edit {0}', __d('content', 'Page')),
-                    [ 'action' => 'edit', $content->id ],
-                    [ 'class' => 'edit link-frame-modal btn btn-primary btn-sm', 'data-icon' => 'edit']);
-                ?>
+                    Public URL:
+                    <?= $this->Ui->link(
+                        $this->Html->Url->build($content->url, true),
+                        $content->url,
+                        ['target' => '_blank', 'data-icon' => 'external']
+                    ); ?>
+                </div>
+                <div class="col-md-4">
+                    <div class="actions right grouped">
+                        <ul>
+                            <li><?= $this->Html->link(__d('content', 'Edit'),
+                                    [ 'action' => 'edit', $content->id ],
+                                    [ 'class' => 'edit link-frame-modal btn btn-primary btn-sm', 'data-icon' => 'edit']);
+                                ?>
+                            </li>
+                            <li><?= $this->Html->link(__d('content', 'Preview'),
+                                    [ 'action' => 'preview', $content->id ],
+                                    [ 'class' => 'preview link-frame-modal btn btn-primary btn-sm', 'data-icon' => 'eye', 'target' => '_preview']);
+                                ?>
+                            </li>
+                            <li><?= $this->Html->link(__d('content', 'Delete'),
+                                    [ 'action' => 'delete', $content->id ],
+                                    [ 'class' => 'delete btn btn-danger btn-sm',
+                                        'data-icon' => 'trash-o',
+                                        'confirm' => __d('content', 'Sure ?'),
+                                    ]);
+                                ?>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="panel-body">
 
+        </div>
+
+        <div class="panel-body">
 
             <?php $this->Tabs->start(); ?>
             <?php
@@ -55,6 +78,14 @@ $this->assign('title', $content->title);
                 ]);
             }
 
+            $this->Tabs->add(__d('content', 'Edit'), [
+                'url' => ['action' => 'edit', $content->id]
+            ]);
+
+            $this->Tabs->add(__d('content', 'Page Details'), [
+                'url' => ['action' => 'view', $content->id]
+            ]);
+
             $this->Tabs->add(__d('content', 'Meta'), [
                 'url' => ['action' => 'relatedPageMeta', $content->id]
             ]);
@@ -63,9 +94,6 @@ $this->assign('title', $content->title);
             //    'url' => ['action' => 'relatedPageMeta', $content->id]
             //]);
 
-            $this->Tabs->add(__d('content', 'Page Details'), [
-                'url' => ['action' => 'view', $content->id]
-            ]);
 
             $this->Tabs->add(__d('content', 'Content Modules'), [
                 'url' => ['action' => 'relatedContentModules', $content->id]
