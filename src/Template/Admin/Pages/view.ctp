@@ -41,7 +41,9 @@ $this->assign('title', $content->title);
                 }
             ],
             'is_published' => ['formatter' => 'boolean'],
-            'url' => ['formatter' => 'link']
+            'url' => [
+                'formatter' => ['link' => ['target' => '_blank']]
+            ]
         ],
         'exclude' => ['id', 'level', 'lft', 'rght', 'meta', 'meta_lang', 'meta_title', 'meta_desc', 'meta_keywords', 'meta_robots', 'parent_page', 'content_modules', 'posts']
     ]); ?>
