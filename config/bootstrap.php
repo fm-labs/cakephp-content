@@ -9,6 +9,59 @@ if (!Configure::read('Content')) {
 }
 
 /**
+ * Default Content setup
+ */
+ContentManager::register('PageType', [
+    'root' =>  [
+        'name' => 'Website Root',
+        'class' => 'Content\Page\RootPageType'
+    ],
+    'content' => [
+        'name' => 'Content Page',
+        'class' => 'Content\Page\ContentPageType'
+    ],
+    'static' => [
+        'name' => 'Static Page',
+        'class' => 'Content\Page\StaticPageType'
+    ],
+    'redirect' => [
+        'name' => 'Redirect',
+        'class' => 'Content\Page\RedirectPageType'
+    ],
+    'controller' => [
+        'name' => 'Controller',
+        'class' => 'Content\Page\ControllerPageType'
+    ],
+]);
+
+ContentManager::register('ContentModule', [
+    'Flexslider' => [
+        'class' => 'Content.Flexslider'
+    ],
+    'HtmlElement' => [
+        'class' => 'Content.HtmlElement'
+    ],
+    'PostsList' => [
+        'class' => 'Content.PostsList'
+    ],
+    'PostsView' => [
+        'class' => 'Content.PostsView'
+    ],
+    'TextHtml' => [
+        'class' => 'Content.TextHtml'
+    ],
+    'PagesMenu' => [
+        'class' => 'Content.PagesMenu'
+    ],
+    'PagesSubmenu' => [
+        'class' => 'Content.PagesSubmenu'
+    ],
+    'Image' => [
+        'class' => 'Content.Image'
+    ]
+]);
+
+/**
  * Core Content plugins (required)
  */
 Plugin::load('Backend', ['bootstrap' => true, 'routes' => true]);

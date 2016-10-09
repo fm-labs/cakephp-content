@@ -31,8 +31,15 @@ $this->assign('title', $content->title);
             <?php
             echo $this->Form->input('title');
             echo $this->Form->input('slug');
-            echo $this->Form->input('type', ['id' => 'select-type']);
+            echo $this->Form->input('type', [
+                'id' => 'select-type',
+                'class' => 'select-ajax',
+                'data-target' => 'select-type-params-form',
+                'data-url' => ['action' => 'ajaxPageTypeForm']
+            ]);
             ?>
+            <div id="select-type-params-form"></div>
+            <!--
             <div class="select-type select-type-redirect select-type-root">
                 <?php
                 echo $this->Form->input('redirect_location', [
@@ -61,6 +68,7 @@ $this->assign('title', $content->title);
                 ]);
                 ?>
             </div>
+            -->
         </div>
         <div class="col-md-3">
 
@@ -110,7 +118,6 @@ $this->assign('title', $content->title);
 
     <?= $this->Form->end() ?>
     <!-- EOF PAGE EDIT FORM -->
-
 
 </div>
 

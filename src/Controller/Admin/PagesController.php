@@ -217,10 +217,6 @@ class PagesController extends ContentController
 
     public function edit($id = null)
     {
-        if (!$this->request->is('ajax')) {
-            $this->redirect(['action' => 'index', 'id' => $id]);
-        }
-
         $content = $this->Pages->get($id, [
             'contain' => ['PageLayouts', 'Posts']
         ]);

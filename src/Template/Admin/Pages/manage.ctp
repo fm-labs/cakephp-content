@@ -31,7 +31,8 @@ $this->assign('title', $content->title);
 
             <div class="row">
                 <div class="col-md-8">
-
+                    Page Type: <?= h($content->type); ?> <?= $this->Html->link(__('Change type'), ['action' => 'editPageType']); ?>
+                    <br />
                     Public URL:
                     <?= $this->Ui->link(
                         $this->Html->Url->build($content->url, true),

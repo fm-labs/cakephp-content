@@ -1,6 +1,8 @@
 <?php
 namespace Content\Lib;
 
+use Cake\Core\App;
+use Cake\Utility\Hash;
 use Content\Model\Entity\Page;
 use Content\Model\Entity\PageTypeTrait;
 use Cake\Core\Configure;
@@ -14,8 +16,16 @@ class ContentManager
 
     public static $version;
 
+    public static $registry = [
+        'PageType' => [],
+        'ContentModule' => []
+    ];
+
     protected static $_hooks;
 
+    /**
+     * @return string Content plugin version nummer
+     */
     public static function version()
     {
         if (!isset(static::$version)) {
@@ -24,11 +34,39 @@ class ContentManager
         return static::$version;
     }
 
+    /**
+     * @param $type
+     * @param $config
+     *
+     * Config:
+     * - className
+     */
+    public static function register($scope, $key, $config = null)
+    {
+        if (is_array($key) && $config === null) {
+            foreach ($key as $_key => $_config) {
+                self::register($scope, $_key, $_config);
+            }
+            return;
+        }
+
+
+        self::$registry[$scope][$key] = $config;
+    }
+
+    /**
+     * @param $type
+     * @param callable $callback
+     * @unused
+     */
     public static function hook($type, callable $callback)
     {
 
     }
 
+    /**
+     * @unused
+     */
     public static function bootstrap()
     {
         $config = Configure::read('Content');
@@ -37,6 +75,9 @@ class ContentManager
         }
     }
 
+    /**
+     * @unused
+     */
     public static function bootstrapConfigs()
     {
         if (Configure::check('Content.configs')) {
@@ -46,6 +87,9 @@ class ContentManager
         }
     }
 
+    /**
+     * @unused
+     */
     public static function bootstrapPlugins()
     {
         if (Configure::check('Content.plugins')) {
@@ -63,6 +107,9 @@ class ContentManager
         }
     }
 
+    /**
+     * @unused
+     */
     public static function routes()
     {
         // @todo Implement me
@@ -78,7 +125,7 @@ class ContentManager
     public static function getDefaultPageLayout()
     {
         $PageLayouts = TableRegistry::get('Content.PageLayouts');
-        $pageLayout = $PageLayouts->find('first')->where(['is_default' => true]);
+        $pageLayout = $PageLayouts->find()->where(['is_default' => true])->first();
         return $pageLayout;
     }
 
@@ -93,9 +140,10 @@ class ContentManager
             'controller' => 'Content\Page\ControllerPageType',
             'shop_category' => 'Shop\Page\ShopCategoryPageType',
         ];
+        $handlers = self::$registry['PageType'];
 
         if (isset($handlers[$pageType])) {
-            return new $handlers[$pageType]($page);
+            return new $handlers[$pageType]['class']($page);
         }
 
         return null;
@@ -103,38 +151,7 @@ class ContentManager
 
     public static function getModulesAvailable()
     {
-        $modules =  [
-            'Flexslider' => [
-                'class' => 'Content.Flexslider'
-            ],
-            'HtmlElement' => [
-                'class' => 'Content.HtmlElement'
-            ],
-            'PostsList' => [
-                'class' => 'Content.PostsList'
-            ],
-            'PostsView' => [
-                'class' => 'Content.PostsView'
-            ],
-            'TextHtml' => [
-                'class' => 'Content.TextHtml'
-            ],
-            'PagesMenu' => [
-                'class' => 'Content.PagesMenu'
-            ],
-            'PagesSubmenu' => [
-                'class' => 'Content.PagesSubmenu'
-            ],
-            'Image' => [
-                'class' => 'Content.Image'
-            ]
-        ];
-
-        if (Configure::check('Content.modules')) {
-            $modules = array_merge($modules, Configure::read('Content.modules'));
-        }
-
-        return $modules;
+        return self::$registry['ContentModule'];
     }
 
 
@@ -275,7 +292,6 @@ class ContentManager
         ];
     }
 
-
     /**
      * @deprecated Use getContentSections() instead
      */
@@ -285,6 +301,12 @@ class ContentManager
     }
 
 
+    /**
+     * Find content view templates in app, plugins and themes templates
+     * @param $path
+     * @param null $filter
+     * @return array
+     */
     public static function getAvailableViewTemplates($path, $filter = null)
     {
         $path = 'Template/' . $path;
@@ -359,19 +381,8 @@ class ContentManager
 
     public static function getAvailablePageTypes()
     {
-        return [
-            'content' => 'Content',
-            'blog_category' => 'Blog Category',
-            'controller' => 'Controller',
-            //'cell' => 'Cell',
-            //'module' => 'Module',
-            //'page' => 'Page',
-            'redirect' => 'Redirect',
-            'root' => 'Website Root',
-            'static' => 'Static',
-            'shop_category' => 'ShopCategory',
-            'shop_product' => 'ShopProduct'
-        ];
+        $names = Hash::extract(self::$registry['PageType'], '{s}.name');
+        return array_combine(array_keys(self::$registry['PageType']), $names);
     }
 
     /**
