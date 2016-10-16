@@ -1,4 +1,5 @@
 <?php
+$this->loadHelper('Bootstrap.Panel');
 $this->loadHelper('Bootstrap.Tabs');
 //$this->extend('/Admin/Content/edit');
 
@@ -21,54 +22,57 @@ $this->assign('title', $content->title);
 ?>
 <div class="pages">
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <i class="fa fa-file-o"></i>
-            <strong><?= __d('content', 'Page'); ?></strong>
-            <?= h($content->title); ?>
-        </div>
-        <div class="panel-body">
+    <?php
+    $this->Panel->create();
+    $this->Panel->addAction(__d('content', 'Edit'),
+        [ 'action' => 'edit', $content->id ],
+        [ 'class' => 'link-edit link-frame-modal btn btn-default btn-sm', 'data-icon' => 'edit']);
+    $this->Panel->addAction(__d('content', 'Change Page Type'),
+        [ 'action' => 'editPageType', $content->id ],
+        [ 'class' => 'link-edit link-frame-modal btn btn-default btn-sm', 'data-icon' => 'edit']);
+    $this->Panel->addAction(__d('content', 'Preview'),
+        [ 'action' => 'preview', $content->id ],
+        [ 'class' => 'link-preview link-frame-modal btn btn-default btn-sm', 'data-icon' => 'eye', 'target' => '_preview']);
+    $this->Panel->addAction(__d('content', 'Delete'),
+        [ 'action' => 'delete', $content->id ],
+        [ 'class' => 'link-delete btn btn-danger btn-sm',
+            'data-icon' => 'trash-o',
+            'confirm' => __d('content', 'Sure ?'),
+        ]);
+    ?>
+    <?php $this->Panel->heading(); ?>
+        <i class="fa fa-file-o"></i>
+        <strong><?= __d('content', 'Page'); ?></strong>
+        <?= h($content->title); ?>
 
-            <div class="row">
-                <div class="col-md-8">
-                    Page Type: <?= h($content->type); ?> <?= $this->Html->link(__('Change type'), ['action' => 'editPageType']); ?>
-                    <br />
-                    Public URL:
-                    <?= $this->Ui->link(
-                        $this->Html->Url->build($content->url, true),
-                        $content->url,
-                        ['target' => '_blank', 'data-icon' => 'external']
-                    ); ?>
-                </div>
-                <div class="col-md-4">
-                    <div class="actions right grouped">
-                        <ul>
-                            <li><?= $this->Html->link(__d('content', 'Edit'),
-                                    [ 'action' => 'edit', $content->id ],
-                                    [ 'class' => 'edit link-frame-modal btn btn-primary btn-sm', 'data-icon' => 'edit']);
-                                ?>
-                            </li>
-                            <li><?= $this->Html->link(__d('content', 'Preview'),
-                                    [ 'action' => 'preview', $content->id ],
-                                    [ 'class' => 'preview link-frame-modal btn btn-primary btn-sm', 'data-icon' => 'eye', 'target' => '_preview']);
-                                ?>
-                            </li>
-                            <li><?= $this->Html->link(__d('content', 'Delete'),
-                                    [ 'action' => 'delete', $content->id ],
-                                    [ 'class' => 'delete btn btn-danger btn-sm',
-                                        'data-icon' => 'trash-o',
-                                        'confirm' => __d('content', 'Sure ?'),
-                                    ]);
-                                ?>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <?php $this->Panel->body(); ?>
+    <?= $this->cell('Backend.EntityView', [ $content ], [
+            'title' => false,
+            'model' => 'Content.Pages',
+            'fields' => [
+                'title' => [
+                    'formatter' => function($val, $entity) {
+                        return $this->Html->link($val, ['action' => 'edit', $entity->id], ['class' => 'link-frame']);
+                    }
+                ],
+                'type' => [
+                    'formatter' => function($val) {
+                        $html = h($val);
+                        $html .= "&nbsp;";
+                        $html .= $this->Html->link(__('Change type'), ['action' => 'editPageType']);
+                        return $html;
+                    }
+                ],
+                'is_published' => ['formatter' => 'boolean'],
+                'url' => [
+                    'formatter' => ['link' => ['target' => '_blank']]
+                ]
+            ],
+            'exclude' => '*'
+        ]); ?>
+    <?= $this->Panel->render(); ?>
 
-        </div>
-
-        <div class="panel-body">
+    <?= $this->Panel->create(); ?>
 
             <?php $this->Tabs->start(); ?>
             <?php

@@ -25,12 +25,22 @@ $this->assign('title', $content->title);
 
     <?= $this->Form->create($content, ['novalidate' => 'novalidate']); ?>
 
+    <div class="actions">
+        <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
+    </div>
     <div class="row">
         <div class="col-md-9">
-
+            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Page'), 'collapsed' => false]); ?>
+            <?php
+            echo $this->Form->input('parent_id',
+                ['options' => $pagesTree, 'empty' => '- Root Node -']);
+            ?>
             <?php
             echo $this->Form->input('title');
             echo $this->Form->input('slug');
+            ?>
+            <!--
+            <?php
             echo $this->Form->input('type', [
                 'id' => 'select-type',
                 'class' => 'select-ajax',
@@ -39,6 +49,7 @@ $this->assign('title', $content->title);
             ]);
             ?>
             <div id="select-type-params-form"></div>
+            -->
             <!--
             <div class="select-type select-type-redirect select-type-root">
                 <?php
@@ -69,52 +80,75 @@ $this->assign('title', $content->title);
                 ?>
             </div>
             -->
-        </div>
-        <div class="col-md-3">
-
-            <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary btn-block']) ?>
-
-            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => true]); ?>
-            <?= $this->Form->input('hide_in_nav'); ?>
-            <?= $this->Form->input('hide_in_sitemap'); ?>
             <?= $this->Form->fieldsetEnd(); ?>
 
+
+            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => true]); ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $this->Form->input('hide_in_nav'); ?>
+                </div>
+                <div class="col-md-6">
+                    <?= $this->Form->input('hide_in_sitemap'); ?>
+                </div>
+            </div>
+            <?= $this->Form->fieldsetEnd(); ?>
+
+
+            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => true]); ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <?php
+                    echo $this->Form->input('page_layout_id',
+                        ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
+                    ?>
+                    <?php
+                    if ($content->page_layout_id) {
+                        echo $this->Html->link('Edit Layout', '#');
+                    }
+                    ?>
+                </div>
+                <div class="col-md-6">
+                    <?php
+                    echo $this->Form->input('page_template',
+                        //['type' => 'text']
+                        ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
+                    );
+                    ?>
+                </div>
+            </div>
+            <?= $this->Form->fieldsetEnd(); ?>
+
+
+            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => true]); ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $this->Form->input('cssid'); ?>
+                </div>
+                <div class="col-md-6">
+                    <?= $this->Form->input('cssclass'); ?>
+                </div>
+            </div>
+            <?= $this->Form->fieldsetEnd(); ?>
+
+        </div>
+        <div class="col-md-3">
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
             <?php
             echo $this->Form->input('is_published');
-            echo $this->Form->input('publish_start_date', ['type' => 'datepicker']);
-            echo $this->Form->input('publish_end_date', ['type' => 'datepicker']);
             ?>
+            <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
+            <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
             <?= $this->Form->fieldsetEnd(); ?>
 
-
-            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
-            <?php
-            echo $this->Form->input('parent_id',
-                ['options' => $pagesTree, 'empty' => '- Root Node -']);
-            ?>
-            <?php
-            echo $this->Form->input('page_layout_id',
-                ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
-
-            if ($content->page_layout_id) {
-                echo $this->Html->link('Edit Layout', '#');
-            }
-            ?>
-            <?php
-            echo $this->Form->input('page_template',
-                //['type' => 'text']
-                ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
-            );
-            ?>
-            <?= $this->Form->input('cssid'); ?>
-            <?= $this->Form->input('cssclass'); ?>
-            <?= $this->Form->fieldsetEnd(); ?>
         </div>
+
     </div>
 
-
+    <div class="actions">
+        <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
+    </div>
 
     <?= $this->Form->end() ?>
     <!-- EOF PAGE EDIT FORM -->
