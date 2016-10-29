@@ -224,7 +224,7 @@ class PagesController extends ContentController
             $content = $this->Pages->patchEntity($content, $this->request->data);
             if ($this->Pages->save($content)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                return $this->redirect(['action' => 'edit', $content->id]);
+                return $this->redirect(['action' => 'manage', $content->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }

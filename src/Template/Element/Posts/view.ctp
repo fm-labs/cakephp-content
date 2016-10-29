@@ -6,9 +6,9 @@ if (!$post->is_published) {
 try {
     $action = 'view';
     //@TODO only rely on use_teaser flag
-    if ($post->teaser_html || $post->use_teaser) {
-        $action = 'teaser';
-    }
+    //if ($post->teaser_html || $post->use_teaser) {
+    //    $action = 'teaser';
+    //}
     $url = $this->Url->build(['plugin' => 'Content', 'controller' => 'Posts', 'action' => $action, $post->id]);
     echo $this->requestAction($url);
 } catch (\Exception $ex) {

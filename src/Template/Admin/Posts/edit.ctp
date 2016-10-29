@@ -1,17 +1,22 @@
-<?php $this->Html->addCrumb(__d('content','Posts'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','Edit {0}', __d('content','Post'))); ?>
-<?php $this->loadHelper('Bootstrap.Tabs'); ?>
+<?php
+if ($post->ref && $post->ref instanceof \Content\Model\Entity\Page) {
+    $this->Html->addCrumb($post->ref->title, ['controller' => 'Pages', 'action' => 'manage', $post->ref->id]);
+} else {
+    $this->Html->addCrumb(__d('content','Posts'), ['action' => 'index']);
+    $this->Html->addCrumb(__d('content','Edit {0}', __d('content','Post')));
+}
+?>
 <?php
 // TOOLBAR
 
 $this->Toolbar->addPostLink([
     'title' => __d('content','Delete'),
-    'url' => ['action' => 'delete', $content->id],
-    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $content->id)],
+    'url' => ['action' => 'delete', $post->id],
+    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
 $this->Toolbar->addLink([
     'title' => __d('content','View'),
-    'url' => ['action' => 'view', $content->id],
+    'url' => ['action' => 'view', $post->id],
     'attr' => ['data-icon' => 'eye']
 ]);
 $this->Toolbar->addLink([
@@ -20,16 +25,16 @@ $this->Toolbar->addLink([
     'attr' => ['data-icon' => 'list']
 ]);
 
-$this->assign('heading', __d('content','Edit {0}', __d('content','Post')));
-$this->assign('title', sprintf('%s [%s #%s]', $content->title, 'Post', $content->id));
+$this->extend('/Admin/Content/edit');
+$this->assign('heading', $post->title);
+$this->assign('title', $post->title);
 
 // HtmlEditor config
 $editor = \Cake\Core\Configure::read('Content.HtmlEditor.default');
-$editor['body_class'] = $content->cssclass;
-$editor['body_id'] = $content->cssid;
+$editor['body_class'] = $post->cssclass;
+$editor['body_id'] = $post->cssid;
 ?>
-<?= $this->Form->create($content); ?>
-<h1><?= sprintf('%s [%s #%s]', $content->title, 'Post', $content->id); ?></h1>
+<?= $this->Form->create($post); ?>
 <div class="row">
     <div class="col-md-9">
 
@@ -38,7 +43,7 @@ $editor['body_id'] = $content->cssid;
         echo $this->Form->input('slug');
         //echo $this->Form->input('subheading');
         ?>
-        <?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($content->use_teaser || $content->teaser_html)]);  ?>
+        <?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
         <?php
         echo $this->Form->input('use_teaser');
         echo $this->Form->input('teaser_html', [
@@ -92,18 +97,18 @@ $editor['body_id'] = $content->cssid;
         <?= $this->cell('Media.ImageSelect', [[
             'label' => 'Teaser Image',
             'model' => 'Content.Posts',
-            'id' => $content->id,
+            'id' => $post->id,
             'scope' => 'teaser_image_file',
-            'image' => $content->teaser_image_file,
+            'image' => $post->teaser_image_file,
             'imageOptions' => ['width' => 200]
         ]]); ?>
 
         <?= $this->cell('Media.ImageSelect', [[
             'label' => 'Primary Image',
             'model' => 'Content.Posts',
-            'id' => $content->id,
+            'id' => $post->id,
             'scope' => 'image_file',
-            'image' => $content->image_file,
+            'image' => $post->image_file,
             'imageOptions' => ['width' => 200]
         ]]); ?>
 
@@ -111,10 +116,10 @@ $editor['body_id'] = $content->cssid;
         <?= $this->cell('Media.ImageSelect', [[
             'label' => 'Additional Images',
             'model' => 'Content.Posts',
-            'id' => $content->id,
+            'id' => $post->id,
             'scope' => 'image_files',
             'multiple' => true,
-            'image' => $content->image_files,
+            'image' => $post->image_files,
             'imageOptions' => ['width' => 200]
         ]]); ?>
         <?= $this->Form->fieldsetEnd(); ?>

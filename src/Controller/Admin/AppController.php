@@ -26,7 +26,7 @@ class AppController extends BaseAdminAppController
 
         $locale = $this->request->query('locale');
         $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
-        $this->Auth->allow();
+        //$this->Auth->allow();
     }
 
     public function beforeRender(Event $event)

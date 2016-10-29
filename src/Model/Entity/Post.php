@@ -178,6 +178,19 @@ class Post extends Entity
         return ['plugin' => $ref[0], 'controller' => $ref[1], 'action' => 'view', $this->refid];
     }
 
+    protected function _getRef()
+    {
+        if (!$this->refscope || !$this->refid) {
+            return null;
+        }
+
+        if (isset($this->_properties['ref'])) {
+            return $this->_properties['ref'];
+        }
+
+        $Model = TableRegistry::get($this->refscope);
+        return $this->_properties['ref'] = $Model->get($this->refid);
+    }
 
 
     /*

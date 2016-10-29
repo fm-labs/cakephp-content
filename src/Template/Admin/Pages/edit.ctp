@@ -1,6 +1,6 @@
 <?php
 //$this->loadHelper('Bootstrap.Tabs');
-//$this->extend('/Admin/Content/edit');
+$this->extend('/Admin/Content/edit');
 
 
 // EXTEND: TOOLBAR
@@ -25,9 +25,6 @@ $this->assign('title', $content->title);
 
     <?= $this->Form->create($content, ['novalidate' => 'novalidate']); ?>
 
-    <div class="actions">
-        <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
-    </div>
     <div class="row">
         <div class="col-md-9">
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Page'), 'collapsed' => false]); ?>

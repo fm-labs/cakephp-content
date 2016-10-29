@@ -43,13 +43,14 @@ class HtmlEditorController extends AppController
             $_list = [];
             try {
                 $this->loadModel('Content.Pages');
-                $result = $this->Pages->find()->contain([])->all()->toArray();
+                $result = $this->Pages->find()->contain([])->order('Pages.lft')->all()->toArray();
 
                 array_walk($result, function($entity) use (&$_list) {
                     $_list[] = [
                         'title' => str_repeat('_', $entity->level) . $entity->title,
                         //'value' => Router::url($entity->url, true)
-                        'value' => sprintf('{{Content.Pages:%s}}', $entity->id)
+                        'value' => sprintf('{{Content.Pages:%s}}', $entity->id),
+                        //'class' => 'foo'
                     ];
                 });
 

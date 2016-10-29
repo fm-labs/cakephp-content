@@ -26,7 +26,7 @@ $this->assign('title', $content->title);
     $this->Panel->create();
     $this->Panel->addAction(__d('content', 'Edit'),
         [ 'action' => 'edit', $content->id ],
-        [ 'class' => 'link-edit link-frame-modal btn btn-default btn-sm', 'data-icon' => 'edit']);
+        [ 'class' => 'link-edit btn btn-default btn-sm', 'data-icon' => 'edit']);
     $this->Panel->addAction(__d('content', 'Change Page Type'),
         [ 'action' => 'editPageType', $content->id ],
         [ 'class' => 'link-edit link-frame-modal btn btn-default btn-sm', 'data-icon' => 'edit']);
@@ -52,7 +52,7 @@ $this->assign('title', $content->title);
             'fields' => [
                 'title' => [
                     'formatter' => function($val, $entity) {
-                        return $this->Html->link($val, ['action' => 'edit', $entity->id], ['class' => 'link-frame']);
+                        return $this->Html->link($val, ['action' => 'edit', $entity->id]);
                     }
                 ],
                 'type' => [
@@ -65,13 +65,25 @@ $this->assign('title', $content->title);
                 ],
                 'is_published' => ['formatter' => 'boolean'],
                 'url' => [
-                    'formatter' => ['link' => ['target' => '_blank']]
+                    'formatter' => function($val) {
+                        return $this->Html->link($this->Html->Url->build($val), $val, ['target' => '_blank']);
+                    }
                 ]
             ],
             'exclude' => '*'
         ]); ?>
     <?= $this->Panel->render(); ?>
 
+    <?php
+    $typeElement = 'Content.Admin/Pages/manage_' . $content->type;
+    if ($this->elementExists($typeElement)) {
+        echo $this->element($typeElement, ['page' => $content]);
+    } else {
+        echo "Page type element not found: $typeElement";
+    }
+    ?>
+
+    <!--
     <?= $this->Panel->create(); ?>
 
             <?php $this->Tabs->start(); ?>
@@ -83,9 +95,9 @@ $this->assign('title', $content->title);
                 ]);
             }
 
-            $this->Tabs->add(__d('content', 'Edit'), [
-                'url' => ['action' => 'edit', $content->id]
-            ]);
+            //$this->Tabs->add(__d('content', 'Edit'), [
+            //    'url' => ['action' => 'edit', $content->id]
+            //]);
 
             $this->Tabs->add(__d('content', 'Page Details'), [
                 'url' => ['action' => 'view', $content->id]
@@ -107,6 +119,7 @@ $this->assign('title', $content->title);
             ?>
         </div>
     </div>
+    -->
 
 
 </div>

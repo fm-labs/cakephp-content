@@ -41,7 +41,7 @@ $defaultJsTree = [
         ],
         'check_callback' => true,
     ],
-    'plugins' => ['wholerow']
+    'plugins' => ['wholerow', 'state']
 ];
 $jsTree = $this->get('jsTree', $defaultJsTree);
 ?>
@@ -57,7 +57,7 @@ $jsTree = $this->get('jsTree', $defaultJsTree);
 
     <div class="row">
         <div class="col-sm-4 col-md-3">
-            <div class="panel panel-primary panel-nopad">
+            <div class="panel panel-primary panel-nopad no-border">
                 <?php if ($this->fetch('treeHeading')): ?>
                 <div class="panel-heading">
                     <?= $this->fetch('treeHeading'); ?>

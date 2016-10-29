@@ -120,15 +120,16 @@ class PostsController extends ContentController
      */
     public function edit($id = null)
     {
-        $content = $this->Posts->get($id, [
+        $post = $this->Posts->get($id, [
             'contain' => ['ContentModules' => ['Modules']],
             'media' => true,
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $content = $this->Posts->patchEntity($content, $this->request->data);
-            if ($this->Posts->save($content)) {
+            $post = $this->Posts->patchEntity($post, $this->request->data);
+            if ($this->Posts->save($post)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                return $this->redirect(['action' => 'edit', $content->id]);
+                return $this->redirect(['action' => 'edit', $post->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }
@@ -137,7 +138,7 @@ class PostsController extends ContentController
         $teaserTemplates = ContentManager::getAvailablePostTeaserTemplates();
         $templates = ContentManager::getAvailablePostTemplates();
 
-        $this->set(compact('content', 'teaserTemplates', 'templates'));
+        $this->set(compact('post', 'teaserTemplates', 'templates'));
         $this->set('_serialize', ['content']);
     }
 
@@ -151,5 +152,4 @@ class PostsController extends ContentController
         $this->set('post', $post);
         $this->set('_serialize', $post);
     }
-
 }

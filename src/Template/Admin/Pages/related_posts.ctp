@@ -22,14 +22,14 @@
             ],
             'title' => [
                 'formatter' => function($val, $row) {
-                    return $this->Html->link($val, ['controller' => 'Posts', 'action' => 'edit', $row->id], ['class' => 'link-modal']);
+                    return $this->Html->link($val, ['controller' => 'Posts', 'action' => 'edit', $row->id]);
                 }
             ]
         ],
         'rowActions' => [
-            [__d('shop','Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], ['class' => 'edit link-modal-frame']],
-            [__d('shop','Move Up'), ['controller' => 'Posts', 'action' => 'moveUp', ':id'], ['class' => 'move up']],
-            [__d('shop','Move Down'), ['controller' => 'Posts', 'action' => 'moveDown', ':id'], ['class' => 'move down']],
+            [__d('shop','Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], ['class' => 'edit']],
+            //[__d('shop','Move Up'), ['controller' => 'Posts', 'action' => 'moveUp', ':id'], ['class' => 'move up']],
+            //[__d('shop','Move Down'), ['controller' => 'Posts', 'action' => 'moveDown', ':id'], ['class' => 'move down']],
             [__d('shop','Delete'), ['controller' => 'Posts', 'action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);

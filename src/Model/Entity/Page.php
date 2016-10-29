@@ -124,6 +124,20 @@ class Page extends Entity implements PageInterface
         return $this->getPageHandler()->isHiddenInNav();
     }
 
+    public function _getPosts()
+    {
+        if (isset($this->_properties['posts'])) {
+            return $this->_properties['posts'];
+        }
+
+        return TableRegistry::get('Content.Pages')->Posts
+            ->find('sorted')
+            ->where([ 'Posts.refscope' => 'Content.Pages', 'Posts.refid' => $this->id])
+            ->order(['Posts.pos' => 'DESC'])
+            ->all()
+            ->toArray();
+    }
+
     public function getPath()
     {
         return TableRegistry::get('Content.Pages')
