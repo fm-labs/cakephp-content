@@ -13,6 +13,13 @@ class PostsController extends FrontendController
 
     public $modelClass = "Content.Posts";
 
+    public function initialize()
+    {
+        $this->loadComponent('Content.Frontend');
+        $this->loadComponent('Paginator');
+        $this->loadComponent('RequestHandler');
+    }
+
     /**
      * Index method
      *
@@ -32,8 +39,9 @@ class PostsController extends FrontendController
      * @param string|null $id Post id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @deprecated
      */
-    public function view($id = null)
+    public function view1($id = null)
     {
         $this->viewBuilder()->className('Content.Post');
 
@@ -52,12 +60,39 @@ class PostsController extends FrontendController
         $this->render($view);
     }
 
+    public function view($id = null)
+    {
+        $this->viewBuilder()->className('Content.Post');
+
+        if ($id === null && $this->request->query('post_id')) {
+            $id = $this->request->query('post_id');
+        }
+        $post = $this->Posts->get($id, [
+            'media' => true,
+        ]);
+
+        $template = ($post->template) ?: $post->type;
+        if ($template == 'page') {
+            $template = 'view';
+        }
+
+        if (!$this->request->is('requested')) {
+            $this->Frontend->setRefScope('Content.Posts');
+            $this->Frontend->setRefId($id);
+        }
+
+        $this->set('post', $post);
+        $this->set('_serialize', ['post']);
+        $this->render($template);
+    }
+
     /**
      * View method
      *
      * @param string|null $id Post id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @deprecated
      */
     public function teaser($id = null)
     {

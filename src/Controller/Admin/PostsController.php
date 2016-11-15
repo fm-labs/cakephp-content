@@ -23,7 +23,7 @@ class PostsController extends ContentController
      */
     public function index()
     {
-        $scope = ['Posts.refscope' => 'Content.Pages'];
+        $scope = ['Posts.refscope' => 'Content.Pages', 'Posts.parent_id IS' => null];
         $order = ['Posts.title' => 'ASC'];
 
         $this->paginate = [
@@ -129,7 +129,7 @@ class PostsController extends ContentController
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                return $this->redirect(['action' => 'edit', $post->id]);
+                //return $this->redirect(['action' => 'edit', $post->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }

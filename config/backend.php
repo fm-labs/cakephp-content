@@ -3,7 +3,7 @@ return [
     'Backend.Plugin.Content' => [
         'Menu' => [
             'title' => 'Content',
-            'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
+            'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
             'data-icon' => 'desktop',
 
             '_children' => [
@@ -46,6 +46,16 @@ return [
                     'title' => 'Theme',
                     'url' => ['plugin' => 'Content', 'controller' => 'ThemesManager', 'action' => 'index'],
                     'data-icon' => 'paint-brush'
+                ],
+                'menus' => [
+                    'title' => 'Menus',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+                    'data-icon' => ''
+                ],
+                'menu_items' => [
+                    'title' => 'Menu Items',
+                    'url' => ['plugin' => 'Content', 'controller' => 'MenuItems', 'action' => 'index'],
+                    'data-icon' => ''
                 ],
             ]
         ]

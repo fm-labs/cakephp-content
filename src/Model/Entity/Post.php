@@ -5,12 +5,17 @@ use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
+use Content\Lib\ContentManager;
+use Content\Post\BasePostType;
+use Content\Post\PostHandlerEntityTrait;
 
 /**
  * Post Entity.
  */
 class Post extends Entity
 {
+
+    use PostHandlerEntityTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -22,7 +27,7 @@ class Post extends Entity
         'title' => true,
         'slug' => true,
         'subheading' => true,
-        'teaser_html' => true,
+        'teaser_html' => true, // @deprecated
         'body_html' => true,
         'image_file' => true,
         //'image_file_upload' => true,
@@ -35,43 +40,15 @@ class Post extends Entity
     ];
 
     protected $_virtual = [
-        'url'
+        'url',
+        'view_url',
+        'children'
     ];
+
 
     protected function _setTitle($val)
     {
         return trim($val);
-    }
-
-    /**
-     * Get Teaser Link Url.
-     * Fallback to view url, if body is set.
-     *
-     * @return array|null
-     */
-    protected function _getTeaserLinkUrl()
-    {
-        // customer teaser link
-        if (!empty($this->_properties['teaser_link_href'])) {
-            return $this->_properties['teaser_link_href'];
-        }
-
-        if (!empty($this->_properties['body_html'])) {
-            return $this->_getViewUrl();
-        }
-
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function _getTeaserLinkTitle()
-    {
-        if (!empty($this->_properties['teaser_link_caption'])) {
-            return $this->_properties['teaser_link_caption'];
-        }
-        return __d('content','Read more');
     }
 
     /**
@@ -89,37 +66,6 @@ class Post extends Entity
      */
     protected function _getPermaUrl() {
         return '/?postid=' . $this->id;
-    }
-
-    /**
-     * Virtual Field 'view_url'
-     * @return array
-     */
-    protected function _getViewUrl()
-    {
-        if (Configure::read('Content.Router.enablePrettyUrls')) {
-
-            $url = [
-                'prefix' => false,
-                'plugin' => 'Content',
-                'controller' => 'Posts',
-                'action' => 'view',
-                'post_id' => $this->id,
-                'slug' => $this->slug,
-            ];
-        } else {
-
-            $url = [
-                'prefix' => false,
-                'plugin' => 'Content',
-                'controller' => 'Posts',
-                'action' => 'view',
-                $this->id,
-                'slug' => $this->slug,
-            ];
-        }
-
-        return $url;
     }
 
     /**
@@ -144,6 +90,7 @@ class Post extends Entity
      * Virtual field 'teaser_image'. Wrapper for 'teaser_image_file'
      * Fallback to 'image_file'
      * @return mixed
+     * @deprecated
      */
     protected function _getTeaserImage()
     {
@@ -153,6 +100,10 @@ class Post extends Entity
         return $this->image_file;
     }
 
+    /**
+     * @return null|string
+     * @deprecated
+     */
     protected function _getReftitle()
     {
         if (!$this->refscope) {
@@ -167,6 +118,10 @@ class Post extends Entity
         return __d('content',"{0} with ID {1}", Inflector::singularize($ref[1]), $this->refid);
     }
 
+    /**
+     * @return array|void
+     * @deprecated
+     */
     protected function _getRefurl()
     {
         if (!$this->refscope) {
@@ -178,6 +133,10 @@ class Post extends Entity
         return ['plugin' => $ref[0], 'controller' => $ref[1], 'action' => 'view', $this->refid];
     }
 
+    /**
+     * @return \Cake\Datasource\EntityInterface|mixed|null
+     * @deprecated
+     */
     protected function _getRef()
     {
         if (!$this->refscope || !$this->refid) {
@@ -192,6 +151,38 @@ class Post extends Entity
         return $this->_properties['ref'] = $Model->get($this->refid);
     }
 
+    /**
+     * Get Teaser Link Url.
+     * Fallback to view url, if body is set.
+     *
+     * @return array|null
+     * @deprecated
+     */
+    protected function _getTeaserLinkUrl()
+    {
+        // customer teaser link
+        if (!empty($this->_properties['teaser_link_href'])) {
+            return $this->_properties['teaser_link_href'];
+        }
+
+        if (!empty($this->_properties['body_html'])) {
+            return $this->_getViewUrl();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     * @deprecated
+     */
+    protected function _getTeaserLinkTitle()
+    {
+        if (!empty($this->_properties['teaser_link_caption'])) {
+            return $this->_properties['teaser_link_caption'];
+        }
+        return __d('content','Read more');
+    }
 
     /*
     protected function _getImageFiles()

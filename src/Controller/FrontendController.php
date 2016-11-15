@@ -15,7 +15,6 @@ abstract class FrontendController extends Controller
 {
     public function initialize()
     {
-        parent::initialize();
         $this->loadComponent('Content.Frontend');
     }
 } 

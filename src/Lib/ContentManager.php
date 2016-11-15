@@ -10,6 +10,8 @@ use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
+use Content\Model\Entity\Post;
+use Content\Post\PostHandlerInterface;
 
 class ContentManager
 {
@@ -129,9 +131,15 @@ class ContentManager
         return $pageLayout;
     }
 
+    /**
+     * @param Page $page
+     * @return null
+     * @deprecated
+     */
     public static function getPageHandler(Page $page)
     {
         $pageType = $page->getPageType();
+        /*
         $handlers = [
             'root' => 'Content\Page\RootPageType',
             'content' => 'Content\Page\ContentPageType',
@@ -140,6 +148,7 @@ class ContentManager
             'controller' => 'Content\Page\ControllerPageType',
             'shop_category' => 'Shop\Page\ShopCategoryPageType',
         ];
+        */
         $handlers = self::$registry['PageType'];
 
         if (isset($handlers[$pageType])) {
@@ -147,6 +156,76 @@ class ContentManager
         }
 
         return null;
+    }
+
+    public static function getMenuHandlerInstance($menuItem)
+    {
+        $menuType = $menuItem->type;
+        $handlers = [
+            'page' => 'Content\Menu\PostMenuHandler',
+            'post' => 'Content\Menu\PostMenuHandler',
+            'redirect' => 'Content\Menu\RedirectMenuHandler',
+            'controller' => 'Content\Menu\ControllerMenuHandler',
+            'shop_category' => 'Shop\Menu\ShopCategoryMenuHandler',
+        ];
+
+        //$handlers = self::$registry['PageType'];
+
+        if (isset($handlers[$menuType])) {
+            return new $handlers[$menuType]($menuItem);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $postType
+     * @return PostHandlerInterface
+     */
+    public static function getPostHandlerInstance($post)
+    {
+        $postType = $post->type;
+        $handlers = [
+            'page' => 'Content\Post\DefaultPostHandler',
+            'post' => 'Content\Post\DefaultPostHandler',
+            'inline' => 'Content\Post\DefaultPostHandler',
+            'multipage' => 'Content\Post\DefaultPostHandler',
+            'shop_category' => 'Shop\Post\ShopCategoryPostHandler',
+        ];
+
+        //$handlers = self::$registry['PageType'];
+
+        if (isset($handlers[$postType])) {
+            return new $handlers[$postType]($post);
+        }
+
+        return null;
+    }
+
+    public static function getPostModelByType($type)
+    {
+        $map = [
+            'page' => 'Content.Posts',
+            'post' => 'Content.Posts',
+            'inline' => 'Content.Posts',
+            'multipage' => 'Content.Posts',
+            'shop_category' => 'Shop.ShopCategories',
+        ];
+
+        if (isset($map[$type])) {
+            return $map[$type];
+        }
+        return null;
+    }
+
+    public static function getPostByType($type, $typeid)
+    {
+        $modelClass = self::getPostModelByType($type);
+        if (!$modelClass) {
+            return null;
+        }
+
+        return TableRegistry::get($modelClass)->get($typeid);
     }
 
     public static function getModulesAvailable()

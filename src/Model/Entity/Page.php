@@ -56,6 +56,7 @@ class Page extends Entity implements PageInterface
 
     protected $_virtual = [
         'url',
+        'view_url',
         'meta_title',
         'meta_desc',
         'meta_keywords',
@@ -152,6 +153,15 @@ class Page extends Entity implements PageInterface
     {
         return $this->getPageUrl();
     }
+    /**
+     * @return array|string
+     * @deprecated Use getPageUrl() instead
+     */
+    protected function _getViewUrl()
+    {
+        return $this->getPageUrl();
+    }
+
 
     protected function _getPermaUrl() {
         return '/?page_id=' . $this->id;
