@@ -211,9 +211,11 @@ class PagesTable extends Table
         return $rootPage;
     }
 
-    public function findHostRoot($fallback = false)
+    public function findHostRoot($fallback = false, $host = null)
     {
-        $host = (defined('BANANA_HOST')) ? BANANA_HOST : env('HTTP_HOST');
+        if (is_null($host)) {
+            $host = (defined('BANANA_HOST')) ? BANANA_HOST : env('HTTP_HOST');
+        }
 
         $page = $this
             ->find()
@@ -265,7 +267,7 @@ class PagesTable extends Table
         return $page['id'];
     }
 
-    public function jsTreeGetNodes()
+    public function toJsTree($rootId = null)
     {
         $nodes = $this->find('threaded')
             ->all()

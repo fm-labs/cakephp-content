@@ -6,40 +6,20 @@ use Cake\Network\Exception\NotFoundException;
 
 class ContentManagerController extends AppController
 {
-    public $tabs = [
-        'pages' => [
-            'title' => 'Pages',
-            'url' => ['controller' => 'PagesManager', 'action' => 'index']
-        ],
-        'posts' => [
-            'title' => 'Posts',
-            'url' => ['controller' => 'PagesManager', 'action' => 'index']
-        ]
-    ];
 
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['ParentPages'],
-            'order' => ['Pages.lft ASC']
-        ];
-
-        $this->loadModel('Content.Pages');
-        $pagesTree = $this->Pages->find('treeList')->toArray();
-        $this->set('pagesTree', $pagesTree);
-
-        $this->set('contents', $this->paginate($this->Pages));
-        $this->set('_serialize', ['contents']);
-
-        //$this->set('tabs', $this->tabs);
-
+        $this->render('index_jstree_ajax');
     }
 
-    public function tab($id = null)
+    public function treeData()
     {
-        if (!isset($this->tabs[$id])) {
-            throw new NotFoundException();
-        }
-        $this->redirect($this->tabs[$id]['url']);
+        $this->viewBuilder()->className('Json');
+
+        $this->loadModel('Banana.Sites');
+        $sitesTree = $this->Sites->toJsTree();
+        $this->set('tree', $sitesTree);
+        $this->set('_serialize', 'tree');
     }
+
 }

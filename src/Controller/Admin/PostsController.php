@@ -152,4 +152,9 @@ class PostsController extends ContentController
         $this->set('post', $post);
         $this->set('_serialize', $post);
     }
+
+    public function manage($id = null)
+    {
+        $this->view($id);
+    }
 }

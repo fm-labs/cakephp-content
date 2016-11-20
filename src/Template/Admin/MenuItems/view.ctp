@@ -48,8 +48,8 @@
     </h2>
 
     <?php
-    echo $this->cell('Backend.EntityView', [ $post ], [
-        'title' => $post->title,
+    echo $this->cell('Backend.EntityView', [ $menuItem ], [
+        'title' => $menuItem->title,
         'model' => 'Content.MenuItems',
     ]);
     ?>

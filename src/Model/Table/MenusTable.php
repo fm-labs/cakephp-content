@@ -29,6 +29,11 @@ class MenusTable extends Table
         $this->displayField('title');
         $this->primaryKey('id');
 
+        $this->belongsTo('Sites', [
+            'className' => 'Banana.Sites',
+            'foreignKey' => 'site_id'
+        ]);
+
         $this->hasMany('MenuItems', [
             'className' => 'Content.MenuItems',
             'foreignKey' => 'menu_id'

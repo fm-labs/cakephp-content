@@ -1,6 +1,4 @@
 <?php
-use Backend\Lib\Backend;
-use Content\Lib\ContentManager;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 
@@ -11,6 +9,7 @@ if (!Configure::read('Content')) {
 /**
  * Default Content setup
  */
+use Content\Lib\ContentManager;
 ContentManager::register('PageType', [
     'root' =>  [
         'name' => 'Website Root',
@@ -64,11 +63,12 @@ ContentManager::register('ContentModule', [
 /**
  * Core Content plugins (required)
  */
-Plugin::load('Backend', ['bootstrap' => true, 'routes' => true]);
-Plugin::load('User', ['bootstrap' => true, 'routes' => true]);
-Plugin::load('Tree', ['bootstrap' => true, 'routes' => false]);
-Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
-Plugin::load('Settings', ['bootstrap' => true, 'routes' => true]);
+Plugin::load('Banana', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('Backend', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('User', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('Tree', ['bootstrap' => true, 'routes' => false]);
+//Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('Settings', ['bootstrap' => true, 'routes' => true]);
 
 /**
  * Theme plugins
@@ -84,4 +84,5 @@ if (Configure::check('Content.Frontend.theme')) {
 /**
  * Backend hook
  */
+use Backend\Lib\Backend;
 Backend::hookPlugin('Content');

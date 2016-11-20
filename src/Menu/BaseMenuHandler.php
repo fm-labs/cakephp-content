@@ -37,6 +37,10 @@ abstract class BaseMenuHandler
 
     public function getChildren()
     {
-        return TableRegistry::get('Content.MenuItems')->find('children', ['for' => $this->item->id, 'direct' => true])->toArray();
+        if ($this->item->id) {
+            return TableRegistry::get('Content.MenuItems')->find('children', ['for' => $this->item->id, 'direct' => true])->toArray();
+        }
+
+        return [];
     }
 }

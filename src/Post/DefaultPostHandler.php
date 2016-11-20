@@ -28,7 +28,7 @@ class DefaultPostHandler implements PostHandlerInterface
                 'plugin' => 'Content',
                 'controller' => 'Posts',
                 'action' => 'view',
-                'post_id' => $this->post->get('id'),
+                //'post_id' => $this->post->get('id'),
                 'slug' => $this->post->get('slug'),
             ];
         } else {
@@ -60,8 +60,9 @@ class DefaultPostHandler implements PostHandlerInterface
     public function getChildren()
     {
         return TableRegistry::get('Content.Posts')
-            ->find()
+            ->find('published')
             ->where(['parent_id' => $this->post->get('id')])
+            ->order(['pos' => 'ASC'])
             ->all();
     }
 

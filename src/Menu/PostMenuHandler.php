@@ -33,9 +33,9 @@ class PostMenuHandler extends BaseMenuHandler implements MenuHandlerInterface
 
     public function isHiddenInNav()
     {
-        //if ($this->post) {
-        //    return !$this->post->isPublished();
-        //}
+        if ($this->post && !$this->post->isPublished()) {
+            return true;
+        }
 
         return parent::isHiddenInNav();
     }

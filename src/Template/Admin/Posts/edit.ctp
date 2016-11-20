@@ -9,10 +9,10 @@ if ($post->ref && $post->ref instanceof \Content\Model\Entity\Page) {
 <?php
 // TOOLBAR
 
-$this->Toolbar->addPostLink([
-    'title' => __d('content','Delete'),
-    'url' => ['action' => 'delete', $post->id],
-    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
+$this->Toolbar->addLink([
+    'title' => __d('content','Manage'),
+    'url' => ['action' => 'manage', $post->id],
+    'attr' => ['data-icon' => 'gears']
 ]);
 $this->Toolbar->addLink([
     'title' => __d('content','View'),
@@ -23,6 +23,11 @@ $this->Toolbar->addLink([
     'title' => __d('content','List {0}', __d('content','Posts')),
     'url' => ['action' => 'index'],
     'attr' => ['data-icon' => 'list']
+]);
+$this->Toolbar->addPostLink([
+    'title' => __d('content','Delete'),
+    'url' => ['action' => 'delete', $post->id],
+    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
 
 $this->extend('/Admin/Content/edit');

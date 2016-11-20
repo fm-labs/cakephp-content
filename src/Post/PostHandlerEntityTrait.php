@@ -86,5 +86,4 @@ trait PostHandlerEntityTrait
     {
         return $this->handler()->getAdminUrl();
     }
-
 }

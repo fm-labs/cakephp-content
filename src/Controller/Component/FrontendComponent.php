@@ -8,6 +8,7 @@
 
 namespace Content\Controller\Component;
 
+use Banana\Lib\Banana;
 use Content\Model\Entity\Page;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;

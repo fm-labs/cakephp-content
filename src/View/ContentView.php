@@ -34,7 +34,10 @@ class ContentView extends View
     ) {
         parent::__construct($request, $response, $eventManager, $viewOptions);
 
-        $this->helpers()->load('Content.Content', []);
+        $this->loadHelper('Content.Content', []);
+        $this->loadHelper('Form', [
+            'className' => 'Backend\View\Helper\BackendFormHelper',
+        ]);
     }
 
     public function section($name, $cellData = [], $cellOptions = [])

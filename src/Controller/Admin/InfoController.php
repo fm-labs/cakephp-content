@@ -6,7 +6,7 @@
  * Time: 1:33 AM
  */
 
-namespace Content\Controller\Admin;
+namespace Banana\Controller\Admin;
 
 
 use Content\Lib\ContentManager;

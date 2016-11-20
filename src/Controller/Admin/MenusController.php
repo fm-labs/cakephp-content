@@ -18,6 +18,9 @@ class MenusController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Sites']
+        ];
         $this->set('menus', $this->paginate($this->Menus));
         $this->set('_serialize', ['menus']);
     }
@@ -32,7 +35,7 @@ class MenusController extends AppController
     public function view($id = null)
     {
         $menu = $this->Menus->get($id, [
-            'contain' => ['MenuItems', 'RootMenuItems']
+            'contain' => ['Sites', 'MenuItems', 'RootMenuItems']
         ]);
         $this->set('menu', $menu);
         $this->set('_serialize', ['menu']);
@@ -55,7 +58,8 @@ class MenusController extends AppController
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('menu')));
             }
         }
-        $this->set(compact('menu'));
+        $sites = $this->Menus->Sites->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'sites'));
         $this->set('_serialize', ['menu']);
     }
 
@@ -80,20 +84,9 @@ class MenusController extends AppController
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('menu')));
             }
         }
-        $this->set(compact('menu'));
+        $sites = $this->Menus->Sites->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'sites'));
         $this->set('_serialize', ['menu']);
-    }
-
-
-    public function manage($id = null) {
-        $this->edit($id);
-
-        $this->loadModel('Content.MenuItems');
-        $menuItems = $this->MenuItems->find()->where(['MenuItems.menu_id' => $id])->all()->toArray();
-        $this->set('menuItems', $menuItems);
-
-        $menuItem = $this->MenuItems->newEntity();
-        $this->set('menuItem', $menuItem);
     }
 
     /**

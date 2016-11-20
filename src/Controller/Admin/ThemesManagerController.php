@@ -12,13 +12,11 @@ namespace Content\Controller\Admin;
 use Cake\Core\App;
 use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;
-use App\Model\Table\ThemesTable;
 
 /**
  * Class ThemesManagerController
  * @package App\Controller\Admin
  *
- * @property ThemesTable $Themes
  */
 class ThemesManagerController extends AppController
 {

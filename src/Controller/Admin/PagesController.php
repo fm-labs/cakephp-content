@@ -151,6 +151,10 @@ class PagesController extends ContentController
         $this->set('_serialize', ['content', 'pageMeta']);
     }
 
+    /**
+     * @param null $id
+     * @deprecated Use ContentModulesController->related() instead
+     */
     public function relatedContentModules($id = null)
     {
 
@@ -198,6 +202,11 @@ class PagesController extends ContentController
 
     }
 
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     * @deprecated Use ContentModulesController->linkModule() instead
+     */
     public function linkModule($id = null)
     {
         $contentModule = $this->Pages->ContentModules->newEntity(

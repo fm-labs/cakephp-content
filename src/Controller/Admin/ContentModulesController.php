@@ -109,4 +109,57 @@ class ContentModulesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function related($model = null, $modelId = null)
+    {
+
+        $contentModules = $this->ContentModules->find()->where([
+            'refscope' => $model,
+            'refid' => $modelId
+        ])->contain(['Modules'])->all();
+
+        //@TODO Read custom sections from page layout
+        $sections = ['main', 'top', 'bottom', 'before', 'after', 'left', 'right'];
+        $sections = array_combine($sections, $sections);
+
+        //$sectionsModules = $this->Pages->ContentModules->find()->where(['refscope' => 'Content.Pages', 'refid' => $id]);
+        //debug($sectionsModules);
+
+        $availableModules = $this->ContentModules->Modules->find('list');
+
+        $this->set('model', $model);
+        $this->set('modelId', $modelId);
+        $this->set('contentModules', $contentModules);
+        $this->set('sections', $sections);
+        $this->set('availableModules', $availableModules);
+
+        $this->set('_serialize', ['model', 'modelId', 'contentModules', 'sections', 'availableModules']);
+    }
+
+    public function linkModule($model = null, $modelId = null)
+    {
+
+        $contentModule = $this->ContentModules->newEntity(
+            [],
+            ['validate' => false]
+        );
+        if ($this->request->is(['put', 'post'])) {
+
+            $this->ContentModules->patchEntity($contentModule, $this->request->data);
+            if ($this->ContentModules->save($contentModule)) {
+                $this->Flash->success(__d('content','The content module has been saved for {0} {1}.', $model, $modelId));
+            } else {
+                $this->Flash->error(__d('content','The content module could not be saved for {0} {1}.', $model, $modelId));
+            }
+
+            list($plugin, $model) = pluginSplit($model);
+            $redirect = ['controller' => $model, 'action' => 'manage', $modelId, '#' => 'content_modules'];
+            if ($this->request->data('_redirect')) {
+                $redirect = $this->request->data('_redirect');
+            }
+
+            return $this->redirect($redirect);
+        }
+
+    }
 }

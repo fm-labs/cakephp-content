@@ -18,6 +18,7 @@ class AppController extends BaseAdminAppController
     public function initialize()
     {
         parent::initialize();
+        $this->loadComponent('Banana.Site');
     }
 
     public function beforeFilter(Event $event)

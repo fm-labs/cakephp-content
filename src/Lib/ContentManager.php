@@ -3,6 +3,7 @@ namespace Content\Lib;
 
 use Cake\Core\App;
 use Cake\Utility\Hash;
+use Content\Model\Entity\MenuItem;
 use Content\Model\Entity\Page;
 use Content\Model\Entity\PageTypeTrait;
 use Cake\Core\Configure;
@@ -158,7 +159,7 @@ class ContentManager
         return null;
     }
 
-    public static function getMenuHandlerInstance($menuItem)
+    public static function getMenuHandlerInstance(MenuItem $menuItem)
     {
         $menuType = $menuItem->type;
         $handlers = [

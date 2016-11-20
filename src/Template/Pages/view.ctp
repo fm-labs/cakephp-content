@@ -1,5 +1,8 @@
 <?php $this->Html->addCrumb($page->title, $page->url); ?>
 <div class="page view <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
+    <div class="alert alert-info">
+        This view is deprecated
+    </div>
     <!--
     <h1 class="title"><?= h($page->title); ?></h1>
     -->

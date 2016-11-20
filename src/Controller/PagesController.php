@@ -25,6 +25,7 @@ use Content\Controller\Component\FrontendComponent;
  *
  * @property FrontendComponent $Frontend
  * @property PagesTable $Pages
+ * @deprecated Use FrontendController instead
  */
 class PagesController extends FrontendController
 {

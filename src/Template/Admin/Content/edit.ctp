@@ -1,13 +1,12 @@
 <?php $this->loadHelper('Bootstrap.Panel'); ?>
 <div class="contents form">
 
-    <?= $this->Panel->create(); ?>
-    <?= $this->Panel->heading(); ?>
-    <span class="strong"><i class="fa fa-pencil"></i> Edit</span>
-    <?= $this->fetch('heading', "[No heading]"); ?>
+    <?php if ($this->fetch('heading')): ?>
+        <h2>
+            <span class="strong"><i class="fa fa-pencil"></i></span>
+            <?= $this->fetch('heading'); ?>
+        </h2>
+    <?php endif; ?>
 
-    <?= $this->Panel->body(); ?>
-    <?= $this->fetch('content'); ?>
-
-    <?= $this->Panel->render(); ?>
+    <?php echo $this->fetch('content'); ?>
 </div>

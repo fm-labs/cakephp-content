@@ -79,6 +79,11 @@ class MenuItem extends Entity
         return $this->handler()->getViewUrl();
     }
 
+    public function getAdminUrl()
+    {
+        return $this->handler()->getAdminUrl();
+    }
+
     public function getLabel()
     {
         return $this->handler()->getLabel();
@@ -98,8 +103,14 @@ class MenuItem extends Entity
         return $this->handler()->getChildren();
     }
 
+    public function isHiddenInNav()
+    {
+        return $this->handler()->isHiddenInNav();
+    }
+
     protected function _getChildren()
     {
         return $this->getChildren();
     }
+
 }

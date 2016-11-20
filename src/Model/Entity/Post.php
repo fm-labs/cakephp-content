@@ -24,6 +24,7 @@ class Post extends Entity
      */
     protected $_accessible = [
         '*' => true, //@todo Define accessible fields
+        'site_id' => true,
         'title' => true,
         'slug' => true,
         'subheading' => true,
@@ -37,6 +38,7 @@ class Post extends Entity
         'is_published' => true,
         'publish_start_datetime' => true,
         'publish_end_datetime' => true,
+        'is_home' => true,
     ];
 
     protected $_virtual = [

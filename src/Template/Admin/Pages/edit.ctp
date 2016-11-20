@@ -10,9 +10,10 @@ $this->Toolbar->addLink(
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $content->id)]
 );
 //$this->Toolbar->addLink(__d('content','List {0}', __d('content','Pages')), ['action' => 'index'], ['data-icon' => 'list']);
-$this->Toolbar->addLink(__d('content','View'), ['action' => 'view', $content->id], ['data-icon' => 'file']);
+$this->Toolbar->addLink(__d('content','Manage'), ['action' => 'manage', $content->id], ['class' => 'link-manage']);
+$this->Toolbar->addLink(__d('content','View'), ['action' => 'view', $content->id], ['class' => 'link-view']);
 //$this->Toolbar->addLink(__d('content','Preview'), ['action' => 'preview', $content->id], ['data-icon' => 'eye', 'target' => '_preview']);
-$this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['action' => 'add'], ['data-icon' => 'plus']);
+$this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['action' => 'add'], ['class' => 'link-add']);
 
 
 // HEADING

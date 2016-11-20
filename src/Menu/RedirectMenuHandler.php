@@ -16,6 +16,6 @@ class RedirectMenuHandler extends BaseMenuHandler implements MenuHandlerInterfac
 
     public function getAdminUrl()
     {
-        return false;
+        return ['admin' => true, 'plugin' => 'Content', 'controller' => 'MenuItems', 'action' => 'view', $this->item->id];
     }
 }

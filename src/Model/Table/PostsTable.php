@@ -96,6 +96,51 @@ class PostsTable extends Table
         return $schema;
     }
 
+    public function setAsHome($postId, $siteId)
+    {
+        $updated = 0;
+        $updated += $this->updateAll(['is_home' => true], ['id' => $postId, 'site_id' => $siteId]);
+        $updated += $this->updateAll(['is_home' => false], ['id !=' => $postId, 'site_id' => $siteId]);
+        return $updated;
+    }
+
+    public function findHome($siteId = null, $fallback = true)
+    {
+        $post = $this
+            ->find()
+            //->find('published')
+            ->where([
+                'site_id' => $siteId,
+                'is_home' => true,
+                'parent_id IS NULL'
+            ])
+            ->first();
+
+        if (!$post && $fallback && $siteId !== null) {
+            return $this->findHome(null, false);
+        }
+
+        return $post;
+    }
+    /**
+     * @param null $slug
+     * @return mixed Model Id or null
+     */
+    public function findIdBySlug($slug = null)
+    {
+        $post = $this
+            ->find()
+            ->where([
+                'slug' => $slug
+            ])
+            ->select('id')
+            ->contain([])
+            ->hydrate(false)
+            ->first();
+
+        return $post['id'];
+    }
+
     /**
      * Default validation rules.
      *

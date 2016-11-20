@@ -22,6 +22,16 @@
 ) ?>
 <?= $this->Toolbar->startGroup(__('More')); ?>
 <?= $this->Toolbar->addLink(
+    __('List {0}', __('Sites')),
+    ['controller' => 'Sites', 'action' => 'index'],
+    ['data-icon' => 'list']
+) ?>
+<?= $this->Toolbar->addLink(
+    __('New {0}', __('Site')),
+    ['controller' => 'Sites', 'action' => 'add'],
+    ['data-icon' => 'plus']
+) ?>
+<?= $this->Toolbar->addLink(
     __('List {0}', __('Menu Items')),
     ['controller' => 'MenuItems', 'action' => 'index'],
     ['data-icon' => 'list']
@@ -48,6 +58,10 @@
     <table class="ui attached celled striped table">
 
 
+        <tr>
+            <td><?= __('Site') ?></td>
+            <td><?= $menu->has('site') ? $this->Html->link($menu->site->title, ['controller' => 'Sites', 'action' => 'view', $menu->site->id]) : '' ?></td>
+        </tr>
         <tr>
             <td><?= __('Title') ?></td>
             <td><?= h($menu->title) ?></td>
