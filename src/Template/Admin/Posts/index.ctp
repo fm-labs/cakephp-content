@@ -41,6 +41,9 @@ $this->assign('title', __d('content','Posts'));
     </div>
 
 
+    <?php $this->loadHelper('Backend.DataTableJs'); ?>
+    <?= '' //$this->DataTableJs->create('Content.Posts')->render(); ?>
+
 
     <?= $this->cell('Backend.DataTable', [[
         'paginate' => true,
