@@ -32,8 +32,8 @@ class MenuItemsTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Tree', [
-            'level' => 'level'
+        $this->addBehavior('Tree.Tree', [
+            'level' => 'level',
         ]);
 
         $this->belongsTo('Menus', [
@@ -74,6 +74,11 @@ class MenuItemsTable extends Table
         $validator
             ->add('level', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('level');
+
+        $validator
+            ->add('menu_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('menu_id', 'create')
+            ->notEmpty('menu_id');
 
         $validator
             ->requirePresence('title', 'create')

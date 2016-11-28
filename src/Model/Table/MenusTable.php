@@ -4,8 +4,11 @@ namespace Content\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\Model\Entity\Menu;
+use Content\Model\Entity\MenuItem;
 
 /**
  * Menus Model
@@ -66,4 +69,133 @@ class MenusTable extends Table
 
         return $validator;
     }
+
+    /**
+     * @param $menuId
+     * @return array
+     */
+    public function toMenu($menuId)
+    {
+        $menu = $this->get($menuId);
+
+
+        $nodeFormatter = function(MenuItem $menuItem) use (&$id) {
+
+            $publishedClass = ($menuItem->isHiddenInNav()) ? 'unpublished' : 'published';
+            $class = $menuItem->type;
+            $class.= " " . $publishedClass;
+
+            return [
+                'id' => 'menu_item__' . $menuItem->id,
+                'title' => $menuItem->getLabel(),
+                'url' => $menuItem->getAdminUrl()
+            ];
+        };
+
+        $nodesFormatter = function($menuItems) use ($nodeFormatter, &$nodesFormatter) {
+            $formatted = [];
+            foreach ($menuItems as $menuItem) {
+                $_node = $nodeFormatter($menuItem);
+                if ($menuItem->getChildren()) {
+                    $_node['children'] = $nodesFormatter($menuItem->getChildren());
+                }
+                $formatted[] = $_node;
+            }
+            return $formatted;
+        };
+
+
+        $menuItems = TableRegistry::get('Content.MenuItems')->find()->where(['menu_id' => $menu->id, 'parent_id IS' => null])->all();
+        $menuArray = [
+            'title' => $menu->title,
+            'items' => $nodesFormatter($menuItems)
+        ];
+
+        return $menuArray;
+    }
+
+
+    public function toJsTree($siteId = null)
+    {
+
+        $id = 1;
+        $nodeFormatter = function(MenuItem $menuItem) use (&$id) {
+
+            $publishedClass = ($menuItem->isHiddenInNav()) ? 'unpublished' : 'published';
+            $class = $menuItem->type;
+            $class.= " " . $publishedClass;
+
+            return [
+                'id' => $menuItem->id,
+                'text' => $menuItem->getLabel(),
+                'icon' => $class,
+                'state' => [
+                    'opened' => false,
+                    'disabled' => false,
+                    'selected' => false,
+                ],
+                'children' => [],
+                'li_attr' => ['class' => $class],
+                'a_attr' => [],
+                'data' => [
+                    'id' => $menuItem->id,
+                    'menu_id' => $menuItem->menu_id,
+                    'type' => $menuItem->type,
+                    'typeid' => $menuItem->typeid,
+                    'parent_id' => $menuItem->parent_id,
+                    'level' => $menuItem->level,
+                    'lft' => $menuItem->lft,
+                    'url' => Router::url($menuItem->getAdminUrl()),
+                ]
+            ];
+        };
+
+        $nodesFormatter = function($menuItems) use ($nodeFormatter, &$nodesFormatter) {
+            $formatted = [];
+            foreach ($menuItems as $menuItem) {
+                $_node = $nodeFormatter($menuItem);
+                if ($menuItem->getChildren()) {
+                    $_node['children'] = $nodesFormatter($menuItem->getChildren());
+                }
+                $formatted[] = $_node;
+            }
+            return $formatted;
+        };
+
+        $menu = TableRegistry::get('Content.Menus')->find()->where(['site_id' => $siteId])->first();
+        $menuItems = TableRegistry::get('Content.MenuItems')
+            ->find()
+            ->where(['menu_id' => $menu->id, 'parent_id IS' => null])
+            ->order(['MenuItems.lft' => 'ASC'])
+            ->all();
+
+        return $nodesFormatter($menuItems);
+
+        /*
+        foreach ($menus as $menu) {
+
+            $menuNode = [
+                'id' => 'menu__' . $menu->id,
+                'text' => $menu->title,
+                'icon' => null,
+                'state' => [
+                    'opened' => true,
+                    'disabled' => false,
+                    'selected' => false,
+                ],
+                'children' => $nodesFormatter($menuItems),
+                'li_attr' => ['class' => ''],
+                'a_attr' => [],
+                'data' => [
+                    'type' => 'menu',
+                    'typeid' => $menu->id,
+                    'viewUrl' => Router::url(['controller' => 'Menus', 'action' => 'view', $menu->id])
+                ]
+            ];
+            $nodes[] = $menuNode;
+        }
+        return $nodes;
+        */
+    }
+
 }

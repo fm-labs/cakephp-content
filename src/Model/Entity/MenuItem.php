@@ -100,7 +100,8 @@ class MenuItem extends Entity
 
     public function getChildren()
     {
-        return $this->handler()->getChildren();
+        //return $this->handler()->getChildren();
+        return TableRegistry::get('Content.MenuItems')->find('children', ['for' => $this->id, 'direct' => true])->toArray();
     }
 
     public function isHiddenInNav()

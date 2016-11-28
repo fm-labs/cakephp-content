@@ -1,33 +1,51 @@
-<?php $this->Html->addCrumb(__d('content','Posts')); ?>
-<?php $this->extend('/Admin/Content/index'); ?>
 <?php
-// EXTEND: TOOLBAR
+// Breadcrumbs
+$this->Html->addCrumb(__d('content','Posts'));
+
+// Toolbar
 $this->Toolbar->addLink(__d('content','New {0}', __d('content','Post')), ['action' => 'add'], ['data-icon' => 'plus']);
 
-// EXTEND: HEADING
-$this->assign('heading', __d('content','Posts'));
+// Vars
+$this->assign('title', __d('content','Posts'));
 ?>
 <div class="posts index">
 
-    <!-- Quick Search -->
-    <div class="ui segment">
-        <div class="ui form">
-            <?= $this->Form->create(null, ['id' => 'quickfinder', 'url' => ['action' => 'quick'], 'class' => 'no-ajax']); ?>
-            <?= $this->Form->input('post_id', [
-                'options' => $postsList,
-                'label' => false,
-                'empty' => '- Quick Search -'
+    <!-- Quick Search
+    <?= $this->Form->create(null, ['id' => 'quickfinder', 'url' => ['action' => 'quick'], 'class' => 'no-ajax']); ?>
+    <?= $this->Form->input('post_id', [
+        'options' => $postsList,
+        'label' => false,
+        'empty' => '- Quick Search -'
+    ]); ?>
+    <?= $this->Form->button('Go'); ?>
+    <?= $this->Form->end() ?>
+     -->
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+            <?= $this->Form->create(null, ['method' => 'GET', 'horizontal' => true]); ?>
+            <?= $this->Form->input('q', [
+                'type' => 'datalist',
+                'options' => $postsList->toArray(),
+                'value' => $this->request->query('q'),
+                'placeholder' => 'Search for Posts',
+                'label' => 'Search',
             ]); ?>
-            <?= $this->Form->button('Go'); ?>
-            <?= $this->Form->end() ?>
+            <!--
+            <div class="pull-right">
+                <?= $this->Form->button('search'); ?>
+            </div>
+            -->
+            <?= $this->Form->end(); ?>
         </div>
     </div>
+
 
 
     <?= $this->cell('Backend.DataTable', [[
         'paginate' => true,
         'model' => 'Content.Posts',
-        'data' => $contents,
+        'data' => $posts,
         'fields' => [
             'id',
             'created',

@@ -1,6 +1,7 @@
 <?php
 namespace Content\Controller\Admin;
 
+use Cake\Routing\Router;
 use Content\Controller\Admin\AppController;
 
 /**
@@ -10,6 +11,63 @@ use Content\Controller\Admin\AppController;
  */
 class MenusController extends AppController
 {
+
+    public $modelClass = 'Content.Menus';
+
+    public function manage($id = null) {
+
+        $menu = null;
+        $menuItems = null;
+
+        if ($id) {
+            $menu = $this->Menus->get($id);
+            $menuItems = $this->Menus->MenuItems->find()->where(['menu_id' => $id])->order(['lft' => 'ASC'])->all();
+        }
+        $menus = $this->Menus->find()->all()->toArray();
+
+        $newMenuItem = $this->Menus->MenuItems->newEntity();
+
+        $this->set('menu', $menu);
+        $this->set('menus', $menus);
+        $this->set('menuItems', $menuItems);
+        $this->set('newMenuItem', $newMenuItem);
+    }
+
+    public function treeData($menuId)
+    {
+        $this->viewBuilder()->className('Json');
+
+        $tree = $this->Menus->toJsTree($menuId);
+        $this->set('tree', $tree);
+        $this->set('_serialize', 'tree');
+    }
+
+    public function treeSort()
+    {
+
+        $this->loadModel('Content.MenuItems');
+
+        $this->viewBuilder()->className('Json');
+        $request = $this->request->data + ['nodeId' => null, 'oldParentId' => null, 'oldPos' => null, 'newParentId' => null, 'newPos' => null];
+
+        $menuItem = $this->MenuItems->get($request['nodeId']);
+
+        $this->MenuItems->behaviors()->Tree->config('scope', ['menu_id' => $menuItem->menu_id]);
+        $this->MenuItems->moveTo($menuItem, $request['newParentId'], $request['newPos'], $request['oldPos']);
+
+        $this->set('request', $request);
+        $this->set('node',[
+            'id' => $menuItem->id,
+            'menu_id' => $menuItem->menu_id,
+            'type' => $menuItem->type,
+            'typeid' => $menuItem->typeid,
+            'parent_id' => $menuItem->parent_id,
+            'level' => $menuItem->level,
+            'lft' => $menuItem->lft,
+            'url' => Router::url($menuItem->getAdminUrl()),
+        ]);
+        $this->set('_serialize', ['request', 'message', 'node']);
+    }
 
     /**
      * Index method

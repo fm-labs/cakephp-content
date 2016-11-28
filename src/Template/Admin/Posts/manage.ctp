@@ -90,6 +90,7 @@ $this->assign('title', $post->title);
         <?php $this->Tabs->start(); ?>
         <?php
 
+
         $this->Tabs->add(__d('content', 'Details'));
         ?>
     <?= $this->cell('Backend.EntityView', [ $post ], [
@@ -99,6 +100,7 @@ $this->assign('title', $post->title);
     <?php
 
         $this->Tabs->add(__d('content', 'Meta'));
+
     ?>
     <?= $this->cell('Backend.EntityView', [ $post ], [
         'title' => false,
@@ -122,5 +124,7 @@ $this->assign('title', $post->title);
         ]);
         echo $this->Tabs->render();
         ?>
+
+    <?php echo $this->Panel->render(); ?>
 
 </div>

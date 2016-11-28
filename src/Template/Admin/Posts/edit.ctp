@@ -1,14 +1,9 @@
 <?php
-if ($post->ref && $post->ref instanceof \Content\Model\Entity\Page) {
-    $this->Html->addCrumb($post->ref->title, ['controller' => 'Pages', 'action' => 'manage', $post->ref->id]);
-} else {
-    $this->Html->addCrumb(__d('content','Posts'), ['action' => 'index']);
-    $this->Html->addCrumb(__d('content','Edit {0}', __d('content','Post')));
-}
-?>
-<?php
-// TOOLBAR
+// Breadcrumbs
+$this->Html->addCrumb(__d('content','Posts'), ['action' => 'index']);
+$this->Html->addCrumb(__d('content','Edit {0}', __d('content','Post')));
 
+// Toolbar
 $this->Toolbar->addLink([
     'title' => __d('content','Manage'),
     'url' => ['action' => 'manage', $post->id],
@@ -30,8 +25,8 @@ $this->Toolbar->addPostLink([
     'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
 
-$this->extend('/Admin/Content/edit');
-$this->assign('heading', $post->title);
+//$this->extend('/Admin/Content/edit');
+$this->assign('heading', __('Edit {0}', __('Post')));
 $this->assign('title', $post->title);
 
 // HtmlEditor config

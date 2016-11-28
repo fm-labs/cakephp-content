@@ -18,7 +18,7 @@ return [
 
                     'menus' => [
                         'title' => 'Menus',
-                        'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+                        'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'manage'],
                         'data-icon' => 'sitemap'
                     ],
 

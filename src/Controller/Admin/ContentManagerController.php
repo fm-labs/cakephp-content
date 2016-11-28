@@ -9,7 +9,11 @@ class ContentManagerController extends AppController
 
     public function index()
     {
-        $this->render('index_jstree_ajax');
+        $this->loadModel('Content.Menus');
+        $menu = $this->Menus->toMenu(1);
+        $this->set('menu', $menu);
+
+        $this->render('index');
     }
 
     public function treeData()

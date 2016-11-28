@@ -2,6 +2,7 @@
 namespace Content\Controller\Admin;
 
 use Content\Controller\Admin\AppController;
+use Content\Form\SearchForm;
 use Content\Lib\ContentManager;
 use Cake\Network\Exception\BadRequestException;
 use Cake\ORM\Table;
@@ -23,8 +24,14 @@ class PostsController extends ContentController
      */
     public function index()
     {
+
         $scope = ['Posts.refscope' => 'Content.Pages', 'Posts.parent_id IS' => null];
         $order = ['Posts.title' => 'ASC'];
+
+        $q = $this->request->query('q');
+        if ($q) {
+            $scope['Posts.title LIKE'] = '%' . $q . '%';
+        }
 
         $this->paginate = [
             'contain' => [],
@@ -34,11 +41,19 @@ class PostsController extends ContentController
             'conditions' => $scope,
             //'media' => true,
         ];
+        $posts = $this->paginate($this->Posts);
+
+        // if in search mode and there is only a single result
+        // go straight to the result item edit
+        if ($q && count($posts) == 1) {
+            $this->Flash->info('Redirected from search for \'' . $q . '\'');
+            $this->redirect(['action' => 'edit', $posts->first()->id ]);
+        }
 
         $this->set('postsList', $this->Posts->find('list')->where($scope)->order($order));
 
-        $this->set('contents', $this->paginate($this->Posts));
-        $this->set('_serialize', ['contents']);
+        $this->set('posts', $posts);
+        $this->set('_serialize', ['posts']);
     }
 
 
