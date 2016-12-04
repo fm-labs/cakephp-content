@@ -5,7 +5,7 @@
     <br />
     <?= $this->Ui->link('Build a new module for this page', [
         'controller' => 'ModuleBuilder',
-        'action' => 'build2',
+        'action' => 'build',
         'refscope' => 'Content.Pages',
         'refid' => $content->id
     ], ['class' => 'btn btn-default', 'data-icon' => 'plus']); ?>

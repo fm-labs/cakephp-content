@@ -31,6 +31,7 @@ class MenusController extends AppController
         $this->set('menus', $menus);
         $this->set('menuItems', $menuItems);
         $this->set('newMenuItem', $newMenuItem);
+        $this->set('menuItemTypes', $this->Menus->MenuItems->getTypeList());
     }
 
     public function treeData($menuId)

@@ -6,19 +6,25 @@ return [
 
             [
                 'title' => 'Content',
-                'url' => ['plugin' => 'Content', 'controller' => 'ContentManager', 'action' => 'index'],
+                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'page'],
                 'data-icon' => 'book',
                 'children' => [
 
                     'posts' => [
                         'title' => 'Posts',
-                        'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
+                        'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'post'],
+                        'data-icon' => 'desktop',
+                    ],
+
+                    'pages' => [
+                        'title' => 'Pages',
+                        'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'page'],
                         'data-icon' => 'desktop',
                     ],
 
                     'menus' => [
                         'title' => 'Menus',
-                        'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'manage'],
+                        'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
                         'data-icon' => 'sitemap'
                     ],
 
@@ -28,7 +34,7 @@ return [
                         'data-icon' => 'image'
                     ],
 
-                    'pages' => [
+                    'pages_legacy' => [
                         'title' => 'Pages (Legacy)',
                         'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
                         'data-icon' => 'sitemap'

@@ -10,6 +10,23 @@ if (!Configure::read('Content')) {
  * Default Content setup
  */
 use Content\Lib\ContentManager;
+ContentManager::register('PostType', [
+    'gallerypost' => 'Content\Post\GalleryItemPostHandler',
+    'post' => 'Content\Post\DefaultPostHandler',
+    'page' => 'Content\Post\PagePostHandler',
+    'inline' => 'Content\Post\DefaultPostHandler',
+    'multipage' => 'Content\Post\DefaultPostHandler',
+    //'shop_category' => 'Shop\Post\ShopCategoryPostHandler',
+]);
+ContentManager::register('MenuItemType', [
+    'page' => 'Content\Menu\PostMenuHandler',
+    'post' => 'Content\Menu\PostMenuHandler',
+    'redirect' => 'Content\Menu\RedirectMenuHandler',
+    'controller' => 'Content\Menu\ControllerMenuHandler',
+    //'shop_category' => 'Shop\Menu\ShopCategoryMenuHandler',
+]);
+
+// @deprecated
 ContentManager::register('PageType', [
     'root' =>  [
         'name' => 'Website Root',

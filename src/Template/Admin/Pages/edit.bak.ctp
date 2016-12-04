@@ -177,7 +177,7 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 <br />
                 <?= $this->Ui->link('Build a new module for this page', [
                     'controller' => 'ModuleBuilder',
-                    'action' => 'build2',
+                    'action' => 'build',
                     'refscope' => 'Content.Pages',
                     'refid' => $content->id
                 ], ['class' => 'ui button', 'data-icon' => 'plus']); ?>

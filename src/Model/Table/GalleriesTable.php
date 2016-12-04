@@ -90,7 +90,7 @@ class GalleriesTable extends Table
     }
 
 
-    public function jsTreeGetNodes()
+    public function toJsTree()
     {
         $nodes = $this->find('threaded')
             ->orderAsc('Galleries.title')

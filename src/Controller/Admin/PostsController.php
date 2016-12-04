@@ -1,6 +1,7 @@
 <?php
 namespace Content\Controller\Admin;
 
+use Cake\Core\Configure;
 use Content\Controller\Admin\AppController;
 use Content\Form\SearchForm;
 use Content\Lib\ContentManager;
@@ -31,6 +32,10 @@ class PostsController extends ContentController
         $q = $this->request->query('q');
         if ($q) {
             $scope['Posts.title LIKE'] = '%' . $q . '%';
+        }
+        $type = $this->request->query('type');
+        if ($type) {
+            $scope['Posts.type'] = $type;
         }
 
         $this->paginate = [
@@ -144,7 +149,7 @@ class PostsController extends ContentController
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                //return $this->redirect(['action' => 'edit', $post->id]);
+                return $this->redirect(['action' => 'edit', $post->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }
@@ -153,8 +158,21 @@ class PostsController extends ContentController
         $teaserTemplates = ContentManager::getAvailablePostTeaserTemplates();
         $templates = ContentManager::getAvailablePostTemplates();
 
-        $this->set(compact('post', 'teaserTemplates', 'templates'));
-        $this->set('_serialize', ['content']);
+
+        // HtmlEditor config
+        $editor = Configure::read('Content.HtmlEditor.default');
+        $editor['body_class'] = $post->cssclass;
+        $editor['body_id'] = $post->cssid;
+
+        $this->set(compact('post', 'teaserTemplates', 'templates', 'editor'));
+        $this->set('_serialize', 'post');
+
+        $this->autoRender = false;
+        $template = ($post->parent) ? 'edit_parent' : 'edit';
+
+        $this->set('typeElement', 'Content.Admin/Posts/' . 'edit_' . $post->type);
+
+        $this->render($template);
     }
 
     public function view($id = null)

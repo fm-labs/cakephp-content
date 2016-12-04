@@ -1,8 +1,10 @@
-<?php $this->Html->addCrumb('Module Builder', ['action' => 'index']) ?>
-<div class="index">
-    <h1>Module Builder</h1>
+<?php
+$this->Html->addCrumb(__('Module Builder'), ['action' => 'index']);
 
-    <table class="ui table striped">
+$this->assign('title', __('Module Builder'));
+?>
+<div class="index">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Module</th>
@@ -14,11 +16,9 @@
                 <td><?= h($moduleClass); ?></td>
                 <td class="actions">
                     <?= $this->Html->link('Create new module', [
-                        'action' => 'build2',
+                        'action' => 'build',
                         'path' => $moduleInfo['class'],
-                        'refscope' => $refscope,
-                        'refid' => $refid
-                    ], ['class' => 'ui small button']); ?>
+                    ], ['class' => 'btn btn-sm btn-default']); ?>
                     <!--
                     <?= $this->Html->link('View', ['action' => 'view', 'class' => $moduleInfo['class']]); ?>
                     -->

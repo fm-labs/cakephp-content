@@ -51,6 +51,11 @@ class MenuItemsTable extends Table
         ]);
     }
 
+    public function getTypeList()
+    {
+
+    }
+
     /**
      * Default validation rules.
      *

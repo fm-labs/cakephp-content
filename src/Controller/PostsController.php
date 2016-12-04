@@ -81,10 +81,7 @@ class PostsController extends FrontendController
 
         $this->viewBuilder()->className('Content.Post');
 
-        $template = ($post->template) ?: $post->type;
-        if ($template == 'page') {
-            $template = 'view';
-        }
+        $template = ($post->template) ?: (($post->parent) ? $post->type . '_parent' : $post->type);
         $this->render($template);
     }
 

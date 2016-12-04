@@ -2,7 +2,8 @@
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 
-
+debug("content routes");
+Router::extensions(['json']);
 if (Configure::read('Content.Router.enableRootScope')) {
 
     Router::scope('/', function($routes) {

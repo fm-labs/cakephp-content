@@ -9,11 +9,6 @@ class ContentManagerController extends AppController
 
     public function index()
     {
-        $this->loadModel('Content.Menus');
-        $menu = $this->Menus->toMenu(1);
-        $this->set('menu', $menu);
-
-        $this->render('index');
     }
 
     public function treeData()

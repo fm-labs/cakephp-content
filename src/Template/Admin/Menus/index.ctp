@@ -23,19 +23,20 @@
 ) ?>
 <div class="menus index">
 
-    <?php $fields = [
-    'id','site_id','title',    ] ?>
     <?= $this->cell('Backend.DataTable', [[
-        'paginate' => true,
+        'paginate' => false,
         'model' => 'Content.Menus',
         'data' => $menus,
-        'fields' => $fields,
-        'debug' => true,
-        'rowActions' => [
-            [__d('shop','View'), ['action' => 'view', ':id'], ['class' => 'view']],
-            [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-            [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
-        ]
+        'fields' => [
+            'site_id',
+            'title' => [
+                'formatter' => function($val, $row) {
+                    return $this->Html->link($val, ['action' => 'manage', $row->id]);
+                }
+            ]
+        ],
+        'debug' => false,
+        'rowActions' => false
     ]]);
     ?>
 

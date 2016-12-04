@@ -17,6 +17,7 @@ $this->Toolbar->addPostLink([
     'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
 
+$this->assign('title', $post->title);
 ?>
 <?php $this->loadHelper('Media.Media'); ?>
 <?= $this->Form->create($post); ?>
@@ -26,23 +27,20 @@ $this->Toolbar->addPostLink([
         <?php
         echo $this->Form->hidden('type');
         echo $this->Form->input('title');
-        echo $this->Form->input('slug');
+        echo $this->Form->hidden('slug', ['value' => null]);
         //echo $this->Form->input('subheading');
         ?>
+        <?= $this->Html->link(__('Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'index', $post->refid]); ?>
 
+        <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
         <?php
-        echo $this->element($typeElement);
+        echo $this->Form->input('body_html', [
+            'type' => 'htmleditor',
+            'editor' => $editor
+        ]);
         ?>
-
-        <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => true]); ?>
-
-        <?= $this->Form->input('meta_title'); ?>
-        <?= $this->Form->input('meta_desc'); ?>
-        <?= $this->Form->input('meta_keywords'); ?>
-        <?= $this->Form->input('meta_lang'); ?>
-        <?= $this->Form->input('meta_robots'); ?>
-
         <?= $this->Form->fieldsetEnd(); ?>
+
     </div>
     <div class="col-md-3">
 
@@ -57,25 +55,9 @@ $this->Toolbar->addPostLink([
         ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
-        <!-- Layout -->
-        <?= $this->Form->fieldsetStart(['legend' => 'Layout', 'collapsed' => false]); ?>
-        <?php
-        echo $this->Form->input('template', ['empty' => '- Default -']);
-        ?>
-        <?= $this->Form->fieldsetEnd(); ?>
-
         <!-- Media -->
         <?= $this->Form->fieldsetStart(['legend' => 'Media', 'collapsed' => false]); ?>
         <?= $this->Form->input('image_file', ['type' => 'media_picker']); ?>
-        <?= $this->cell('Media.ImageSelect', [[
-            'label' => 'Additional Images',
-            'model' => 'Content.Posts',
-            'id' => $post->id,
-            'scope' => 'image_files',
-            'multiple' => true,
-            'image' => $post->image_files,
-            'imageOptions' => ['width' => 200]
-        ]]); ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
 
@@ -86,7 +68,7 @@ $this->Toolbar->addPostLink([
             echo $this->Form->input('refid');
             echo $this->Form->input('cssclass');
             echo $this->Form->input('cssid');
-            echo $this->Form->input('order');
+            echo $this->Form->input('pos', ['readonly' => true]);
             ?>
         <?= $this->Form->fieldsetEnd(); ?>
     </div>

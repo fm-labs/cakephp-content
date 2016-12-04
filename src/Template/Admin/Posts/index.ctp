@@ -28,7 +28,7 @@ $this->assign('title', __d('content','Posts'));
                 'type' => 'datalist',
                 'options' => $postsList->toArray(),
                 'value' => $this->request->query('q'),
-                'placeholder' => 'Search for Posts',
+                'placeholder' => 'Enter search word',
                 'label' => 'Search',
             ]); ?>
             <!--
@@ -52,6 +52,8 @@ $this->assign('title', __d('content','Posts'));
         'fields' => [
             'id',
             'created',
+            'type',
+            'parent',
             'title' => [
                 'formatter' => function($val, $row) {
                     return $this->Html->link($val, ['action' => 'edit', $row->id]);

@@ -1,5 +1,5 @@
 <?php $this->Html->addCrumb($post->title, $post->view_url); ?>
-<div class="page multipage view <?= $post->cssclass ?>" id="<?= $post->cssid; ?>">
+<div class="page parent view <?= $post->cssclass ?>" id="<?= $post->cssid; ?>">
 
     <?php if ($post->title): ?>
     <h1 class="title"><?= h($page->title); ?></h1>

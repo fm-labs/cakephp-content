@@ -1,50 +1,25 @@
 <?php $this->Html->addCrumb(__('Menus'), ['action' => 'index']); ?>
 <?php $this->Html->addCrumb(__('Manage {0}', __('Menu'))); ?>
 <?php $this->loadHelper('AdminLte.Box'); ?>
+<?php $this->loadHelper('Backend.DataTableJs'); ?>
 <?php $this->assign('heading', __('Manage {0}', __('Menu'))); ?>
 <div class="form">
-
     <div class="row">
-        <div class="col-md-3">
-
-            <!-- Menus -->
-            <div class="menus index">
-
-                <?= $this->cell('Backend.DataTable', [[
-                    'paginate' => false,
-                    'model' => 'Content.Menus',
-                    'data' => $menus,
-                    'fields' => [
-                        'site_id',
-                        'title' => [
-                            'formatter' => function($val, $row) {
-                                return $this->Html->link($val, ['action' => 'manage', $row->id]);
-                            }
-                        ]
-                    ],
-                    'debug' => false,
-                    'rowActions' => false
-                ]]);
-                ?>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
 
             <?php if ($menu): ?>
-                <?= $this->Form->create($menu, ['class' => 'no-ajax']); ?>
-                <?php echo $this->Form->input('title'); ?>
-                <?= $this->Form->button(__('Change title')) ?>
-                <?= $this->Form->end() ?>
-                <?php echo $this->cell('Content.MenuModule::manage', [ $menu->id ]); ?>
+            <?php $this->Form->create($menu, ['class' => 'no-ajax']); ?>
+            <?php echo $this->Form->input('title'); ?>
+            <?= $this->Form->button(__('Change title')) ?>
+            <?= $this->Form->end() ?>
             <?php endif; ?>
-
         </div>
-        <div class="col-md-4">
+    </div>
 
+
+    <div class="row" style="margin-top: 1rem;">
+        <div class="col-md-4">
+            <?php if ($menu): ?>
             <?= $this->Html->css('Backend.jstree/themes/backend/style.min', ['block' => true]); ?>
             <?= $this->Html->script('Backend.jstree/jstree.min', ['block' => true]); ?>
             <?php
@@ -71,6 +46,27 @@
                 'data-active' => $selected
             ]); ?>
             <?= $this->Box->render(); ?>
+
+
+            <?= $this->Box->create(__('Add {0}', __('Menu Item')), ['collapsed' => true]); ?>
+            <?= $this->Form->create($newMenuItem, ['class' => '', 'url' => ['controller' => 'MenuItems', 'action' => 'add']]); ?>
+            <?php
+            echo $this->Form->hidden('menu_id', ['value' => $menu->id]);
+            echo $this->Form->input('title');
+            echo $this->Form->input('type');
+            //echo $this->Form->input('typeid');
+            //echo $this->Form->input('type_params');
+            //echo $this->Form->input('url');
+            //echo $this->Form->input('link_target');
+            //echo $this->Form->input('cssid');
+            //echo $this->Form->input('cssclass');
+            //echo $this->Form->input('hide_in_nav');
+            //echo $this->Form->input('hide_in_sitemap');
+            ?>
+            <?= $this->Form->button(__('Add')) ?>
+            <?= $this->Form->end() ?>
+            <?= $this->Box->render(); ?>
+
             <script>
 
                 var sortUrl = '<?= $this->Html->Url->build($sortUrl) ?>';
@@ -111,9 +107,10 @@
                             //console.log(data);
                             if (data.action === "select_node") {
                                 for(i = 0, j = data.selected.length; i < j; i++) {
-                                    r.push(data.instance.get_node(data.selected[i]).id);
+                                    r.push(data.instance.get_node(data.selected[i]).data);
                                 }
                                 console.log('Selected: ' + r.join(', '));
+                                $('#menu-info-container').html('<pre>' + JSON.stringify(r, null, 2) + '</pre>');
                             }
 
                         }).on('move_node.jstree', function (e, data) {
@@ -182,32 +179,17 @@
                 });
 
             </script>
+            <?php endif; ?>
         </div>
+        <div class="col-md-4" id="menu-info-container">
+        </div>
+
         <div class="col-md-4">
 
             <?php if ($menu): ?>
-                <?= $this->Box->create(__('Add {0}', __('Menu Item'))); ?>
-                <?= $this->Form->create($newMenuItem, ['class' => '', 'url' => ['controller' => 'MenuItems', 'action' => 'add']]); ?>
-                <?php
-                echo $this->Form->hidden('menu_id', ['value' => $menu->id]);
-                echo $this->Form->input('title');
-                echo $this->Form->input('type');
-                echo $this->Form->input('typeid');
-                echo $this->Form->input('type_params');
-                echo $this->Form->input('url');
-                echo $this->Form->input('link_target');
-                echo $this->Form->input('cssid');
-                echo $this->Form->input('cssclass');
-                echo $this->Form->input('hide_in_nav');
-                echo $this->Form->input('hide_in_sitemap');
-                ?>
-
-                <?= $this->Form->button(__('Submit')) ?>
-                <?= $this->Form->end() ?>
-                <?= $this->Box->render(); ?>
-            <?php else: ?>
-                <?= __('Select a menu'); ?>
+                <?php echo $this->cell('Content.MenuModule::manage', [ $menu->id ]); ?>
             <?php endif; ?>
+
         </div>
     </div>
 

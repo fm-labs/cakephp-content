@@ -14,6 +14,8 @@ use Cake\ORM\ResultSet;
 
 interface PostHandlerInterface
 {
+    public static function describe();
+
     public function __construct(EntityInterface $entity);
 
     /**

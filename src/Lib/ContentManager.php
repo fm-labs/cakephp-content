@@ -21,6 +21,8 @@ class ContentManager
 
     public static $registry = [
         'PageType' => [],
+        'PostType' => [],
+        'MenuItemType' => [],
         'ContentModule' => []
     ];
 
@@ -140,18 +142,7 @@ class ContentManager
     public static function getPageHandler(Page $page)
     {
         $pageType = $page->getPageType();
-        /*
-        $handlers = [
-            'root' => 'Content\Page\RootPageType',
-            'content' => 'Content\Page\ContentPageType',
-            'static' => 'Content\Page\StaticPageType',
-            'redirect' => 'Content\Page\RedirectPageType',
-            'controller' => 'Content\Page\ControllerPageType',
-            'shop_category' => 'Shop\Page\ShopCategoryPageType',
-        ];
-        */
         $handlers = self::$registry['PageType'];
-
         if (isset($handlers[$pageType])) {
             return new $handlers[$pageType]['class']($page);
         }
@@ -162,16 +153,7 @@ class ContentManager
     public static function getMenuHandlerInstance(MenuItem $menuItem)
     {
         $menuType = $menuItem->type;
-        $handlers = [
-            'page' => 'Content\Menu\PostMenuHandler',
-            'post' => 'Content\Menu\PostMenuHandler',
-            'redirect' => 'Content\Menu\RedirectMenuHandler',
-            'controller' => 'Content\Menu\ControllerMenuHandler',
-            'shop_category' => 'Shop\Menu\ShopCategoryMenuHandler',
-        ];
-
-        //$handlers = self::$registry['PageType'];
-
+        $handlers = self::$registry['MenuItemType'];
         if (isset($handlers[$menuType])) {
             return new $handlers[$menuType]($menuItem);
         }
@@ -186,16 +168,8 @@ class ContentManager
     public static function getPostHandlerInstance($post)
     {
         $postType = $post->type;
-        $handlers = [
-            'page' => 'Content\Post\DefaultPostHandler',
-            'post' => 'Content\Post\DefaultPostHandler',
-            'inline' => 'Content\Post\DefaultPostHandler',
-            'multipage' => 'Content\Post\DefaultPostHandler',
-            'shop_category' => 'Shop\Post\ShopCategoryPostHandler',
-        ];
 
-        //$handlers = self::$registry['PageType'];
-
+        $handlers = self::$registry['PostType'];
         if (isset($handlers[$postType])) {
             return new $handlers[$postType]($post);
         }
@@ -208,8 +182,6 @@ class ContentManager
         $map = [
             'page' => 'Content.Posts',
             'post' => 'Content.Posts',
-            'inline' => 'Content.Posts',
-            'multipage' => 'Content.Posts',
             'shop_category' => 'Shop.ShopCategories',
         ];
 
