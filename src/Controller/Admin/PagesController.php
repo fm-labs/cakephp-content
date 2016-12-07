@@ -35,7 +35,15 @@ class PagesController extends ContentController
 
     public $modelClass = "Content.Pages";
 
-    public function beforeRender(Event $event) {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->components()->unload('RequestHandler');
+    }
+
+    public function beforeRender(Event $event)
+    {
         parent::beforeRender($event);
 
 

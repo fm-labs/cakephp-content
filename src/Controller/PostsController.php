@@ -58,6 +58,9 @@ class PostsController extends FrontendController
             'media' => true,
         ]);
 
+        if (!$post->isPublished()) {
+            throw new NotFoundException();
+        }
 
         // force canonical url (except root pages)
         if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
@@ -81,7 +84,7 @@ class PostsController extends FrontendController
 
         $this->viewBuilder()->className('Content.Post');
 
-        $template = ($post->template) ?: (($post->parent) ? $post->type . '_parent' : $post->type);
+        $template = ($post->template) ?: ((!$post->parent_id) ? $post->type . '_parent' : $post->type);
         $this->render($template);
     }
 
