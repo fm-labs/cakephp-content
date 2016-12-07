@@ -141,7 +141,7 @@ class PostsController extends ContentController
     public function edit($id = null)
     {
         $post = $this->Posts->get($id, [
-            'contain' => ['ContentModules' => ['Modules']],
+            'contain' => ['Parent', 'ContentModules' => ['Modules']],
             'media' => true,
         ]);
 
@@ -168,7 +168,7 @@ class PostsController extends ContentController
         $this->set('_serialize', 'post');
 
         $this->autoRender = false;
-        $template = ($post->parent) ? 'edit_parent' : 'edit';
+        $template = (!$post->parent_id) ? 'edit_parent' : 'edit';
 
         $this->set('typeElement', 'Content.Admin/Posts/' . 'edit_' . $post->type);
 

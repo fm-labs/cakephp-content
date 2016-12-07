@@ -38,52 +38,60 @@ trait PostHandlerEntityTrait
 
 
     /**
-     * @return array
+     * @return array|string
+     * @throws \Exception
      */
     public function getViewUrl()
     {
         return $this->handler()->getViewUrl();
     }
 
+    protected function _getViewUrl()
+    {
+        return $this->handler()->getViewUrl();
+    }
 
     /**
-     * @return array
+     * @return array|string
+     * @throws \Exception
      */
     public function getAdminUrl()
     {
         return $this->handler()->getAdminUrl();
     }
 
+    protected function _getAdminUrl()
+    {
+        return $this->handler()->getAdminUrl();
+    }
+
     /**
-     * @return array
+     * @return bool
+     * @throws \Exception
      */
     public function isPublished()
     {
         return $this->handler()->isPublished();
     }
 
+    protected function _isPublished()
+    {
+        return $this->isPublished();
+    }
+
     /**
-     * @return array
+     * @return \Cake\ORM\Query
+     * @throws \Exception
      */
     public function getChildren()
     {
-        return $this->handler()->getChildren()->toArray();
+        return $this->handler()->getChildren();
     }
 
-    /**
-     * @return array
-     */
-    protected function _getViewUrl()
+    protected function _getChildren()
     {
-        return $this->handler()->getViewUrl();
+        return $this->getChildren();
     }
 
 
-    /**
-     * @return array
-     */
-    protected function _getAdminUrl()
-    {
-        return $this->handler()->getAdminUrl();
-    }
 }

@@ -45,7 +45,7 @@ class GalleryItemPostHandler extends DefaultPostHandler implements  PostHandlerI
 
     public function getChildren()
     {
-        return [];
+        return null;
     }
 
     public function isPublished()

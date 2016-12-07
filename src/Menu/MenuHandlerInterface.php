@@ -3,6 +3,7 @@
 namespace Content\Menu;
 
 
+use Cake\ORM\Query;
 use Cake\ORM\ResultSet;
 use Content\Model\Entity\MenuItem;
 
@@ -26,7 +27,7 @@ interface MenuHandlerInterface
     public function getAdminUrl();
 
     /**
-     * @return ResultSet
+     * @return Query
      */
     public function getChildren();
 

@@ -481,7 +481,7 @@ class PagesController extends ContentController
         } else {
 
             $page = $this->Pages->get($id);
-            $nodes = $page->getChildren();
+            $nodes = $page->getChildren()->all()->toArray();
             //$nodes = $this->Pages->find('children', ['for' => $id]);
             /*
             $nodes = $this->Pages

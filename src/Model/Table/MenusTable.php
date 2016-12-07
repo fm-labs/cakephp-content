@@ -97,7 +97,7 @@ class MenusTable extends Table
             foreach ($menuItems as $menuItem) {
                 $_node = $nodeFormatter($menuItem);
                 if ($menuItem->getChildren()) {
-                    $_node['children'] = $nodesFormatter($menuItem->getChildren());
+                    $_node['children'] = $nodesFormatter($menuItem->getChildren()->all()->toArray());
                 }
                 $formatted[] = $_node;
             }
@@ -155,7 +155,7 @@ class MenusTable extends Table
             foreach ($menuItems as $menuItem) {
                 $_node = $nodeFormatter($menuItem);
                 if ($menuItem->getChildren()) {
-                    $_node['children'] = $nodesFormatter($menuItem->getChildren());
+                    $_node['children'] = $nodesFormatter($menuItem->getChildren()->all()->toArray());
                 }
                 $formatted[] = $_node;
             }

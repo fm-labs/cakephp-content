@@ -84,12 +84,12 @@ class MenuModuleCell extends ModuleCell
         }
 
         $title = $item->handler()->getLabel();
-        $url = ($this->_manage) ? $item->handler()->getAdminUrl() : $item->handler()->getViewUrl();
+        $url = ($this->_manage) ? $item->getAdminUrl() : $item->getViewUrl();
         $class = $item->cssclass;
         $children = [];
 
         if ($this->_currentDepth <= $this->params['depth'] && $item->getChildren()) {
-            $children = $this->_buildMenu($item->getChildren());
+            $children = $this->_buildMenu($item->getChildren()->all()->toArray());
         }
 
         $menuItem = [

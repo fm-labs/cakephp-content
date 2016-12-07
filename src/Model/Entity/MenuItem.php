@@ -74,44 +74,74 @@ class MenuItem extends Entity
         return $this->_handler;
     }
 
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
     public function getViewUrl()
     {
         return $this->handler()->getViewUrl();
     }
 
+    protected function _getViewUrl()
+    {
+        return $this->getViewUrl();
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
     public function getAdminUrl()
     {
         return $this->handler()->getAdminUrl();
     }
 
+    protected function _getAdminUrl()
+    {
+        return $this->getAdminUrl();
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function getLabel()
     {
         return $this->handler()->getLabel();
     }
 
-    /**
-     * @return array
-     * @deprecated Use getChildren() instead
-     */
-    public function getSubitems()
+    protected function _getLabel()
     {
-        return $this->getChildren();
+        return $this->getLabel();
     }
 
+    /**
+     * @return \Cake\ORM\Query
+     * @throws \Exception
+     */
     public function getChildren()
     {
-        //return $this->handler()->getChildren();
-        return TableRegistry::get('Content.MenuItems')->find('children', ['for' => $this->id, 'direct' => true])->toArray();
+        return $this->handler()->getChildren();
     }
 
+    protected function _getChildren()
+    {
+        return $this->getChildren()->all()->toArray();
+    }
+
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function isHiddenInNav()
     {
         return $this->handler()->isHiddenInNav();
     }
 
-    protected function _getChildren()
+    protected function _isHiddenInNav()
     {
-        return $this->getChildren();
+        return $this->isHiddenInNav();
     }
 
 }

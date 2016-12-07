@@ -13,7 +13,7 @@ return [
                     'posts' => [
                         'title' => 'Posts',
                         'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'post'],
-                        'data-icon' => 'desktop',
+                        'data-icon' => 'file-o',
                     ],
 
                     'pages' => [
@@ -34,16 +34,11 @@ return [
                         'data-icon' => 'image'
                     ],
 
-                    'pages_legacy' => [
-                        'title' => 'Pages (Legacy)',
-                        'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                        'data-icon' => 'sitemap'
-                    ],
 
                     'page_layouts' => [
                         'title' => 'Layouts',
                         'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
-                        'data-icon' => 'file'
+                        'data-icon' => 'columns'
                     ],
                     'module_builder' => [
                         'title' => 'Module Builder',
@@ -59,6 +54,12 @@ return [
                         'title' => 'Content Modules',
                         'url' => ['plugin' => 'Content', 'controller' => 'ContentModules', 'action' => 'index'],
                         'data-icon' => 'object-group'
+                    ],
+
+                    'pages_legacy' => [
+                        'title' => 'Pages (Legacy)',
+                        'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
+                        'data-icon' => 'sitemap'
                     ],
                 ],
             ],

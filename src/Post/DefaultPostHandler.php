@@ -68,10 +68,9 @@ class DefaultPostHandler implements PostHandlerInterface
     public function getChildren()
     {
         return TableRegistry::get('Content.Posts')
-            ->find('published')
+            ->find()
             ->where(['parent_id' => $this->post->get('id')])
-            ->order(['pos' => 'ASC'])
-            ->all();
+            ->order(['pos' => 'ASC']);
     }
 
     public function isPublished()

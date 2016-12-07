@@ -10,6 +10,7 @@ namespace Content\Post;
 
 
 use Cake\Datasource\EntityInterface;
+use Cake\ORM\Query;
 use Cake\ORM\ResultSet;
 
 interface PostHandlerInterface
@@ -34,7 +35,7 @@ interface PostHandlerInterface
     public function isPublished();
 
     /**
-     * @return ResultSet
+     * @return Query
      */
     public function getChildren();
 }

@@ -28,6 +28,13 @@ class PostsTable extends Table
         $this->table('bc_posts');
         $this->displayField('title');
         $this->primaryKey('id');
+
+
+        $this->belongsTo('Parent', [
+            'className' => 'Content.Posts',
+            'foreignKey' => 'parent_id'
+        ]);
+
         $this->addBehavior('Timestamp');
 
         $this->addBehavior('Translate', [

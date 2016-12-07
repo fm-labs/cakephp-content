@@ -6,7 +6,7 @@
     <?php endif; ?>
 
     <div class="posts">
-        <?php foreach($post->getChildren() as $post): ?>
+        <?php foreach($post->children as $post): ?>
         <?= $this->element('Content.Posts/view', ['post' => $post]); ?>
         <?php endforeach; ?>
     </div>

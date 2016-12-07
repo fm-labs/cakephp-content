@@ -5,7 +5,6 @@ $this->Html->addCrumb(__d('content','Edit {0}', __d('content', 'Post')));
 // Heading
 $this->assign('title', $post->title);
 ?>
-<h1>Edit Post</h1>
 <?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
 <?php
 echo $this->Form->input('use_teaser');

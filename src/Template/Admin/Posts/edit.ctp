@@ -1,4 +1,5 @@
 <?php
+$this->loadHelper('Media.Media');
 
 // Toolbar
 $this->Toolbar->addLink([
@@ -16,11 +17,12 @@ $this->Toolbar->addPostLink([
     'url' => ['action' => 'delete', $post->id],
     'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
-
 ?>
-<?php $this->loadHelper('Media.Media'); ?>
+<?php if ($post->parent_id): ?>
+    <?= $this->Html->link(__('Edit parent post: {0}', $post->parent->title), ['action' => 'edit', $post->parent->id]); ?>
+<?php endif; ?>
+<hr />
 <?= $this->Form->create($post); ?>
-<div class="clearfix clear-fix" style="clear: both;"></div>
 <div class="row">
     <div class="col-md-9">
         <?php
@@ -30,11 +32,14 @@ $this->Toolbar->addPostLink([
         //echo $this->Form->input('subheading');
         ?>
 
+
         <?php
-        echo $this->element($typeElement);
+        if ($this->elementExists($typeElement)) {
+            echo $this->element($typeElement);
+        }
         ?>
 
-        <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => true]); ?>
+        <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => false]); ?>
 
         <?= $this->Form->input('meta_title'); ?>
         <?= $this->Form->input('meta_desc'); ?>
@@ -104,3 +109,4 @@ $this->Toolbar->addPostLink([
         $('.media-picker').mediapicker(<?= json_encode($mediapicker); ?>);
     });
 </script>
+<?php debug($post); ?>
