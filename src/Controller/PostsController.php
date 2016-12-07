@@ -62,18 +62,18 @@ class PostsController extends FrontendController
             throw new NotFoundException();
         }
 
-        // force canonical url (except root pages)
-        if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
-            $here = Router::normalize($this->request->here);
-            $canonical = Router::normalize($post->getViewUrl());
-
-            if ($here != $canonical) {
-                $this->redirect($canonical, 301);
-                return;
-            }
-        }
-
         if (!$this->request->is('requested')) {
+            // force canonical url (except root pages)
+            if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
+                $here = Router::normalize($this->request->here);
+                $canonical = Router::normalize($post->getViewUrl());
+
+                if ($here != $canonical) {
+                    $this->redirect($canonical, 301);
+                    return;
+                }
+            }
+
             $this->Frontend->setRefScope('Content.Posts');
             $this->Frontend->setRefId($id);
         }

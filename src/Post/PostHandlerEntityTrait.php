@@ -90,7 +90,7 @@ trait PostHandlerEntityTrait
 
     protected function _getChildren()
     {
-        return $this->getChildren();
+        return $this->getChildren()->all()->toArray();
     }
 
 
