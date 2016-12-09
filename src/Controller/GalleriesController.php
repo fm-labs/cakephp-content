@@ -1,16 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 12/3/15
- * Time: 6:36 PM
- */
 
 namespace Content\Controller;
 
 
-class GalleriesController extends FrontendController
+use Cake\Event\Event;
+
+class GalleriesController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['view']);
+    }
 
     /**
      * View method

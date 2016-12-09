@@ -1,24 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 6/20/15
- * Time: 12:52 AM
- */
 
 namespace Content\Controller;
 
-use Sitemap\Controller\Component\SitemapComponent;
+use Cake\Event\Event;
 
 /**
  * Class SeoController
  * @package Content\Controller
  *
- * @property SitemapComponent $Sitemap
  */
 class SeoController extends AppController
 {
-    public $components = ['Sitemap.Sitemap'];
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow();
+    }
 
     /**
      * Generates robots.txt in webroot

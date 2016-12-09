@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 5/17/15
- * Time: 6:34 PM
- */
 
 namespace Content\Controller;
 
@@ -27,7 +21,7 @@ use Content\Controller\Component\FrontendComponent;
  * @property PagesTable $Pages
  * @deprecated Use FrontendController instead
  */
-class PagesController extends FrontendController
+class PagesController extends AppController
 {
 
     public $modelClass = 'Content.Pages';
@@ -55,7 +49,8 @@ class PagesController extends FrontendController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->viewBuilder()->plugin('Content');
+
+        $this->Auth->allow();
     }
 
     public function beforeRender(Event $event)

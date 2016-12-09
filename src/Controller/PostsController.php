@@ -1,22 +1,28 @@
 <?php
 namespace Content\Controller;
 
-use Banana\Lib\Banana;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
-use Content\Controller\AppController;
 
 /**
  * Posts Controller
  *
  * @property \Content\Model\Table\PostsTable $Posts
  */
-class PostsController extends FrontendController
+class PostsController extends AppController
 {
     public $viewClass = 'Content.Post';
+
     public $modelClass = "Content.Posts";
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['index', 'view', 'teaser', 'sitemap']);
+    }
 
     /**
      * Index method
