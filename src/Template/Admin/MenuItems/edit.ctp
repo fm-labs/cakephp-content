@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Menu Items'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__('Edit {0}', __('Menu Item'))); ?>
+<?php $this->Breadcrumbs->add(__('Menu Items'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__('Edit {0}', __('Menu Item'))); ?>
 <?= $this->Toolbar->addPostLink(
     __('Delete'),
     ['action' => 'delete', $menuItem->id],

@@ -1,6 +1,6 @@
 <?php
-$this->Html->addCrumb(__d('content', 'Pages'), ['action' => 'index']);
-$this->Html->addCrumb(__d('content','Edit {0}', $content->title));
+$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
+$this->Breadcrumbs->add(__d('content','Edit {0}', $content->title));
 
 $this->Toolbar->addLink(
     __d('content','Delete'),

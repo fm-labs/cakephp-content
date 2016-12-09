@@ -1,7 +1,7 @@
 <?php
 // Breadcrumbs
-$this->Html->addCrumb(__('Posts'), ['action' => 'index', 'type' => $post->type]);
-$this->Html->addCrumb(__d('content','Edit {0}', __d('content', 'Post')));
+$this->Breadcrumbs->add(__('Posts'), ['action' => 'index', 'type' => $post->type]);
+$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Post')));
 // Heading
 $this->assign('title', $post->title);
 ?>

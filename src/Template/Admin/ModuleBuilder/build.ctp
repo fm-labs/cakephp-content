@@ -1,6 +1,6 @@
 <?php
-$this->Html->addCrumb(__('Module Builder'), ['action' => 'index']);
-$this->Html->addCrumb(__('Build/Edit Module'));
+$this->Breadcrumbs->add(__('Module Builder'), ['action' => 'index']);
+$this->Breadcrumbs->add(__('Build/Edit Module'));
 
 $this->assign('title', ($module->name) ?: __('New module'));
 ?>

@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Menu Items'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__('New {0}', __('Menu Item'))); ?>
+<?php $this->Breadcrumbs->add(__('Menu Items'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__('New {0}', __('Menu Item'))); ?>
 <?= $this->Toolbar->addLink(
     __('List {0}', __('Menu Items')),
     ['action' => 'index'],

@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Galleries'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','New {0}', __d('content','Gallery Item'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery Item'))); ?>
 <div class="posts">
     <?= $this->Form->create($item); ?>
     <div class="users ui top attached segment">

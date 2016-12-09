@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content', 'Page Metas'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content', 'Edit {0}', __d('content', 'Page Meta'))); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Page Metas'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Edit {0}', __d('content', 'Page Meta'))); ?>
 <?= $this->Toolbar->addPostLink(
     __d('content', 'Delete'),
     ['action' => 'delete', $pageMeta->id],

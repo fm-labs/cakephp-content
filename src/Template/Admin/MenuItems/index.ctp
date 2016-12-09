@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__('Menu Items')); ?>
+<?php $this->Breadcrumbs->add(__('Menu Items')); ?>
 
 <?php $this->Toolbar->addLink(__('New {0}', __('Menu Item')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <?= $this->Toolbar->addLink(

@@ -10,11 +10,14 @@ use Cake\Utility\Inflector;
 use Cake\View\Exception\MissingCellException;
 use Cake\Core\Exception\Exception;
 use Cake\View\View;
+use Content\View\Helper\BreadcrumbsHelper;
 
 /**
  * Class FrontendView
  *
  * @package App\View
+ *
+ * @property BreadcrumbsHelper $Breadcrumbs
  */
 class ContentView extends View
 {
@@ -34,9 +37,14 @@ class ContentView extends View
     ) {
         parent::__construct($request, $response, $eventManager, $viewOptions);
 
-        $this->loadHelper('Content.Content', []);
+    }
+
+    public function initialize()
+    {
+        $this->loadHelper('Content.Breadcrumbs');
+        $this->loadHelper('Content.Content');
         $this->loadHelper('Form', [
-            'className' => 'Backend\View\Helper\BackendFormHelper',
+            'className' => 'Bootstrap\View\Helper\FormHelper',
         ]);
     }
 

@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__d('content','Galleries')); ?>
+<?php $this->Breadcrumbs->add(__d('content','Galleries')); ?>
 <?php
 // TOOLBAR
 $this->Toolbar->addLink(__d('content','{0} (Table)', __d('content','Galleries')), ['action' => 'indexTable'], ['data-icon' => 'list']);

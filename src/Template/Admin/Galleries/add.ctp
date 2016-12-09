@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Galleries'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','New {0}', __d('content','Gallery'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery'))); ?>
 <?= $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Galleries')),
     ['action' => 'index'],

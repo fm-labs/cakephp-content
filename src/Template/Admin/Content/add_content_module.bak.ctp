@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb('Module Builder', ['action' => 'index']) ?>
+<?php $this->Breadcrumbs->add('Module Builder', ['action' => 'index']) ?>
 
 <div class="form">
     <h3>Add Module for Page: <?= h($content->title); ?> [<?= h($modulePath); ?>] in [<?= h($section); ?>]</h3>

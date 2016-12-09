@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Modules'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','New {0}', __d('content','Module'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Modules'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Module'))); ?>
 <div class="modules">
     <div class="be-toolbar actions">
         <div class="ui secondary menu">

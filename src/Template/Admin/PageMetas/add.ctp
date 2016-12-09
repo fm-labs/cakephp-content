@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content', 'Page Metas'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content', 'New {0}', __d('content', 'Page Meta'))); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Page Metas'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'New {0}', __d('content', 'Page Meta'))); ?>
 <?= $this->Toolbar->addLink(
     __d('content', 'List {0}', __d('content', 'Page Metas')),
     ['action' => 'index'],

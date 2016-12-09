@@ -1,6 +1,6 @@
-<?php $this->Html->addCrumb(__d('content','Content'), ['controller' => 'Pages', 'action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','Pages'), ['controller' => 'Pages', 'action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','List pages')); ?>
+<?php $this->Breadcrumbs->add(__d('content','Content'), ['controller' => 'Pages', 'action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','Pages'), ['controller' => 'Pages', 'action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','List pages')); ?>
 <?php
 // TOOLBAR
 $this->Toolbar->addLink(__d('content','{0} (Table)', __d('content','Pages')), ['action' => 'table'], ['data-icon' => 'list']);

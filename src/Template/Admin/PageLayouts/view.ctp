@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Page Layouts'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb($pageLayout->name); ?>
+<?php $this->Breadcrumbs->add(__d('content','Page Layouts'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add($pageLayout->name); ?>
 <?= $this->Toolbar->addLink(
     __d('content','Edit {0}', __d('content','Page Layout')),
     ['action' => 'edit', $pageLayout->id],

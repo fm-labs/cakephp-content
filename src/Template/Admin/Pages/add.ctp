@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Pages'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','New {0}', __d('content','Page'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Pages'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Page'))); ?>
 <?php
 $this->extend('/Admin/Content/add');
 // EXTEND: HEADING

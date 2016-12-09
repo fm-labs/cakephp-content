@@ -1,6 +1,6 @@
 <?php
 // Breadcrumbs
-$this->Html->addCrumb(__d('content','Posts'));
+$this->Breadcrumbs->add(__d('content','Posts'));
 
 // Toolbar
 $this->Toolbar->addLink(__d('content','New {0}', __d('content','Post')), ['action' => 'add'], ['data-icon' => 'plus']);

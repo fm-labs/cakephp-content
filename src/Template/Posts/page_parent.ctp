@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb($post->title, $post->view_url); ?>
+<?php $this->Breadcrumbs->add($post->title, $post->view_url); ?>
 <div class="page parent view <?= $post->cssclass ?>" id="<?= $post->cssid; ?>">
 
     <?php if ($post->title): ?>

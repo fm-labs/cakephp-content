@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Page Layouts'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','Edit {0}', __d('content','Page Layout'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Page Layouts'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content','Page Layout'))); ?>
 <?= $this->Toolbar->addPostLink(
     __d('content','Delete'),
     ['action' => 'delete', $pageLayout->id],

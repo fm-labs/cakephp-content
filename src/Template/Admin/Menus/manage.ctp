@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Menus'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__('Manage {0}', __('Menu'))); ?>
+<?php $this->Breadcrumbs->add(__('Menus'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__('Manage {0}', __('Menu'))); ?>
 <?php $this->loadHelper('AdminLte.Box'); ?>
 <?php $this->loadHelper('Backend.DataTableJs'); ?>
 <?php $this->assign('heading', __('Manage {0}', __('Menu'))); ?>

@@ -87,10 +87,10 @@ class PageView extends ContentView
 
             foreach ($page->getPath() as $node) {
                 if (!$node->parent_id || $node->hide_in_nav) continue;
-                $this->Content->addCrumb($node->getPageTitle(), $node->getPageUrl());
+                $this->Breadcrumbs->add($node->getPageTitle(), $node->getPageUrl());
             }
 
-            //$this->Content->addCrumb($page->getPageTitle(), $page->getPageUrl());
+            //$this->Breadcrumbs->add($page->getPageTitle(), $page->getPageUrl());
 
         }
 

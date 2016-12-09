@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__d('content','Pages')); ?>
+<?php $this->Breadcrumbs->add(__d('content','Pages')); ?>
 <?php $this->extend('/Admin/Content/index'); ?>
 <?php
 // TOOLBAR

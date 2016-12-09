@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb('Module Builder', ['action' => 'index']) ?>
+<?php $this->Breadcrumbs->add('Module Builder', ['action' => 'index']) ?>
 
 <div class="form">
     <h1>Module Builder: <?= h($modulePath); ?>Widget</h1>

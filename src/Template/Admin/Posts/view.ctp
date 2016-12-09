@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Posts'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb($post->title); ?>
+<?php $this->Breadcrumbs->add(__d('content','Posts'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add($post->title); ?>
 <?= $this->Toolbar->addLink(
     __d('content','Edit {0}', __d('content','Post')),
     ['action' => 'edit', $post->id],

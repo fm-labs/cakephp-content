@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__d('content', 'Page Metas')); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Page Metas')); ?>
 
 <?php $this->Toolbar->addLink(__d('content', 'New {0}', __d('content', 'Page Meta')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <div class="pageMetas index">

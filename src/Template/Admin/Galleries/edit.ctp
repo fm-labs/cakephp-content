@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__d('content','Galleries'), ['action' => 'index']); ?>
-<?php $this->Html->addCrumb(__d('content','Edit {0}', __d('content','Gallery'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content','Gallery'))); ?>
 <?= $this->Toolbar->addPostLink(
     __d('content','Delete'),
     ['action' => 'delete', $gallery->id],

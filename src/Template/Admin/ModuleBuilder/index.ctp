@@ -1,5 +1,5 @@
 <?php
-$this->Html->addCrumb(__('Module Builder'), ['action' => 'index']);
+$this->Breadcrumbs->add(__('Module Builder'), ['action' => 'index']);
 
 $this->assign('title', __('Module Builder'));
 ?>

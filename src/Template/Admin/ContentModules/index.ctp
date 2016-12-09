@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__d('content','Content Modules')); ?>
+<?php $this->Breadcrumbs->add(__d('content','Content Modules')); ?>
 <div class="contentModules index">
 
 
