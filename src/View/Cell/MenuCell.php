@@ -13,7 +13,12 @@ use Cake\Utility\Inflector;
 use Cake\View\Cell;
 use Content\Model\Table\PagesTable;
 
-
+/**
+ * Class MenuCell
+ * @package Content\View\Cell
+ *
+ * @deprecated Use MenuModuleCell instead
+ */
 class MenuCell extends Cell
 {
     public $modelClass = "Content.Pages";

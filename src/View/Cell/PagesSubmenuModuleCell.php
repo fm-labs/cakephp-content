@@ -6,7 +6,12 @@ use Cake\Utility\Inflector;
 use Cake\View\Cell;
 use Content\Model\Table\PagesTable;
 
-
+/**
+ * Class PagesSubmenuModuleCell
+ * @package Content\View\Cell
+ *
+ * @deprecated Use MenuSubmenuModuleCell instead
+ */
 class PagesSubmenuModuleCell extends PagesMenuModuleCell
 {
     public $modelClass = "Content.Pages";
