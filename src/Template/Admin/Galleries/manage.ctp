@@ -106,19 +106,21 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (asc)'),
                     [
-                        'controller' => 'Sort', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
                         'field' => 'pos',  'order' => 'asc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
-                    ['class' => 'link-frame btn btn-default']); ?>
+                    ['class' => 'link-frame btn'],
+                    __('Are you sure?')); ?>
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
-                        'controller' => 'Sort', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
                         'field' => 'pos',  'order' => 'desc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
-                    ['class' => 'link-frame btn btn-default']); ?>
+                    ['class' => 'link-frame btn'],
+                    __('Are you sure?')); ?>
             </div>
 
 

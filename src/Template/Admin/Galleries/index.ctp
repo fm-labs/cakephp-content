@@ -67,7 +67,7 @@
                 'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
                 'fields' => [
                     //'id',
-                    //'pos',
+                    'pos',
                     'image_file' => [
                         'formatter' => function($val) {
                             if (!$val) {
@@ -96,27 +96,30 @@
             ]]);
             ?>
             <div class="actions">
-                <?= $this->Ui->link(__d('content','Add Gallery Item'),
-                    ['action' => 'addItem', $gallery->id],
-                    ['class' => 'btn btn-default link-frame-modal', 'data-icon' => 'plus']
+                <?= $this->Ui->link(__d('content','Add Gallery Post'),
+                    ['action' => 'addPost', $gallery->id],
+                    ['class' => 'btn btn-default', 'data-icon' => 'plus']
                 ) ?>
+
 
                 <?= $this->Html->link(
                     __d('content', 'Reorder (asc)'),
                     [
-                        'controller' => 'Sort', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
                         'field' => 'pos',  'order' => 'asc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
-                    ['class' => 'link-frame btn btn-default']); ?>
+                    ['class' => 'link-frame btn'],
+                    __('Are you sure?')); ?>
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
-                        'controller' => 'Sort', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
                         'field' => 'pos',  'order' => 'desc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
-                    ['class' => 'link-frame btn btn-default']); ?>
+                    ['class' => 'link-frame btn'],
+                    __('Are you sure?')); ?>
             </div>
 
 

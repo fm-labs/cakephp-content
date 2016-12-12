@@ -26,7 +26,7 @@ class PostsController extends ContentController
     public function index()
     {
 
-        $scope = ['Posts.refscope' => 'Content.Pages', 'Posts.parent_id IS' => null];
+        $scope = ['Posts.refscope' => 'Content.Posts', 'Posts.parent_id IS' => null];
         $order = ['Posts.title' => 'ASC'];
 
         $q = $this->request->query('q');
@@ -164,14 +164,21 @@ class PostsController extends ContentController
         $editor['body_class'] = $post->cssclass;
         $editor['body_id'] = $post->cssid;
 
+        $template = 'edit';
+        if (!$post->parent_id) {
+            $template .= '_parent';
+        }
+        if ($post->type) {
+            $template .= '_' . $post->type;
+        } else {
+            $template = 'edit_type';
+        }
+
         $this->set(compact('post', 'teaserTemplates', 'templates', 'editor'));
         $this->set('_serialize', 'post');
-
-        $this->autoRender = false;
-        $template = (!$post->parent_id) ? 'edit_parent' : 'edit';
-
         $this->set('typeElement', 'Content.Admin/Posts/' . 'edit_' . $post->type);
 
+        $this->autoRender = false;
         $this->render($template);
     }
 

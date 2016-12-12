@@ -18,10 +18,18 @@ $this->Toolbar->addPostLink([
     'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
 ?>
+<?php
+// Breadcrumbs
+$this->Breadcrumbs->add(__('Pages'), ['action' => 'index', 'type' => $post->type]);
+$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Page')));
+// Heading
+$this->assign('title', $post->title);
+$this->assign('heading', $post->title);
+$this->assign('subheading', $post->type);
+?>
 <?php if ($post->parent_id): ?>
-    <?= $this->Html->link(__('Edit parent post: {0}', $post->parent->title), ['action' => 'edit', $post->parent->id]); ?>
+    <?= $this->Html->link(__('Parent page: {0}', $post->parent->title), ['action' => 'edit', $post->parent->id, 'type' => $post->parent->type]); ?>
 <?php endif; ?>
-<hr />
 <?= $this->Form->create($post); ?>
 <div class="row">
     <div class="col-md-9">
@@ -32,12 +40,30 @@ $this->Toolbar->addPostLink([
         //echo $this->Form->input('subheading');
         ?>
 
-
+        <!-- Teaser
+        <?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
         <?php
-        if ($this->elementExists($typeElement)) {
-            //echo $this->element($typeElement);
-        }
+                echo $this->Form->input('use_teaser');
+                echo $this->Form->input('teaser_html', [
+                    'type' => 'htmleditor',
+                    'editor' => $editor
+                ]);
+                echo $this->Form->input('teaser_link_caption');
+                echo $this->Form->input('teaser_link_href');
+                echo $this->Form->input('teaser_template', ['empty' => '- Default -']);
+                echo $this->Form->input('teaser_image_file', ['type' => 'media_picker']);
+                ?>
+        <?= $this->Form->fieldsetEnd(); ?>
+        -->
+        <!-- Content -->
+        <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
+        <?php
+        echo $this->Form->input('body_html', [
+            'type' => 'htmleditor',
+            'editor' => $editor
+        ]);
         ?>
+        <?= $this->Form->fieldsetEnd(); ?>
 
         <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => false]); ?>
 

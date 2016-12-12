@@ -16,8 +16,11 @@ $this->Toolbar->addPostLink([
     'url' => ['action' => 'delete', $post->id],
     'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
 ]);
-
-$this->assign('title', $post->title);
+?>
+<?php
+$this->assign('title', __('Galleries'));
+$this->assign('heading', $gallery->title);
+$this->assign('subheading', 'New gallery post');
 ?>
 <?php $this->loadHelper('Media.Media'); ?>
 <?= $this->Form->create($post); ?>

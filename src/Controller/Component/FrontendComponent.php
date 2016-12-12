@@ -35,6 +35,7 @@ class FrontendComponent extends Component
 
     protected $_defaultConfig = [
         'viewClass' => 'Content.Content',
+        'refscope' => 'Content.Posts',
         'theme' => null,
         'layout' => null
     ];
@@ -58,6 +59,7 @@ class FrontendComponent extends Component
         $this->controller->viewBuilder()->theme($this->_config['theme']);
         $this->controller->viewBuilder()->layout($this->_config['layout']);
 
+        $this->setRefScope($this->_config['refscope']);
     }
 
     public function setRefScope($scope)

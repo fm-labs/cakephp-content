@@ -113,27 +113,27 @@ class GalleriesController extends AppController
         $this->set('_serialize', ['gallery']);
     }
 
-    public function addItem($id = null)
+    public function addPost($id = null)
     {
         $gallery = $this->Galleries->get($id, [
             'contain' => []
         ]);
 
-        $item = $this->Galleries->Posts->newEntity([
+        $post = $this->Galleries->Posts->newEntity([
             'refscope' => 'Content.Galleries',
             'refid' => $id
         ]);
         if ($this->request->is('post')) {
-            $item = $this->Galleries->Posts->patchEntity($item, $this->request->data);
-            if ($this->Galleries->Posts->save($item)) {
-                $this->Flash->success(__d('content','The gallery item has been saved.'));
-                return $this->redirect(['action' => 'edit', $item->id]);
+            $post = $this->Galleries->Posts->patchEntity($post, $this->request->data);
+            if ($this->Galleries->Posts->save($post)) {
+                $this->Flash->success(__d('content','The gallery post has been saved.'));
+                return $this->redirect(['action' => 'editPost', $post->id]);
             } else {
                 $this->Flash->error(__d('content','The gallery could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('item'));
-        $this->set('_serialize', ['item']);
+        $this->set(compact('gallery', 'post'));
+        $this->set('_serialize', ['gallery', 'post']);
     }
 
     /**
@@ -181,6 +181,8 @@ class GalleriesController extends AppController
             'media' => true,
         ]);
 
+        $gallery = $this->Galleries->get($post->refid);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $post = $this->Galleries->Posts->patchEntity($post, $this->request->data);
             if ($this->Galleries->Posts->save($post)) {
@@ -199,8 +201,8 @@ class GalleriesController extends AppController
         $editor['body_class'] = $post->cssclass;
         $editor['body_id'] = $post->cssid;
 
-        $this->set(compact('post', 'templates', 'editor'));
-        $this->set('_serialize', 'post');
+        $this->set(compact('post', 'templates', 'editor', 'gallery'));
+        $this->set('_serialize', ['post', 'gallery']);
     }
 
     /**
