@@ -66,6 +66,12 @@ ContentManager::register('ContentModule', [
     'TextHtml' => [
         'class' => 'Content.TextHtml'
     ],
+    'MenuMenu' => [
+        'class' => 'Content.Menu'
+    ],
+    'MenuSubmenu' => [
+        'class' => 'Content.MenuSubmenu'
+    ],
     'PagesMenu' => [
         'class' => 'Content.PagesMenu'
     ],
