@@ -1,6 +1,7 @@
 <?php
 namespace Content\Model\Entity;
 
+use Banana\Model\Entity\EntityAttributesTrait;
 use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
@@ -16,6 +17,7 @@ class Post extends Entity
 {
 
     use PostHandlerEntityTrait;
+    use EntityAttributesTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

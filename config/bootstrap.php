@@ -86,7 +86,7 @@ ContentManager::register('ContentModule', [
 /**
  * Core Content plugins (required)
  */
-Plugin::load('Banana', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('Banana', ['bootstrap' => true, 'routes' => true]);
 //Plugin::load('Backend', ['bootstrap' => true, 'routes' => true]);
 //Plugin::load('User', ['bootstrap' => true, 'routes' => true]);
 //Plugin::load('Tree', ['bootstrap' => true, 'routes' => false]);

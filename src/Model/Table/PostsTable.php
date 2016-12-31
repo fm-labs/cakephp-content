@@ -17,6 +17,13 @@ use Cake\Validation\Validator;
 class PostsTable extends Table
 {
 
+    protected $_attributes = [
+        'html_meta_title' => [],
+        'html_meta_robots' => [
+            'type' => 'list:lst_content_html_meta_robots'
+        ]
+    ];
+
     /**
      * Initialize method
      *
@@ -59,6 +66,8 @@ class PostsTable extends Table
 
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable', []);
+
+        $this->addBehavior('Banana.Attributes');
 
         //@TODO Refactor with initalization hook
         if (Plugin::loaded('Media')) {
