@@ -14,7 +14,7 @@ use Media\Lib\Media\MediaManager;
  *
  * @property \Content\Model\Table\PostsTable $Posts
  */
-class PostsController extends ContentController
+class PostsController extends AppController
 {
     public $modelClass = 'Content.Posts';
 
@@ -165,6 +165,7 @@ class PostsController extends ContentController
         $editor['body_id'] = $post->cssid;
 
         $template = 'edit';
+        /*
         if (!$post->parent_id) {
             $template .= '_parent';
         }
@@ -173,10 +174,11 @@ class PostsController extends ContentController
         } else {
             $template = 'edit_type';
         }
+        */
 
         $this->set(compact('post', 'teaserTemplates', 'templates', 'editor'));
         $this->set('_serialize', 'post');
-        $this->set('typeElement', 'Content.Admin/Posts/' . 'edit_' . $post->type);
+        //$this->set('typeElement', 'Content.Admin/Posts/' . 'edit_' . $post->type);
 
         $this->autoRender = false;
         $this->render($template);
