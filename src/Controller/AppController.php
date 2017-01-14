@@ -11,7 +11,9 @@ class AppController extends BaseAppController
     {
         parent::beforeFilter($event);
 
-        $this->Auth->config('authorize', 'Controller');
+        if ($this->components()->has('Auth')) {
+            $this->Auth->config('authorize', 'Controller');
+        }
     }
 
     public function isAuthorized($user = null)

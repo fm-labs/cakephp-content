@@ -22,9 +22,11 @@ class ContentHelper extends Helper
 
         //@todo Implement modelMap feature
         $modelMap = [
-            'Content.Pages' => 'Content.Pages',
+            'Content.Pages' => 'Content.Posts',
             'Content.Posts' => 'Content.Posts'
         ];
+
+        return $text;
 
         $text = preg_replace_callback('/\{\{(.*)\}\}/U', function($matches) use ($modelMap) {
 

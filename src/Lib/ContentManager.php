@@ -1,11 +1,11 @@
 <?php
 namespace Content\Lib;
 
+use Banana\Lib\ClassRegistry;
 use Cake\Core\App;
 use Cake\Utility\Hash;
 use Content\Model\Entity\MenuItem;
 use Content\Model\Entity\Page;
-use Content\Model\Entity\PageTypeTrait;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;
@@ -19,15 +19,6 @@ class ContentManager
 
     public static $version;
 
-    public static $registry = [
-        'PageType' => [],
-        'PostType' => [],
-        'MenuItemType' => [],
-        'ContentModule' => []
-    ];
-
-    protected static $_hooks;
-
     /**
      * @return string Content plugin version nummer
      */
@@ -39,86 +30,6 @@ class ContentManager
         return static::$version;
     }
 
-    /**
-     * @param $type
-     * @param $config
-     *
-     * Config:
-     * - className
-     */
-    public static function register($scope, $key, $config = null)
-    {
-        if (is_array($key) && $config === null) {
-            foreach ($key as $_key => $_config) {
-                self::register($scope, $_key, $_config);
-            }
-            return;
-        }
-
-
-        self::$registry[$scope][$key] = $config;
-    }
-
-    /**
-     * @param $type
-     * @param callable $callback
-     * @unused
-     */
-    public static function hook($type, callable $callback)
-    {
-
-    }
-
-    /**
-     * @unused
-     */
-    public static function bootstrap()
-    {
-        $config = Configure::read('Content');
-        if ($config === null) {
-            die("Content Cake is not configured");
-        }
-    }
-
-    /**
-     * @unused
-     */
-    public static function bootstrapConfigs()
-    {
-        if (Configure::check('Content.configs')) {
-            foreach ((array) Configure::read('Content.configs') as $config) {
-                Configure::load($config);
-            }
-        }
-    }
-
-    /**
-     * @unused
-     */
-    public static function bootstrapPlugins()
-    {
-        if (Configure::check('Content.plugins')) {
-            foreach ((array) Configure::read('Content.plugins') as $plugin => $flags) {
-                $flags = array_merge(['bootstrap' => false, 'routes' => false, 'config' => false], $flags);
-                Plugin::load($plugin, $flags);
-
-                if ($flags['config'] === true) {
-                    $flags['config'] = Inflector::underscore($plugin);
-                }
-                if ($flags['config']) {
-                    Configure::load($flags['config']);
-                }
-            }
-        }
-    }
-
-    /**
-     * @unused
-     */
-    public static function routes()
-    {
-        // @todo Implement me
-    }
 
     public static function getAvailablePageLayouts()
     {
@@ -136,45 +47,28 @@ class ContentManager
 
     /**
      * @param Page $page
-     * @return null
      * @deprecated
      */
     public static function getPageHandler(Page $page)
     {
         $pageType = $page->getPageType();
-        $handlers = self::$registry['PageType'];
-        if (isset($handlers[$pageType])) {
-            return new $handlers[$pageType]['class']($page);
-        }
-
-        return null;
+        return ClassRegistry::createInstance('PageType', $pageType, $page);
     }
 
     public static function getMenuHandlerInstance(MenuItem $menuItem)
     {
         $menuType = $menuItem->type;
-        $handlers = self::$registry['MenuItemType'];
-        if (isset($handlers[$menuType])) {
-            return new $handlers[$menuType]($menuItem);
-        }
-
-        return null;
+        return ClassRegistry::createInstance('MenuItemType', $menuType, $menuItem);
     }
 
     /**
-     * @param $postType
+     * @param $post
      * @return PostHandlerInterface
      */
     public static function getPostHandlerInstance($post)
     {
         $postType = $post->type;
-
-        $handlers = self::$registry['PostType'];
-        if (isset($handlers[$postType])) {
-            return new $handlers[$postType]($post);
-        }
-
-        return null;
+        return ClassRegistry::createInstance('PostType', $postType, $post);
     }
 
     public static function getPostModelByType($type)

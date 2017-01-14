@@ -2,8 +2,35 @@
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 
-debug("content routes");
 Router::extensions(['json']);
+
+
+Router::plugin('Content', [], function($routes) {
+
+
+    // Admin routes
+    //if (!Configure::read('Content.Router.disableAdminRoutes')) {
+        $routes->scope( '/admin', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'],function ($routes) {
+
+            $routes->extensions(['json']);
+
+            $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
+            //$routes->connect('/:controller');
+            $routes->fallbacks('DashedRoute');
+        });
+    //}
+
+});
+
+
+
+return;
+
+
+
+
+
+
 if (Configure::read('Content.Router.enableRootScope')) {
 
     Router::scope('/', function($routes) {
@@ -90,18 +117,6 @@ Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:', ]
 
 
 
-// Admin routes
-if (!Configure::read('Content.Router.disableAdminRoutes')) {
-    Router::scope( '/content/admin', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'],function ($routes) {
-
-        $routes->extensions(['json']);
-
-        $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-        //$routes->connect('/:controller');
-        $routes->fallbacks('DashedRoute');
-    });
-
-}
 
 // Content SEO: robots.txt
 //Router::connect('/robots.txt', ['plugin' => 'Content', 'controller' => 'Seo', 'action' => 'robots']);

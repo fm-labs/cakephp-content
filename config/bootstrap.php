@@ -2,55 +2,35 @@
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 
-if (!Configure::read('Content')) {
-    die("Content Plugin not configured");
-}
+//if (!Configure::read('Content')) {
+//    die("Content Plugin not configured");
+//}
 
-/**
- * Default Content setup
- */
-use Content\Lib\ContentManager;
-ContentManager::register('PostType', [
+use Banana\Lib\ClassRegistry;
+ClassRegistry::add('PostType', [
     'gallerypost' => 'Content\Post\GalleryItemPostHandler',
     'post' => 'Content\Post\DefaultPostHandler',
     'page' => 'Content\Post\PagePostHandler',
     'inline' => 'Content\Post\DefaultPostHandler',
     'multipage' => 'Content\Post\DefaultPostHandler',
-    //'shop_category' => 'Shop\Post\ShopCategoryPostHandler',
 ]);
-ContentManager::register('MenuItemType', [
+ClassRegistry::add('MenuItemType', [
     'page' => 'Content\Menu\PostMenuHandler',
     'post' => 'Content\Menu\PostMenuHandler',
     'redirect' => 'Content\Menu\RedirectMenuHandler',
     'controller' => 'Content\Menu\ControllerMenuHandler',
-    //'shop_category' => 'Shop\Menu\ShopCategoryMenuHandler',
 ]);
 
 // @deprecated
-ContentManager::register('PageType', [
-    'root' =>  [
-        'name' => 'Website Root',
-        'class' => 'Content\Page\RootPageType'
-    ],
-    'content' => [
-        'name' => 'Content Page',
-        'class' => 'Content\Page\ContentPageType'
-    ],
-    'static' => [
-        'name' => 'Static Page',
-        'class' => 'Content\Page\StaticPageType'
-    ],
-    'redirect' => [
-        'name' => 'Redirect',
-        'class' => 'Content\Page\RedirectPageType'
-    ],
-    'controller' => [
-        'name' => 'Controller',
-        'class' => 'Content\Page\ControllerPageType'
-    ],
+ClassRegistry::add('PageType', [
+    'root' =>  'Content\Page\RootPageType',
+    'content' => 'Content\Page\ContentPageType',
+    'static' => 'Content\Page\StaticPageType',
+    'redirect' => 'Content\Page\RedirectPageType',
+    'controller' => 'Content\Page\ControllerPageType',
 ]);
 
-ContentManager::register('ContentModule', [
+ClassRegistry::add('ContentModule', [
     'Flexslider' => [
         'class' => 'Content.Flexslider'
     ],
@@ -82,16 +62,6 @@ ContentManager::register('ContentModule', [
         'class' => 'Content.Image'
     ]
 ]);
-
-/**
- * Core Content plugins (required)
- */
-//Plugin::load('Banana', ['bootstrap' => true, 'routes' => true]);
-//Plugin::load('Backend', ['bootstrap' => true, 'routes' => true]);
-//Plugin::load('User', ['bootstrap' => true, 'routes' => true]);
-//Plugin::load('Tree', ['bootstrap' => true, 'routes' => false]);
-//Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
-//Plugin::load('Settings', ['bootstrap' => true, 'routes' => true]);
 
 /**
  * Theme plugins
