@@ -26,7 +26,7 @@ class PostsController extends AppController
     public function index()
     {
 
-        $scope = ['Posts.refscope' => 'Content.Posts', 'Posts.parent_id IS' => null];
+        $scope = ['Posts.refscope' => 'Content.Posts', 'Posts.refid IS' => null];
         $order = ['Posts.title' => 'ASC'];
 
         $q = $this->request->query('q');

@@ -24,7 +24,7 @@ return [
                 'data-icon' => 'desktop',
             ],
 
-            'Nodes' => [
+            'nodes' => [
                 'title' => 'Nodes',
                 'url' => ['plugin' => 'Content', 'controller' => 'Nodes', 'action' => 'index'],
                 'data-icon' => 'sitemap'
@@ -35,7 +35,6 @@ return [
                 'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
                 'data-icon' => 'image'
             ],
-
 
             'page_layouts' => [
                 'title' => 'Layouts',
@@ -58,11 +57,13 @@ return [
                 'data-icon' => 'object-group'
             ],
 
+            /*
             'pages_legacy' => [
                 'title' => 'Pages (Legacy)',
                 'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
                 'data-icon' => 'sitemap'
             ],
+            */
         ],
     ],
 
