@@ -1,5 +1,5 @@
 <?php
-namespace Banana\Controller\Admin;
+namespace Content\Controller\Admin;
 
 
 use Cake\Core\Plugin;
