@@ -16,7 +16,7 @@ class Post extends Entity implements EntityTypeHandlerInterface
 {
 
     use EntityPostTypeHandlerTrait;
-    use EntityAttributesTrait;
+    //use EntityAttributesTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

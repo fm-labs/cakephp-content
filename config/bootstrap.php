@@ -8,7 +8,7 @@ use Backend\Lib\Backend;
 /**
  * Load dependencies
  */
-Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
+//Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
 
 /**
  * Load themes

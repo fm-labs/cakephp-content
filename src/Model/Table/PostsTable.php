@@ -61,7 +61,7 @@ class PostsTable extends Table
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable', []);
 
-        $this->addBehavior('Eav.Attributes');
+        //$this->addBehavior('Eav.Attributes');
 
         //@TODO Refactor with initalization hook
         if (Plugin::loaded('Media')) {
