@@ -14,12 +14,12 @@ class MenusController extends AppController
     public function manage($id = null) {
         $this->edit($id);
 
-        $this->loadModel('Content.MenuItems');
-        $menuItems = $this->MenuItems->find()->where(['MenuItems.menu_id' => $id])->all()->toArray();
-        $this->set('menuItems', $menuItems);
+        $this->loadModel('Content.Nodes');
+        $nodes = $this->Nodes->find()->where(['Nodes.site_id' => $id])->all()->toArray();
+        $this->set('nodes', $nodes);
 
-        $menuItem = $this->MenuItems->newEntity();
-        $this->set('menuItem', $menuItem);
+        $node = $this->Nodes->newEntity();
+        $this->set('node', $node);
     }
 
 }

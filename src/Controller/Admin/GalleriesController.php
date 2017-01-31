@@ -2,11 +2,13 @@
 namespace Content\Controller\Admin;
 
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Content\Controller\Admin\AppController;
 use Banana\Controller\Shared\JsTreeAwareTrait;
 use Banana\Controller\Shared\PrimaryModelAwareTrait;
 use Content\Lib\ContentManager;
+use Crud\Controller\Component\CrudComponent;
 
 /**
  * Galleries Controller
@@ -19,15 +21,21 @@ class GalleriesController extends AppController
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
 
-    public function index($id = null)
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index()
     {
-
-        $id = ($id !== null) ? $id : $this->request->query('id');
-        if ($id) {
-            //$gallery = $this->Galleries->get($id);
-            //$this->set('gallery', $gallery);
-            $this->edit($id);
+        if ($this->request->query('id')) {
+            $this->redirect(['action' => 'manage', $this->request->query('id')]);
         }
+
+
+        $this->paginate['limit'] = 100;
+        $this->paginate['order'] = ['Galleries.title' => 'ASC'];
+        $this->paginate['contain'] = ['Parent'];
 
         $tree = $this->Galleries
             ->find('threaded')
@@ -37,25 +45,12 @@ class GalleriesController extends AppController
             ->toArray();
 
         $this->set('galleryTree', $tree);
+        $this->set('galleries', $this->paginate($this->Galleries));
+        $this->set('_serialize', ['galleries']);
     }
 
     public function indexTree() {
         $this->set('dataUrl', ['action' => 'treeData']);
-    }
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
-    public function indexTable()
-    {
-        $this->paginate['limit'] = 100;
-        $this->paginate['order'] = ['Galleries.title' => 'ASC'];
-        $this->paginate['contain'] = ['Parent'];
-
-        $this->set('galleries', $this->paginate($this->Galleries));
-        $this->set('_serialize', ['galleries']);
     }
 
     /**
@@ -72,12 +67,6 @@ class GalleriesController extends AppController
         ]);
         $this->set('gallery', $gallery);
         $this->set('_serialize', ['gallery']);
-    }
-
-    public function manage($id = null) {
-        $this->autoRender = false;
-        $this->setAction('view', $id);
-        $this->render('manage');
     }
 
     public function treeView()
@@ -137,13 +126,13 @@ class GalleriesController extends AppController
     }
 
     /**
-     * Edit method
+     * Manage method
      *
      * @param string|null $id Gallery id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function manage($id = null)
     {
         $gallery = $this->Galleries->get($id, [
             'contain' => ['Parent']

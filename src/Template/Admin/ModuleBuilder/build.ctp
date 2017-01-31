@@ -7,7 +7,7 @@ $this->assign('title', ($module->name) ?: __('New module'));
 <?php $this->loadHelper('AdminLte.Box'); ?>
 <div class="module-builder ui grid">
     <div class="row">
-        <div class="build-container col-md-4">
+        <div class="build-container col-md-3">
             <?= $this->Box->create('Configure Module'); ?>
                 <?= $this->Form->create($module, [
                     'url' => [
@@ -32,16 +32,17 @@ $this->assign('title', ($module->name) ?: __('New module'));
                 <?= $this->Form->end(); ?>
             <?= $this->Box->render(); ?>
 
-        </div>
-        <div class="preview-container col-md-8">
-            <?= $this->Box->create('Preview'); ?>
-
-            <?= '' // $this->cell($module->path . 'Module', [], ['module' => $module, 'section' => $section, 'page_id' => $page_id]) ?>
             <?php if (isset($previewUrl)): ?>
-                <?= $this->Html->link('Open in new window', $previewUrl, ['target' => '_blank']); ?>
-            <iframe src="<?= $this->Url->build($previewUrl); ?>" style="width: 750px; height: 600px; border: none;"></iframe>
-            <?php endif; ?>
+            <?= $this->Box->create('Preview'); ?>
+            <?= $this->Html->link('Open in new window', $previewUrl, ['target' => '_blank']); ?>
             <?= $this->Box->render(); ?>
+            <?php endif; ?>
+        </div>
+        <div class="preview-container col-md-9">
+
+            <?php if (isset($previewUrl)): ?>
+                <iframe src="<?= $this->Url->build($previewUrl); ?>" style="width: 100%; height: 1000px; border: none;"></iframe>
+            <?php endif; ?>
         </div>
     </div>
 

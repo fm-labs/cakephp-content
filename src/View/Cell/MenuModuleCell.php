@@ -1,27 +1,22 @@
 <?php
 namespace Content\View\Cell;
 
-use Cake\ORM\Query;
-use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
-use Cake\View\Cell;
-use Content\Model\Entity\MenuItem;
-use Content\Model\Table\MenusTable;
+use Content\Model\Entity\Node;
+use Content\Model\Table\NodesTable;
 
 /**
  * Class MenuModuleCell
  * @package Content\View\Cell
  *
- * @property MenusTable $Menus
+ * @property NodesTable $Nodes
  */
 class MenuModuleCell extends ModuleCell
 {
-    public $modelClass = "Content.Menus";
+    public $modelClass = "Content.Nodes";
 
     public static $defaultParams = [
         'menu' => [],
-        'start_node' => 0,
+        'start_node' => null,
         'depth' => 1,
         'level' => 0,
         'class' => '',
@@ -31,23 +26,29 @@ class MenuModuleCell extends ModuleCell
     protected $_currentDepth = 0;
     protected $_manage = false;
 
-    public function display($menuId = null)
+    public function display()
     {
-        if (empty($this->params['menu']) && $menuId) {
-            $this->loadModel('Content.Menus');
+        if (empty($this->params['menu'])) {
+            $this->loadModel('Content.Nodes');
 
-            $menu = $this->Menus->find()
-                ->where(['Menus.id' => $menuId])
-                ->contain(['MenuItems' => function (Query $q) use ($menuId) {
-                    return $q
-                        ->where(['MenuItems.menu_id' => $menuId, 'MenuItems.parent_id IS NULL']);
-                }
-                ])
-                ->first();
+            if (!$this->params['start_node']) {
 
-            if ($menu) {
-                $this->params['menu'] = $this->_buildMenu($menu->menu_items);
+                $siteId = $this->request->session()->read('Site.id');
+                //@TODO Throw and handle exception when site id not found. Or fallback to default site.
+                $rootNode = $this->Nodes->find()
+                    ->where(['Nodes.site_id' => $siteId, 'Nodes.parent_id IS NULL'])
+                    ->first();
+
+                $this->params['start_node'] = $rootNode->id;
             }
+
+            $nodes = $this->Nodes->find('children', [
+                'for' => $this->params['start_node'],
+                'direct' => true
+            ])->all();
+
+            //@TODO cache menu nodes
+            $this->params['menu'] = $this->_buildMenu($nodes);
         }
 
         $this->params['element_path'] = ($this->params['element_path']) ?: 'Content.Modules/Menu/menu_list';
@@ -67,7 +68,7 @@ class MenuModuleCell extends ModuleCell
         $menu = [];
         foreach ($items as $item) {
             
-            $item = $this->_buildMenuItem($item);
+            $item = $this->_buildNode($item);
             if ($item) {
                 $menu[] = $item;
             }
@@ -77,7 +78,7 @@ class MenuModuleCell extends ModuleCell
         return $menu;
     }
     
-    protected function _buildMenuItem(MenuItem $item)
+    protected function _buildNode(Node $item)
     {
         if ($item->handler()->isHiddenInNav()) {
             return false;
@@ -92,12 +93,12 @@ class MenuModuleCell extends ModuleCell
             $children = $this->_buildMenu($item->getChildren()->all()->toArray());
         }
 
-        $menuItem = [
+        $node = [
             'title' => $title,
             'url' => $url,
             'class' => $class,
             'children' => $children
         ];
-        return $menuItem;
+        return $node;
     }
 }

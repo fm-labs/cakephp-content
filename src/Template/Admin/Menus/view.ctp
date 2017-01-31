@@ -33,12 +33,12 @@
 ) ?>
 <?= $this->Toolbar->addLink(
     __('List {0}', __('Menu Items')),
-    ['controller' => 'MenuItems', 'action' => 'index'],
+    ['controller' => 'Nodes', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?= $this->Toolbar->addLink(
     __('New {0}', __('Menu Item')),
-    ['controller' => 'MenuItems', 'action' => 'add'],
+    ['controller' => 'Nodes', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?= $this->Toolbar->endGroup(); ?>
@@ -78,8 +78,8 @@
 -->
 <div class="related">
     <div class="ui basic segment">
-    <h4 class="ui header"><?= __('Related {0}', __('MenuItems')) ?></h4>
-    <?php if (!empty($menu->menu_items)): ?>
+    <h4 class="ui header"><?= __('Related {0}', __('Nodes')) ?></h4>
+    <?php if (!empty($menu->nodes)): ?>
     <table class="ui table">
         <tr>
             <th><?= __('Id') ?></th>
@@ -102,33 +102,33 @@
             <th><?= __('Modified') ?></th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
-        <?php foreach ($menu->menu_items as $menuItems): ?>
+        <?php foreach ($menu->nodes as $nodes): ?>
         <tr>
-            <td><?= h($menuItems->id) ?></td>
-            <td><?= h($menuItems->menu_id) ?></td>
-            <td><?= h($menuItems->lft) ?></td>
-            <td><?= h($menuItems->rght) ?></td>
-            <td><?= h($menuItems->level) ?></td>
-            <td><?= h($menuItems->parent_id) ?></td>
-            <td><?= h($menuItems->title) ?></td>
-            <td><?= h($menuItems->type) ?></td>
-            <td><?= h($menuItems->typeid) ?></td>
-            <td><?= h($menuItems->type_params) ?></td>
-            <td><?= h($menuItems->url) ?></td>
-            <td><?= h($menuItems->link_target) ?></td>
-            <td><?= h($menuItems->cssid) ?></td>
-            <td><?= h($menuItems->cssclass) ?></td>
-            <td><?= h($menuItems->hide_in_nav) ?></td>
-            <td><?= h($menuItems->hide_in_sitemap) ?></td>
-            <td><?= h($menuItems->created) ?></td>
-            <td><?= h($menuItems->modified) ?></td>
+            <td><?= h($nodes->id) ?></td>
+            <td><?= h($nodes->site_id) ?></td>
+            <td><?= h($nodes->lft) ?></td>
+            <td><?= h($nodes->rght) ?></td>
+            <td><?= h($nodes->level) ?></td>
+            <td><?= h($nodes->parent_id) ?></td>
+            <td><?= h($nodes->title) ?></td>
+            <td><?= h($nodes->type) ?></td>
+            <td><?= h($nodes->typeid) ?></td>
+            <td><?= h($nodes->type_params) ?></td>
+            <td><?= h($nodes->url) ?></td>
+            <td><?= h($nodes->link_target) ?></td>
+            <td><?= h($nodes->cssid) ?></td>
+            <td><?= h($nodes->cssclass) ?></td>
+            <td><?= h($nodes->hide_in_nav) ?></td>
+            <td><?= h($nodes->hide_in_sitemap) ?></td>
+            <td><?= h($nodes->created) ?></td>
+            <td><?= h($nodes->modified) ?></td>
 
             <td class="actions">
-                <?= $this->Html->link(__('View'), ['controller' => 'MenuItems', 'action' => 'view', $menuItems->id]) ?>
+                <?= $this->Html->link(__('View'), ['controller' => 'Nodes', 'action' => 'view', $nodes->id]) ?>
 
-                <?= $this->Html->link(__('Edit'), ['controller' => 'MenuItems', 'action' => 'edit', $menuItems->id]) ?>
+                <?= $this->Html->link(__('Edit'), ['controller' => 'Nodes', 'action' => 'edit', $nodes->id]) ?>
 
-                <?= $this->Form->postLink(__('Delete'), ['controller' => 'MenuItems', 'action' => 'delete', $menuItems->id], ['confirm' => __('Are you sure you want to delete # {0}?', $menuItems->id)]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Nodes', 'action' => 'delete', $nodes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nodes->id)]) ?>
 
             </td>
         </tr>
@@ -140,8 +140,8 @@
 </div>
 <div class="related">
     <div class="ui basic segment">
-    <h4 class="ui header"><?= __('Related {0}', __('MenuItems')) ?></h4>
-    <?php if (!empty($menu->root_menu_items)): ?>
+    <h4 class="ui header"><?= __('Related {0}', __('Nodes')) ?></h4>
+    <?php if (!empty($menu->root_nodes)): ?>
     <table class="ui table">
         <tr>
             <th><?= __('Id') ?></th>
@@ -164,33 +164,33 @@
             <th><?= __('Modified') ?></th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
-        <?php foreach ($menu->root_menu_items as $rootMenuItems): ?>
+        <?php foreach ($menu->root_nodes as $rootNodes): ?>
         <tr>
-            <td><?= h($rootMenuItems->id) ?></td>
-            <td><?= h($rootMenuItems->menu_id) ?></td>
-            <td><?= h($rootMenuItems->lft) ?></td>
-            <td><?= h($rootMenuItems->rght) ?></td>
-            <td><?= h($rootMenuItems->level) ?></td>
-            <td><?= h($rootMenuItems->parent_id) ?></td>
-            <td><?= h($rootMenuItems->title) ?></td>
-            <td><?= h($rootMenuItems->type) ?></td>
-            <td><?= h($rootMenuItems->typeid) ?></td>
-            <td><?= h($rootMenuItems->type_params) ?></td>
-            <td><?= h($rootMenuItems->url) ?></td>
-            <td><?= h($rootMenuItems->link_target) ?></td>
-            <td><?= h($rootMenuItems->cssid) ?></td>
-            <td><?= h($rootMenuItems->cssclass) ?></td>
-            <td><?= h($rootMenuItems->hide_in_nav) ?></td>
-            <td><?= h($rootMenuItems->hide_in_sitemap) ?></td>
-            <td><?= h($rootMenuItems->created) ?></td>
-            <td><?= h($rootMenuItems->modified) ?></td>
+            <td><?= h($rootNodes->id) ?></td>
+            <td><?= h($rootNodes->site_id) ?></td>
+            <td><?= h($rootNodes->lft) ?></td>
+            <td><?= h($rootNodes->rght) ?></td>
+            <td><?= h($rootNodes->level) ?></td>
+            <td><?= h($rootNodes->parent_id) ?></td>
+            <td><?= h($rootNodes->title) ?></td>
+            <td><?= h($rootNodes->type) ?></td>
+            <td><?= h($rootNodes->typeid) ?></td>
+            <td><?= h($rootNodes->type_params) ?></td>
+            <td><?= h($rootNodes->url) ?></td>
+            <td><?= h($rootNodes->link_target) ?></td>
+            <td><?= h($rootNodes->cssid) ?></td>
+            <td><?= h($rootNodes->cssclass) ?></td>
+            <td><?= h($rootNodes->hide_in_nav) ?></td>
+            <td><?= h($rootNodes->hide_in_sitemap) ?></td>
+            <td><?= h($rootNodes->created) ?></td>
+            <td><?= h($rootNodes->modified) ?></td>
 
             <td class="actions">
-                <?= $this->Html->link(__('View'), ['controller' => 'MenuItems', 'action' => 'view', $rootMenuItems->id]) ?>
+                <?= $this->Html->link(__('View'), ['controller' => 'Nodes', 'action' => 'view', $rootNodes->id]) ?>
 
-                <?= $this->Html->link(__('Edit'), ['controller' => 'MenuItems', 'action' => 'edit', $rootMenuItems->id]) ?>
+                <?= $this->Html->link(__('Edit'), ['controller' => 'Nodes', 'action' => 'edit', $rootNodes->id]) ?>
 
-                <?= $this->Form->postLink(__('Delete'), ['controller' => 'MenuItems', 'action' => 'delete', $rootMenuItems->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rootMenuItems->id)]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Nodes', 'action' => 'delete', $rootNodes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rootNodes->id)]) ?>
 
             </td>
         </tr>

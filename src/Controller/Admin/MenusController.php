@@ -8,6 +8,7 @@ use Content\Controller\Admin\AppController;
  * Menus Controller
  *
  * @property \Content\Model\Table\MenusTable $Menus
+ * @deprecated Use NodesController instead
  */
 class MenusController extends AppController
 {
@@ -17,21 +18,21 @@ class MenusController extends AppController
     public function manage($id = null) {
 
         $menu = null;
-        $menuItems = null;
+        $nodes = null;
 
         if ($id) {
             $menu = $this->Menus->get($id);
-            $menuItems = $this->Menus->MenuItems->find()->where(['menu_id' => $id])->order(['lft' => 'ASC'])->all();
+            $nodes = $this->Menus->Nodes->find()->where(['site_id' => $id])->order(['lft' => 'ASC'])->all();
         }
         $menus = $this->Menus->find()->all()->toArray();
 
-        $newMenuItem = $this->Menus->MenuItems->newEntity();
+        $newNode = $this->Menus->Nodes->newEntity();
 
         $this->set('menu', $menu);
         $this->set('menus', $menus);
-        $this->set('menuItems', $menuItems);
-        $this->set('newMenuItem', $newMenuItem);
-        $this->set('menuItemTypes', $this->Menus->MenuItems->getTypeList());
+        $this->set('nodes', $nodes);
+        $this->set('newNode', $newNode);
+        $this->set('nodeTypes', $this->Menus->Nodes->getTypeList());
     }
 
     public function treeData($menuId)
@@ -46,26 +47,26 @@ class MenusController extends AppController
     public function treeSort()
     {
 
-        $this->loadModel('Content.MenuItems');
+        $this->loadModel('Content.Nodes');
 
         $this->viewBuilder()->className('Json');
         $request = $this->request->data + ['nodeId' => null, 'oldParentId' => null, 'oldPos' => null, 'newParentId' => null, 'newPos' => null];
 
-        $menuItem = $this->MenuItems->get($request['nodeId']);
+        $node = $this->Nodes->get($request['nodeId']);
 
-        $this->MenuItems->behaviors()->Tree->config('scope', ['menu_id' => $menuItem->menu_id]);
-        $this->MenuItems->moveTo($menuItem, $request['newParentId'], $request['newPos'], $request['oldPos']);
+        $this->Nodes->behaviors()->Tree->config('scope', ['site_id' => $node->site_id]);
+        $this->Nodes->moveTo($node, $request['newParentId'], $request['newPos'], $request['oldPos']);
 
         $this->set('request', $request);
         $this->set('node',[
-            'id' => $menuItem->id,
-            'menu_id' => $menuItem->menu_id,
-            'type' => $menuItem->type,
-            'typeid' => $menuItem->typeid,
-            'parent_id' => $menuItem->parent_id,
-            'level' => $menuItem->level,
-            'lft' => $menuItem->lft,
-            'url' => Router::url($menuItem->getAdminUrl()),
+            'id' => $node->id,
+            'site_id' => $node->site_id,
+            'type' => $node->type,
+            'typeid' => $node->typeid,
+            'parent_id' => $node->parent_id,
+            'level' => $node->level,
+            'lft' => $node->lft,
+            'url' => Router::url($node->getAdminUrl()),
         ]);
         $this->set('_serialize', ['request', 'message', 'node']);
     }
@@ -94,7 +95,7 @@ class MenusController extends AppController
     public function view($id = null)
     {
         $menu = $this->Menus->get($id, [
-            'contain' => ['Sites', 'MenuItems', 'RootMenuItems']
+            'contain' => ['Sites', 'Nodes', 'RootNodes']
         ]);
         $this->set('menu', $menu);
         $this->set('_serialize', ['menu']);

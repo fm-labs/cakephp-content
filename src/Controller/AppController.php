@@ -5,6 +5,10 @@ namespace Content\Controller;
 use App\Controller\AppController as BaseAppController;
 use Cake\Event\Event;
 
+/**
+ * Class AppController
+ * @package Content\Controller
+ */
 class AppController extends BaseAppController
 {
     public function beforeFilter(Event $event)

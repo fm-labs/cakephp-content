@@ -17,10 +17,10 @@ $this->assign('title', __('Module Builder'));
                 <td class="actions">
                     <?= $this->Html->link('Create new module', [
                         'action' => 'build',
-                        'path' => $moduleInfo['class'],
+                        'path' => $moduleInfo,
                     ], ['class' => 'btn btn-sm btn-default']); ?>
                     <!--
-                    <?= $this->Html->link('View', ['action' => 'view', 'class' => $moduleInfo['class']]); ?>
+                    <?= $this->Html->link('View', ['action' => 'view', 'class' => $moduleInfo]); ?>
                     -->
                 </td>
             </tr>

@@ -8,12 +8,12 @@ use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\Model\Entity\Menu;
-use Content\Model\Entity\MenuItem;
+use Content\Model\Entity\Node;
 
 /**
  * Menus Model
  *
- * @property MenuItemsTable $MenuItems
+ * @property NodesTable $Nodes
  */
 class MenusTable extends Table
 {
@@ -37,16 +37,16 @@ class MenusTable extends Table
             'foreignKey' => 'site_id'
         ]);
 
-        $this->hasMany('MenuItems', [
-            'className' => 'Content.MenuItems',
-            'foreignKey' => 'menu_id'
+        $this->hasMany('Nodes', [
+            'className' => 'Content.Nodes',
+            'foreignKey' => 'site_id'
         ]);
 
-        $this->hasMany('RootMenuItems', [
-            'className' => 'Content.MenuItems',
-            'foreignKey' => 'menu_id',
+        $this->hasMany('RootNodes', [
+            'className' => 'Content.Nodes',
+            'foreignKey' => 'site_id',
             'conditions' => [
-                'RootMenuItems.parent_id IS NULL'
+                'RootNodes.parent_id IS NULL'
             ]
         ]);
     }
@@ -79,25 +79,25 @@ class MenusTable extends Table
         $menu = $this->get($menuId);
 
 
-        $nodeFormatter = function(MenuItem $menuItem) use (&$id) {
+        $nodeFormatter = function(Node $node) use (&$id) {
 
-            $publishedClass = ($menuItem->isHiddenInNav()) ? 'unpublished' : 'published';
-            $class = $menuItem->type;
+            $publishedClass = ($node->isHiddenInNav()) ? 'unpublished' : 'published';
+            $class = $node->type;
             $class.= " " . $publishedClass;
 
             return [
-                'id' => 'menu_item__' . $menuItem->id,
-                'title' => $menuItem->getLabel(),
-                'url' => $menuItem->getAdminUrl()
+                'id' => 'node__' . $node->id,
+                'title' => $node->getLabel(),
+                'url' => $node->getAdminUrl()
             ];
         };
 
-        $nodesFormatter = function($menuItems) use ($nodeFormatter, &$nodesFormatter) {
+        $nodesFormatter = function($nodes) use ($nodeFormatter, &$nodesFormatter) {
             $formatted = [];
-            foreach ($menuItems as $menuItem) {
-                $_node = $nodeFormatter($menuItem);
-                if ($menuItem->getChildren()) {
-                    $_node['children'] = $nodesFormatter($menuItem->getChildren()->all()->toArray());
+            foreach ($nodes as $node) {
+                $_node = $nodeFormatter($node);
+                if ($node->getChildren()) {
+                    $_node['children'] = $nodesFormatter($node->getChildren()->all()->toArray());
                 }
                 $formatted[] = $_node;
             }
@@ -105,10 +105,10 @@ class MenusTable extends Table
         };
 
 
-        $menuItems = TableRegistry::get('Content.MenuItems')->find()->where(['menu_id' => $menu->id, 'parent_id IS' => null])->all();
+        $nodes = TableRegistry::get('Content.Nodes')->find()->where(['site_id' => $menu->id, 'parent_id IS' => null])->all();
         $menuArray = [
             'title' => $menu->title,
-            'items' => $nodesFormatter($menuItems)
+            'items' => $nodesFormatter($nodes)
         ];
 
         return $menuArray;
@@ -119,15 +119,15 @@ class MenusTable extends Table
     {
 
         $id = 1;
-        $nodeFormatter = function(MenuItem $menuItem) use (&$id) {
+        $nodeFormatter = function(Node $node) use (&$id) {
 
-            $publishedClass = ($menuItem->isHiddenInNav()) ? 'unpublished' : 'published';
-            $class = $menuItem->type;
+            $publishedClass = ($node->isHiddenInNav()) ? 'unpublished' : 'published';
+            $class = $node->type;
             $class.= " " . $publishedClass;
 
             return [
-                'id' => $menuItem->id,
-                'text' => $menuItem->getLabel(),
+                'id' => $node->id,
+                'text' => $node->getLabel(),
                 'icon' => $class,
                 'state' => [
                     'opened' => false,
@@ -138,24 +138,24 @@ class MenusTable extends Table
                 'li_attr' => ['class' => $class],
                 'a_attr' => [],
                 'data' => [
-                    'id' => $menuItem->id,
-                    'menu_id' => $menuItem->menu_id,
-                    'type' => $menuItem->type,
-                    'typeid' => $menuItem->typeid,
-                    'parent_id' => $menuItem->parent_id,
-                    'level' => $menuItem->level,
-                    'lft' => $menuItem->lft,
-                    'url' => Router::url($menuItem->getAdminUrl()),
+                    'id' => $node->id,
+                    'site_id' => $node->site_id,
+                    'type' => $node->type,
+                    'typeid' => $node->typeid,
+                    'parent_id' => $node->parent_id,
+                    'level' => $node->level,
+                    'lft' => $node->lft,
+                    'url' => Router::url($node->getAdminUrl()),
                 ]
             ];
         };
 
-        $nodesFormatter = function($menuItems) use ($nodeFormatter, &$nodesFormatter) {
+        $nodesFormatter = function($nodes) use ($nodeFormatter, &$nodesFormatter) {
             $formatted = [];
-            foreach ($menuItems as $menuItem) {
-                $_node = $nodeFormatter($menuItem);
-                if ($menuItem->getChildren()) {
-                    $_node['children'] = $nodesFormatter($menuItem->getChildren()->all()->toArray());
+            foreach ($nodes as $node) {
+                $_node = $nodeFormatter($node);
+                if ($node->getChildren()) {
+                    $_node['children'] = $nodesFormatter($node->getChildren()->all()->toArray());
                 }
                 $formatted[] = $_node;
             }
@@ -163,13 +163,13 @@ class MenusTable extends Table
         };
 
         $menu = TableRegistry::get('Content.Menus')->find()->where(['site_id' => $siteId])->first();
-        $menuItems = TableRegistry::get('Content.MenuItems')
+        $nodes = TableRegistry::get('Content.Nodes')
             ->find()
-            ->where(['menu_id' => $menu->id, 'parent_id IS' => null])
-            ->order(['MenuItems.lft' => 'ASC'])
+            ->where(['site_id' => $menu->id, 'parent_id IS' => null])
+            ->order(['Nodes.lft' => 'ASC'])
             ->all();
 
-        return $nodesFormatter($menuItems);
+        return $nodesFormatter($nodes);
 
         /*
         foreach ($menus as $menu) {
@@ -183,7 +183,7 @@ class MenusTable extends Table
                     'disabled' => false,
                     'selected' => false,
                 ],
-                'children' => $nodesFormatter($menuItems),
+                'children' => $nodesFormatter($nodes),
                 'li_attr' => ['class' => ''],
                 'a_attr' => [],
                 'data' => [

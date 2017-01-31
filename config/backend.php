@@ -2,25 +2,31 @@
 return [
     'Content.Backend.Menu' => [
         'title' => 'Content',
-        'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'page'],
+        'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
         'data-icon' => 'book',
         'children' => [
 
+            'categories' => [
+                'title' => 'Categories',
+                'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
+                'data-icon' => 'folder-o',
+            ],
+
             'posts' => [
                 'title' => 'Posts',
-                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'post'],
+                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
                 'data-icon' => 'file-o',
             ],
 
             'pages' => [
                 'title' => 'Pages',
-                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index', 'type' => 'page'],
+                'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
                 'data-icon' => 'desktop',
             ],
 
-            'menus' => [
-                'title' => 'Menus',
-                'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+            'Nodes' => [
+                'title' => 'Nodes',
+                'url' => ['plugin' => 'Content', 'controller' => 'Nodes', 'action' => 'index'],
                 'data-icon' => 'sitemap'
             ],
 
@@ -58,5 +64,6 @@ return [
                 'data-icon' => 'sitemap'
             ],
         ],
-    ]
+    ],
+
 ];

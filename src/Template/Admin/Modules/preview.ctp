@@ -7,4 +7,4 @@ debug($modulePath);
 debug($moduleParams);
 ?>
 
-<?php echo $this->cell($modulePath . 'Module' , [], ['params' => $moduleParams]); ?>
+<?php echo $this->cell($modulePath, [], ['params' => $moduleParams]); ?>

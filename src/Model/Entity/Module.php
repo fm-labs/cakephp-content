@@ -1,10 +1,13 @@
 <?php
 namespace Content\Model\Entity;
 
+use Banana\Lib\ClassRegistry;
 use Cake\ORM\Entity;
 
 /**
  * Module Entity.
+ *
+ * @TODO Refactor with type handler interface
  */
 class Module extends Entity
 {
@@ -73,6 +76,24 @@ class Module extends Entity
         ];
 
         return $url;
+    }
+
+    protected function _getCellname()
+    {
+        $path = $this->get('path');
+
+        $class = ClassRegistry::getClass('ContentModule', $path);
+        if (!$class) {
+            return false;
+        }
+
+        list($ns,$className) = namespaceSplit($class);
+        $className = substr($className, 0, -4);
+        $ns = explode('\\', $ns);
+        if ($ns && $ns[0] && $ns[0] != "App" && $ns[0] != "Cake") {
+            $className = $ns[0] . '.' . $className;
+        }
+        return $className;
     }
 
     protected function _setParams($params = null)

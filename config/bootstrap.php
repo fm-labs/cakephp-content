@@ -1,70 +1,17 @@
 <?php
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-
-//if (!Configure::read('Content')) {
-//    die("Content Plugin not configured");
-//}
-
 use Banana\Lib\ClassRegistry;
-ClassRegistry::add('PostType', [
-    'gallerypost' => 'Content\Post\GalleryItemPostHandler',
-    'post' => 'Content\Post\DefaultPostHandler',
-    'page' => 'Content\Post\PagePostHandler',
-    'inline' => 'Content\Post\DefaultPostHandler',
-    'multipage' => 'Content\Post\DefaultPostHandler',
-]);
-ClassRegistry::add('MenuItemType', [
-    'page' => 'Content\Menu\PostMenuHandler',
-    'post' => 'Content\Menu\PostMenuHandler',
-    'redirect' => 'Content\Menu\RedirectMenuHandler',
-    'controller' => 'Content\Menu\ControllerMenuHandler',
-]);
+use Backend\Lib\Backend;
 
-// @deprecated
-ClassRegistry::add('PageType', [
-    'root' =>  'Content\Page\RootPageType',
-    'content' => 'Content\Page\ContentPageType',
-    'static' => 'Content\Page\StaticPageType',
-    'redirect' => 'Content\Page\RedirectPageType',
-    'controller' => 'Content\Page\ControllerPageType',
-]);
-
-ClassRegistry::add('ContentModule', [
-    'Flexslider' => [
-        'class' => 'Content.Flexslider'
-    ],
-    'HtmlElement' => [
-        'class' => 'Content.HtmlElement'
-    ],
-    'PostsList' => [
-        'class' => 'Content.PostsList'
-    ],
-    'PostsView' => [
-        'class' => 'Content.PostsView'
-    ],
-    'TextHtml' => [
-        'class' => 'Content.TextHtml'
-    ],
-    'MenuMenu' => [
-        'class' => 'Content.Menu'
-    ],
-    'MenuSubmenu' => [
-        'class' => 'Content.MenuSubmenu'
-    ],
-    'PagesMenu' => [
-        'class' => 'Content.PagesMenu'
-    ],
-    'PagesSubmenu' => [
-        'class' => 'Content.PagesSubmenu'
-    ],
-    'Image' => [
-        'class' => 'Content.Image'
-    ]
-]);
 
 /**
- * Theme plugins
+ * Load dependencies
+ */
+Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
+
+/**
+ * Load themes
  */
 if (Configure::check('Content.Frontend.theme')) {
     try {
@@ -75,7 +22,43 @@ if (Configure::check('Content.Frontend.theme')) {
 }
 
 /**
+ * Register classes
+ */
+ClassRegistry::register('PostType', [
+    'default' => 'Content\Model\Entity\Post\DefaultPostType',
+    'gallerypost' => 'Content\Model\Entity\Post\GalleryItemPostType',
+    'post' => 'Content\Model\Entity\Post\DefaultPostType',
+    'page' => 'Content\Model\Entity\Post\PagePostType',
+    'teaser' => 'Content\Model\Entity\Post\TeaserPostType',
+    'inline' => 'Content\Model\Entity\Post\DefaultPostType',
+    'multipage' => 'Content\Model\Entity\Post\DefaultPostType',
+]);
+ClassRegistry::register('NodeType', [
+    'root' => 'Content\Model\Entity\Node\RootNodeType',
+    'category' => 'Content\Model\Entity\Node\CategoryNodeType',
+    'page' => 'Content\Model\Entity\Node\PostNodeType',
+    'post' => 'Content\Model\Entity\Node\PostNodeType',
+    'redirect' => 'Content\Model\Entity\Node\RedirectNodeType',
+    'controller' => 'Content\Model\Entity\Node\ControllerNodeType',
+]);
+
+// @deprecated
+ClassRegistry::register('PageType', [
+    'root' =>  'Content\Page\RootPageType',
+    'content' => 'Content\Page\ContentPageType',
+    'static' => 'Content\Page\StaticPageType',
+    'redirect' => 'Content\Page\RedirectPageType',
+    'controller' => 'Content\Page\ControllerPageType',
+]);
+
+ClassRegistry::register('ContentModule', [
+    'flexslider' => 'Content\View\Cell\FlexsliderModuleCell',
+    'pages_submenu' => 'Content\View\Cell\PagesSubmenuModuleCell'
+]);
+
+
+/**
  * Backend hook
  */
-use Backend\Lib\Backend;
 Backend::hookPlugin('Content');
+

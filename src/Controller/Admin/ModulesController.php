@@ -1,6 +1,7 @@
 <?php
 namespace Content\Controller\Admin;
 
+use Banana\Lib\ClassRegistry;
 use Content\Controller\Admin\AppController;
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
@@ -62,19 +63,34 @@ class ModulesController extends AppController
 
     public function preview()
     {
+
         $path = $this->request->query('path');
         $params = $this->request->query('params');
         if ($params) {
             $params = json_decode(base64_decode($params), true);
         }
 
-        $this->set('modulePath', $path);
+        $class = ClassRegistry::getClass('ContentModule', $path);
+        if (!$class) {
+            throw new NotFoundException("Preview failed: Missing class for module " . $path);
+        }
+
+        list($ns,$className) = namespaceSplit($class);
+        $className = substr($className, 0, -4);
+        $ns = explode('\\', $ns);
+        if ($ns && $ns[0] && $ns[0] != "App" && $ns[0] != "Cake") {
+            $className = $ns[0] . '.' . $className;
+        }
+
+        $this->set('modulePath', $className);
         $this->set('moduleParams', $params);
 
         $this->viewBuilder()
             ->layout('frontend')
             ->theme(Configure::read('Content.Frontend.theme'))
-            ->className('Content.Content');
+            ->className('Content.Content')
+        ;
+
     }
 
     /**

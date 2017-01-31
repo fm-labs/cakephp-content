@@ -49,9 +49,9 @@
 
 
             <?= $this->Box->create(__('Add {0}', __('Menu Item')), ['collapsed' => true]); ?>
-            <?= $this->Form->create($newMenuItem, ['class' => '', 'url' => ['controller' => 'MenuItems', 'action' => 'add']]); ?>
+            <?= $this->Form->create($newNode, ['class' => '', 'url' => ['controller' => 'Nodes', 'action' => 'add']]); ?>
             <?php
-            echo $this->Form->hidden('menu_id', ['value' => $menu->id]);
+            echo $this->Form->hidden('site_id', ['value' => $menu->id]);
             echo $this->Form->input('title');
             echo $this->Form->input('type');
             //echo $this->Form->input('typeid');

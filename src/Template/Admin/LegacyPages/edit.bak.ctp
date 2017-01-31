@@ -203,7 +203,7 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
 
 </div>
 
-<?php $this->append('scriptBottom'); ?>
+<?php $this->append('script'); ?>
     <script>
         /*
         $(document).ready(function() {

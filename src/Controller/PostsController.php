@@ -60,12 +60,18 @@ class PostsController extends AppController
             }
         }
 
-        $post = $this->Posts->get($id, [
-            'media' => true,
-        ]);
+        try {
 
-        if (!$post->isPublished()) {
-            throw new NotFoundException();
+            $post = $this->Posts->get($id, [
+                'media' => true,
+            ]);
+
+            if (!$post->isPublished()) {
+                throw new NotFoundException();
+            }
+        } catch (\Exception $ex) {
+            //throw new NotFoundException();
+            throw $ex;
         }
 
         if (!$this->request->is('requested')) {
@@ -90,7 +96,9 @@ class PostsController extends AppController
 
         $this->viewBuilder()->className('Content.Post');
 
-        $template = ($post->template) ?: ((!$post->parent_id) ? $post->type . '_parent' : $post->type);
+        //$template = ($post->template) ?: ((!$post->parent_id) ? $post->type . '_parent' : $post->type);
+        $template = ($post->template) ?: $post->type;
+        $template = ($this->request->query('template')) ?: $template;
         $this->render($template);
     }
 
@@ -106,20 +114,31 @@ class PostsController extends AppController
     {
         $this->viewBuilder()->className('Content.Post');
 
-        if ($id === null && $this->request->query('post_id')) {
-            $id = $this->request->query('post_id');
+        //if ($id === null && $this->request->query('post_id')) {
+        //    $id = $this->request->query('post_id');
+        //}
+
+        // find teaser
+        $post = $this->Posts->find()
+            ->find('media')
+            ->where(['refscope' => 'Content.Posts', 'refid' => $id])
+            ->contain([])
+            ->first();
+
+        // fallback to original post
+        if (!$post) {
+            $post = $this->Posts->get($id, [
+                'contain' => [],
+                'media' => true
+            ]);
         }
-        $post = $this->Posts->get($id, [
-            'contain' => [],
-            'media' => true,
-        ]);
 
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
 
-        $view = ($post->teaser_template) ?: null;
-
-        $this->render($view);
+        $template = ($post->template) ?: $post->type;
+        $template = ($this->request->query('template')) ?: $template;
+        $this->render($template);
     }
 
     public function sitemap()

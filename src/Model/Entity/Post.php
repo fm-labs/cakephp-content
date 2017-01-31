@@ -1,22 +1,21 @@
 <?php
 namespace Content\Model\Entity;
 
-use Banana\Model\Entity\EntityAttributesTrait;
+use Banana\Model\EntityTypeHandlerInterface;
 use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
-use Content\Lib\ContentManager;
-use Content\Post\BasePostType;
-use Content\Post\PostHandlerEntityTrait;
+use Content\Model\EntityPostTypeHandlerTrait;
+use Eav\Model\EntityAttributesTrait;
 
 /**
  * Post Entity.
  */
-class Post extends Entity
+class Post extends Entity implements EntityTypeHandlerInterface
 {
 
-    use PostHandlerEntityTrait;
+    use EntityPostTypeHandlerTrait;
     use EntityAttributesTrait;
 
     /**

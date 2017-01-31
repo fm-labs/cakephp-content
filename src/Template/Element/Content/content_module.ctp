@@ -1,6 +1,7 @@
 <?php
 $module = $contentModule->module;
-$cell = ($contentModule->template) ? $module->path . 'Module::' . $contentModule->template : $module->path.'Module';
+//$cell = ($contentModule->template) ? $module->path . 'Module::' . $contentModule->template : $module->path.'Module';
+$cell = $module->cellname;
 $cellData = [];
 $cellOptions = compact('refscope', 'refid', 'section', 'module');
 

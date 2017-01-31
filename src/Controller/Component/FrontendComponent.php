@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 7/26/15
- * Time: 1:44 PM
- */
 
 namespace Content\Controller\Component;
 

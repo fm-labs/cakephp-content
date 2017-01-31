@@ -1,17 +1,13 @@
 <?php
 namespace Content\Controller\Admin;
 
+use Banana\Exception\ClassNotFoundException;
+use Banana\Lib\ClassRegistry;
 use Cake\Utility\Hash;
-use Content\Form\ModuleParamsForm;
 use Content\Lib\ContentManager;
-use Content\View\ViewModule;
-use Cake\Core\App;
+use Content\View\Cell\ModuleCell;
 use Cake\Core\Configure;
-use Cake\Core\Exception\Exception;
-use Cake\Core\Plugin;
 use Content\Model\Table\ModulesTable;
-use Cake\Filesystem\Folder;
-use Content\Model\Entity\Module;
 use Cake\Network\Exception\NotFoundException;
 
 /**
@@ -57,7 +53,7 @@ class ModuleBuilderController extends AppController
         $query = $this->request->query;
 
         if (!$id) {
-            $className = App::className($class, 'View/Cell', 'ModuleCell');
+            $className = $class;
 
             $module = $this->Modules->newEntity($query, ['validate' => false]);
             $module->path = $class;
@@ -67,7 +63,7 @@ class ModuleBuilderController extends AppController
             }
         } else {
             $module = $this->Modules->get($id);
-            $className = App::className($module->path, 'View/Cell', 'ModuleCell');
+            $className = $module->path;
         }
 
 
@@ -80,8 +76,22 @@ class ModuleBuilderController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
-        $formInputs = $className::inputs();
-        $formDefaults = $className::defaults();
+        try {
+            $instance = ClassRegistry::get('ContentModule', $className);
+
+            if (!($instance instanceof ModuleCell)) {
+                throw new \InvalidArgumentException('Module instance MUST be an instance of ModuleCell');
+            }
+
+        } catch (ClassNotFoundException $ex) {
+
+            $this->Flash->error('Error while loading module instance: ' . $ex->getMessage());
+            return $this->redirect(['action' => 'build']);
+        }
+
+
+        $formInputs = $instance::inputs();
+        $formDefaults = $instance::defaults();
         $module->accessible(array_keys($formDefaults), true);
         $module->accessible('_save', true);
         $module->setDefaults($formDefaults);
@@ -100,8 +110,7 @@ class ModuleBuilderController extends AppController
             $this->set('previewUrl', $previewUrl);
         }
 
-        $paths = Hash::extract(ContentManager::getModulesAvailable(), '{s}.class');
-        $this->set('paths', array_combine($paths, $paths));
+        $this->set('paths', ContentManager::getModulesAvailable());
         $this->set('module', $module);
         $this->set('formInputs', $formInputs);
         $this->set('data', $this->request->data());

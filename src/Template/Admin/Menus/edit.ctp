@@ -25,13 +25,13 @@
 ) ?>
 <?= $this->Toolbar->addLink(
     __('List {0}', __('Menu Items')),
-    ['controller' => 'MenuItems', 'action' => 'index'],
+    ['controller' => 'Nodes', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
 <?= $this->Toolbar->addLink(
     __('New {0}', __('Menu Item')),
-    ['controller' => 'MenuItems', 'action' => 'add'],
+    ['controller' => 'Nodes', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?php $this->Toolbar->endGroup(); ?>

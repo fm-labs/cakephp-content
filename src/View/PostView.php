@@ -3,12 +3,20 @@
 namespace Content\View;
 
 use Cake\I18n\I18n;
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Utility\Text;
+use Content\Model\Entity\Node;
 
 class PostView extends ContentView
 {
 
+    /**
+     * @param null $view
+     * @param null $layout
+     * @return null|string
+     * @TODO Skip meta for inline posts
+     */
     public function render($view = null, $layout = null)
     {
         if ($this->get('post')) {
@@ -75,6 +83,7 @@ class PostView extends ContentView
                 $this->Html->meta(['property' => 'article:modified_time', 'content' => $modifiedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
+            //@TODO Wrap in try/catch block
             if ($post->image) {
                 $thumb = $this->Media->thumbnailUrl($post->image->filepath, ['width' => 200, 'height' => 200], true);
                 $this->Html->meta(['property' => 'og:image', 'content' => $thumb], null, ['block' => true]);
@@ -84,9 +93,28 @@ class PostView extends ContentView
             // Twitter Tags (https://dev.twitter.com/cards/markup)
             $this->Html->meta(['property' => 'twitter:card', 'content' => 'summary'], null, ['block' => true]);
             $this->Html->meta(['property' => 'twitter:title', 'content' => $metaTitle], null, ['block' => true]);
-            $this->Html->meta(['property' => 'twitter:description', 'content' => Text::truncate($metaDescription, 197, ['ellipsis' => '...', 'exact' => false])], null, ['block' => true]);
+            $this->Html->meta(['property' => 'twitter:description', 'content' => Text::truncate($metaDescription, 190, ['ellipsis' => '...', 'exact' => false])], null, ['block' => true]);
             $this->Html->meta(['property' => 'twitter:url', 'content' => $postUrl], null, ['block' => true]);
 
+            // Breadcrumbs
+            // If a menuitem-reference is set in request (?_mref=MENUITEMID), fetch the menuitem path and render as breadcrumbs.
+            // This should be considered a workaround.
+            // @TODO Use some post <-> menuitem mapping cache (performance)
+            // @TODO Fallback to auto-detection, which nodes arle linked with this post, fetch path of first match
+            // @TODO Skip breadcrumbs for inline posts
+            $nodeId = $this->request->query('_mref');
+            if ($nodeId) {
+                $node = TableRegistry::get('Content.Nodes')->get($nodeId);
+                $paths = TableRegistry::get('Content.Nodes')
+                    ->find('path', ['for' => $nodeId])
+                    ->where(['site_id' => $node->site_id])
+                    ->all();
+                $paths->each(function(Node $node) {
+                    $this->Breadcrumbs->add($node->getLabel(), $node->getViewUrl());
+                });
+            } else {
+                $this->Breadcrumbs->add($post->title, $postUrl);
+            }
         }
 
         return parent::render($view, $layout);

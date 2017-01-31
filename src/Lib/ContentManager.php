@@ -3,8 +3,9 @@ namespace Content\Lib;
 
 use Banana\Lib\ClassRegistry;
 use Cake\Core\App;
+use Cake\Datasource\EntityInterface;
 use Cake\Utility\Hash;
-use Content\Model\Entity\MenuItem;
+use Content\Model\Entity\Node;
 use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
@@ -55,20 +56,24 @@ class ContentManager
         return ClassRegistry::createInstance('PageType', $pageType, $page);
     }
 
-    public static function getMenuHandlerInstance(MenuItem $menuItem)
+    public static function getMenuHandlerInstance(Node $node)
     {
-        $menuType = $menuItem->type;
-        return ClassRegistry::createInstance('MenuItemType', $menuType, $menuItem);
+        $menuType = $node->type;
+        $instance = ClassRegistry::get('NodeType', $menuType);
+        $instance->setNode($node);
+        return $instance;
     }
 
     /**
      * @param $post
      * @return PostHandlerInterface
      */
-    public static function getPostHandlerInstance($post)
+    public static function getPostHandlerInstance(Post $post)
     {
         $postType = $post->type;
-        return ClassRegistry::createInstance('PostType', $postType, $post);
+        $instance = ClassRegistry::get('PostType', $postType);
+        $instance->setEntity($post);
+        return $instance;
     }
 
     public static function getPostModelByType($type)
@@ -97,7 +102,7 @@ class ContentManager
 
     public static function getModulesAvailable()
     {
-        return self::$registry['ContentModule'];
+        return ClassRegistry::show('ContentModule');
     }
 
 
