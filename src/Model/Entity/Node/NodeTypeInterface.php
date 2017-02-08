@@ -29,10 +29,9 @@ interface NodeTypeInterface extends EntityTypeInterface
     public function getAdminUrl();
 
     /**
-     * @return Query
-     * @TODO Return ResultSet instead of Query
+     * @return array
      */
-    public function getChildren();
+    public function getChildNodes();
 
     /**
      * @return boolean

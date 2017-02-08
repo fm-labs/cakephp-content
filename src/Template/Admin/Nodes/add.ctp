@@ -1,7 +1,7 @@
-<?php $this->Breadcrumbs->add(__('Menu Items'), ['action' => 'index']); ?>
-<?php $this->Breadcrumbs->add(__('New {0}', __('Menu Item'))); ?>
+<?php $this->Breadcrumbs->add(__('Nodes'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__('New {0}', __('Node'))); ?>
 <?= $this->Toolbar->addLink(
-    __('List {0}', __('Menu Items')),
+    __('List {0}', __('Nodes')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
@@ -18,20 +18,20 @@
     ['data-icon' => 'plus']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('List {0}', __('Parent Menu Items')),
+    __('List {0}', __('Parent Nodes')),
     ['controller' => 'Nodes', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
 <?= $this->Toolbar->addLink(
-    __('New {0}', __('Parent Menu Item')),
+    __('New {0}', __('Parent Node')),
     ['controller' => 'Nodes', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?php $this->Toolbar->endGroup(); ?>
 <div class="form">
     <h2 class="ui header">
-        <?= __('Add {0}', __('Menu Item')) ?>
+        <?= __('Add {0}', __('Node')) ?>
     </h2>
     <?= $this->Form->create($node, ['class' => 'no-ajax']); ?>
         <div class="ui form">

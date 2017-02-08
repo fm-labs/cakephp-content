@@ -35,13 +35,13 @@ class DefaultNodeType implements NodeTypeInterface
         return $this->item->title;
     }
 
-    public function getChildren()
+    public function getChildNodes()
     {
         if ($this->item->id) {
             return TableRegistry::get('Content.Nodes')
-                ->find('children', ['for' => $this->item->id, 'direct' => true]);
+                ->find('children', ['for' => $this->item->id, 'direct' => true])
+                ->toArray();
         }
-
         return [];
     }
 

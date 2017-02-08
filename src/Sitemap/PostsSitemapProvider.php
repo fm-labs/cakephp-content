@@ -4,28 +4,24 @@ namespace Content\Sitemap;
 
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Query;
-use Cake\ORM\ResultSet;
-use Sitemap\Lib\ModelSitemapProvider;
-use Sitemap\Lib\SitemapProviderInterface;
+use Sitemap\Sitemap\AbstractTableSitemapProvider;
+use Sitemap\Sitemap\SitemapLocation;
 
-class PostsSitemapProvider extends ModelSitemapProvider
+class PostsSitemapProvider extends AbstractTableSitemapProvider
 {
     public $modelClass = 'Content.Posts';
 
     public function find(Query $query)
     {
         $query->find('published');
-        $query->where(['Posts.type' => 'post']);
+        $query->where(['Posts.type' => 'post', 'Posts.refscope' => 'Content.Posts']);
         return $query;
     }
 
     public function compile(ResultSetInterface $result)
     {
-        $locations = [];
         foreach ($result as $post) {
-            $locations[] = [ 'url' => $post->getViewUrl()];
+            $this->_addLocation(new SitemapLocation($post->getViewUrl()));
         }
-
-        return $locations;
     }
 }

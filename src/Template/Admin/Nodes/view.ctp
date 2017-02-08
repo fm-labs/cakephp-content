@@ -1,22 +1,22 @@
-<?php $this->Breadcrumbs->add(__('Menu Items'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__('Nodes'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($node->title); ?>
 <?= $this->Toolbar->addLink(
-    __('Edit {0}', __('Menu Item')),
+    __('Edit {0}', __('Node')),
     ['action' => 'edit', $node->id],
     ['data-icon' => 'edit']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('Delete {0}', __('Menu Item')),
+    __('Delete {0}', __('Node')),
     ['action' => 'delete', $node->id],
     ['data-icon' => 'trash', 'confirm' => __('Are you sure you want to delete # {0}?', $node->id)]) ?>
 
 <?= $this->Toolbar->addLink(
-    __('List {0}', __('Menu Items')),
+    __('List {0}', __('Nodes')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('New {0}', __('Menu Item')),
+    __('New {0}', __('Node')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
@@ -32,12 +32,12 @@
     ['data-icon' => 'plus']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('List {0}', __('Parent Menu Items')),
+    __('List {0}', __('Parent Nodes')),
     ['controller' => 'Nodes', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('New {0}', __('Parent Menu Item')),
+    __('New {0}', __('Parent Node')),
     ['controller' => 'Nodes', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
@@ -63,7 +63,7 @@
             <td><?= $node->has('menu') ? $this->Html->link($node->menu->title, ['controller' => 'Menus', 'action' => 'view', $node->menu->id]) : '' ?></td>
         </tr>
         <tr>
-            <td><?= __('Parent Menu Item') ?></td>
+            <td><?= __('Parent Node') ?></td>
             <td><?= $node->has('parent_node') ? $this->Html->link($node->parent_node->title, ['controller' => 'Nodes', 'action' => 'view', $node->parent_node->id]) : '' ?></td>
         </tr>
         <tr>

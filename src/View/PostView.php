@@ -97,12 +97,36 @@ class PostView extends ContentView
             $this->Html->meta(['property' => 'twitter:url', 'content' => $postUrl], null, ['block' => true]);
 
             // Breadcrumbs
-            // If a menuitem-reference is set in request (?_mref=MENUITEMID), fetch the menuitem path and render as breadcrumbs.
+            // If a menuitem-reference is set in request (?node_id=MENUITEMID), fetch the menuitem path and render as breadcrumbs.
             // This should be considered a workaround.
             // @TODO Use some post <-> menuitem mapping cache (performance)
-            // @TODO Fallback to auto-detection, which nodes arle linked with this post, fetch path of first match
             // @TODO Skip breadcrumbs for inline posts
-            $nodeId = $this->request->query('_mref');
+            $Nodes = TableRegistry::get('Content.Nodes');
+            $node = $Nodes->find()
+                ->where(['type' => $post->type, 'typeid' => $post->id])
+                ->first();
+
+            if ($node) {
+                $paths = TableRegistry::get('Content.Nodes')
+                    ->find('path', ['for' => $node->id])
+                    ->where(['site_id' => $node->site_id])
+                    ->all();
+                $paths->each(function(Node $node) use ($post) {
+                    if ($post->type == $node->type && $post->id == $node->typeid) {
+                        return;
+                    }
+                    if (!$node->parent_id || $node->isHiddenInNav()) {  // skip root and hidden nodes
+                        return;
+                    }
+                    $this->Breadcrumbs->add($node->getLabel(), $node->getViewUrl());
+                });
+            }
+            $this->Breadcrumbs->add($post->title, $postUrl);
+
+            /*
+            $nodeId = $this->get('nodeId');
+            $nodeId = ($nodeId) ?: $this->request->query('node_id');
+            $nodeId = ($nodeId) ?: $this->request->param('node_id');
             if ($nodeId) {
                 $node = TableRegistry::get('Content.Nodes')->get($nodeId);
                 $paths = TableRegistry::get('Content.Nodes')
@@ -110,11 +134,15 @@ class PostView extends ContentView
                     ->where(['site_id' => $node->site_id])
                     ->all();
                 $paths->each(function(Node $node) {
+                    if (!$node->parent_id) {
+                        return; // skip root node
+                    }
                     $this->Breadcrumbs->add($node->getLabel(), $node->getViewUrl());
                 });
             } else {
                 $this->Breadcrumbs->add($post->title, $postUrl);
             }
+            */
         }
 
         return parent::render($view, $layout);

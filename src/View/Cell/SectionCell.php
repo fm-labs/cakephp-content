@@ -86,7 +86,7 @@ class SectionCell extends Cell
     protected function _loadLayoutModules()
     {
         $this->_layoutModules = $this->ContentModules->find()
-            ->where(['section' => $this->name, 'refscope' => $this->refscope, 'refid IS NULL'])
+            ->where(['section' => $this->name, 'refid IS NULL', 'or' => ['refscope' => $this->refscope, 'refscope IS NULL']])
             ->contain(['Modules'])
             ->all();
     }

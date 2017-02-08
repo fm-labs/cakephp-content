@@ -35,6 +35,7 @@ ClassRegistry::register('PostType', [
 ]);
 ClassRegistry::register('NodeType', [
     'root' => 'Content\Model\Entity\Node\RootNodeType',
+    'virtual' => 'Content\Model\Entity\Node\VirtualNodeType',
     'category' => 'Content\Model\Entity\Node\CategoryNodeType',
     'page' => 'Content\Model\Entity\Node\PostNodeType',
     'post' => 'Content\Model\Entity\Node\PostNodeType',
@@ -53,7 +54,8 @@ ClassRegistry::register('PageType', [
 
 ClassRegistry::register('ContentModule', [
     'flexslider' => 'Content\View\Cell\FlexsliderModuleCell',
-    'pages_submenu' => 'Content\View\Cell\PagesSubmenuModuleCell'
+    'pages_submenu' => 'Content\View\Cell\PagesSubmenuModuleCell',
+    'nodes_menu' => 'Content\View\Cell\NodesMenuModuleCell'
 ]);
 
 

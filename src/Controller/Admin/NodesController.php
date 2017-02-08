@@ -81,7 +81,7 @@ class NodesController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Menu Item id.
+     * @param string|null $id Node id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -111,16 +111,15 @@ class NodesController extends AppController
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('node')));
             }
         }
-        $menus = $this->Nodes->Menus->find('list', ['limit' => 200]);
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'menus', 'parentNodes'));
+        $this->set(compact('node', 'parentNodes'));
         $this->set('_serialize', ['node']);
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Menu Item id.
+     * @param string|null $id Node id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -138,16 +137,15 @@ class NodesController extends AppController
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('node')));
             }
         }
-        $menus = $this->Nodes->Menus->find('list', ['limit' => 200]);
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'menus', 'parentNodes'));
+        $this->set(compact('node', 'parentNodes'));
         $this->set('_serialize', ['node']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Menu Item id.
+     * @param string|null $id Node id.
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */

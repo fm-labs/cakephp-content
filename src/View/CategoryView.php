@@ -97,12 +97,12 @@ class PostView extends ContentView
             $this->Html->meta(['property' => 'twitter:url', 'content' => $categoryUrl], null, ['block' => true]);
 
             // Breadcrumbs
-            // If a menuitem-reference is set in request (?_mref=MENUITEMID), fetch the menuitem path and render as breadcrumbs.
+            // If a menuitem-reference is set in request (?node_id=MENUITEMID), fetch the menuitem path and render as breadcrumbs.
             // This should be considered a workaround.
             // @TODO Use some category <-> menuitem mapping cache (performance)
             // @TODO Fallback to auto-detection, which nodes arle linked with this category, fetch path of first match
             // @TODO Skip breadcrumbs for inline categorys
-            $nodeId = $this->request->query('_mref');
+            $nodeId = $this->request->query('node_id');
             if ($nodeId) {
                 $node = TableRegistry::get('Content.Nodes')->get($nodeId);
                 $paths = TableRegistry::get('Content.Nodes')

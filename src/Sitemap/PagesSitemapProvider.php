@@ -4,11 +4,10 @@ namespace Content\Sitemap;
 
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Query;
-use Cake\ORM\ResultSet;
-use Sitemap\Lib\ModelSitemapProvider;
-use Sitemap\Lib\SitemapProviderInterface;
+use Sitemap\Sitemap\AbstractTableSitemapProvider;
+use Sitemap\Sitemap\SitemapLocation;
 
-class PagesSitemapProvider extends ModelSitemapProvider
+class PagesSitemapProvider extends AbstractTableSitemapProvider
 {
     public $modelClass = 'Content.Posts';
 
@@ -21,11 +20,8 @@ class PagesSitemapProvider extends ModelSitemapProvider
 
     public function compile(ResultSetInterface $result)
     {
-        $locations = [];
         foreach ($result as $page) {
-            $locations[] = [ 'url' => $page->getViewUrl()];
+           $this->_addLocation(new SitemapLocation($page->getViewUrl(), 0.8));
         }
-
-        return $locations;
     }
 }

@@ -1,6 +1,6 @@
-<?php $this->Breadcrumbs->add(__('Menu Items')); ?>
+<?php $this->Breadcrumbs->add(__('Nodes')); ?>
 
-<?php $this->Toolbar->addLink(__('New {0}', __('Menu Item')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
+<?php $this->Toolbar->addLink(__('New {0}', __('Node')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <?= $this->Toolbar->addLink(
     __('List {0}', __('Menus')),
     ['controller' => 'Menus', 'action' => 'index'],
@@ -12,12 +12,12 @@
     ['data-icon' => 'plus']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('List {0}', __('Parent Menu Items')),
+    __('List {0}', __('Parent Nodes')),
     ['controller' => 'Nodes', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?= $this->Toolbar->addLink(
-    __('New {0}', __('Parent Menu Item')),
+    __('New {0}', __('Parent Node')),
     ['controller' => 'Nodes', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>

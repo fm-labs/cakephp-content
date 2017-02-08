@@ -92,8 +92,8 @@ class NodesTable extends Table
             $formatted = [];
             foreach ($nodes as $node) {
                 $_node = $nodeFormatter($node);
-                if ($node->getChildren()) {
-                    $_node['children'] = $nodesFormatter($node->getChildren()->all()->toArray());
+                if ($node->getChildNodes()) {
+                    $_node['children'] = $nodesFormatter($node->getChildNodes());
                 }
                 $formatted[] = $_node;
             }

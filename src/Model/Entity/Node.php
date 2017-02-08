@@ -5,6 +5,7 @@ use Banana\Model\EntityTypeHandlerInterface;
 use Banana\Model\EntityTypeHandlerTrait;
 use Cake\ORM\Entity;
 use Content\Lib\ContentManager;
+use Content\Model\Entity\Node\NodeInterface;
 use Content\Model\Entity\Node\NodeTypeInterface;
 
 /**
@@ -30,7 +31,7 @@ use Content\Model\Entity\Node\NodeTypeInterface;
  * @property \Cake\I18n\Time $modified
  * @property \Content\Model\Entity\ChildNode[] $child_nodes
  */
-class Node extends Entity implements EntityTypeHandlerInterface
+class Node extends Entity implements EntityTypeHandlerInterface, NodeInterface
 {
 
     use EntityTypeHandlerTrait {
@@ -53,6 +54,8 @@ class Node extends Entity implements EntityTypeHandlerInterface
     ];
 
     protected $_virtual = [
+        'label',
+        'is_hidden_in_nav',
         'view_url'
     ];
 
@@ -70,84 +73,33 @@ class Node extends Entity implements EntityTypeHandlerInterface
         return 'NodeType';
     }
 
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
     public function getViewUrl()
     {
-        $url = $this->handler()->getViewUrl();
-
-        // inject menuitem reference to url
-        if (is_array($url)) {
-            $url['_mref'] = $this->id;
-        } elseif (strrpos($url, '?') !== false) {
-            $url .= '&_mref=' . $this->id;
-        } elseif (strpos($url, '://') === false) {
-            $url .= '?_mref=' . $this->id;
-        }
-        return $url;
+        return $this->handler()->getViewUrl();
     }
 
-    protected function _getViewUrl()
-    {
-        return $this->getViewUrl();
-    }
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getAdminUrl()
-    {
-        return $this->handler()->getAdminUrl();
-    }
-
-    protected function _getAdminUrl()
-    {
-        return $this->getAdminUrl();
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public function getLabel()
+    public function getNodeLabel()
     {
         return $this->handler()->getLabel();
     }
 
-    protected function _getLabel()
+    public function getNodeUrl()
     {
-        return $this->getLabel();
+        return $this->handler()->getViewUrl();
+    }
+
+    public function isNodeEnabled()
+    {
+        return !$this->handler()->isHiddenInNav();
     }
 
     /**
-     * @return \Cake\ORM\Query
+     * @return array
      * @throws \Exception
      */
-    public function getChildren()
+    public function getChildNodes()
     {
-        return $this->handler()->getChildren();
-    }
-
-    protected function _getChildren()
-    {
-        return $this->getChildren()->all()->toArray();
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    public function isHiddenInNav()
-    {
-        return $this->handler()->isHiddenInNav();
-    }
-
-    protected function _isHiddenInNav()
-    {
-        return $this->isHiddenInNav();
+        return $this->handler()->getChildNodes();
     }
 
 }

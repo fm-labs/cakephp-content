@@ -28,9 +28,6 @@ return;
 
 
 
-
-
-
 if (Configure::read('Content.Router.enableRootScope')) {
 
     Router::scope('/', function($routes) {

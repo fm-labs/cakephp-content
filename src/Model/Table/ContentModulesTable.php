@@ -49,7 +49,7 @@ class ContentModulesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->add('refscope', 'valid', ['rule' => 'notblank']);
+            ->allowEmpty('refscope');
 
         $validator
             ->add('refid', 'valid', ['rule' => 'numeric'])
