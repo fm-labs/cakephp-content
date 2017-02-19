@@ -2,16 +2,19 @@
 
 namespace Content\Page;
 
+use Cake\Datasource\EntityInterface;
 use Content\Model\Entity\Page;
 use Cake\Core\Configure;
-use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 
-abstract class AbstractPageType
+abstract class AbstractPageType implements PageTypeInterface
 {
+    /**
+     * @var Page
+     */
     protected $page;
     
-    public function __construct(Page $page)
+    public function setEntity(EntityInterface $page)
     {
         $this->page =& $page;
     }

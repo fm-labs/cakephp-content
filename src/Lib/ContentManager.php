@@ -2,18 +2,12 @@
 namespace Content\Lib;
 
 use Banana\Lib\ClassRegistry;
-use Cake\Core\App;
-use Cake\Datasource\EntityInterface;
-use Cake\Utility\Hash;
-use Content\Model\Entity\Node;
 use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
-use Cake\Utility\Inflector;
 use Content\Model\Entity\Post;
-use Content\Post\PostHandlerInterface;
 
 class ContentManager
 {
@@ -54,14 +48,6 @@ class ContentManager
     {
         $pageType = $page->getPageType();
         return ClassRegistry::createInstance('PageType', $pageType, $page);
-    }
-
-    public static function getMenuHandlerInstance(Node $node)
-    {
-        $menuType = $node->type;
-        $instance = ClassRegistry::get('NodeType', $menuType);
-        $instance->setNode($node);
-        return $instance;
     }
 
     /**
@@ -332,8 +318,7 @@ class ContentManager
 
     public static function getAvailablePageTypes()
     {
-        $names = Hash::extract(self::$registry['PageType'], '{s}.name');
-        return array_combine(array_keys(self::$registry['PageType']), $names);
+        return ClassRegistry::show('PageType');
     }
 
     /**

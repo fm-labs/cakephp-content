@@ -1,5 +1,6 @@
 <?php $this->Breadcrumbs->add(__('Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($category->name); ?>
+<?php $this->loadHelper('Backend.Toolbar'); ?>
 <?= $this->Toolbar->addLink(
     __('Edit {0}', __('Category')),
     ['action' => 'edit', $category->id],

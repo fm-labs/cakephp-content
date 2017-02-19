@@ -1,17 +1,17 @@
 <?php
 namespace Content\Model\Entity;
 
+use Banana\Model\EntityTypeHandlerTrait;
+use Cake\Controller\Controller;
 use Content\Lib\ContentManager;
 use Content\Model\Behavior\PageMeta\PageMetaTrait;
-use Content\Model\Entity\Page\PageInterface;
 use Content\Page\AbstractPageType;
 use Cake\Core\Configure;
-use Cake\Core\Exception\Exception;
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
-use Cake\Utility\Hash;
+use Content\Page\PageInterface;
+use Content\Page\PageTypeInterface;
 
 /**
  * Page Entity.
@@ -20,6 +20,11 @@ class Page extends Entity implements PageInterface
 {
     use TranslateTrait;
     use PageMetaTrait;
+
+
+    use EntityTypeHandlerTrait {
+        EntityTypeHandlerTrait::handler as typeHandler;
+    }
 
     private $__parentTheme;
 
@@ -65,9 +70,18 @@ class Page extends Entity implements PageInterface
     ];
 
     /**
-     * @var AbstractPageType
+     * @return PageTypeInterface
+     * @throws \Exception
      */
-    protected $_handler;
+    public function handler()
+    {
+        return $this->typeHandler();
+    }
+
+    protected function _getHandlerNamespace()
+    {
+        return 'PageType';
+    }
 
     function getPageId() {
         return $this->id;
@@ -84,46 +98,37 @@ class Page extends Entity implements PageInterface
         return $this->type;
     }
 
-    /**
-     * @return AbstractPageType|null
-     * @throws \Exception
-     */
-    public function getPageHandler()
-    {
-        if ($this->_handler === null) {
-            $this->_handler = ContentManager::getPagehandler($this);
-            if (!$this->_handler) {
-                throw new \Exception(sprintf('Page Handler not found for type %s', $this->type));
-            }
-        }
-        return $this->_handler;
-    }
-
-
     function getPageUrl()
     {
-        return $this->getPageHandler()->getUrl();
+        return $this->handler()->getUrl();
     }
 
     function getPageAdminUrl()
     {
-        return $this->getPageHandler()->getAdminUrl();
+        return $this->handler()->getAdminUrl();
     }
 
     public function getPageChildren()
     {
-        return $this->getPageHandler()->getChildren();
+        return $this->handler()->getChildren();
     }
 
     public function isPagePublished()
     {
-        return $this->getPageHandler()->isPublished();
+        return $this->handler()->isPublished();
     }
 
     public function isPageHiddenInNav()
     {
-        return $this->getPageHandler()->isHiddenInNav();
+        return $this->handler()->isHiddenInNav();
     }
+
+
+    public function execute(Controller &$controller)
+    {
+        return $this->handler()->execute($controller);
+    }
+
 
     public function _getPosts()
     {
@@ -203,13 +208,5 @@ class Page extends Entity implements PageInterface
             ->order(['Posts.pos' => 'ASC', 'Posts.id' => 'ASC'])
             ->all();
     }
-
-
-
-
-    /** PAGE AWARE **/
-
-
-
 
 }

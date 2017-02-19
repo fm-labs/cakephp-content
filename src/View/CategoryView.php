@@ -8,7 +8,7 @@ use Cake\Routing\Router;
 use Cake\Utility\Text;
 use Content\Model\Entity\Node;
 
-class PostView extends ContentView
+class CategoryView extends ContentView
 {
 
     /**
@@ -24,7 +24,7 @@ class PostView extends ContentView
 
             $category = $this->get('category');
 
-            $metaTitle = ($category->meta_title) ?: $category->title;
+            $metaTitle = ($category->meta_title) ?: $category->name;
             $categoryUrl = $this->Html->Url->build($category->url, true);
 
             // category title

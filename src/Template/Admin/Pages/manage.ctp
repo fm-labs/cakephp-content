@@ -22,6 +22,9 @@ $this->assign('title', $content->title);
 ?>
 <div class="pages">
 
+    <h2><?= h($content->title); ?></h2>
+
+    <!--
     <?php
     $this->Panel->create();
     $this->Panel->addAction(__d('content', 'Edit'),
@@ -73,18 +76,27 @@ $this->assign('title', $content->title);
             'exclude' => '*'
         ]); ?>
     <?= $this->Panel->render(); ?>
+    -->
 
     <?php
+    /*
     $typeElement = 'Content.Admin/Pages/manage_' . $content->type;
     if ($this->elementExists($typeElement)) {
         echo $this->element($typeElement, ['page' => $content]);
     } else {
         echo "Page type element not found: $typeElement";
     }
+    */
     ?>
-
+    <?php
+    echo $this->Html->link(__d('content', 'Edit'),
+        [ 'action' => 'edit', $content->id ],
+        [ 'class' => 'link-edit btn btn-default btn-sm', 'data-icon' => 'edit']);
+    ?>
+    <hr />
     <!--
-    <?= $this->Panel->create(); ?>
+    -->
+    <?php //$this->Panel->create(); ?>
 
             <?php $this->Tabs->start(); ?>
             <?php
@@ -117,9 +129,7 @@ $this->assign('title', $content->title);
             ]);
             echo $this->Tabs->render();
             ?>
-        </div>
-    </div>
-    -->
 
+    <?php debug($content); ?>
 
 </div>

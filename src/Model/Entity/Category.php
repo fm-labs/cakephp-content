@@ -4,7 +4,6 @@ namespace Content\Model\Entity;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
-use Content\Model\Entity\Node\NodeTypeInterface;
 
 /**
  * Category Entity

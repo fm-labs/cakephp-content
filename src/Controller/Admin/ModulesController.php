@@ -71,18 +71,9 @@ class ModulesController extends AppController
         }
 
         $class = ClassRegistry::getClass('ContentModule', $path);
-        if (!$class) {
-            throw new NotFoundException("Preview failed: Missing class for module " . $path);
-        }
 
-        list($ns,$className) = namespaceSplit($class);
-        $className = substr($className, 0, -4);
-        $ns = explode('\\', $ns);
-        if ($ns && $ns[0] && $ns[0] != "App" && $ns[0] != "Cake") {
-            $className = $ns[0] . '.' . $className;
-        }
 
-        $this->set('modulePath', $className);
+        $this->set('modulePath', $class);
         $this->set('moduleParams', $params);
 
         $this->viewBuilder()

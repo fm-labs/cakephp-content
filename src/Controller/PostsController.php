@@ -99,6 +99,8 @@ class PostsController extends AppController
         //$template = ($post->template) ?: ((!$post->parent_id) ? $post->type . '_parent' : $post->type);
         $template = ($post->template) ?: $post->type;
         $template = ($this->request->query('template')) ?: $template;
+        $template = ($template) ?: null;
+
         $this->render($template);
     }
 
@@ -118,26 +120,19 @@ class PostsController extends AppController
         //    $id = $this->request->query('post_id');
         //}
 
-        // find teaser
-        $post = $this->Posts->find()
-            ->find('media')
-            ->where(['refscope' => 'Content.Posts', 'refid' => $id])
-            ->contain([])
-            ->first();
 
-        // fallback to original post
-        if (!$post) {
-            $post = $this->Posts->get($id, [
-                'contain' => [],
-                'media' => true
-            ]);
-        }
+        $post = $this->Posts->get($id, [
+            'contain' => [],
+            'media' => true
+        ]);
 
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
 
-        $template = ($post->template) ?: $post->type;
+        $template = ($post->teaser_template) ?: $post->type;
         $template = ($this->request->query('template')) ?: $template;
+        $template = ($template) ?: null;
+
         $this->render($template);
     }
 

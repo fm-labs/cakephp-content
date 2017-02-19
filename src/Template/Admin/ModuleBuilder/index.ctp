@@ -11,20 +11,20 @@ $this->assign('title', __('Module Builder'));
             <th>Actions</th>
         </tr>
         </thead>
-        <?php foreach ($availableModules as $moduleClass => $moduleInfo): ?>
+        <?php foreach ($availableModules as $moduleAlias => $moduleClassName): ?>
             <tr>
-                <td><?= h($moduleClass); ?></td>
+                <td><?= h($moduleClassName); ?></td>
                 <td class="actions">
                     <?= $this->Html->link('Create new module', [
                         'action' => 'build',
-                        'path' => $moduleInfo,
+                        'path' => $moduleAlias,
                     ], ['class' => 'btn btn-sm btn-default']); ?>
                     <!--
-                    <?= $this->Html->link('View', ['action' => 'view', 'class' => $moduleInfo]); ?>
+                    <?= $this->Html->link('View', ['action' => 'view', 'class' => $moduleAlias]); ?>
                     -->
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
-
+<?php debug($availableModules); ?>
 </div>

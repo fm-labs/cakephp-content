@@ -16,14 +16,9 @@ use Content\Model\Table\ContentModulesTable;
  */
 class SectionCell extends Cell
 {
-    protected $_validCellOptions = ['name', 'page_id', 'refscope', 'refid'];
+    protected $_validCellOptions = ['section', 'refscope', 'refid'];
 
-    /**
-     * @var string Section name. Can be passed as cell option.
-     */
-    public $name;
-
-    public $page_id;
+    public $section;
 
     public $refscope = 'Content.Pages';
 
@@ -56,13 +51,13 @@ class SectionCell extends Cell
         $this->loadModel('Content.ContentModules');
 
         $this->_loadPageModules();
-        //if (count($this->_pageModules) < 1) {
+        if (count($this->_pageModules) < 1) {
             $this->_loadLayoutModules();
-        //}
+        }
 
         $this->set('refscope', $this->refscope);
         $this->set('refid', $this->refid);
-        $this->set('section', $this->name);
+        $this->set('section', $this->section);
         $this->set('sectionTag', $tag);
         $this->set('sectionAttrs', $attrs);
         $this->set('layout_modules', $this->_layoutModules);
@@ -72,13 +67,13 @@ class SectionCell extends Cell
     protected function _loadPageModules()
     {
         if (!isset($this->refid)) {
-            //debug("ContentModules skipped for section " . $this->name . ": No refid set");
+            //debug("ContentModules skipped for section " . $this->section . ": No refid set");
             $this->_pageModules = [];
             return;
         }
 
         $this->_pageModules = $this->ContentModules->find()
-            ->where(['section' => $this->name, 'refscope' => $this->refscope, 'refid' => $this->refid])
+            ->where(['section' => $this->section, 'refscope' => $this->refscope, 'refid' => $this->refid])
             ->contain(['Modules'])
             ->all();
     }
@@ -86,7 +81,7 @@ class SectionCell extends Cell
     protected function _loadLayoutModules()
     {
         $this->_layoutModules = $this->ContentModules->find()
-            ->where(['section' => $this->name, 'refid IS NULL', 'or' => ['refscope' => $this->refscope, 'refscope IS NULL']])
+            ->where(['section' => $this->section, 'refid IS NULL', 'or' => ['refscope' => $this->refscope, 'refscope IS NULL']])
             ->contain(['Modules'])
             ->all();
     }

@@ -30,7 +30,7 @@ class CategoriesController extends FrontendController
 
     public function view($id = null)
     {
-
+        $this->viewBuilder()->className('Content.Category');
         $category = $this->Categories->get($id);
 
         if (!$this->request->is('requested')) {

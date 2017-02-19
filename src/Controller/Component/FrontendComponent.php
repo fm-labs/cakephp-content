@@ -29,7 +29,7 @@ class FrontendComponent extends Component
 
     protected $_defaultConfig = [
         'viewClass' => 'Content.Content',
-        'refscope' => 'Content.Posts',
+        'refscope' => 'Content.Pages',
         'theme' => null,
         'layout' => null
     ];

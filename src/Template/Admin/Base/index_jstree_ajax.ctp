@@ -45,10 +45,9 @@ $defaultJsTree = [
 ];
 $jsTree = $this->get('jsTree', $defaultJsTree);
 ?>
-<?= $this->Html->css('Backend.jstree/themes/backend/style.min', ['block' => true]); ?>
-<?= $this->Html->script('Backend.jstree/jstree.min', ['block' => true]); ?>
+<?= $this->Html->css('/backend/css/jstree/themes/backend/style.min', ['block' => true]); ?>
+<?= $this->Html->script('/backend/libs/jstree/jstree.min', ['block' => true]); ?>
 <div class="index index-tree">
-
     <?php if ($this->fetch('heading')): ?>
         <div class="page-heading">
             <h1><?= $this->fetch('heading'); ?></h1>

@@ -3,6 +3,7 @@ namespace Content\Controller\Admin;
 
 use Banana\Exception\ClassNotFoundException;
 use Banana\Lib\ClassRegistry;
+use Cake\Core\App;
 use Cake\Utility\Hash;
 use Content\Lib\ContentManager;
 use Content\View\Cell\ModuleCell;
@@ -53,8 +54,6 @@ class ModuleBuilderController extends AppController
         $query = $this->request->query;
 
         if (!$id) {
-            $className = $class;
-
             $module = $this->Modules->newEntity($query, ['validate' => false]);
             $module->path = $class;
             if (!$module->name) {
@@ -63,7 +62,7 @@ class ModuleBuilderController extends AppController
             }
         } else {
             $module = $this->Modules->get($id);
-            $className = $module->path;
+            $class = $module->path;
         }
 
 
@@ -71,16 +70,24 @@ class ModuleBuilderController extends AppController
             throw new NotFoundException('Module not found');
         }
 
-        if (!$className) {
+        if (!$class) {
             $this->Flash->error('Module class path not set or not set');
             return $this->redirect(['action' => 'index']);
         }
 
         try {
-            $instance = ClassRegistry::get('ContentModule', $className);
+            // resolve class by alias
+            $class = ClassRegistry::getClass('ContentModule', $class);
 
+            // resolve class path from dot notation
+            $className = App::className($class, 'View/Cell', 'Cell');
+            if (!$className) {
+                throw new ClassNotFoundException(['class' => $class]);
+            }
+
+            $instance = new $className();
             if (!($instance instanceof ModuleCell)) {
-                throw new \InvalidArgumentException('Module instance MUST be an instance of ModuleCell');
+               throw new \InvalidArgumentException('Module instance MUST be an instance of ModuleCell');
             }
 
         } catch (ClassNotFoundException $ex) {

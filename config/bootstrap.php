@@ -53,11 +53,11 @@ ClassRegistry::register('PageType', [
 ]);
 
 ClassRegistry::register('ContentModule', [
-    'flexslider' => 'Content\View\Cell\FlexsliderModuleCell',
-    'pages_submenu' => 'Content\View\Cell\PagesSubmenuModuleCell',
-    'nodes_menu' => 'Content\View\Cell\NodesMenuModuleCell'
+    'flexslider' => 'Content.FlexsliderModule',
+    'pages_menu' => 'Content.PagesMenuModule',
+    'pages_submenu' => 'Content.PagesMenuModule',
+    'nodes_menu' => 'Content.NodesMenuModule'
 ]);
-
 
 /**
  * Backend hook

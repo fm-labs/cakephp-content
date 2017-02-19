@@ -31,6 +31,7 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->className('Content.Category');
         $category = $this->Categories->get($id, [
             'contain' => ['Posts']
         ]);

@@ -121,6 +121,16 @@ class PagesController extends AppController
         //$this->Frontend->setPageId($page->id);
         $this->Frontend->setRefId($page->id);
 
+        // Dispatch Page.beforeExecute()
+
+        // Execute page
+        if ($page->execute($this) === false) {
+            return;
+        }
+
+        // Dispatch Page.afterExecute();
+
+        /*
         switch ($page->type) {
             // Internal redirects
             case 'root':
@@ -175,6 +185,7 @@ class PagesController extends AppController
             default:
                 break;
         }
+        */
 
         // force canonical url (except root pages)
         if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
@@ -190,22 +201,29 @@ class PagesController extends AppController
         $this->viewBuilder()->className('Content.Page');
 
         $view = ($page->page_template) ?: $page->type;
-        $view = ($view == 'content') ? 'view' : $view;
+        $view = ($this->request->query('view')) ?: $view;
         $this->viewBuilder()->template($view);
 
         $layout = ($page->page_layout) ? $page->page_layout->template : null;
         $this->viewBuilder()->layout($layout);
 
+        /*
+        //@TODO Move to view
         $contentModules = $this->Pages->ContentModules
             ->find()
             ->order(['ContentModules.priority' => 'DESC'])
             ->where(['ContentModules.refid' => $page->id, 'ContentModules.refscope' => 'Content.Pages'])
             ->contain(['Modules'])
             ->all();
+        $this->set('contentModules', $contentModules);
+        */
 
         $this->set('page', $page);
-        $this->set('contentModules', $contentModules);
 
+        // for debugging purposes
+        $this->set('_page_template', $view);
+        $this->set('_page_layout', $layout);
+        $this->set('_page_id', $page->id);
     }
 
     /**

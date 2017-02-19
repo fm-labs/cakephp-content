@@ -60,8 +60,6 @@ class ContentView extends View
             'section' => $name,
             'refscope' => $this->get('refscope'),
             'refid' => $this->get('refid'),
-            'name' => $name, // @deprecated
-            'page_id' => $this->get('refid') // @deprecated
         ];
 
         return $this->cell('Content.Section', $cellData, $cellOptions);

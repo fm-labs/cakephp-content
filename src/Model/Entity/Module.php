@@ -27,6 +27,10 @@ class Module extends Entity
         'template' => true, //@TODO add field in database
     ];
 
+    protected $_virtual = [
+        'cellClass'
+    ];
+
     public function __construct(array $properties = [], array $options = [])
     {
         parent::__construct($properties, $options);
@@ -78,10 +82,11 @@ class Module extends Entity
         return $url;
     }
 
-    protected function _getCellname()
+    protected function _getCellClass()
     {
         $path = $this->get('path');
 
+        /*
         $class = ClassRegistry::getClass('ContentModule', $path);
         if (!$class) {
             return false;
@@ -93,7 +98,8 @@ class Module extends Entity
         if ($ns && $ns[0] && $ns[0] != "App" && $ns[0] != "Cake") {
             $className = $ns[0] . '.' . $className;
         }
-        return $className;
+        */
+        return ClassRegistry::getClass('ContentModule', $path);
     }
 
     protected function _setParams($params = null)

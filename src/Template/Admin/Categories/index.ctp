@@ -1,5 +1,5 @@
 <?php $this->Breadcrumbs->add(__('Categories')); ?>
-
+<?php $this->loadHelper('Backend.Toolbar'); ?>
 <?php $this->Toolbar->addLink(__('New {0}', __('Category')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <?= $this->Toolbar->addLink(
     __('List {0}', __('Posts')),

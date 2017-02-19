@@ -10,8 +10,6 @@ use Content\Model\Table\PagesTable;
 /**
  * Class PagesMenuModuleCell
  * @package Content\View\Cell
- *
- * @deprecated Use MenuModuleCell instead
  */
 class PagesMenuModuleCell extends ModuleCell
 {

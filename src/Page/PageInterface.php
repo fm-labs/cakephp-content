@@ -6,9 +6,10 @@
  * Time: 10:48 PM
  */
 
-namespace Content\Model\Entity\Page;
+namespace Content\Page;
 
 
+use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
 
 interface PageInterface
@@ -23,4 +24,5 @@ interface PageInterface
     public function getPageChildren();
     public function isPagePublished();
     public function isPageHiddenInNav();
+    public function execute(Controller &$controller);
 }

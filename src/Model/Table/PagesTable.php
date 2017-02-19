@@ -2,7 +2,6 @@
 namespace Content\Model\Table;
 
 use Content\Model\Entity\Page;
-use Content\Model\Entity\Page\PageInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -10,6 +9,7 @@ use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\Model\Table\PageModulesTable;
 use Content\Model\Table\PageLayoutsTable;
+use Content\Page\PageInterface;
 
 /**
  * Pages Model

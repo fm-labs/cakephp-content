@@ -1,6 +1,7 @@
 <?php
 namespace Content\Page;
 
+use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
 use Exception;
 
@@ -47,5 +48,11 @@ class ControllerPageType extends AbstractPageType
         $url = ['prefix' => false, 'plugin' => $plugin, 'controller' => $controller, 'action' => $action, 'page_id' => $page->id];
         $url = array_merge($params, $url);
         return $url;
+    }
+
+    public function execute(Controller &$controller)
+    {
+        $controller->redirect($this->page->redirect_controller_url, $this->page->redirect_status);
+        return false;
     }
 }
