@@ -55,8 +55,8 @@
     <div class="related">
         <?= $this->cell('Backend.DataTable', [[
             'paginate' => false,
-            'model' => 'Content.Posts',
-            'data' => isset($galleryPosts) ? $galleryPosts : [],
+            'model' => 'Content.Posts' ,
+            'data' => $galleryPosts->toArray(),
             'sortable' => true,
             'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
             'fields' => [
@@ -123,6 +123,7 @@
 
     <?php $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]); ?>
     <?php debug($gallery); ?>
+    <?php debug($galleryPosts->toArray()); ?>
 
     <?= $this->Tabs->render(); ?>
 

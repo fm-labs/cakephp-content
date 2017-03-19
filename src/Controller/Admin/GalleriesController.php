@@ -2,6 +2,8 @@
 namespace Content\Controller\Admin;
 
 use Cake\Core\Configure;
+use Cake\Core\Exception\MissingPluginException;
+use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Content\Controller\Admin\AppController;
@@ -20,6 +22,16 @@ class GalleriesController extends AppController
 
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        if (!Plugin::loaded('Media')) {
+            //$this->request->param('action', 'index');
+            $this->Flash->warning(__('{0} plugin not loaded', 'Media'));
+        }
+    }
 
     /**
      * Index method
@@ -125,6 +137,11 @@ class GalleriesController extends AppController
         $this->set('_serialize', ['gallery', 'post']);
     }
 
+    public function edit($id = null)
+    {
+        $this->setAction('manage', $id);
+    }
+
     /**
      * Manage method
      *
@@ -151,7 +168,7 @@ class GalleriesController extends AppController
         $sources = $this->Galleries->getSources();
         $sourceFolders = $this->Galleries->getSourceFolders();
         $viewTemplates = ContentManager::getAvailableGalleryTemplates();
-        $galleryPosts = $this->Galleries->Posts->find('sorted')->find('media')->where(['refid' => $id]);
+        $galleryPosts = $this->Galleries->Posts->find('sorted')->where(['refid' => $id]);
 
         $dependees = ['Content.Flexslider'];
         $modules = TableRegistry::get('Content.Modules')->find()->where([

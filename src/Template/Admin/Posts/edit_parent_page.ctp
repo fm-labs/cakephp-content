@@ -2,7 +2,6 @@
 $this->loadHelper('AdminLte.Box');
 $this->loadHelper('Backend.DataTable');
 $this->loadHelper('Bootstrap.Tabs');
-$this->loadHelper('Media.Media');
 
 // Toolbar
 $this->Toolbar->addLink([
@@ -134,17 +133,4 @@ $this->Toolbar->addPostLink([
     </div>
 </div>
 <?= $this->Form->end() ?>
-<script>
-    <?php
-    $mediapicker = [
-        'modal' => true,
-        'treeUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'treeData', 'config' => 'images', '_ext' => 'json']),
-        'filesUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'filesData', 'config' => 'images', '_ext' => 'json'])
-    ];
-    ?>
-    $(document).ready(function() {
-        $('.media-picker').mediapicker(<?= json_encode($mediapicker); ?>);
-    });
-</script>
-
 <?php debug($post); ?>

@@ -20,9 +20,8 @@ $this->Toolbar->addPostLink([
 <?php
 $this->assign('title', __('Galleries'));
 $this->assign('heading', $gallery->title);
-$this->assign('subheading', 'New gallery post');
+$this->assign('subheading', 'Gallery post');
 ?>
-<?php $this->loadHelper('Media.Media'); ?>
 <?= $this->Form->create($post); ?>
 <div class="clearfix clear-fix" style="clear: both;"></div>
 <div class="row">
@@ -33,7 +32,7 @@ $this->assign('subheading', 'New gallery post');
         echo $this->Form->hidden('slug', ['value' => null]);
         //echo $this->Form->input('subheading');
         ?>
-        <?= $this->Html->link(__('Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'index', $post->refid]); ?>
+        <?= $this->Html->link(__('Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $post->refid]); ?>
 
         <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
         <?php
@@ -77,15 +76,3 @@ $this->assign('subheading', 'New gallery post');
     </div>
 </div>
 <?= $this->Form->end() ?>
-<script>
-    <?php
-    $mediapicker = [
-        'modal' => true,
-        'treeUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'treeData', 'config' => 'images', '_ext' => 'json']),
-        'filesUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'filesData', 'config' => 'images', '_ext' => 'json'])
-    ];
-    ?>
-    $(document).ready(function() {
-        $('.media-picker').mediapicker(<?= json_encode($mediapicker); ?>);
-    });
-</script>

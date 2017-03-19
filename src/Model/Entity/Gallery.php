@@ -64,7 +64,6 @@ class Gallery extends Entity
         return TableRegistry::get('Content.Posts')
             ->find('sorted')
             ->find('published')
-            ->find('media')
             ->where([
             'refscope' => 'Content.Galleries',
             'refid' => $this->id,

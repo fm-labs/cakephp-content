@@ -1,5 +1,4 @@
 <?php
-$this->loadHelper('Media.Media');
 $this->loadHelper('Bootstrap.Tabs');
 
 // Toolbar
@@ -188,15 +187,3 @@ echo $this->Form->input('order');
 <?php debug($post); ?>
 
 <?php echo $this->Tabs->render(); ?>
-<script>
-    <?php
-    $mediapicker = [
-        'modal' => true,
-        'treeUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'treeData', 'config' => 'images', '_ext' => 'json']),
-        'filesUrl' => $this->Url->build(['plugin' => 'Media', 'controller' => 'MediaManager', 'action' => 'filesData', 'config' => 'images', '_ext' => 'json'])
-    ];
-    ?>
-    $(document).ready(function() {
-        $('.media-picker').mediapicker(<?= json_encode($mediapicker); ?>);
-    });
-</script>
