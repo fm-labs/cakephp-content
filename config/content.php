@@ -2,8 +2,7 @@
 return [
     'Content' => [
         'Router' => [
-            'disableFrontendRoutes' => false,
-            'disableAdminRoutes' => false,
+            'scope' => 'content',
             'enablePrettyUrls' => true,
             'forceCanonical' => false,
         ],
@@ -16,8 +15,6 @@ return [
         ],
         'Frontend' => [
             'theme' => null
-        ],
-        'Modules' => [
         ]
     ]
 ];

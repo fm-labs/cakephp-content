@@ -11,17 +11,19 @@ class PostsSitemapProvider extends AbstractTableSitemapProvider
 {
     public $modelClass = 'Content.Posts';
 
+    public $name = 'posts';
+
     public function find(Query $query)
     {
         $query->find('published');
-        $query->where(['Posts.type' => 'post', 'Posts.refscope' => 'Content.Posts']);
+        //$query->where(['Posts.type' => 'post', 'Posts.refscope' => 'Content.Posts']);
         return $query;
     }
 
     public function compile(ResultSetInterface $result)
     {
         foreach ($result as $post) {
-            $this->_addLocation(new SitemapLocation($post->getViewUrl()));
+            $this->_addLocation(new SitemapLocation($post->getViewUrl(), null, $post->modified));
         }
     }
 }

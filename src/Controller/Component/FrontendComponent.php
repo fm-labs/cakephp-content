@@ -41,7 +41,7 @@ class FrontendComponent extends Component
         $this->controller = $this->_registry->getController();
 
         if (is_null($this->_config['theme'])) {
-            $this->_config['theme'] = Configure::read('Content.Frontend.theme');
+            $this->_config['theme'] = Configure::read('Site.theme');
         }
 
         if (is_null($this->_config['layout'])) {
@@ -124,4 +124,8 @@ class FrontendComponent extends Component
     }
     */
 
+    public function getTheme()
+    {
+        return $this->_config['theme'];
+    }
 }

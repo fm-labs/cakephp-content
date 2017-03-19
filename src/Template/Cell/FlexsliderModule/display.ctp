@@ -10,4 +10,5 @@ try {
     echo $this->requestAction($url);
 } catch (\Exception $ex) {
     debug($ex->getMessage());
+    \Cake\Log\Log::error('Failed to display flexslider for gallery with ID ' . $params['gallery_id'] . ': ' . $ex->getMessage());
 }

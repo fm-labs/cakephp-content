@@ -78,7 +78,7 @@ class ModulesController extends AppController
 
         $this->viewBuilder()
             ->layout('frontend')
-            ->theme(Configure::read('Content.Frontend.theme'))
+            ->theme(Configure::read('Site.theme'))
             ->className('Content.Content')
         ;
 

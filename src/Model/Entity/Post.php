@@ -7,16 +7,17 @@ use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
 use Content\Model\EntityPostTypeHandlerTrait;
+use Eav\Model\EntityAttributesInterface;
 use Eav\Model\EntityAttributesTrait;
 
 /**
  * Post Entity.
  */
-class Post extends Entity implements EntityTypeHandlerInterface
+class Post extends Entity implements EntityTypeHandlerInterface, EntityAttributesInterface
 {
 
     use EntityPostTypeHandlerTrait;
-    //use EntityAttributesTrait;
+    use EntityAttributesTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

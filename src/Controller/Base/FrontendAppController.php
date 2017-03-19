@@ -4,6 +4,7 @@ namespace Content\Controller\Base;
 
 use Banana\Controller\Component\SiteComponent;
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Content\Controller\Component\FrontendComponent;
 
 /**

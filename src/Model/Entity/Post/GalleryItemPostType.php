@@ -22,7 +22,7 @@ class GalleryItemPostType extends DefaultPostType implements  PostTypeInterface
         ];
     }
     
-    public function __construct(EntityInterface $entity)
+    public function setEntity(EntityInterface $entity)
     {
         $this->post = $entity;
     }

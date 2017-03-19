@@ -67,7 +67,7 @@ class PostsController extends AppController
             ]);
 
             if (!$post->isPublished()) {
-                throw new NotFoundException();
+                throw new NotFoundException("Post not published");
             }
         } catch (\Exception $ex) {
             //throw new NotFoundException();

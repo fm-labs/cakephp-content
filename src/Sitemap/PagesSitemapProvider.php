@@ -9,19 +9,22 @@ use Sitemap\Sitemap\SitemapLocation;
 
 class PagesSitemapProvider extends AbstractTableSitemapProvider
 {
-    public $modelClass = 'Content.Posts';
+    public $modelClass = 'Content.Pages';
+
+    public $name = 'pages';
 
     public function find(Query $query)
     {
         $query->find('published');
-        $query->where(['Posts.type' => 'page']);
+        //$query->where(['Page.type' => 'content']);
         return $query;
     }
 
     public function compile(ResultSetInterface $result)
     {
         foreach ($result as $page) {
-           $this->_addLocation(new SitemapLocation($page->getViewUrl(), 0.8));
+           $this->_addLocation(new SitemapLocation($page->url, 0.8, $page->modified));
         }
     }
+
 }

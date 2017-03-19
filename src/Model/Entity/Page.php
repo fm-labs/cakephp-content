@@ -193,7 +193,7 @@ class Page extends Entity implements PageInterface
             return $this->__parentTheme = $parent->parent_theme;
         }
 
-        return Configure::read('Content.Frontend.theme');
+        return Configure::read('Site.theme');
     }
 
     /**

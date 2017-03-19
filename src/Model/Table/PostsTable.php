@@ -61,7 +61,7 @@ class PostsTable extends Table
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable', []);
 
-        //$this->addBehavior('Eav.Attributes');
+        $this->addBehavior('Eav.Attributes');
 
         //@TODO Refactor with initalization hook
         if (Plugin::loaded('Media')) {
@@ -100,38 +100,24 @@ class PostsTable extends Table
         */
     }
 
+    public function implementedAttributes()
+    {
+        //@TODO Use event to get implemented model attributes
+        return [
+            'test_attribute' => [
+                'type' => 'string',
+                'is_required' => true
+            ]
+        ];
+    }
+
+
     protected function _initializeSchema(\Cake\Database\Schema\Table $schema)
     {
         $schema->columnType('image_files', 'media_file');
         return $schema;
     }
 
-    public function setAsHome($postId, $siteId)
-    {
-        $updated = 0;
-        $updated += $this->updateAll(['is_home' => true], ['id' => $postId, 'site_id' => $siteId]);
-        $updated += $this->updateAll(['is_home' => false], ['id !=' => $postId, 'site_id' => $siteId]);
-        return $updated;
-    }
-
-    public function findHome($siteId = null, $fallback = true)
-    {
-        $post = $this
-            ->find()
-            //->find('published')
-            ->where([
-                'site_id' => $siteId,
-                'is_home' => true,
-                'parent_id IS NULL'
-            ])
-            ->first();
-
-        if (!$post && $fallback && $siteId !== null) {
-            return $this->findHome(null, false);
-        }
-
-        return $post;
-    }
     /**
      * @param null $slug
      * @return mixed Model Id or null

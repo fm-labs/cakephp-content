@@ -2,6 +2,7 @@
 namespace Content\View;
 
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\Log\Log;
 use Cake\Network\Request;
 use Cake\Network\Response;
@@ -46,6 +47,10 @@ class ContentView extends View
         $this->loadHelper('Form', [
             'className' => 'Bootstrap\View\Helper\FormHelper',
         ]);
+
+        // collect additional helpers
+        $event = new Event('Content.View.Helper.get', $this);
+        $this->eventManager()->dispatch($event);
     }
 
     public function section($name, $cellData = [], $cellOptions = [])

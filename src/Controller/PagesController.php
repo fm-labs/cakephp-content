@@ -117,6 +117,19 @@ class PagesController extends AppController
             throw new NotFoundException(__d('content',"Page not found"));
         }
 
+
+        // force canonical url (except root pages)
+        if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
+            $here = Router::normalize($this->request->here);
+            $canonical = Router::normalize($page->url);
+
+            if ($here != $canonical) {
+                $this->redirect($canonical, 301);
+                return;
+            }
+        }
+
+
         //$this->request->params['page_id'] = $page->id;
         //$this->Frontend->setPageId($page->id);
         $this->Frontend->setRefId($page->id);
@@ -186,17 +199,6 @@ class PagesController extends AppController
                 break;
         }
         */
-
-        // force canonical url (except root pages)
-        if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
-            $here = Router::normalize($this->request->here);
-            $canonical = Router::normalize($page->url);
-
-            if ($here != $canonical) {
-                $this->redirect($canonical, 301);
-                return;
-            }
-        }
 
         $this->viewBuilder()->className('Content.Page');
 

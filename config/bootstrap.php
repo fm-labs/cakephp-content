@@ -5,24 +5,19 @@ use Banana\Lib\ClassRegistry;
 use Backend\Lib\Backend;
 
 
+Configure::load('Content.content');
+try { Configure::load('content'); } catch (\Exception $ex) {}
+try { Configure::load('local/content'); } catch (\Exception $ex) {}
+
 /**
  * Load dependencies
  */
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-
-/**
- * Load themes
- */
-if (Configure::check('Content.Frontend.theme')) {
-    try {
-        Plugin::load(Configure::read('Content.Frontend.theme'), ['bootstrap' => true, 'routes' => true]);
-    } catch (\Cake\Core\Exception\Exception $ex) {
-        die ($ex->getMessage());
-    }
-}
+Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
 
 /**
  * Register classes
+ * @TODO Move to ContentPlugin
  */
 ClassRegistry::register('PostType', [
     'default' => 'Content\Model\Entity\Post\DefaultPostType',
@@ -58,9 +53,3 @@ ClassRegistry::register('ContentModule', [
     'pages_submenu' => 'Content.PagesMenuModule',
     'nodes_menu' => 'Content.NodesMenuModule'
 ]);
-
-/**
- * Backend hook
- */
-Backend::hookPlugin('Content');
-
