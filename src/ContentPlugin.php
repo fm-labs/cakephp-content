@@ -59,15 +59,8 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
                 'pages' => [
                     'title' => 'Pages',
                     'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                    'data-icon' => 'desktop',
+                    'data-icon' => 'sitemap',
                 ],
-
-                'nodes' => [
-                    'title' => 'Nodes',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Nodes', 'action' => 'index'],
-                    'data-icon' => 'sitemap'
-                ],
-
                 'galleries' => [
                     'title' => 'Galleries',
                     'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],

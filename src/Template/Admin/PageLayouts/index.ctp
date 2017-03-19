@@ -1,5 +1,3 @@
-<?php $this->Breadcrumbs->add(__d('content','Page Layouts')); ?>
-
 <?php $this->Toolbar->addLink(__d('content','New {0}', __d('content','Page Layout')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <div class="pageLayouts index">
 

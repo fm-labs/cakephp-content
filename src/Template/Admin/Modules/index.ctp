@@ -1,4 +1,3 @@
-<?php $this->Breadcrumbs->add(__d('content','Modules')); ?>
 <div class="modules index">
 
 

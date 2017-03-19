@@ -50,7 +50,7 @@ class PagesController extends ContentController
      *
      * @return void
      */
-    public function table()
+    public function index()
     {
         $this->paginate = [
             'contain' => ['ParentPages'],
@@ -59,7 +59,7 @@ class PagesController extends ContentController
             'maxLimit' => 200,
         ];
 
-        $pagesTree = $this->Pages->find('treeList')->toArray();
+        $pagesTree = $this->Pages->find('treeList',['spacer' => '_ '])->toArray();
         $this->set('pagesTree', $pagesTree);
 
         $this->set('contents', $this->paginate($this->Pages));
@@ -80,7 +80,7 @@ class PagesController extends ContentController
         $this->redirect($this->referer(['action' => 'index']));
     }
 
-    public function index()
+    public function indexJstree()
     {
     }
 
@@ -228,14 +228,14 @@ class PagesController extends ContentController
 
     public function edit($id = null)
     {
-        $content = $this->Pages->get($id, [
+        $page = $this->Pages->get($id, [
             'contain' => ['PageLayouts', 'Posts']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $content = $this->Pages->patchEntity($content, $this->request->data);
+            $content = $this->Pages->patchEntity($page, $this->request->data);
             if ($this->Pages->save($content)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                return $this->redirect(['action' => 'manage', $content->id]);
+                return $this->redirect(['action' => 'edit', $page->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }
@@ -247,7 +247,7 @@ class PagesController extends ContentController
         $this->set('pageLayouts', ContentManager::getAvailablePageLayouts());
         $this->set('pageTemplates', ContentManager::getAvailablePageTemplates());
 
-        $this->set('content', $content);
+        $this->set('page', $page);
         $this->set('_serialize', ['content']);
     }
 

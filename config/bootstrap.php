@@ -2,18 +2,17 @@
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Banana\Lib\ClassRegistry;
-use Backend\Lib\Backend;
 
 
-Configure::load('Content.content');
-try { Configure::load('content'); } catch (\Exception $ex) {}
-try { Configure::load('local/content'); } catch (\Exception $ex) {}
+//Configure::load('Content.content');
+//try { Configure::load('content'); } catch (\Exception $ex) {}
+//try { Configure::load('local/content'); } catch (\Exception $ex) {}
 
 /**
  * Load dependencies
  */
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
+//Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
 
 /**
  * Register classes

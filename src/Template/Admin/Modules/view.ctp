@@ -1,5 +1,8 @@
-<?php $this->Breadcrumbs->add(__d('content','Modules'), ['action' => 'index']); ?>
-<?php $this->Breadcrumbs->add($module->name); ?>
+<?php
+$this->assign('title', $module->name);
+
+$this->Breadcrumbs->add(__d('content','Modules'), ['action' => 'index']); ?>
+
 <?= $this->Toolbar->addLink(
     __d('content','Edit {0}', __d('content','Module')),
     ['action' => 'edit', $module->id],

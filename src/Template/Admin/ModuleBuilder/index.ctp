@@ -1,6 +1,4 @@
 <?php
-$this->Breadcrumbs->add(__('Module Builder'), ['action' => 'index']);
-
 $this->assign('title', __('Module Builder'));
 ?>
 <div class="index">
