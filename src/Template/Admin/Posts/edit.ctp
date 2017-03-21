@@ -15,8 +15,9 @@ $this->Toolbar->addPostLink([
 ?>
 <?php
 // Breadcrumbs
-$this->Breadcrumbs->add(__('Pages'), ['action' => 'index']);
-$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Page')));
+$this->Breadcrumbs->add(__('Posts'), ['action' => 'index']);
+$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Post')));
+
 // Heading
 $this->assign('title', $post->title);
 $this->assign('heading', $post->title);
@@ -129,7 +130,7 @@ echo $this->Form->input('order');
 <?= $this->Form->end() ?>
 
 <!-- Related Posts -->
-<?php $this->Tabs->add(__('Related Posts')); ?>
+<?php $this->Tabs->add(__('Subposts')); ?>
 <?php if (!$post->parent_id): ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Posts', 'collapsed' => false]);  ?>
     <div class="child-posts">

@@ -84,13 +84,8 @@ class PagesController extends ContentController
     {
     }
 
-    public function manage($id = null)
+    public function view ($id = null)
     {
-        if (!$this->request->is('ajax')) {
-            $this->redirect(['action' => 'index', 'id' => $id]);
-        }
-
-
         $content = $this->Pages->get($id, [
             'contain' => ['ParentPages']
         ]);
@@ -250,47 +245,6 @@ class PagesController extends ContentController
         $this->set('page', $page);
         $this->set('_serialize', ['content']);
     }
-
-    public function view($id = null)
-    {
-
-        if (!$this->request->is('ajax')) {
-            $this->redirect(['action' => 'index', 'id' => $id]);
-        }
-
-        $content = $this->Pages->get($id, [
-            'contain' => ['ContentModules' => ['Modules'], 'PageLayouts']
-        ]);
-
-        $posts = $this->Pages->Posts->find()->where(['refid' => $id])->order(['Posts.pos' => 'DESC']);
-        $content->posts = $posts;
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $content = $this->Pages->patchEntity($content, $this->request->data);
-            if ($this->Pages->save($content)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
-                return $this->redirect(['action' => 'edit', $content->id]);
-            } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
-            }
-        }
-
-        //@TODO Read custom sections from page layout
-        $sections = ['main', 'top', 'bottom', 'before', 'after', 'left', 'right'];
-        $sections = array_combine($sections, $sections);
-        $this->set('sections', $sections);
-
-
-        //$sectionsModules = $this->Pages->ContentModules->find()->where(['refscope' => 'Content.Pages', 'refid' => $id]);
-        //debug($sectionsModules);
-
-        $availableModules = $this->Pages->ContentModules->Modules->find('list');
-        $this->set('availableModules', $availableModules);
-
-        $this->set('content', $content);
-        $this->set('_serialize', ['content']);
-    }
-
 
 
     public function preview($id = null)

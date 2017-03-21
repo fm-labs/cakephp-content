@@ -23,7 +23,7 @@ $this->Toolbar->addLink(__d('content','Repair Tree'), ['action' => 'repair'], ['
             'id',
             'title' => [
                 'formatter' => function($val, $row) use ($pagesTree) {
-                    return $this->Html->link($pagesTree[$row->id], ['action' => 'edit', $row->id]);
+                    return $this->Html->link($pagesTree[$row->id], ['action' => 'view', $row->id]);
                 }
             ],
             'type',
@@ -34,6 +34,7 @@ $this->Toolbar->addLink(__d('content','Repair Tree'), ['action' => 'repair'], ['
             ]
         ],
         'rowActions' => [
+            [__d('shop','View'), ['action' => 'view', ':id'], ['class' => 'view']],
             [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
             [__d('shop','Preview'), ['action' => 'preview', ':id'], ['class' => 'edit']],
             [__d('shop','Copy'), ['action' => 'copy', ':id'], ['class' => 'copy']],

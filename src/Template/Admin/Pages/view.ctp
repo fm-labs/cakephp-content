@@ -1,7 +1,9 @@
 <?php
-$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
-$this->Breadcrumbs->add(__d('content','Edit {0}', $content->title));
+$this->loadHelper('Bootstrap.Panel');
+$this->loadHelper('Bootstrap.Tabs');
+//$this->extend('/Admin/Content/edit');
 
+// EXTEND: TOOLBAR
 $this->Toolbar->addLink(
     __d('content','Delete'),
     ['action' => 'delete', $content->id],
@@ -18,33 +20,60 @@ $this->assign('title', $content->title);
 
 // CONTENT
 ?>
-<div class="pages view">
+<div class="pages">
 
+    <?php $this->Tabs->start(); ?>
+
+    <!-- Related posts -->
+    <?php
+    if ($content->type == 'content') {
+        $this->Tabs->add(__d('content', 'Posts'), [
+            'url' => ['action' => 'relatedPosts', $content->id]
+        ]);
+    }
+    ?>
+
+    <!-- Details -->
+    <?php $this->Tabs->add(__d('content', 'Page Details')); ?>
     <?= $this->cell('Backend.EntityView', [ $content ], [
         'title' => false,
         'model' => 'Content.Pages',
         'fields' => [
             'title' => [
                 'formatter' => function($val, $entity) {
-                    return $this->Html->link($val, ['action' => 'edit', $entity->id], ['class' => 'link-frame']);
+                    return $this->Html->link($val, ['action' => 'edit', $entity->id]);
                 }
             ],
-            'parent_id' => [
-                'title' => __d('content', 'Parent Page'),
-                'formatter' => function($val, $entity) {
-                    if (!$entity->parent_id) {
-                        return __d('content', 'Root Page');
-                    }
-
-                    $title = ($entity->parent_page) ? $entity->parent_page->title : $entity->parent_id;
-                    return $this->Html->link($title, ['action' => 'view', $entity->id], ['class' => 'link-frame']);
+            'type' => [
+                'formatter' => function($val) {
+                    $html = h($val);
+                    $html .= "&nbsp;";
+                    $html .= $this->Html->link(__('Change type'), ['action' => 'editPageType']);
+                    return $html;
                 }
             ],
             'is_published' => ['formatter' => 'boolean'],
             'url' => [
-                'formatter' => ['link' => ['target' => '_blank']]
+                'formatter' => function($val) {
+                    return $this->Html->link($this->Html->Url->build($val), $val, ['target' => '_blank']);
+                }
             ]
         ],
-        'exclude' => ['id', 'level', 'lft', 'rght', 'meta', 'meta_lang', 'meta_title', 'meta_desc', 'meta_keywords', 'meta_robots', 'parent_page', 'content_modules', 'posts']
+        'exclude' => ['lft', 'rght']
     ]); ?>
+
+    <?php
+    $this->Tabs->add(__d('content', 'Meta'), [
+        'url' => ['action' => 'relatedPageMeta', $content->id]
+    ]);
+
+    $this->Tabs->add(__d('content', 'Content Modules'), [
+        'url' => ['action' => 'relatedContentModules', $content->id]
+    ]);
+
+    $this->Tabs->add(__('Debug'), ['debugOnly' => true]);
+    debug($content);
+    ?>
+
+    <?php echo $this->Tabs->render(); ?>
 </div>

@@ -19,18 +19,16 @@ $this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['actio
 
 
 // HEADING
-//$this->assign('title', $page->title);
+$this->assign('title', $page->title);
 
 // CONTENT
 ?>
 <div class="pages form">
 
-    <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
+    <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => false]); ?>
 
     <div class="row">
-        <div class="col-md-12">
-            <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Page'), 'collapsed' => false]); ?>
-
+        <div class="col-md-9">
             <?php
             echo $this->Form->input('title');
             echo $this->Form->input('slug');
@@ -72,8 +70,8 @@ $this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['actio
                 ]);
                 ?>
             </div>
-            <?= $this->Form->fieldsetEnd(); ?>
-
+        </div>
+        <div class="col-md-3">
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
             <?= $this->Form->input('hide_in_nav'); ?>
