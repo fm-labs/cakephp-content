@@ -12,7 +12,7 @@ use Banana\Lib\ClassRegistry;
  * Load dependencies
  */
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-//Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
+Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
 
 /**
  * Register classes
