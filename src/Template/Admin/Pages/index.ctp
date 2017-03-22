@@ -27,6 +27,7 @@ $this->Toolbar->addLink(__d('content','Repair Tree'), ['action' => 'repair'], ['
                 }
             ],
             'type',
+            'page_template',
             'is_published' => [
                 'formatter' => function($val, $row) {
                     return $this->Ui->statusLabel($val);
