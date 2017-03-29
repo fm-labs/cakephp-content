@@ -42,13 +42,14 @@ class PagesTable extends Table
         $this->addBehavior('Banana.Copyable', [
             'excludeFields' => ['lft', 'rght', 'slug']
         ]);
-        $this->addBehavior('Content.Page');
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable');
+        $this->addBehavior('Backend.JsTree', ['dataFields' => ['slug', 'type']]);
 
+        //$this->addBehavior('Content.Page');
 
         /*
-        $this->addBehavior('Banana.Sortable', [
+        $this->addBehavior('Tree.SimpleTree', [
             'field' => 'pos',
             'scope' => []
         ]);
@@ -267,6 +268,11 @@ class PagesTable extends Table
         return $page['id'];
     }
 
+    /**
+     * @param null $rootId
+     * @return mixed
+     * @deprecated Use JsTreeBehavior instead.
+     */
     public function toJsTree($rootId = null)
     {
         $nodes = $this->find('threaded')

@@ -3,7 +3,7 @@ return [
     'Content' => [
         'Router' => [
             'scope' => 'content',
-            'enablePrettyUrls' => true,
+            'enablePrettyUrls' => false,
             'forceCanonical' => false,
         ],
         'HtmlEditor' => [
@@ -12,9 +12,6 @@ return [
                 'image_list_url' => ['plugin' => 'Content', 'controller' => 'HtmlEditor', 'action' => 'imageList'],
                 'link_list_url' => ['plugin' => 'Content', 'controller' => 'HtmlEditor', 'action' => 'linkList']
             ],
-        ],
-        'Frontend' => [
-            'theme' => null
         ]
     ]
 ];

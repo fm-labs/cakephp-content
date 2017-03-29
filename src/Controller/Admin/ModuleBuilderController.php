@@ -10,6 +10,7 @@ use Content\View\Cell\ModuleCell;
 use Cake\Core\Configure;
 use Content\Model\Table\ModulesTable;
 use Cake\Network\Exception\NotFoundException;
+use Banana\View\ViewModuleTrait;
 
 /**
  * Class ModuleBuilderController
@@ -19,6 +20,8 @@ use Cake\Network\Exception\NotFoundException;
  */
 class ModuleBuilderController extends AppController
 {
+    use ViewModuleTrait;
+
     public $modelClass = "Content.Modules";
 
     public function index()
@@ -46,6 +49,16 @@ class ModuleBuilderController extends AppController
 
         $this->set('modulePath', $path);
         $this->set('moduleParams', $params);
+    }
+
+    public function build2($id = null)
+    {
+
+        $moduleClass = $this->request->query('path');
+        $moduleOptions = $this->request->query;
+        $userArgs = $this->request->data;
+
+        $this->set(compact('moduleClass', 'moduleOptions', 'userArgs'));
     }
 
     public function build($id = null)

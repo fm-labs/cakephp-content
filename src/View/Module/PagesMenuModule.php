@@ -1,5 +1,5 @@
 <?php
-namespace Content\View\Cell;
+namespace Content\View\Module;
 
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
@@ -9,33 +9,32 @@ use Content\Model\Table\PagesTable;
 use Banana\View\ViewModule;
 
 /**
- * Class PagesMenuModuleCell
- * @package Content\View\Cell
+ * Class PagesMenuModule
+ *
+ * @package Content\View\Module
  */
-class PagesMenuModuleCell extends ViewModule // ModuleCell
+class PagesMenuModule extends ViewModule
 {
     public $modelClass = "Content.Pages";
 
-    public static $defaultParams = [
-        'menu' => [],
-        'start_node' => 0,
-        'depth' => 1,
-        'level' => 0,
-        'class' => '',
-        'element_path' => null
-    ];
+    public $menu = [];
+    public $start_node = 0;
+    public $depth = 1;
+    public $level = 0;
+    public $class = '';
+    public $element_path = null;
+
+    protected $_validCellOptions = ['menu', 'start_node', 'depth', 'level', 'class', 'element_path'];
 
     protected $_index = [];
     protected $_activeIndex;
     protected $_depth = 0;
 
-    public function display($params = [])
+    public function display()
     {
 
-        if (empty($this->params['menu'])) {
-
-            $cacheKey = 'pages_menu_' . md5(serialize($this->params));
-
+        if (empty($this->menu)) {
+            
             $this->loadModel('Content.Pages');
 
             $startNodeId = $this->_getStartNodeId();
@@ -47,19 +46,24 @@ class PagesMenuModuleCell extends ViewModule // ModuleCell
                     ->contain([])
                     ->toArray();
 
-                $this->params['menu'] = $this->_buildMenu($children);
+                $this->menu = $this->_buildMenu($children);
             } else {
                 debug("Start node not found");
-                $this->params['menu'] = [];
+                $this->menu = [];
             }
         }
 
-        $this->params['element_path'] = ($this->params['element_path']) ?: 'Content.Modules/PagesMenu/menu_list';
+        $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';
+
+        $this->set('menu', $this->menu);
+        $this->set('level', $this->level);
+        $this->set('class', $this->class);
+        $this->set('element_path', $this->element_path);
+        $this->set('start_node', $this->start_node);
 
         $this->set('index', $this->_index);
         $this->set('activeIndex', $this->_activeIndex);
         $this->set('activePageId', $this->request->param('page_id'));
-        $this->set('params', $this->params);
     }
 
     protected function _buildMenu($children)
@@ -115,7 +119,7 @@ class PagesMenuModuleCell extends ViewModule // ModuleCell
             }
             */
 
-            if ($this->_depth <= $this->params['depth'] && $child->getPageChildren()) {
+            if ($this->_depth <= $this->depth && $child->getPageChildren()) {
                 $item['_children'] = $this->_buildMenu($child->getPageChildren());
             }
 
@@ -128,9 +132,9 @@ class PagesMenuModuleCell extends ViewModule // ModuleCell
 
     protected function _getStartNodeId()
     {
-        if ($this->params['start_node'] > 0) {
-            $nodeId = $this->params['start_node'];
-        } elseif ($this->params['start_node'] < 0) {
+        if ($this->start_node > 0) {
+            $nodeId = $this->start_node;
+        } elseif ($this->start_node < 0) {
             $nodeId = $this->refid;
         } else {
             $rootNode = $this->Pages->findHostRoot();

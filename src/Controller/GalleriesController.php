@@ -20,6 +20,7 @@ class GalleriesController extends AppController
      * @param string|null $id Gallery id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @deprecated Use FlexsliderModuleCell instead.
      */
     public function view($id = null)
     {

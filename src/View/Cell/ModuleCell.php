@@ -1,17 +1,17 @@
 <?php
 namespace Content\View\Cell;
 
+use Cake\Event\EventDispatcherInterface;
+use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
+use Cake\Log\Log;
 use Cake\Network\Request;
 use Cake\Network\Response;
 use Cake\View\Cell;
 
-abstract class ModuleCell extends Cell
+abstract class ModuleCell extends Cell implements EventListenerInterface
 {
-    public static $defaultParams = [
-    ];
-
-    protected $_validCellOptions = ['module', 'params', 'section', 'refscope', 'refid'];
+    public static $defaultParams = [];
 
     public $section;
 
@@ -22,6 +22,22 @@ abstract class ModuleCell extends Cell
     public $module;
 
     public $params = [];
+
+    protected $_validCellOptions = ['module', 'params', 'section', 'refscope', 'refid'];
+
+    public static function defaults()
+    {
+        return static::$defaultParams;
+    }
+
+    public static function inputs()
+    {
+        $inputs = [];
+        array_walk(static::$defaultParams, function ($val, $idx) use (&$inputs) {
+            $inputs[$idx] = ['default' => $val];
+        });
+        return $inputs;
+    }
 
     /**
      * Constructor.
@@ -42,6 +58,23 @@ abstract class ModuleCell extends Cell
         $this->params = ($this->module)
             ? array_merge(static::$defaultParams, $this->params, $this->module->params_arr)
             : array_merge(static::$defaultParams, $this->params);
+
+        $this->eventManager()->on($this);
+
+    }
+
+    public function render($template = null)
+    {
+        $this->viewBuilder()
+            ->className('Content.Content');
+
+        try {
+            $rendered = parent::render($template);
+            return $rendered;
+        } catch (\Exception $ex) {
+            Log::error('ModuleCell: ' . get_class($this) . ': ' . $ex->getMessage());
+            throw $ex;
+        }
     }
 
     public function display()
@@ -50,17 +83,8 @@ abstract class ModuleCell extends Cell
         //$this->set('module', $this->module);
     }
 
-    public static function defaults()
+    public function implementedEvents()
     {
-        return static::$defaultParams;
-    }
-
-    public static function inputs()
-    {
-        $inputs = [];
-        array_walk(static::$defaultParams, function ($val, $idx) use (&$inputs) {
-            $inputs[$idx] = ['default' => $val];
-        });
-        return $inputs;
+        return [];
     }
 }

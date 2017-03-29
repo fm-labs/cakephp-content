@@ -1,8 +1,6 @@
 <?php
 namespace Content\Controller\Admin;
 
-use Content\Form\ModuleParamsForm;
-use Content\View\ViewModule;
 use Cake\Core\Exception\Exception;
 use Cake\Event\Event;
 use Cake\Form\Form;

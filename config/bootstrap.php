@@ -47,8 +47,10 @@ ClassRegistry::register('PageType', [
 ]);
 
 ClassRegistry::register('ContentModule', [
-    'flexslider' => 'Content.FlexsliderModule',
-    'pages_menu' => 'Content.PagesMenuModule',
-    'pages_submenu' => 'Content.PagesMenuModule',
-    'nodes_menu' => 'Content.NodesMenuModule'
+    'flexslider' => 'Content.Flexslider',
+    'pages_menu' => 'Content.PagesMenu',
+    'pages_submenu' => 'Content.PagesMenu',
+    'nodes_menu' => 'Content.NodesMenu'
 ]);
+
+\Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());

@@ -17,8 +17,6 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
      */
     public function registerEvents(EventManager $eventManager)
     {
-        $eventManager->on(new \Content\Sitemap\PagesSitemapProvider());
-        $eventManager->on(new \Content\Sitemap\PostsSitemapProvider());
     }
 
     /**

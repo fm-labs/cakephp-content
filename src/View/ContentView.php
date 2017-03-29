@@ -1,16 +1,15 @@
 <?php
 namespace Content\View;
 
+use Banana\View\ViewModuleTrait;
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Log\Log;
 use Cake\Network\Request;
 use Cake\Network\Response;
 use Cake\Event\EventManager;
-use Cake\Utility\Inflector;
-use Cake\View\Exception\MissingCellException;
-use Cake\Core\Exception\Exception;
+use Cake\ORM\TableRegistry;
 use Cake\View\View;
+use Content\Model\Entity\ContentModule;
 use Content\View\Helper\BreadcrumbsHelper;
 
 /**
@@ -22,7 +21,7 @@ use Content\View\Helper\BreadcrumbsHelper;
  */
 class ContentView extends View
 {
-    //use ModuleTrait;
+    use ViewModuleTrait;
 
     /**
      * @param Request $request
@@ -53,21 +52,101 @@ class ContentView extends View
         $this->eventManager()->dispatch($event);
     }
 
-    public function section($name, $cellData = [], $cellOptions = [])
+    public function section($section, array $options = [])
     {
-        // a view block with contents will be preferred
-        $content = $this->fetch($name);
+        $content = $this->fetch($section);
         if ($content) {
             return $content;
         }
 
-        $cellOptions += [
-            'section' => $name,
-            'refscope' => $this->get('refscope'),
-            'refid' => $this->get('refid'),
-        ];
+        $options = array_merge(['wrap' => 'section'], $options);
+        $refscope = $this->get('refscope');
+        $refid = $this->get('refid');
 
-        return $this->cell('Content.Section', $cellData, $cellOptions);
+        $page_modules = $this->_loadPageModules($section, $refscope, $refid);
+        if (count($page_modules) < 1) {
+            $page_modules = $this->_loadLayoutModules($section, $refscope, $refid);
+        }
+
+        $sectionHtml = "";
+        foreach ($page_modules as $contentModule):
+            $sectionHtml .= $this->contentModule($contentModule);
+        endforeach;
+
+        if ($options['wrap'] && $sectionHtml) {
+            $sectionAttrs = $options;
+            $sectionAttrs['data-section'] = $section;
+            $sectionAttrs['data-section-refscope'] = $refscope;
+            $sectionAttrs['data-section-refid'] = $refid;
+            unset($sectionAttrs['wrap']);
+
+            $sectionHtml = $this->Html->tag($options['wrap'], $sectionHtml, $sectionAttrs);
+        }
+
+        return $sectionHtml;
+    }
+
+    protected function _loadPageModules($section = null, $refscope = null, $refid = null)
+    {
+        // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
+        return TableRegistry::get('Content.ContentModules')->find()
+            ->where(['section' => $section, 'refscope' => $refscope, 'refid' => $refid])
+            ->contain(['Modules'])
+            ->all();
+    }
+
+    protected function _loadLayoutModules($section = null, $refscope = null, $refid = null)
+    {
+        // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
+        return TableRegistry::get('Content.ContentModules')->find()
+            ->where(['section' => $section, 'refid IS NULL', 'or' => ['refscope' => $refscope, 'refscope IS NULL']])
+            ->contain(['Modules'])
+            ->all();
+    }
+
+    /*
+    public function module(Module $module, $cellData = [], $template = null)
+    {
+        $cell = $module->cellClass;
+
+        try {
+            $template = ($template) ?: null;
+            $moduleHtml = $this->cell($cell , $cellData, compact('module'))->render($template);
+        } catch (\Exception $ex) {
+            $moduleHtml = sprintf('Unable to render content module %s [%s]: %s', $module->name, $module->path, $ex->getMessage());
+        }
+
+        return $moduleHtml;
+    }
+    */
+
+    public function contentModule(ContentModule $contentModule, array $moduleData = [], array $wrapperAttrs = [])
+    {
+        if (!$contentModule->module) {
+            if (Configure::read('debug')) {
+                return "Content Module with ID " . $contentModule->id . " has no module attached";
+            }
+            return null;
+        }
+
+        $moduleHtml = $this->module(
+            $contentModule->module->cellClass,
+            $moduleData,
+            $contentModule->module->params_arr
+        );
+
+        // output module without wrapper container, if css class is set to '_nowrap'
+        // @todo Create virtual property 'nowrap' in ContentModule entity (and
+        if ($contentModule->nowrap || $contentModule->cssclass === '_nowrap') {
+            return $moduleHtml;
+        }
+
+        $wrapperAttrs = array_merge([
+            'id' => $contentModule->cssid,
+            'class' => $contentModule->cssclass,
+            'data-content-module-id' => $contentModule->id
+        ], $wrapperAttrs);
+        return $this->Html->div(null, $moduleHtml, $wrapperAttrs);
     }
 
     public function render($view = null, $layout = null)
