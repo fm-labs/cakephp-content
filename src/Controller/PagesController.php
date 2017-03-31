@@ -21,7 +21,7 @@ use Content\Controller\Component\FrontendComponent;
  * @property PagesTable $Pages
  * @deprecated Use FrontendController instead
  */
-class PagesController extends AppController
+class PagesController extends ContentController
 {
 
     public $modelClass = 'Content.Pages';
@@ -41,7 +41,6 @@ class PagesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Content.Frontend');
         $this->loadComponent('Paginator');
         $this->loadComponent('RequestHandler');
     }
@@ -66,11 +65,6 @@ class PagesController extends AppController
         }
 
         $this->setAction('view', $rootPage->id);
-    }
-
-    public function tree()
-    {
-
     }
 
     public function viewSlug($slug = null)
@@ -134,71 +128,13 @@ class PagesController extends AppController
         //$this->Frontend->setPageId($page->id);
         $this->Frontend->setRefId($page->id);
 
-        // Dispatch Page.beforeExecute()
+        //@todo Dispatch Page.beforeExecute()
 
         // Execute page
         if ($page->execute($this) === false) {
             return;
         }
-
-        // Dispatch Page.afterExecute();
-
-        /*
-        switch ($page->type) {
-            // Internal redirects
-            case 'root':
-                $this->_root = true; // root flag
-
-            case 'page':
-                return $this->setAction('view', $page->redirect_page_id);
-
-            // Http redirect
-            case 'redirect':
-                if ($page->redirect_page_id) {
-                    $page = $this->Pages->get($page->redirect_page_id, ['contain' => []]);
-                    $redirectUrl = $page->url;
-                } else {
-                    $redirectUrl = $page->redirect_location;
-                }
-
-                return $this->redirect($redirectUrl, $page->redirect_status);
-            case 'controller':
-                return $this->redirect($page->redirect_controller_url, $page->redirect_status);
-
-            // Inline types
-            case 'cell':
-                $cellName = $page->redirect_controller;
-                $this->setAction('cell', $cellName);
-                break;
-
-            case 'module':
-                $moduleName = $page->redirect_controller;
-                $this->setAction('module', $moduleName);
-                break;
-
-            // Static
-            case 'static':
-                $action = ($page->page_template) ?: null;
-                if ($action !== 'view' && $action && method_exists($this, $action)) {
-                    $this->setAction($action);
-                }
-                break;
-
-            case 'blog_category':
-                $query = $this->Pages->Posts
-                    ->find('published')
-                    ->where(['refscope' => 'Content.Pages', 'refid' => $page->id]);
-
-                $posts = $this->Paginator->paginate($query);
-                $this->set('posts', $posts);
-                break;
-
-            // Content
-            case 'content':
-            default:
-                break;
-        }
-        */
+        //@todo Dispatch Page.afterExecute();
 
         $this->viewBuilder()->className('Content.Page');
 
@@ -209,23 +145,7 @@ class PagesController extends AppController
         $layout = ($page->page_layout) ? $page->page_layout->template : null;
         $this->viewBuilder()->layout($layout);
 
-        /*
-        //@TODO Move to view
-        $contentModules = $this->Pages->ContentModules
-            ->find()
-            ->order(['ContentModules.priority' => 'DESC'])
-            ->where(['ContentModules.refid' => $page->id, 'ContentModules.refscope' => 'Content.Pages'])
-            ->contain(['Modules'])
-            ->all();
-        $this->set('contentModules', $contentModules);
-        */
-
         $this->set('page', $page);
-
-        // for debugging purposes
-        $this->set('_page_template', $view);
-        $this->set('_page_layout', $layout);
-        $this->set('_page_id', $page->id);
     }
 
     /**
@@ -261,17 +181,6 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
-    }
-
-    protected function module($moduleName)
-    {
-        $this->set('moduleName', $moduleName);
-        $this->set('moduleTemplate', null);
-    }
-
-    protected function cell($cellName)
-    {
-        $this->set('cellName', $cellName);
     }
 
 }

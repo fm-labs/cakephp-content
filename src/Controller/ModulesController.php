@@ -4,7 +4,7 @@ namespace Content\Controller;
 
 use Cake\Event\Event;
 
-class ModulesController extends AppController
+class ModulesController extends ContentController
 {
     public function beforeFilter(Event $event)
     {

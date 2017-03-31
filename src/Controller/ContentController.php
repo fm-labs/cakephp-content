@@ -2,22 +2,29 @@
 
 namespace Content\Controller;
 
-use App\Controller\AppController as BaseAppController;
+use App\Controller\AppController;
 use Cake\Event\Event;
 
 /**
  * Class AppController
+ *
  * @package Content\Controller
  */
-class AppController extends BaseAppController
+class ContentController extends AppController
 {
+    public function initialize()
+    {
+        $this->loadComponent('User.Auth', [
+            'logoutRedirect' => '/'
+        ]);
+        $this->loadComponent('Banana.Site');
+        $this->loadComponent('Content.Frontend');
+    }
+
     public function beforeFilter(Event $event)
     {
+        $this->Auth->config('authorize', 'Controller');
         parent::beforeFilter($event);
-
-        if ($this->components()->has('Auth')) {
-            $this->Auth->config('authorize', 'Controller');
-        }
     }
 
     public function isAuthorized($user = null)
@@ -25,11 +32,6 @@ class AppController extends BaseAppController
         // Any registered user can access public functions
         if (empty($this->request->params['prefix'])) {
             return true;
-        }
-
-        // Only admins can access admin functions
-        if ($this->request->params['prefix'] === 'admin') {
-            return (bool)($user['superuser'] === true);
         }
 
         // Default deny

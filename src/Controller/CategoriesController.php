@@ -11,7 +11,7 @@ use Content\Model\Table\PostsTable;
  * @property CategoriesTable $Categories
  * @property PostsTable $Posts
  */
-class CategoriesController extends FrontendController
+class CategoriesController extends ContentController
 {
     public $modelClass = "Content.Categories";
 

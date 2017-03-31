@@ -11,7 +11,7 @@ use Cake\Routing\Router;
  *
  * @property \Content\Model\Table\PostsTable $Posts
  */
-class PostsController extends AppController
+class PostsController extends ContentController
 {
     public $viewClass = 'Content.Post';
 

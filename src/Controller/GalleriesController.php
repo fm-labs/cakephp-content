@@ -5,7 +5,7 @@ namespace Content\Controller;
 
 use Cake\Event\Event;
 
-class GalleriesController extends AppController
+class GalleriesController extends ContentController
 {
     public function beforeFilter(Event $event)
     {
