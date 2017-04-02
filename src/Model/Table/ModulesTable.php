@@ -63,41 +63,4 @@ class ModulesTable extends Table
 
         return $validator;
     }
-
-    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
-    {
-        if (isset($data['path'])) {
-            //$entityClass = self::moduleEntityClass($data['path']);
-            //$this->entityClass($entityClass);
-        }
-    }
-
-    public static function moduleEntityClass($moduleClass)
-    {
-        return App::className($moduleClass, 'Model/Entity/Module', 'Module');
-    }
-
-    public function modularize($entity)
-    {
-        $entityClass = self::moduleEntityClass($entity->path);
-        if ($entityClass) {
-            $this->entityClass($entityClass);
-        }
-
-        $mod = $this->newEntity();
-        $mod->accessible('*', true);
-        $mod->set($entity->toArray());
-        return $mod;
-    }
-
-    public function findExpanded(Query $query, array $options)
-    {
-        // Incomplete
-        debug($options);
-        if (isset($options['path'])) {
-            $entityClass = self::moduleEntityClass($options['path']);
-            $this->entityClass($entityClass);
-        }
-        return $query;
-    }
 }
