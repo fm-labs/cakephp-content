@@ -1,4 +1,4 @@
-<div class="page index <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
+<div class="page index container <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
     <div class="alert alert-info">Default Page Index</div>
     <!--
     <h1 class="title"><?= h($page->title); ?></h1>

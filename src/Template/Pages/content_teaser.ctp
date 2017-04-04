@@ -1,4 +1,4 @@
-<div class="page view <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
+<div class="page view container <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
     <!--
     <h1 class="title"><?= h($page->title); ?></h1>
     -->
