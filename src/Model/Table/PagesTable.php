@@ -177,6 +177,91 @@ class PagesTable extends Table
         return $rules;
     }
 
+    public function getMenu($startNodeId = null)
+    {
+        if ($startNodeId === null) {
+            $root = $this->findRoot();
+            $startNodeId = $root->id;
+        }
+
+        $menu = [];
+        if ($startNodeId) {
+            $children = $this
+                ->find('children', ['for' => $startNodeId])
+                ->find('threaded')
+                ->orderAsc('lft')
+                ->contain([])
+                ->toArray();
+
+            $menu = $this->_buildMenu($children);
+        }
+        return $menu;
+    }
+
+
+    protected function _buildMenu($children, $level = 0, $maxLevel = -1)
+    {
+        $menu = [];
+        foreach ($children as $child) {
+            $isActive = false;
+            $class = $child->cssclass;
+
+            if ($child->isPageHiddenInNav()) {
+                continue;
+
+            } elseif (!$child->isPagePublished()) {
+                continue;
+
+                //} elseif ($this->request->param('page_id') == $child->id) {
+                //    $isActive = true;
+
+                /*
+            } elseif ($child->type == 'controller') {
+                $plugin = $this->request->param('plugin');
+                $controller = $this->request->param('controller');
+                $needle = ($plugin)
+                    ? Inflector::camelize($plugin) . '.' . Inflector::camelize($controller)
+                    : Inflector::camelize($controller);
+            */
+                //if ($child->redirect_location == $needle) {
+                //    $isActive = true;
+                //}
+            }
+
+            if ($isActive) {
+                $class .= ' active';
+            }
+
+            $itemPageId = $child->getPageId();
+            $item = [
+                'title' => $child->getPageTitle(),
+                'url' => $child->getPageUrl(),
+                'class' => $class,
+                '_children' => []
+            ];
+
+            //$indexKey = count($this->_index) . ':' . Router::url($item['url'], true);
+            //$this->_index[$indexKey] = str_repeat('_', $level - 1) . $item['title'];
+            //if ($isActive) {
+            //    $this->_activeIndex = $indexKey;
+            //}
+
+            /*
+            if ($child->children) {
+                $item['_children'] = $this->_buildMenu($child->children);
+            }
+            */
+
+            if (($maxLevel < 0 || $level <= $maxLevel) && $child->getPageChildren()) {
+                $item['_children'] = $this->_buildMenu($child->getPageChildren(), $level + 1, $maxLevel);
+            }
+
+            $menu[] = $item;
+        }
+
+        return $menu;
+    }
+
     public function getPageLayoutFor($page)
     {
         if (is_numeric($page)) {

@@ -2,7 +2,7 @@
 <?php
 // TOOLBAR
 //$this->Toolbar->addLink(__d('content','{0} (Tree)', __d('content','Pages')), ['action' => 'index'], ['data-icon' => 'sitemap']);
-$this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['action' => 'add'], ['data-icon' => 'file-o', 'class' => 'link-frame-modal']);
+$this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['action' => 'add'], ['data-icon' => 'file-o']);
 $this->Toolbar->addLink(__d('content','Sort'),
     ['plugin' => 'Backend',  'controller' => 'Tree', 'action' => 'index', 'model' => 'Content.Pages', 'op' => 'sort'],
     ['data-icon' => 'sitemap', 'data-modal' => true, 'data-modal-reload' => true]);
@@ -26,7 +26,7 @@ $this->Toolbar->addLink(__d('content','Repair Tree'), ['action' => 'repair'], ['
             'id',
             'title' => [
                 'formatter' => function($val, $row) use ($pagesTree) {
-                    return $this->Html->link($pagesTree[$row->id], ['action' => 'view', $row->id]);
+                    return $this->Html->link($pagesTree[$row->id], ['action' => 'edit', $row->id]);
                 }
             ],
             'type',

@@ -12,6 +12,7 @@ use Banana\View\ViewModule;
  * Class PagesMenuModule
  *
  * @package Content\View\Module
+ * @property PagesTable $Pages
  */
 class PagesMenuModule extends ViewModule
 {
@@ -38,19 +39,7 @@ class PagesMenuModule extends ViewModule
             $this->loadModel('Content.Pages');
 
             $startNodeId = $this->_getStartNodeId();
-            if ($startNodeId) {
-                $children = $this->Pages
-                    ->find('children', ['for' => $startNodeId])
-                    ->find('threaded')
-                    ->orderAsc('lft')
-                    ->contain([])
-                    ->toArray();
-
-                $this->menu = $this->_buildMenu($children);
-            } else {
-                debug("Start node not found");
-                $this->menu = [];
-            }
+            $this->menu = $this->Pages->getMenu($startNodeId);
         }
 
         $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';
@@ -64,70 +53,6 @@ class PagesMenuModule extends ViewModule
         $this->set('index', $this->_index);
         $this->set('activeIndex', $this->_activeIndex);
         $this->set('activePageId', $this->request->param('page_id'));
-    }
-
-    protected function _buildMenu($children)
-    {
-        $this->_depth++;
-        $menu = [];
-        foreach ($children as $child) {
-            $isActive = false;
-            $class = $child->cssclass;
-
-            if ($child->isPageHiddenInNav()) {
-                continue;
-
-            } elseif (!$child->isPagePublished()) {
-                continue;
-
-            //} elseif ($this->request->param('page_id') == $child->id) {
-            //    $isActive = true;
-
-            } elseif ($child->type == 'controller') {
-                $plugin = $this->request->param('plugin');
-                $controller = $this->request->param('controller');
-                $needle = ($plugin)
-                    ? Inflector::camelize($plugin) . '.' . Inflector::camelize($controller)
-                    : Inflector::camelize($controller);
-
-                //if ($child->redirect_location == $needle) {
-                //    $isActive = true;
-                //}
-            }
-
-            if ($isActive) {
-                $class .= ' active';
-            }
-
-            $itemPageId = $child->getPageId();
-            $item = [
-                'title' => $child->getPageTitle(),
-                'url' => $child->getPageUrl(),
-                'class' => $class,
-                '_children' => []
-            ];
-
-            $indexKey = count($this->_index) . ':' . Router::url($item['url'], true);
-            $this->_index[$indexKey] = str_repeat('_', $this->_depth - 1) . $item['title'];
-            //if ($isActive) {
-            //    $this->_activeIndex = $indexKey;
-            //}
-
-            /*
-            if ($child->children) {
-                $item['_children'] = $this->_buildMenu($child->children);
-            }
-            */
-
-            if ($this->_depth <= $this->depth && $child->getPageChildren()) {
-                $item['_children'] = $this->_buildMenu($child->getPageChildren());
-            }
-
-            $menu[] = $item;
-        }
-
-        $this->_depth--;
-        return $menu;
     }
 
     protected function _getStartNodeId()

@@ -2,14 +2,14 @@
 
 namespace Content\Controller\Admin;
 
-use App\Controller\Admin\AppController as BaseAdminAppController;
+use Backend\Controller\Admin\AbstractBackendController;
 use Content\Lib\ContentManager;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\Filesystem\Folder;
 
-class AppController extends BaseAdminAppController
+class AppController extends AbstractBackendController
 {
     public $paginate = [
         'limit' => 100,

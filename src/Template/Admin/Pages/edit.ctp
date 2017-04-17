@@ -36,9 +36,9 @@ $this->assign('title', $page->title);
             <?php
             echo $this->Form->input('type', [
                 'id' => 'select-type',
-                'class' => 'select-ajax',
-                'data-target' => 'select-type-params-form',
-                'data-url' => ['action' => 'ajaxPageTypeForm']
+                //'class' => 'select-ajax',
+                //'data-target' => 'select-type-params-form',
+                //'data-url' => ['action' => 'ajaxPageTypeForm']
             ]);
             ?>
             <div id="select-type-params-form"></div>
