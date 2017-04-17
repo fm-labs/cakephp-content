@@ -18,7 +18,7 @@ abstract class AbstractPageType implements PageTypeInterface
     {
         $this->page =& $page;
     }
-    
+
     public function getUrl()
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {

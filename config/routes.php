@@ -2,7 +2,9 @@
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 
-Router::connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+if (Configure::read('Content.Router.disableRootUrl') !== true) {
+    Router::connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+}
 
 $scope = '/' . trim(Configure::read('Content.Router.scope'), '/');
 Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], function($routes) {
