@@ -177,8 +177,11 @@ class PagesTable extends Table
         return $rules;
     }
 
-    public function getMenu($startNodeId = null)
+    public function getMenu($startNodeId = null, array $options = [])
     {
+        $options += ['maxDepth' => null];
+        $maxDepth = ($options['maxDepth']) ?: -1;
+
         if ($startNodeId === null) {
             $root = $this->findRoot();
             $startNodeId = $root->id;
@@ -193,13 +196,13 @@ class PagesTable extends Table
                 ->contain([])
                 ->toArray();
 
-            $menu = $this->_buildMenu($children);
+            $menu = $this->_buildMenu($children, 0, $maxDepth);
         }
         return $menu;
     }
 
 
-    protected function _buildMenu($children, $level = 0, $maxLevel = -1)
+    protected function _buildMenu($children, $level = 0, $maxDepth = -1)
     {
         $menu = [];
         foreach ($children as $child) {
@@ -252,8 +255,8 @@ class PagesTable extends Table
             }
             */
 
-            if (($maxLevel < 0 || $level <= $maxLevel) && $child->getPageChildren()) {
-                $item['_children'] = $this->_buildMenu($child->getPageChildren(), $level + 1, $maxLevel);
+            if (($maxDepth < 0 || $level < $maxDepth) && $child->getPageChildren()) {
+                $item['_children'] = $this->_buildMenu($child->getPageChildren(), $level + 1, $maxDepth);
             }
 
             $menu[] = $item;
