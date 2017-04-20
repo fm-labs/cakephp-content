@@ -20,7 +20,7 @@ class PagesMenuModule extends ViewModule
 
     public $menu = [];
     public $start_node = 0;
-    public $depth = 1;
+    public $depth = 1; //@TODO Rename to maxDepth
     public $level = 0;
     public $class = '';
     public $element_path = null;
@@ -39,7 +39,7 @@ class PagesMenuModule extends ViewModule
             $this->loadModel('Content.Pages');
 
             $startNodeId = $this->_getStartNodeId();
-            $this->menu = $this->Pages->getMenu($startNodeId);
+            $this->menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
         }
 
         $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';
