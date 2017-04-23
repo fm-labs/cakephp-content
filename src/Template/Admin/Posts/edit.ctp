@@ -32,7 +32,7 @@ endif;
     <?php $this->Tabs->create(); ?>
     <?php $this->Tabs->add(__('Edit')); ?>
 
-    <?= $this->Form->create($post); ?>
+    <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?php
     echo $this->Form->hidden('type');
     echo $this->Form->input('title');
@@ -95,9 +95,13 @@ endif;
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
+    <!-- Submit -->
+    <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->end() ?>
 
     <!-- Advanced -->
     <?php $this->Tabs->add(__('Advanced')); ?>
+    <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Advanced', 'collapsed' => false]); ?>
     <?php
     echo $this->Form->input('refscope');
@@ -109,7 +113,7 @@ endif;
     <?= $this->Form->fieldsetEnd(); ?>
 
     <!-- Submit -->
-    <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'btn btn-primary btn-block']) ?>
+    <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->end() ?>
 
     <!-- Related Posts -->

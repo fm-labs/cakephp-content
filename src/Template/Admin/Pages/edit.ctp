@@ -16,9 +16,12 @@ $this->Toolbar->addLink(
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $page->id)]
 );
 
+$this->Breadcrumbs->add(__('Pages'), ['action' => 'index']);
+$this->Breadcrumbs->add($page->title);
 
 // HEADING
 $this->assign('title', $page->title);
+$this->assign('heading', $page->title);
 
 // LEFT
 $this->loadHelper('Bootstrap.Menu');
@@ -41,7 +44,7 @@ $this->end();
     <?php $this->Tabs->start(); ?>
 
     <?php $this->Tabs->add(__d('content', 'Page')); ?>
-        <?= $this->Form->create($page, ['novalidate' => 'novalidate']); ?>
+        <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
 
                 <?php
                 echo $this->Form->input('type', [
@@ -76,7 +79,7 @@ $this->end();
         <?php
             $this->Tabs->add(__d('content', 'Advanced'));
         ?>
-        <?= $this->Form->create($page, ['novalidate' => 'novalidate']); ?>
+        <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
                 <?= $this->Form->input('hide_in_nav'); ?>
                 <?= $this->Form->input('hide_in_sitemap'); ?>
