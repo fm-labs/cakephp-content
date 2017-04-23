@@ -5,7 +5,8 @@
 
     <div class="posts">
         <?php foreach($page->published_posts as $post): ?>
-            <?= $this->element('Content.Posts/request_view', ['post' => $post]); ?>
+            <?php $element = ($post->use_teaser) ? 'request_teaser' : 'request_view'; ?>
+            <?= $this->element('Content.Posts/' . $element, ['post' => $post]); ?>
             <?php //debug($post->toArray()); ?>
         <?php endforeach; ?>
     </div>
