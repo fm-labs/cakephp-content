@@ -3,27 +3,27 @@ $this->assign('title', $module->name);
 
 $this->Breadcrumbs->add(__d('content','Modules'), ['action' => 'index']); ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','Edit {0}', __d('content','Module')),
     ['action' => 'edit', $module->id],
     ['data-icon' => 'edit']
 ) ?>
-<?= $this->Toolbar->addPostLink(
+<?php $this->Toolbar->addPostLink(
     __d('content','Delete {0}', __d('content','Module')),
     ['action' => 'delete', $module->id],
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $module->id)]) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Modules')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','New {0}', __d('content','Module')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','Preview {0}', __d('content','Module')),
     ['action' => 'preview', $module->id],
     ['data-icon' => 'plus', 'target' => 'preview']

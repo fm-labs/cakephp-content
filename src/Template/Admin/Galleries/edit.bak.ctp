@@ -1,12 +1,12 @@
 <?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content','Gallery'))); ?>
-<?= $this->Toolbar->addPostLink(
+<?php $this->Toolbar->addPostLink(
     __d('content','Delete'),
     ['action' => 'delete', $gallery->id],
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $gallery->id)]
 )
 ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Galleries')),
     ['action' => 'index'],
     ['data-icon' => 'list']

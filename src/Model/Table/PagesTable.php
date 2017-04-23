@@ -179,8 +179,9 @@ class PagesTable extends Table
 
     public function getMenu($startNodeId = null, array $options = [])
     {
-        $options += ['maxDepth' => null];
+        $options += ['maxDepth' => null, 'includeHidden' => null];
         $maxDepth = ($options['maxDepth']) ?: -1;
+        $includeHidden = $options['includeHidden'];
 
         if ($startNodeId === null) {
             $root = $this->findRoot();
@@ -196,23 +197,23 @@ class PagesTable extends Table
                 ->contain([])
                 ->toArray();
 
-            $menu = $this->_buildMenu($children, 0, $maxDepth);
+            $menu = $this->_buildMenu($children, 0, $maxDepth, $includeHidden);
         }
         return $menu;
     }
 
 
-    protected function _buildMenu($children, $level = 0, $maxDepth = -1)
+    protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
         $menu = [];
         foreach ($children as $child) {
             $isActive = false;
             $class = $child->cssclass;
 
-            if ($child->isPageHiddenInNav()) {
+            if ($includeHidden !== true && $child->isPageHiddenInNav()) {
                 continue;
 
-            } elseif (!$child->isPagePublished()) {
+            } elseif ($includeHidden !== true && !$child->isPagePublished()) {
                 continue;
 
                 //} elseif ($this->request->param('page_id') == $child->id) {
@@ -237,6 +238,7 @@ class PagesTable extends Table
 
             $itemPageId = $child->getPageId();
             $item = [
+                'data-id' => $itemPageId,
                 'title' => $child->getPageTitle(),
                 'url' => $child->getPageUrl(),
                 'class' => $class,

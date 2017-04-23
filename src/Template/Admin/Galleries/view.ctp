@@ -1,37 +1,37 @@
 <?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($gallery->title); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','Edit {0}', __d('content','Gallery')),
     ['action' => 'edit', $gallery->id],
     ['data-icon' => 'edit']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','Delete {0}', __d('content','Gallery')),
     ['action' => 'delete', $gallery->id],
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $gallery->id)]) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Galleries')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','New {0}', __d('content','Gallery')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->startGroup(__d('content','More')); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->startGroup(__d('content','More')); ?>
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','New {0}', __d('content','Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->endGroup(); ?>
+<?php $this->Toolbar->endGroup(); ?>
 <div class="galleries view">
     <h2 class="ui header">
         <?= h($gallery->title) ?>

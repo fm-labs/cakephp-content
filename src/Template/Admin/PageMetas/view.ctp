@@ -1,27 +1,27 @@
 <?php $this->Breadcrumbs->add(__d('content', 'Page Metas'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($pageMeta->title); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content', 'Edit {0}', __d('content', 'Page Meta')),
     ['action' => 'edit', $pageMeta->id],
     ['data-icon' => 'edit']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content', 'Delete {0}', __d('content', 'Page Meta')),
     ['action' => 'delete', $pageMeta->id],
     ['data-icon' => 'trash', 'confirm' => __d('content', 'Are you sure you want to delete # {0}?', $pageMeta->id)]) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content', 'List {0}', __d('content', 'Page Metas')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content', 'New {0}', __d('content', 'Page Meta')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->startGroup(__d('content', 'More')); ?>
-<?= $this->Toolbar->endGroup(); ?>
+<?php $this->Toolbar->startGroup(__d('content', 'More')); ?>
+<?php $this->Toolbar->endGroup(); ?>
 <div class="pageMetas view">
     <h2 class="ui header">
         <?= h($pageMeta->title) ?>

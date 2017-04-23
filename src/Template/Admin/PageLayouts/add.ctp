@@ -1,6 +1,6 @@
 <?php $this->Breadcrumbs->add(__d('content','Page Layouts'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Page Layout'))); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Page Layouts')),
     ['action' => 'index'],
     ['data-icon' => 'list']

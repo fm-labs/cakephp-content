@@ -5,9 +5,11 @@
     No posts found
     <?php endif; ?>
 
+    <!--
     <div class="actions">
         <?= $this->Html->link(__('Sortieren'), ['plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'sort', 'model' => 'Content.Posts', 'refscope' => 'Content.Pages', 'refid' => $content->id]); ?>
     </div>
+    -->
 
     <?= $this->cell('Backend.DataTable', [[
         'paginate' => false,

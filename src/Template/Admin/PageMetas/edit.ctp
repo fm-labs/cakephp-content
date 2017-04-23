@@ -1,12 +1,12 @@
 <?php $this->Breadcrumbs->add(__d('content', 'Page Metas'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__d('content', 'Edit {0}', __d('content', 'Page Meta'))); ?>
-<?= $this->Toolbar->addPostLink(
+<?php $this->Toolbar->addPostLink(
     __d('content', 'Delete'),
     ['action' => 'delete', $pageMeta->id],
     ['data-icon' => 'trash', 'confirm' => __d('content', 'Are you sure you want to delete # {0}?', $pageMeta->id)]
 )
 ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content', 'List {0}', __d('content', 'Page Metas')),
     ['action' => 'index'],
     ['data-icon' => 'list']

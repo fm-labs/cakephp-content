@@ -1,24 +1,24 @@
 <?php $this->Breadcrumbs->add(__('Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__('Edit {0}', __('Category'))); ?>
-<?= $this->Toolbar->addPostLink(
+<?php $this->Toolbar->addPostLink(
     __('Delete'),
     ['action' => 'delete', $category->id],
     ['data-icon' => 'trash', 'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]
 )
 ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Categories')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->startGroup('More'); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('New {0}', __('Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']

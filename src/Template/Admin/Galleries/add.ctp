@@ -1,18 +1,18 @@
 <?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery'))); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Galleries')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->startGroup('More'); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','List {0}', __d('content','Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __d('content','New {0}', __d('content','Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']

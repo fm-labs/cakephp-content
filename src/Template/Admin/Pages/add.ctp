@@ -6,26 +6,16 @@ $this->extend('/Admin/Content/add');
 $this->assign('heading', __d('content','Add {0}', __d('content','Page')));
 ?>
 <div class="pages">
-    <?= $this->Form->create($content, ['class' => 'no-ajax']); ?>
-    <div class="users ui segment">
-        <div class="ui form">
-            <?php
-                echo $this->Form->input('parent_id', ['options' => $pagesTree, 'empty' => '- New website root -']);
-                echo $this->Form->input('title');
-                echo $this->Form->hidden('slug');
-                echo $this->Form->input('type', ['id' => 'select-type']);
-                //echo $this->Form->hidden('is_published');
-                //echo $this->Form->hidden('publish_start_date');
-                //echo $this->Form->hidden('publish_end_date');
-                //echo $this->Form->hidden('parent_id', ['options' => $treeList, 'empty' => '- No parent -']);
-                //echo $this->Form->hidden('layout_template');
-                //echo $this->Form->hidden('page_template');
-            ?>
-
-        </div>
-    </div>
-    <div class="ui bottom attached segment">
-        <?= $this->Form->button(__d('content','Submit')) ?>
-    </div>
+    <div class="form">
+    <?= $this->Form->create($content, ['class' => 'no-ajax', 'horizontal' => true]); ?>
+        <?php
+        echo $this->Form->input('parent_id', ['options' => $pagesTree, 'empty' => '- New website root -']);
+        echo $this->Form->input('type', ['id' => 'select-type']);
+        echo $this->Form->input('title');
+        echo $this->Form->hidden('slug');
+        echo $this->Form->hidden('is_published', ['value' => false]);
+        ?>
+    <?= $this->Form->button(__d('content','Submit')) ?>
     <?= $this->Form->end() ?>
+    </div>
 </div>

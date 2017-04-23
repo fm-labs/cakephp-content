@@ -1,38 +1,38 @@
 <?php $this->Breadcrumbs->add(__('Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($category->name); ?>
 <?php $this->loadHelper('Backend.Toolbar'); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('Edit {0}', __('Category')),
     ['action' => 'edit', $category->id],
     ['data-icon' => 'edit']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('Delete {0}', __('Category')),
     ['action' => 'delete', $category->id],
     ['data-icon' => 'trash', 'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Categories')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('New {0}', __('Category')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->startGroup(__('More')); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->startGroup(__('More')); ?>
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('New {0}', __('Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?= $this->Toolbar->endGroup(); ?>
+<?php $this->Toolbar->endGroup(); ?>
 <div class="categories view">
     <h2 class="ui header">
         <?= h($category->name) ?>

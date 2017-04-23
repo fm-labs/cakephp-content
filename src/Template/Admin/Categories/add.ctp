@@ -1,18 +1,18 @@
 <?php $this->Breadcrumbs->add(__('Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__('New {0}', __('Category'))); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Categories')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->startGroup('More'); ?>
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('List {0}', __('Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
-<?= $this->Toolbar->addLink(
+<?php $this->Toolbar->addLink(
     __('New {0}', __('Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']

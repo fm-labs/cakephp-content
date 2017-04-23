@@ -2,16 +2,17 @@
 
 namespace Content\Controller\Admin;
 
+use Backend\Controller\EntityInfoActionTrait;
 use Banana\Controller\Shared\JsTreeAwareTrait;
 use Banana\Controller\Shared\PrimaryModelAwareTrait;
 use Cake\Network\Exception\NotFoundException;
 use Content\Lib\ContentManager;
-use Content\Model\Entity\Page\PageInterface;
 use Content\Model\Table\PagesTable;
 use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
+use Content\Page\PageInterface;
 use Tree\Controller\TreeSortControllerTrait;
 
 /**
@@ -26,6 +27,7 @@ class PagesController extends ContentController
     use TreeSortControllerTrait;
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
+    use EntityInfoActionTrait;
 
     public $modelClass = "Content.Pages";
 
@@ -111,7 +113,6 @@ class PagesController extends ContentController
             ->where(['refid' => $id])
             //->order(['Posts.pos' => 'DESC'])
             ->all();
-
 
         $this->set('content', $content);
         $this->set('posts', $posts);
