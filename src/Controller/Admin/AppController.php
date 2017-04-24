@@ -18,7 +18,7 @@ class AppController extends AbstractBackendController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Banana.Site');
+        //$this->loadComponent('Banana.Site');
     }
 
     public function beforeFilter(Event $event)

@@ -17,7 +17,7 @@ class ContentController extends AppController
         $this->loadComponent('User.Auth', [
             'logoutRedirect' => '/'
         ]);
-        $this->loadComponent('Banana.Site');
+        //$this->loadComponent('Banana.Site');
         $this->loadComponent('Content.Frontend');
     }
 
