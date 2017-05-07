@@ -2,6 +2,7 @@
 <?php $this->loadHelper('AdminLte.Box'); ?>
 <?php $this->Breadcrumbs->add(__('Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($gallery->title); ?>
+<?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
 <div class="galleries index">
 
 
@@ -59,9 +60,11 @@
             'data' => $galleryPosts->toArray(),
             'sortable' => true,
             'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
+            'fieldsWhitelist' => true,
             'fields' => [
                 //'id',
-                'pos',
+                'pos' => [],
+                /*
                 'image_file' => [
                     'formatter' => function($val) {
                         if (!$val) {
@@ -70,6 +73,7 @@
                         return $this->Html->image($val->url, ['width' => 50]);
                     }
                 ],
+                */
                 'title' => [
                     'formatter' => function($val, $row) {
                         return $this->Html->link($val, ['controller' => 'Galleries', 'action' => 'edit_post', $row->id]);
@@ -81,7 +85,7 @@
                         return $this->Ui->statusLabel($val);
                     }
                 ],
-                'created',
+                //'created' => [],
             ],
             'rowActions' => [
                 [__d('shop','Edit'), ['action' => 'edit_post', ':id'], ['class' => 'edit']],

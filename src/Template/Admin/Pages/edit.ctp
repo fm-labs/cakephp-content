@@ -39,6 +39,7 @@ $this->end();
 
 // CONTENT
 ?>
+<?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
 <div class="pages">
 
     <?php $this->Tabs->start(); ?>

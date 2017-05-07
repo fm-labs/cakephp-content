@@ -17,8 +17,9 @@
         'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
         'model' => 'Content.Posts',
         'data' => $posts,
+        'fieldsWhitelist' => true,
         'fields' => [
-            'pos',
+            'pos' => [],
             'is_published' => [
                 'title' => __d('content', 'Published'),
                 'formatter' => function($val, $row) {
