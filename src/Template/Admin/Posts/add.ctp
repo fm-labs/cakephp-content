@@ -6,7 +6,6 @@
 $this->assign('heading', __d('content','Add {0}', __d('content','Post')));
 ?>
 <div class="posts">
-    <?php var_dump($post->errors()); ?>
     <?= $this->Form->create($post); ?>
     <?php
         echo $this->Form->input('title');

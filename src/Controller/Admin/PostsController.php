@@ -108,10 +108,10 @@ class PostsController extends AppController
      */
     public function add()
     {
-        $content = $this->Posts->newEntity([], ['validate' => false]);
+        $post = $this->Posts->newEntity($this->request->query, ['validate' => false]);
         if ($this->request->is('post')) {
-            $content = $this->Posts->patchEntity($content, $this->request->data);
-            if ($this->Posts->save($content)) {
+            $post = $this->Posts->patchEntity($post, $this->request->data);
+            if ($this->Posts->save($post)) {
                 $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
 
                 /*
@@ -142,16 +142,16 @@ class PostsController extends AppController
                 }
                 */
 
-                return $this->redirect(['action' => 'edit', $content->id]);
+                return $this->redirect(['action' => 'edit', $post->id]);
             } else {
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }
         } else {
-            $this->Posts->patchEntity($content, $this->request->query, ['validate' => false]);
+            $this->Posts->patchEntity($post, $this->request->query, ['validate' => false]);
         }
 
 
-        $this->set(compact('content'));
+        $this->set(compact('post'));
         $this->set('_serialize', ['content']);
     }
 
