@@ -62,8 +62,8 @@ $this->end();
 
 
                 if ($page->type) {
-                    $typeElement = 'Content.Admin/Pages/' . $page->type;
-                    echo ($this->elementExists($typeElement)) ? $this->element($typeElement, compact('page')) : "";
+                    //$typeElement = 'Content.Admin/Pages/' . $page->type;
+                    //echo ($this->elementExists($typeElement)) ? $this->element($typeElement, compact('page')) : "";
                 }
 
                 ?>
@@ -75,6 +75,15 @@ $this->end();
 
         <?= $this->Form->end() ?>
         <!-- # -->
+
+        <?php if ($page->type): ?>
+        <div>
+            <?php
+            $typeElement = 'Content.Admin/Pages/' . $page->type;
+            echo ($this->elementExists($typeElement)) ? $this->element($typeElement, compact('page')) : "";
+            ?>
+        </div>
+        <?php endif; ?>
 
 
         <?php
