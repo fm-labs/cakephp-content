@@ -42,10 +42,18 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
             'data-icon' => 'book',
             'children' => [
 
+                /*
                 'categories' => [
                     'title' => 'Categories',
                     'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
                     'data-icon' => 'folder-o',
+                ],
+                */
+
+                'pages' => [
+                    'title' => 'Pages',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
+                    'data-icon' => 'sitemap',
                 ],
 
                 'posts' => [
@@ -54,11 +62,6 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
                     'data-icon' => 'file-o',
                 ],
 
-                'pages' => [
-                    'title' => 'Pages',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                    'data-icon' => 'sitemap',
-                ],
                 'galleries' => [
                     'title' => 'Galleries',
                     'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
