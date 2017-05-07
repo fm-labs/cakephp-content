@@ -25,6 +25,31 @@ class PostsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => [],
+            'order' => ['Posts.title ASC'],
+            'conditions' => ['Posts.refscope' => 'Content.Pages'],
+            'limit' => 200,
+            'maxLimit' => 200,
+        ];
+
+        $this->set('fields.whitelist', ['is_published', 'title']);
+        $this->set('fields', [
+            'title' => ['formatter' => function($val, $row, $args, $view) {
+                return $view->Html->link($val, ['action' => 'edit', $row->id]);
+            }]
+        ]);
+
+        $this->Backend->executeAction();
+    }
+
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function _index()
+    {
 
         $scope = ['Posts.refscope' => 'Content.Posts', 'Posts.refid IS' => null];
         $order = ['Posts.title' => 'ASC'];

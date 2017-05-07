@@ -1,6 +1,7 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Core\Plugin;
 use Content\Model\Entity\Page;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -95,6 +96,23 @@ class PagesTable extends Table
             'fields' => ['title', 'slug'],
             'translationTable' => 'bc_i18n'
         ]);
+
+        if (Plugin::loaded('Search')) {
+            $this->addBehavior('Search.Search');
+            $this->searchManager()
+                ->add('title', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['title']
+                ])
+                ->value('is_published', [
+                    'filterEmpty' => true
+                ]);
+        }
     }
 
     /**

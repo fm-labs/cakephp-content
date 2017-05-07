@@ -39,7 +39,7 @@
             </ul>
             <hr />
             <?= $this->Html->link(__('Create slider for this gallery'),
-                ['controller' => 'ModuleBuilder', 'action' => 'build', 'path' => 'Content.Flexslider', 'gallery_id' => $gallery->id, 'name' => 'Mod ' . $gallery->title],
+                ['controller' => 'ModuleBuilder', 'action' => 'build', 'path' => 'flexslider', 'gallery_id' => $gallery->id, 'name' => 'Mod ' . $gallery->title],
                 ['class' => 'btn btn-default']); ?>
             <?= $this->Box->render(); ?>
         </div>

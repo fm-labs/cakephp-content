@@ -35,8 +35,9 @@ class FlexsliderModule extends ViewModule
         $schema
             ->addField('gallery_id',
                 ['type' => 'select', 'empty' => true], ['model' => 'Content.Galleries' ])
-            ->addField('template',
-                ['type' => 'select', 'empty' => true], ['source' => $templates, ]);
+            //->addField('template',
+            //    ['type' => 'select', 'empty' => true], ['source' => $templates, ])
+            ;
 
         return $schema;
 

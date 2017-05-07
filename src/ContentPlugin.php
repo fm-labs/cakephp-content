@@ -70,11 +70,6 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
                     'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
                     'data-icon' => 'columns'
                 ],
-                'module_builder' => [
-                    'title' => 'Module Builder',
-                    'url' => ['plugin' => 'Content', 'controller' => 'ModuleBuilder', 'action' => 'index'],
-                    'data-icon' => 'magic'
-                ],
                 'modules' => [
                     'title' => 'Modules',
                     'url' => ['plugin' => 'Content', 'controller' => 'Modules', 'action' => 'index'],

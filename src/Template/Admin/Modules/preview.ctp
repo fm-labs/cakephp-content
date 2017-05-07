@@ -1,10 +1,8 @@
 <?php
-use Cake\Core\Configure;
+//use Cake\Core\Configure;
+//Configure::write('debug', false);
+//debug($this->request->query);
+//debug($moduleClass);
+//debug($moduleParams);
 
-Configure::write('debug', false);
-debug($this->request->query);
-debug($modulePath);
-debug($moduleParams);
-?>
-
-<?php echo $this->cell($modulePath, [], ['params' => $moduleParams]); ?>
+echo $this->module($moduleClass, $moduleParams);

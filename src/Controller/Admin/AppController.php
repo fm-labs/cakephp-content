@@ -2,29 +2,33 @@
 
 namespace Content\Controller\Admin;
 
-use Backend\Controller\Admin\AbstractBackendController;
+use Backend\Controller\BackendActionsTrait;
+use Cake\Controller\Controller;
 use Content\Lib\ContentManager;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Event\Event;
-use Cake\Filesystem\Folder;
+use Media\Lib\Media\MediaManager;
 
-class AppController extends AbstractBackendController
+class AppController extends Controller
 {
+    use BackendActionsTrait;
+
+    public $actions = [
+        'index' => 'Backend.Index',
+        'view' => 'Backend.View'
+    ];
+
     public $paginate = [
         'limit' => 100,
     ];
 
     public function initialize()
     {
-        parent::initialize();
-        //$this->loadComponent('Banana.Site');
+        $this->loadComponent('Backend.Backend');
     }
 
     public function beforeFilter(Event $event)
     {
-        parent::beforeFilter($event);
-
         $locale = $this->request->query('locale');
         $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
         //$this->Auth->allow();
@@ -32,13 +36,23 @@ class AppController extends AbstractBackendController
 
     public function beforeRender(Event $event)
     {
-        parent::beforeRender($event);
         $this->set('locale', $this->locale);
 
         //@TODO Move to a CORSComponent
         $this->response->header("Access-Control-Allow-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization");
         $this->response->header("Access-Control-Allow-Origin", "*");
         $this->response->header("Access-Control-Allow-Credentials", "true");
+    }
+
+    /**
+     * @deprecated
+     */
+    protected function _getGalleryList()
+    {
+        $list = [];
+        $mm = MediaManager::get('shop');
+        $list = $mm->getSelectListRecursive();
+        return $list;
     }
 
     /**

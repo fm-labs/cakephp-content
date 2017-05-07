@@ -19,9 +19,9 @@ use Crud\Controller\Component\CrudComponent;
  */
 class GalleriesController extends AppController
 {
-
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
+
 
     public function beforeFilter(Event $event)
     {
@@ -41,24 +41,35 @@ class GalleriesController extends AppController
     public function index()
     {
         if ($this->request->query('id')) {
-            $this->redirect(['action' => 'manage', $this->request->query('id')]);
+            $this->redirect(['action' => 'edit', $this->request->query('id')]);
         }
-
 
         $this->paginate['limit'] = 100;
         $this->paginate['order'] = ['Galleries.title' => 'ASC'];
         $this->paginate['contain'] = ['Parent'];
 
-        $tree = $this->Galleries
-            ->find('threaded')
-            ->find('list')
-            ->orderAsc('Galleries.title')
-            ->all()
-            ->toArray();
+        $this->set('fields.whitelist', true);
+        $this->set('fields', [
+            //'id' => [],
+            'title' => [
+                'formatter' => function($val, $row, $args, $view) {
+                    return $view->Html->link($val, ['action' => 'edit', $row->id]);
+                }
+            ],
+            //'parent.title' => [],
+            'parent_id' => [
+                'formatter' => function($val, $row, $args, $view) {
+                    if ($row->parent) {
+                        return $view->Html->link($row->parent['title'], ['action' => 'edit', $val]);
+                        //return h($val->title);
+                    }
+                }
+            ],
+            'view_template' => [],
+            'source' => []
+        ]);
 
-        $this->set('galleryTree', $tree);
-        $this->set('galleries', $this->paginate($this->Galleries));
-        $this->set('_serialize', ['galleries']);
+        $this->Backend->executeAction();
     }
 
     public function indexTree() {
@@ -84,7 +95,7 @@ class GalleriesController extends AppController
     public function treeView()
     {
         $id = $this->request->query('id');
-        $this->setAction('manage', $id);
+        $this->setAction('edit', $id);
     }
 
     /**
@@ -139,18 +150,7 @@ class GalleriesController extends AppController
 
     public function edit($id = null)
     {
-        $this->setAction('manage', $id);
-    }
 
-    /**
-     * Manage method
-     *
-     * @param string|null $id Gallery id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function manage($id = null)
-    {
         $gallery = $this->Galleries->get($id, [
             'contain' => ['Parent']
         ]);
@@ -170,14 +170,25 @@ class GalleriesController extends AppController
         $viewTemplates = ContentManager::getAvailableGalleryTemplates();
         $galleryPosts = $this->Galleries->Posts->find('sorted')->where(['refid' => $id]);
 
-        $dependees = ['Content.Flexslider'];
         $modules = TableRegistry::get('Content.Modules')->find()->where([
-            'path IN' => $dependees,
-            'params' => json_encode(['gallery_id' => $id])
+            'path' => 'flexslider',
+            'params' => json_encode(['gallery_id' => (int) $id])
         ])->all()->toArray();
 
         $this->set(compact('gallery', 'parents', 'sources', 'sourceFolders', 'viewTemplates', 'galleryPosts', 'modules'));
         $this->set('_serialize', ['gallery']);
+    }
+
+    /**
+     * Manage method
+     *
+     * @param string|null $id Gallery id.
+     * @return void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function manage($id = null)
+    {
+        $this->setAction('edit', $id);
     }
 
     public function editPost($postId = null)

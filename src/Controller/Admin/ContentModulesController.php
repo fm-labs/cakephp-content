@@ -18,12 +18,7 @@ class ContentModulesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Modules'],
-            'limit' => 100,
-        ];
-        $this->set('contentModules', $this->paginate($this->ContentModules));
-        $this->set('_serialize', ['contentModules']);
+        $this->Backend->executeAction();
     }
 
     /**
@@ -35,11 +30,7 @@ class ContentModulesController extends AppController
      */
     public function view($id = null)
     {
-        $contentModule = $this->ContentModules->get($id, [
-            'contain' => ['Modules']
-        ]);
-        $this->set('contentModule', $contentModule);
-        $this->set('_serialize', ['contentModule']);
+        $this->Backend->executeAction();
     }
 
     /**

@@ -18,8 +18,7 @@ class PageLayoutsController extends AppController
      */
     public function index()
     {
-        $this->set('pageLayouts', $this->paginate($this->PageLayouts));
-        $this->set('_serialize', ['pageLayouts']);
+        $this->Backend->executeAction();
     }
 
     /**
@@ -31,11 +30,7 @@ class PageLayoutsController extends AppController
      */
     public function view($id = null)
     {
-        $pageLayout = $this->PageLayouts->get($id, [
-            'contain' => []
-        ]);
-        $this->set('pageLayout', $pageLayout);
-        $this->set('_serialize', ['pageLayout']);
+        $this->Backend->executeAction();
     }
 
     /**

@@ -113,7 +113,7 @@ class Module extends Entity
         if (!isset($this->_properties['params']) && isset($this->_properties['params_arr'])) {
             $this->_properties['params'] = json_encode($this->_properties['params_arr']);
         }
-        return $this->_properties['params'];
+        return (isset($this->_properties['params'])) ? $this->_properties['params'] : null;
     }
 
 

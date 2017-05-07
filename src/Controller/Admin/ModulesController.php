@@ -2,9 +2,9 @@
 namespace Content\Controller\Admin;
 
 use Banana\Lib\ClassRegistry;
-use Content\Controller\Admin\AppController;
 use Cake\Core\Configure;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
+use Content\Lib\ContentManager;
 
 /**
  * Modules Controller
@@ -30,8 +30,20 @@ class ModulesController extends AppController
      */
     public function index()
     {
-        $this->set('modules', $this->paginate($this->Modules));
-        $this->set('_serialize', ['modules']);
+        $this->paginate = [
+            'limit' => 50,
+            'order' => ['Modules.name' => 'ASC']
+        ];
+
+        $this->set('fields.whitelist', ['name', 'path', 'params']);
+
+        $this->set('rowActions', [
+            [__('Edit'), ['action' => 'edit', ':id']],
+            [__('Configure'), ['action' => 'configure', ':id']],
+            [__('Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
+        ]);
+
+        $this->Backend->executeAction();
     }
 
     /**
@@ -43,22 +55,38 @@ class ModulesController extends AppController
      */
     public function view($id = null)
     {
-        $module = $this->Modules->get($id, [
-            'contain' => []
-        ]);
-
-        //$module = $this->Modules->find()->where(['id' => $id])->all();
-        //$module = $this->Modules->find('expanded')->where(['id' => $id])->first();
-
-        $module = $this->Modules->modularize($module);
-
-        $this->set('module', $module);
-        $this->set('_serialize', ['module']);
+        $this->Backend->executeAction();
     }
 
-    public function previewModule($id = null)
+    public function configure($id = null)
     {
-        $this->redirect(['prefix' => false, 'plugin' => 'Content', 'controller' => 'Modules', 'action' => 'view', $id]);
+        $module = $this->Modules->get($id);
+        $moduleOptions = $userArgs = [];
+
+        //if (!$module->path || !$module->cellClass) {
+        //    $this->Flash->error("Invalid module path set");
+        //}
+
+        if ($this->request->is(['put', 'post'])) {
+            $params = $this->request->data();
+
+            $save = false;
+            if (isset($params['_save']) && $params['_save']) {
+                $save = true;
+                unset($params['_save']);
+            }
+            $module->params_arr = $params;
+
+            if ($save && $this->Modules->save($module)) {
+                $this->Flash->success(__('Module configuration saved'));
+            }
+        }
+
+        $previewUrl = $module->getAdminPreviewUrl();
+        $this->set('previewUrl', Router::url($previewUrl));
+
+        $this->request->data = $module->params_arr;
+        $this->set(compact('module', 'moduleOptions', 'userArgs'));
     }
 
     public function preview()
@@ -73,15 +101,16 @@ class ModulesController extends AppController
         $class = ClassRegistry::getClass('ContentModule', $path);
 
 
-        $this->set('modulePath', $class);
+        $this->set('moduleClass', $class);
         $this->set('moduleParams', $params);
 
         $this->viewBuilder()
             ->layout('frontend')
             ->theme(Configure::read('Site.theme'))
-            ->className('Content.Content')
-        ;
+            ->className('Content.Content');
 
+
+        $this->set('_bare', true);
     }
 
     /**
@@ -101,6 +130,7 @@ class ModulesController extends AppController
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','module')));
             }
         }
+        $this->set('paths', ContentManager::getModulesAvailable());
         $this->set(compact('module'));
         $this->set('_serialize', ['module']);
     }
@@ -126,6 +156,7 @@ class ModulesController extends AppController
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','module')));
             }
         }
+        $this->set('paths', ContentManager::getModulesAvailable());
         $this->set(compact('module'));
         $this->set('_serialize', ['module']);
     }
@@ -147,22 +178,5 @@ class ModulesController extends AppController
             $this->Flash->error(__d('content','The {0} could not be deleted. Please, try again.', __d('content','module')));
         }
         return $this->redirect(['action' => 'index']);
-    }
-
-    public function duplicate($id = null)
-    {
-        $content = $this->Modules->get($id);
-        if (!$content) {
-            throw new NotFoundException();
-        }
-
-        $duplicate = $this->Modules->duplicate($content);
-        if ($this->Modules->save($duplicate)) {
-            $this->Flash->success(__d('content','The {0} has been duplicated.', __d('content','module')));
-            return $this->redirect(['action' => 'edit', $duplicate->id]);
-        } else {
-            $this->Flash->error(__d('content','The {0} could not be duplicated. Please, try again.', __d('content','module')));
-            return $this->redirect($this->referer(['action' => 'index']));
-        }
     }
 }

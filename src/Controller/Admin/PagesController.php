@@ -31,6 +31,10 @@ class PagesController extends ContentController
 
     public $modelClass = "Content.Pages";
 
+    public $actions = [
+        'index' => 'Backend.TreeIndex'
+    ];
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -61,11 +65,14 @@ class PagesController extends ContentController
             'maxLimit' => 200,
         ];
 
-        $pagesTree = $this->Pages->find('treeList',['spacer' => '_ '])->toArray();
-        $this->set('pagesTree', $pagesTree);
+        $this->set('fields.whitelist', ['is_published', 'title']);
+        $this->set('fields', [
+            //'title' => ['formatter' => function($val, $row, $args, $view) {
+            //    return $view->Html->link($val, ['action' => 'edit', $row->id]);
+            //}]
+        ]);
 
-        $this->set('contents', $this->paginate($this->Pages));
-        $this->set('_serialize', ['contents']);
+        $this->Backend->executeAction();
     }
 
     public function quick()

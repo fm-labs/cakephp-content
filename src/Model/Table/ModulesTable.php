@@ -1,6 +1,7 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Core\Plugin;
 use Content\Model\Entity\Module;
 use Cake\Core\App;
 use Cake\Event\Event;
@@ -33,6 +34,30 @@ class ModulesTable extends Table
         $this->table('bc_modules');
         $this->displayField('name');
         $this->primaryKey('id');
+
+
+        if (Plugin::loaded('Search')) {
+            $this->addBehavior('Search.Search');
+            $this->searchManager()
+                ->add('name', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['name']
+                ])
+                ->add('path', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['path']
+                ]);
+        }
     }
 
     /**

@@ -39,6 +39,9 @@
         echo $this->Form->input('view_template');
         echo $this->Form->input('source');
         echo $this->Form->input('source_folder');
+
+
+        echo $this->Form->input('_generate_slider', ['type' => 'checkbox', 'label' => __('Automatically generate slider module')]);
         ?>
     </div>
     <?= $this->Form->button(__d('content','Submit')) ?>

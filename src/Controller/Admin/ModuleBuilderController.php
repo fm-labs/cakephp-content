@@ -51,17 +51,33 @@ class ModuleBuilderController extends AppController
         $this->set('moduleParams', $params);
     }
 
-    public function build2($id = null)
+    public function edit($id = null)
     {
+        $module = $this->Modules->get($id);
+        $moduleOptions = $userArgs = [];
 
-        $moduleClass = $this->request->query('path');
-        $moduleOptions = $this->request->query;
-        $userArgs = $this->request->data;
-
-        $this->set(compact('moduleClass', 'moduleOptions', 'userArgs'));
+        $this->set(compact('module', 'moduleOptions', 'userArgs'));
+        $this->render('build');
     }
 
     public function build($id = null)
+    {
+        $module = $this->Modules->newEntity();
+        $moduleOptions = $userArgs = [];
+
+        //if (!$module->path || !$module->cellClass) {
+        //    $this->Flash->error("Invalid module path set");
+        //}
+
+        if ($this->request->is(['put', 'post'])) {
+            $module = $this->Modules->patchEntity($module, $this->request->data);
+        }
+
+        $this->set(compact('module', 'moduleOptions', 'userArgs'));
+        $this->set('availableModules', ContentManager::getModulesAvailable());
+    }
+
+    public function buildOld($id = null)
     {
         $class = $this->request->query('path');
         $query = $this->request->query;
@@ -134,10 +150,5 @@ class ModuleBuilderController extends AppController
         $this->set('module', $module);
         $this->set('formInputs', $formInputs);
         $this->set('data', $this->request->data());
-    }
-
-    public function edit($id = null)
-    {
-        $this->setAction('build', $id);
     }
 }

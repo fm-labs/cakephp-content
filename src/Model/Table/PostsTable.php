@@ -84,6 +84,22 @@ class PostsTable extends Table
         }
 
 
+        if (Plugin::loaded('Search')) {
+            $this->addBehavior('Search.Search');
+            $this->searchManager()
+                ->add('title', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['title']
+                ])
+                ->value('is_published', [
+                    'filterEmpty' => true
+                ]);
+        }
 
         /*
         if (Plugin::loaded('Attachment')) {

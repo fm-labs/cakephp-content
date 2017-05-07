@@ -1,6 +1,11 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
+use Cake\Log\Log;
+use Cake\ORM\TableRegistry;
+use Content\Lib\ContentManager;
 use Content\Model\Entity\Gallery;
 use Cake\Core\Plugin;
 use Cake\ORM\Query;
@@ -42,6 +47,43 @@ class GalleriesTable extends Table
             'conditions' => ['refscope' => 'Content.Galleries']
         ]);
 
+        if (Plugin::loaded('Search')) {
+            $this->addBehavior('Search.Search');
+            $this->searchManager()
+                ->add('title', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['title']
+                ])
+                ->value('parent_id', [
+                    'filterEmpty' => true
+                ])
+                ->value('is_published', [
+                    'filterEmpty' => true
+                ]);
+        }
+    }
+
+    public function sources($field, array $options = [])
+    {
+        if ($field === 'source') {
+            return $this->getSources();
+        }
+
+        switch ($field) {
+            case "source":
+                return $this->getSources();
+            case "source_folder":
+                return $this->getSourceFolders();
+            case "view_template":
+                return ContentManager::getAvailableGalleryTemplates();
+            case "parent_id":
+                return $this->find('list')->toArray();
+        }
     }
 
     /**
@@ -64,6 +106,22 @@ class GalleriesTable extends Table
             ->allowEmpty('desc_html');
 
         return $validator;
+    }
+
+    public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    {
+        if ($entity->get('_generate_slider')) {
+
+            $Modules = TableRegistry::get('Content.Modules');
+            $module = $Modules->newEntity();
+            $module->name = sprintf("Mod %s", $entity->title);
+            $module->path = "flexslider";
+            $module->params = json_encode(['gallery_id' => $entity->id]);
+
+            if (!$Modules->save($module)) {
+                Log::error('GalleriesTable: Failed to create slider module for gallery with ID ' . $entity->id);
+            }
+        }
     }
 
     /**

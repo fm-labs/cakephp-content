@@ -308,7 +308,7 @@ class ContentManager
 
     public static function getAvailableGalleryTemplates()
     {
-        return self::getAvailableViewTemplates('Galleries');
+        return self::getAvailableViewTemplates('Module/Flexslider');
     }
 
     public static function getAvailablePageTemplates()

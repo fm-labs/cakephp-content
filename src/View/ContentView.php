@@ -54,6 +54,11 @@ class ContentView extends View
 
     public function section($section, array $options = [])
     {
+        // skip section rendering when '_bare' view flag is set
+        if ($this->get('_bare')) {
+            return null;
+        }
+
         $content = $this->fetch($section);
         if ($content) {
             return $content;
