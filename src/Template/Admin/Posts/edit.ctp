@@ -54,7 +54,7 @@ endif;
     <?php
     //echo $this->Form->input('teaser_link_caption');
     //echo $this->Form->input('teaser_link_href');
-    echo $this->Form->input('teaser_image_file', ['type' => 'media_picker']);
+    //echo $this->Form->input('teaser_image_file', ['type' => 'media_picker']);
     echo $this->Form->input('teaser_template', ['empty' => '- Default -']);
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
@@ -68,6 +68,16 @@ endif;
     ]);
     ?>
 
+    <?php
+    echo $this->Form->input('template', ['empty' => '- Default -']);
+    ?>
+    <?= $this->Form->fieldsetEnd(); ?>
+
+    <!-- Media / Images -->
+    <?= $this->Form->fieldsetStart(['legend' => 'Images', 'collapsed' => false]);  ?>
+
+    <?= $this->Form->input('teaser_image_file', ['type' => 'media_picker']); ?>
+
     <?= $this->Form->input('image_file', ['type' => 'media_picker']); ?>
 
     <?= $this->cell('Media.ImageSelect', [[
@@ -79,10 +89,6 @@ endif;
         'image' => $post->image_files,
         'imageOptions' => ['width' => 200]
     ]]); ?>
-
-    <?php
-    echo $this->Form->input('template', ['empty' => '- Default -']);
-    ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
 
