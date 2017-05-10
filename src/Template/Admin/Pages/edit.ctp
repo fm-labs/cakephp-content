@@ -68,6 +68,40 @@ $this->end();
 
                 ?>
 
+                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => false]); ?>
+                <?php
+                echo $this->Form->input('page_layout_id',
+                    ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
+                ?>
+                <?php
+                if ($page->page_layout_id) {
+                    echo $this->Html->link('Edit Layout', '#');
+                }
+                ?>
+                <?php
+                echo $this->Form->input('page_template',
+                    //['type' => 'text']
+                    ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
+                );
+                ?>
+                <?= $this->Form->fieldsetEnd(); ?>
+
+                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
+                <?php
+                echo $this->Form->input('is_published');
+                ?>
+                <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
+                <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
+                <?= $this->Form->fieldsetEnd(); ?>
+
+                <?php
+                echo $this->Form->input('parent_id',
+                    ['options' => $pagesTree, 'empty' => '- Root Node -']);
+
+                if ($page->parent_id) {
+                    echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
+                }
+                ?>
 
             <div class="actions">
                 <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
@@ -77,6 +111,9 @@ $this->end();
         <!-- # -->
 
         <?php if ($page->type): ?>
+            <?php
+            $this->Tabs->add(Inflector::humanize($page->type));
+            ?>
         <div>
             <?php
             $typeElement = 'Content.Admin/Pages/' . $page->type;
@@ -96,23 +133,6 @@ $this->end();
                 <?= $this->Form->fieldsetEnd(); ?>
 
 
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => false]); ?>
-                <?php
-                echo $this->Form->input('page_layout_id',
-                    ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
-                ?>
-                <?php
-                if ($page->page_layout_id) {
-                    echo $this->Html->link('Edit Layout', '#');
-                }
-                ?>
-                <?php
-                echo $this->Form->input('page_template',
-                    //['type' => 'text']
-                    ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
-                );
-                ?>
-                <?= $this->Form->fieldsetEnd(); ?>
 
 
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
@@ -120,23 +140,6 @@ $this->end();
                 <?= $this->Form->input('cssclass'); ?>
                 <?= $this->Form->fieldsetEnd(); ?>
 
-
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
-                <?php
-                echo $this->Form->input('is_published');
-                ?>
-                <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
-                <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
-                <?= $this->Form->fieldsetEnd(); ?>
-
-                <?php
-                echo $this->Form->input('parent_id',
-                    ['options' => $pagesTree, 'empty' => '- Root Node -']);
-
-                if ($page->parent_id) {
-                    echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
-                }
-                ?>
 
             <div class="actions">
                 <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
