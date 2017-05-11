@@ -72,6 +72,18 @@ class PagesController extends ContentController
             //}]
         ]);
 
+        $this->set('actions', [
+            [
+                __('Add {0}', __('page')),
+                ['action' => 'add']
+            ],
+            [
+                __d('shop', 'Sort'),
+                ['plugin' => 'Backend', 'controller' => 'Tree', 'action' => 'index', 'model' => 'Shop.ShopCategories'],
+                ['class' => 'link-modal-frame', 'data-modal-reload' => true, 'data-icon' => 'sitemap']
+            ]
+        ]);
+
         $this->Backend->executeAction();
     }
 
