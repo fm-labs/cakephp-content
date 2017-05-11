@@ -44,7 +44,15 @@ $this->end();
 
     <?php $this->Tabs->start(); ?>
 
-    <?php $this->Tabs->add(__d('content', 'Page')); ?>
+
+    <?php
+    $typeElement = 'Content.Admin/Pages/' . $page->type . '/manage';
+    if ($page->type && $this->elementExists($typeElement)): ?>
+        <?php $this->Tabs->add(__d('content', 'Page')); ?>
+        <div><?php echo $this->element($typeElement, compact('page')); ?></div>
+    <?php endif; ?>
+
+    <?php $this->Tabs->add(__d('content', 'Edit')); ?>
         <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
 
                 <?php
@@ -56,17 +64,26 @@ $this->end();
                     //'data-url' => ['action' => 'ajaxPageTypeForm']
                 ]);
                 ?>
+
+                <?php
+                echo $this->Form->input('parent_id',
+                    ['options' => $pagesTree, 'empty' => '- Root Node -']);
+
+                if ($page->parent_id) {
+                    echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
+                }
+                ?>
                 <?php
                 echo $this->Form->input('title');
                 echo $this->Form->input('slug');
-
-
-                if ($page->type) {
-                    //$typeElement = 'Content.Admin/Pages/' . $page->type;
-                    //echo ($this->elementExists($typeElement)) ? $this->element($typeElement, compact('page')) : "";
-                }
-
                 ?>
+
+                <?php
+                $typeElement = 'Content.Admin/Pages/' . $page->type . '/form';
+                ?>
+                <?php if ($page->type && $this->elementExists($typeElement)): ?>
+                    <div><?php echo $this->element($typeElement, compact('page')); ?></div>
+                <?php endif; ?>
 
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => false]); ?>
                 <?php
@@ -86,6 +103,8 @@ $this->end();
                 ?>
                 <?= $this->Form->fieldsetEnd(); ?>
 
+
+
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
                 <?php
                 echo $this->Form->input('is_published');
@@ -94,56 +113,37 @@ $this->end();
                 <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
                 <?= $this->Form->fieldsetEnd(); ?>
 
-                <?php
-                echo $this->Form->input('parent_id',
-                    ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
-                if ($page->parent_id) {
-                    echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
-                }
-                ?>
 
-            <div class="actions">
+            <div class="actions text-right">
                 <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
             </div>
 
         <?= $this->Form->end() ?>
         <!-- # -->
 
-        <?php if ($page->type): ?>
-            <?php
-            $this->Tabs->add(Inflector::humanize($page->type));
-            ?>
-        <div>
-            <?php
-            $typeElement = 'Content.Admin/Pages/' . $page->type;
-            echo ($this->elementExists($typeElement)) ? $this->element($typeElement, compact('page')) : "";
-            ?>
-        </div>
-        <?php endif; ?>
 
 
         <?php
             $this->Tabs->add(__d('content', 'Advanced'));
         ?>
         <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
-                <?= $this->Form->input('hide_in_nav'); ?>
-                <?= $this->Form->input('hide_in_sitemap'); ?>
-                <?= $this->Form->fieldsetEnd(); ?>
+        <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
+        <?= $this->Form->input('hide_in_nav'); ?>
+        <?= $this->Form->input('hide_in_sitemap'); ?>
+        <?= $this->Form->fieldsetEnd(); ?>
+
+
+        <?= $this->Form->fieldsetStart(['legend' => __d('content', 'DOM'), 'collapsed' => false]); ?>
+        <?= $this->Form->input('cssid'); ?>
+        <?= $this->Form->input('cssclass'); ?>
+        <?= $this->Form->fieldsetEnd(); ?>
 
 
 
-
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
-                <?= $this->Form->input('cssid'); ?>
-                <?= $this->Form->input('cssclass'); ?>
-                <?= $this->Form->fieldsetEnd(); ?>
-
-
-            <div class="actions">
-                <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
-            </div>
+        <div class="actions">
+            <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
+        </div>
 
         <?= $this->Form->end() ?>
         <!-- EOF PAGE EDIT FORM -->
