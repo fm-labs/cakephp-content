@@ -1,6 +1,7 @@
 <?php
 namespace Content\View\Module;
 
+use Cake\Cache\Cache;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Utility\Inflector;
@@ -37,7 +38,6 @@ class PagesMenuModule extends ViewModule
         if (empty($this->menu)) {
             
             $this->loadModel('Content.Pages');
-
             $startNodeId = $this->_getStartNodeId();
             $this->menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
         }

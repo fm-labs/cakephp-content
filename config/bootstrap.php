@@ -1,5 +1,6 @@
 <?php
 use Banana\Plugin\PluginLoader;
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Banana\Lib\ClassRegistry;
 
@@ -50,4 +51,12 @@ ClassRegistry::register('ContentModule', [
     'pages_menu' => 'Content.PagesMenu',
     'pages_submenu' => 'Content.PagesMenu',
     'nodes_menu' => 'Content.NodesMenu'
+]);
+
+
+Cache::config('content_menu', [
+    'className' => 'File',
+    'duration' => '+1 day',
+    'path' => CACHE,
+    'prefix' => 'content_menu_'
 ]);

@@ -1,6 +1,7 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Cache\Cache;
 use Cake\Core\Plugin;
 use Content\Model\Entity\Page;
 use Cake\ORM\Query;
@@ -206,17 +207,24 @@ class PagesTable extends Table
             $startNodeId = $root->id;
         }
 
-        $menu = [];
-        if ($startNodeId) {
-            $children = $this
-                ->find('children', ['for' => $startNodeId])
-                ->find('threaded')
-                ->orderAsc('lft')
-                ->contain([])
-                ->toArray();
 
-            $menu = $this->_buildMenu($children, 0, $maxDepth, $includeHidden);
+        $cacheKey = sprintf("pages-%s-%s", $startNodeId, md5(serialize($options)));
+        $menu = Cache::read($cacheKey, 'content_menu');
+        if (empty($menu)) {
+            $menu = [];
+            if ($startNodeId) {
+                $children = $this
+                    ->find('children', ['for' => $startNodeId])
+                    ->find('threaded')
+                    ->orderAsc('lft')
+                    ->contain([])
+                    ->toArray();
+
+                $menu = $this->_buildMenu($children, 0, $maxDepth, $includeHidden);
+            }
+            Cache::write($cacheKey, $menu, 'content_menu');
         }
+
         return $menu;
     }
 
