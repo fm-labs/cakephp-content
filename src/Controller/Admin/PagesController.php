@@ -65,7 +65,7 @@ class PagesController extends ContentController
             'maxLimit' => 200,
         ];
 
-        $this->set('fields.whitelist', ['is_published', 'title']);
+        $this->set('fields.whitelist', ['title', 'is_published']);
         $this->set('fields', [
             //'title' => ['formatter' => function($val, $row, $args, $view) {
             //    return $view->Html->link($val, ['action' => 'edit', $row->id]);
