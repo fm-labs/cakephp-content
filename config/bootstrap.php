@@ -1,18 +1,17 @@
 <?php
+use Banana\Plugin\PluginLoader;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Banana\Lib\ClassRegistry;
 
 
 //Configure::load('Content.content');
-//try { Configure::load('content'); } catch (\Exception $ex) {}
-//try { Configure::load('local/content'); } catch (\Exception $ex) {}
 
 /**
  * Load dependencies
  */
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-Plugin::load('Media', ['bootstrap' => true, 'routes' => true]);
+PluginLoader::load('Media', ['enabled' => true, 'configs' => true, 'bootstrap' => true, 'routes' => true]);
+
 
 /**
  * Register classes
@@ -52,5 +51,3 @@ ClassRegistry::register('ContentModule', [
     'pages_submenu' => 'Content.PagesMenu',
     'nodes_menu' => 'Content.NodesMenu'
 ]);
-
-\Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());

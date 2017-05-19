@@ -101,6 +101,6 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
      */
     public function __invoke(array $config = [])
     {
-        // TODO: Implement __invoke() method.
+        \Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());
     }
 }
