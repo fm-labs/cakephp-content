@@ -228,7 +228,6 @@ class PagesTable extends Table
         return $menu;
     }
 
-
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
         $menu = [];
@@ -292,6 +291,61 @@ class PagesTable extends Table
 
         return $menu;
     }
+
+
+
+    public function getMenuTree($startNodeId = null, array $options = [])
+    {
+        $tree = [];
+        $options += ['maxDepth' => null, 'includeHidden' => null];
+        $maxDepth = ($options['maxDepth']) ?: 1;
+
+        if ($startNodeId === null) {
+            $root = $this->findRoot();
+            $startNodeId = $root->id;
+        }
+
+
+        $cacheKey = sprintf("pages-tree-%s-%s", $startNodeId, md5(serialize($options)));
+        //$tree = Cache::read($cacheKey, 'content_menu');
+        $tree = [];
+        if (empty($tree)) {
+            $tree = [];
+            if ($startNodeId) {
+                $children = $this
+                    ->find('children', ['for' => $startNodeId])
+                    ->find('threaded')
+                    ->orderAsc('lft')
+                    ->contain([])
+                    ->toArray();
+
+                $tree = [];
+                $this->_buildMenuTree($tree, $children, 0, $maxDepth);
+            }
+            Cache::write($cacheKey, $tree, 'content_menu');
+        }
+
+        return $tree;
+    }
+
+    protected function _buildMenuTree(&$tree, $children, $level = 0, $maxDepth = -1)
+    {
+        foreach ($children as $child) {
+
+            if ($child->isPageHiddenInNav() || !$child->isPagePublished()) {
+                continue;
+            }
+
+            $key = $child->id . ':' . Router::url($child->getPageUrl());
+            $tree[$key] = str_repeat('_', $level) . $child->getPageTitle();
+
+            if (($maxDepth < 0 || $level < $maxDepth) && $child->children) {
+                $this->_buildMenuTree($tree, $child->children, $level + 1, $maxDepth);
+            }
+
+        }
+    }
+
 
     public function getPageLayoutFor($page)
     {

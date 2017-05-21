@@ -55,6 +55,20 @@ class PagesMenuModule extends ViewModule
         $this->set('activePageId', $this->request->param('page_id'));
     }
 
+    public function selectbox($params = [])
+    {
+
+        $this->loadModel('Content.Pages');
+        $startNodeId = $this->_getStartNodeId();
+        $list = $this->Pages->getMenuTree($startNodeId, ['maxDepth' => $this->depth]);
+
+        $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/select_list';
+
+        $this->set('opts', $list);
+        $this->set('attrs', $params);
+    }
+
+
     protected function _getStartNodeId()
     {
         if ($this->start_node > 0) {
