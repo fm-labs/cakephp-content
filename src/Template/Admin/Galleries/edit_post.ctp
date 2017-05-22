@@ -59,7 +59,7 @@ $this->assign('subheading', 'Gallery post');
 
         <!-- Media -->
         <?= $this->Form->fieldsetStart(['legend' => 'Media', 'collapsed' => false]); ?>
-        <?= $this->Form->input('image_file', ['type' => 'media_picker']); ?>
+        <?= $this->Form->input('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
 

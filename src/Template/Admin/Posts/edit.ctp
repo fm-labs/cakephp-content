@@ -76,11 +76,11 @@ endif;
     <!-- Media / Images -->
     <?= $this->Form->fieldsetStart(['legend' => 'Images', 'collapsed' => false]);  ?>
 
-    <?= $this->Form->input('teaser_image_file', ['type' => 'media_picker']); ?>
+    <?= $this->Form->input('teaser_image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->input('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
 
-    <?= $this->Form->input('image_file', ['type' => 'media_picker']); ?>
 
-    <?= $this->cell('Media.ImageSelect', [[
+    <?php /* $this->cell('Media.ImageSelect', [[
         'label' => 'Additional Images',
         'model' => 'Content.Posts',
         'id' => $post->id,
@@ -88,7 +88,7 @@ endif;
         'multiple' => true,
         'image' => $post->image_files,
         'imageOptions' => ['width' => 200]
-    ]]); ?>
+    ]]); */ ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
 
