@@ -82,20 +82,7 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
                     'title' => 'Content Modules',
                     'url' => ['plugin' => 'Content', 'controller' => 'ContentModules', 'action' => 'index'],
                     'data-icon' => 'object-group'
-                ],
-                'module_builder' => [
-                    'title' => 'Module Builder',
-                    'url' => ['plugin' => 'Content', 'controller' => 'ModuleBuilder', 'action' => 'index'],
-                    'data-icon' => 'wizard'
-                ],
-
-                /*
-                'pages_legacy' => [
-                    'title' => 'Pages (Legacy)',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                    'data-icon' => 'sitemap'
-                ],
-                */
+                ]
             ],
         ]);
     }
