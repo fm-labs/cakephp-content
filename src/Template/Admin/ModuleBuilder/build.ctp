@@ -9,7 +9,8 @@ $this->Form->addContextProvider('viewmodule', function($request, $data) {
 if (!$module->cellClass) {
     echo '<div class="alert alert-warning">No module class set</div>';
 }
-$moduleCell = $this->module($module->cellClass, $userArgs, $moduleOptions);
+debug($module->toArray());
+//$moduleCell = $this->module($module->cellClass, $userArgs, $moduleOptions);
 ?>
 <div class="index">
     <div class="row">

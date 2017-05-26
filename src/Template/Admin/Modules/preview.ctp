@@ -5,4 +5,4 @@
 //debug($moduleClass);
 //debug($moduleParams);
 
-echo $this->module($moduleClass, $moduleParams);
+echo $this->module($moduleClass, [], $moduleParams);

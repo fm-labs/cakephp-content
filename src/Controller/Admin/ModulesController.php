@@ -75,7 +75,7 @@ class ModulesController extends AppController
                 $save = true;
                 unset($params['_save']);
             }
-            $module->params_arr = $params;
+            $module->setParams($params);
 
             if ($save && $this->Modules->save($module)) {
                 $this->Flash->success(__('Module configuration saved'));
@@ -85,7 +85,7 @@ class ModulesController extends AppController
         $previewUrl = $module->getAdminPreviewUrl();
         $this->set('previewUrl', Router::url($previewUrl));
 
-        $this->request->data = $module->params_arr;
+        $this->request->data = $moduleOptions = $module->params_arr;
         $this->set(compact('module', 'moduleOptions', 'userArgs'));
     }
 
