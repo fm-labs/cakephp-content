@@ -74,11 +74,11 @@ class PagesController extends ContentController
 
         $this->set('actions', [
             [
-                __('Add {0}', __('page')),
+                __d('content', 'Add {0}', __d('content', 'page')),
                 ['action' => 'add']
             ],
             [
-                __d('shop', 'Sort'),
+                __d('content', 'Sort'),
                 ['plugin' => 'Backend', 'controller' => 'Tree', 'action' => 'index', 'model' => 'Shop.ShopCategories'],
                 ['class' => 'link-modal-frame', 'data-modal-reload' => true, 'data-icon' => 'sitemap']
             ]

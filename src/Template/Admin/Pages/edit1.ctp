@@ -2,7 +2,7 @@
 //$this->loadHelper('Bootstrap.Tabs');
 //$this->extend('/Admin/Content/edit');
 
-$this->Breadcrumbs->add(__('Pages'), ['action' => 'index']);
+$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
 $this->Breadcrumbs->add($page->title);
 
 // EXTEND: TOOLBAR
@@ -118,7 +118,7 @@ $this->assign('title', $page->title);
                 ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
             if ($page->parent_id) {
-                echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
+                echo $this->Html->link(__d('content', 'Edit parent'), ['action' => 'edit', $page->parent_id]);
             }
             ?>
             <?= $this->Form->fieldsetEnd(); ?>

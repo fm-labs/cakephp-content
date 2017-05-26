@@ -1,6 +1,6 @@
 <?php $this->loadHelper('Bootstrap.Tabs'); ?>
 <?php $this->loadHelper('AdminLte.Box'); ?>
-<?php $this->Breadcrumbs->add(__('Galleries'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($gallery->title); ?>
 <?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
 <div class="galleries index">
@@ -14,7 +14,7 @@
             <?= $this->Form->create($gallery); ?>
             <?php
             echo $this->Form->input('title');
-            echo $this->Form->input('parent_id', ['empty' => __('No parent')]);
+            echo $this->Form->input('parent_id', ['empty' => __d('content', 'No parent')]);
             echo $this->Form->input('inherit_desc', ['label' => 'Inherit description from parent']);
             echo $this->Form->input('desc_html', [
                 'type' => 'htmleditor',
@@ -31,7 +31,7 @@
             <?= $this->Form->end() ?>
         </div>
         <div class="col-md-3">
-            <?= $this->Box->create(__('Linked modules')); ?>
+            <?= $this->Box->create(__d('content', 'Linked modules')); ?>
             <ul class="nav nav-default nav-pills nav-stacked">
                 This gallery is used by <strong><?= h((int)count($modules)); ?></strong> modules:
             <?php foreach ($modules as $module): ?>
@@ -39,7 +39,7 @@
             <?php endforeach; ?>
             </ul>
             <hr />
-            <?= $this->Html->link(__('Create slider for this gallery'),
+            <?= $this->Html->link(__d('content', 'Create slider for this gallery'),
                 ['controller' => 'ModuleBuilder', 'action' => 'build', 'path' => 'flexslider', 'gallery_id' => $gallery->id, 'name' => 'Mod ' . $gallery->title],
                 ['class' => 'btn btn-default']); ?>
             <?= $this->Box->render(); ?>
@@ -88,8 +88,8 @@
                 //'created' => [],
             ],
             'rowActions' => [
-                [__d('shop','Edit'), ['action' => 'edit_post', ':id'], ['class' => 'edit']],
-                [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+                [__d('content','Edit'), ['action' => 'edit_post', ':id'], ['class' => 'edit']],
+                [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
             ]
         ]]);
         ?>
@@ -108,7 +108,7 @@
                     'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                 ],
                 ['class' => 'link-frame btn'],
-                __('Are you sure?')); ?>
+                __d('content', 'Are you sure?')); ?>
             <?= $this->Html->link(
                 __d('content', 'Reorder (desc)'),
                 [
@@ -117,7 +117,7 @@
                     'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                 ],
                 ['class' => 'link-frame btn'],
-                __('Are you sure?')); ?>
+                __d('content', 'Are you sure?')); ?>
         </div>
 
 

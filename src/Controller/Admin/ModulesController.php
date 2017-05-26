@@ -38,9 +38,9 @@ class ModulesController extends AppController
         $this->set('fields.whitelist', ['name', 'path', 'params']);
 
         $this->set('rowActions', [
-            [__('Edit'), ['action' => 'edit', ':id']],
-            [__('Configure'), ['action' => 'configure', ':id']],
-            [__('Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
+            [__d('content', 'Edit'), ['action' => 'edit', ':id']],
+            [__d('content', 'Configure'), ['action' => 'configure', ':id']],
+            [__d('content', 'Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
         ]);
 
         $this->Backend->executeAction();
@@ -78,7 +78,7 @@ class ModulesController extends AppController
             $module->setParams($params);
 
             if ($save && $this->Modules->save($module)) {
-                $this->Flash->success(__('Module configuration saved'));
+                $this->Flash->success(__d('content', 'Module configuration saved'));
             }
         }
 

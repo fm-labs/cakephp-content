@@ -57,7 +57,7 @@ $this->assign('title', $post->title);
     ?>
 
     <?php
-    $this->Tabs->add(__('Debug'), ['debugOnly' => true]);
+    $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]);
     debug($post);
     ?>
 

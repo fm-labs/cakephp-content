@@ -65,13 +65,13 @@ $this->Toolbar->addPostLink([
                     'is_published'
                 ],
                 'rowActions' => [
-                    [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-                    [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+                    [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
+                    [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
                 ]
             ]]);
             ?>
 
-            <?= $this->Html->link(__('Add post'), ['action' => 'add', 'parent_id' => $post->id], ['class' => 'btn btn-primary']); ?>
+            <?= $this->Html->link(__d('content', 'Add post'), ['action' => 'add', 'parent_id' => $post->id], ['class' => 'btn btn-primary']); ?>
         </div>
         <?= $this->Form->fieldsetEnd(); ?>
 

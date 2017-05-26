@@ -20,7 +20,7 @@ try {
 <?php $this->Breadcrumbs->add(__d('content','Configure')); ?>
 <div class="index">
     <h3><?= h($module->name); ?></h3>
-    <?= $this->Html->link(__('Edit {0}', __('module')), ['action' => 'edit', $module->id]); ?>
+    <?= $this->Html->link(__d('content', 'Edit {0}', __d('content', 'module')), ['action' => 'edit', $module->id]); ?>
 
     <div class="row">
         <div class="col-md-6">

@@ -1,34 +1,34 @@
-<?php $this->Breadcrumbs->add(__('Categories'), ['action' => 'index']); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($category->name); ?>
 <?php $this->loadHelper('Backend.Toolbar'); ?>
 <?php $this->Toolbar->addLink(
-    __('Edit {0}', __('Category')),
+    __d('content', 'Edit {0}', __d('content', 'Category')),
     ['action' => 'edit', $category->id],
     ['data-icon' => 'edit']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __('Delete {0}', __('Category')),
+    __d('content', 'Delete {0}', __d('content', 'Category')),
     ['action' => 'delete', $category->id],
-    ['data-icon' => 'trash', 'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
+    ['data-icon' => 'trash', 'confirm' => __d('content', 'Are you sure you want to delete # {0}?', $category->id)]) ?>
 
 <?php $this->Toolbar->addLink(
-    __('List {0}', __('Categories')),
+    __d('content', 'List {0}', __d('content', 'Categories')),
     ['action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __('New {0}', __('Category')),
+    __d('content', 'New {0}', __d('content', 'Category')),
     ['action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
-<?php $this->Toolbar->startGroup(__('More')); ?>
+<?php $this->Toolbar->startGroup(__d('content', 'More')); ?>
 <?php $this->Toolbar->addLink(
-    __('List {0}', __('Posts')),
+    __d('content', 'List {0}', __d('content', 'Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __('New {0}', __('Post')),
+    __d('content', 'New {0}', __d('content', 'Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
@@ -50,66 +50,66 @@
 
 
         <tr>
-            <td><?= __('Name') ?></td>
+            <td><?= __d('content', 'Name') ?></td>
             <td><?= h($category->name) ?></td>
         </tr>
         <tr>
-            <td><?= __('Slug') ?></td>
+            <td><?= __d('content', 'Slug') ?></td>
             <td><?= h($category->slug) ?></td>
         </tr>
 
 
         <tr>
-            <td><?= __('Id') ?></td>
+            <td><?= __d('content', 'Id') ?></td>
             <td><?= $this->Number->format($category->id) ?></td>
         </tr>
 
         <tr class="boolean">
-            <td><?= __('Is Published') ?></td>
-            <td><?= $category->is_published ? __('Yes') : __('No'); ?></td>
+            <td><?= __d('content', 'Is Published') ?></td>
+            <td><?= $category->is_published ? __d('content', 'Yes') : __d('content', 'No'); ?></td>
         </tr>
     </table>
 </div>
 -->
 <div class="related" style="overflow-x: scroll;">
     <div class="ui basic segment">
-    <h4 class="ui header"><?= __('Related {0}', __('Posts')) ?></h4>
+    <h4 class="ui header"><?= __d('content', 'Related {0}', __d('content', 'Posts')) ?></h4>
     <?php if (!empty($category->posts)): ?>
     <table class="ui table">
         <tr>
-            <th><?= __('Id') ?></th>
-            <th><?= __('Site Id') ?></th>
-            <th><?= __('Refscope') ?></th>
-            <th><?= __('Refid') ?></th>
-            <th><?= __('Parent Id') ?></th>
-            <th><?= __('Type') ?></th>
-            <th><?= __('Type Params') ?></th>
-            <th><?= __('Title') ?></th>
-            <th><?= __('Slug') ?></th>
-            <th><?= __('Subheading') ?></th>
-            <th><?= __('Use Teaser') ?></th>
-            <th><?= __('Teaser Html') ?></th>
-            <th><?= __('Teaser Link Href') ?></th>
-            <th><?= __('Teaser Link Caption') ?></th>
-            <th><?= __('Teaser Image File') ?></th>
-            <th><?= __('Teaser Template') ?></th>
-            <th><?= __('Body Html') ?></th>
-            <th><?= __('Image Link Href') ?></th>
-            <th><?= __('Image Link Target') ?></th>
-            <th><?= __('Image Desc') ?></th>
-            <th><?= __('Template') ?></th>
-            <th><?= __('Cssclass') ?></th>
-            <th><?= __('Cssid') ?></th>
-            <th><?= __('Is Published') ?></th>
-            <th><?= __('Publish Start Datetime') ?></th>
-            <th><?= __('Publish End Datetime') ?></th>
-            <th><?= __('Pos') ?></th>
-            <th><?= __('Section') ?></th>
-            <th><?= __('Is Home') ?></th>
-            <th><?= __('Is Archived') ?></th>
-            <th><?= __('Modified') ?></th>
-            <th><?= __('Created') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
+            <th><?= __d('content', 'Id') ?></th>
+            <th><?= __d('content', 'Site Id') ?></th>
+            <th><?= __d('content', 'Refscope') ?></th>
+            <th><?= __d('content', 'Refid') ?></th>
+            <th><?= __d('content', 'Parent Id') ?></th>
+            <th><?= __d('content', 'Type') ?></th>
+            <th><?= __d('content', 'Type Params') ?></th>
+            <th><?= __d('content', 'Title') ?></th>
+            <th><?= __d('content', 'Slug') ?></th>
+            <th><?= __d('content', 'Subheading') ?></th>
+            <th><?= __d('content', 'Use Teaser') ?></th>
+            <th><?= __d('content', 'Teaser Html') ?></th>
+            <th><?= __d('content', 'Teaser Link Href') ?></th>
+            <th><?= __d('content', 'Teaser Link Caption') ?></th>
+            <th><?= __d('content', 'Teaser Image File') ?></th>
+            <th><?= __d('content', 'Teaser Template') ?></th>
+            <th><?= __d('content', 'Body Html') ?></th>
+            <th><?= __d('content', 'Image Link Href') ?></th>
+            <th><?= __d('content', 'Image Link Target') ?></th>
+            <th><?= __d('content', 'Image Desc') ?></th>
+            <th><?= __d('content', 'Template') ?></th>
+            <th><?= __d('content', 'Cssclass') ?></th>
+            <th><?= __d('content', 'Cssid') ?></th>
+            <th><?= __d('content', 'Is Published') ?></th>
+            <th><?= __d('content', 'Publish Start Datetime') ?></th>
+            <th><?= __d('content', 'Publish End Datetime') ?></th>
+            <th><?= __d('content', 'Pos') ?></th>
+            <th><?= __d('content', 'Section') ?></th>
+            <th><?= __d('content', 'Is Home') ?></th>
+            <th><?= __d('content', 'Is Archived') ?></th>
+            <th><?= __d('content', 'Modified') ?></th>
+            <th><?= __d('content', 'Created') ?></th>
+            <th class="actions"><?= __d('content', 'Actions') ?></th>
         </tr>
         <?php foreach ($category->posts as $posts): ?>
         <tr>
@@ -147,11 +147,11 @@
             <td><?= h($posts->created) ?></td>
 
             <td class="actions">
-                <?= $this->Html->link(__('View'), ['controller' => 'Posts', 'action' => 'view', $posts->id]) ?>
+                <?= $this->Html->link(__d('content', 'View'), ['controller' => 'Posts', 'action' => 'view', $posts->id]) ?>
 
-                <?= $this->Html->link(__('Edit'), ['controller' => 'Posts', 'action' => 'edit', $posts->id]) ?>
+                <?= $this->Html->link(__d('content', 'Edit'), ['controller' => 'Posts', 'action' => 'edit', $posts->id]) ?>
 
-                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Posts', 'action' => 'delete', $posts->id], ['confirm' => __('Are you sure you want to delete # {0}?', $posts->id)]) ?>
+                <?= $this->Form->postLink(__d('content', 'Delete'), ['controller' => 'Posts', 'action' => 'delete', $posts->id], ['confirm' => __d('content', 'Are you sure you want to delete # {0}?', $posts->id)]) ?>
 
             </td>
         </tr>

@@ -29,7 +29,7 @@ class GalleriesController extends AppController
 
         if (!Plugin::loaded('Media')) {
             //$this->request->param('action', 'index');
-            $this->Flash->warning(__('{0} plugin not loaded', 'Media'));
+            $this->Flash->warning(__d('content', '{0} plugin not loaded', 'Media'));
         }
     }
 

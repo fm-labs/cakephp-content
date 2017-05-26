@@ -1,6 +1,6 @@
 <?php
 // Breadcrumbs
-$this->Breadcrumbs->add(__('Posts'), ['action' => 'index', 'type' => $post->type]);
+$this->Breadcrumbs->add(__d('content', 'Posts'), ['action' => 'index', 'type' => $post->type]);
 $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Post')));
 // Heading
 $this->assign('title', $post->title);

@@ -29,9 +29,9 @@
                 echo $this->Form->input('params');
         ?>
             <p>
-                <?= $this->Html->link(__('Open configuration editor'), ['action' => 'configure', $module->id]); ?>
+                <?= $this->Html->link(__d('content', 'Open configuration editor'), ['action' => 'configure', $module->id]); ?>
                 <br />
-                <strong><?= __('Attention'); ?></strong> It is not recommendet to edit params directly in the editor. Just be careful to provide valid JSON.
+                <strong><?= __d('content', 'Attention'); ?></strong> It is not recommendet to edit params directly in the editor. Just be careful to provide valid JSON.
             </p>
         </div>
     </div>

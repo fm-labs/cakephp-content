@@ -50,10 +50,10 @@ class CategoriesController extends AppController
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The {0} has been saved.', __('category')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('category')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'category')));
             }
         }
         $this->set(compact('category'));
@@ -75,10 +75,10 @@ class CategoriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The {0} has been saved.', __('category')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', __('category')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'category')));
             }
         }
         $this->set(compact('category'));
@@ -97,9 +97,9 @@ class CategoriesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
         if ($this->Categories->delete($category)) {
-            $this->Flash->success(__('The {0} has been deleted.', __('category')));
+            $this->Flash->success(__d('content', 'The {0} has been deleted.', __d('content', 'category')));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', __('category')));
+            $this->Flash->error(__d('content', 'The {0} could not be deleted. Please, try again.', __d('content', 'category')));
         }
         return $this->redirect(['action' => 'index']);
     }

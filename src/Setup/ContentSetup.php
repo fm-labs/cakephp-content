@@ -33,7 +33,7 @@ class ContentSetup
 
     public function activate()
     {
-        if (!$this->AttributeSets->register('Content.Posts', 'default', ['title' => __('Default'), 'is_system' => true])) {
+        if (!$this->AttributeSets->register('Content.Posts', 'default', ['title' => __d('content', 'Default'), 'is_system' => true])) {
             throw new \Exception('Failed to register attribute set default');
         }
 

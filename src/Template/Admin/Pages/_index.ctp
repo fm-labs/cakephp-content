@@ -38,13 +38,13 @@ $this->Toolbar->addLink(__d('content','Repair Tree'), ['action' => 'repair'], ['
             ]
         ],
         'rowActions' => [
-            [__d('shop','View'), ['action' => 'view', ':id'], ['class' => 'view']],
-            [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-            [__d('shop','Preview'), ['action' => 'preview', ':id'], ['class' => 'edit']],
-            [__d('shop','Copy'), ['action' => 'copy', ':id'], ['class' => 'copy']],
-            [__d('shop','Move Up'), ['action' => 'moveUp', ':id'], ['class' => 'move-up']],
-            [__d('shop','Move Down'), ['action' => 'moveDown', ':id'], ['class' => 'move-down']],
-            [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+            [__d('content','View'), ['action' => 'view', ':id'], ['class' => 'view']],
+            [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
+            [__d('content','Preview'), ['action' => 'preview', ':id'], ['class' => 'edit']],
+            [__d('content','Copy'), ['action' => 'copy', ':id'], ['class' => 'copy']],
+            [__d('content','Move Up'), ['action' => 'moveUp', ':id'], ['class' => 'move-up']],
+            [__d('content','Move Down'), ['action' => 'moveDown', ':id'], ['class' => 'move-down']],
+            [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);
     ?>

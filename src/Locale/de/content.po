@@ -1,0 +1,1148 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CakePHP Banana\n"
+"POT-Creation-Date: 2017-05-26 19:08+0000\n"
+"PO-Revision-Date: 2017-05-26 21:09+0100\n"
+"Last-Translator: fm-labs <flowmotionlabs@gmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/PagesController.php:66
+msgid "Root page not found"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/PagesController.php:114
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/PostsController.php:36
+msgid "Start page not found for site ID "
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/CategoriesController.php:53;78
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:74;121;208;230
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:47;73
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:206
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:127;153
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageLayoutsController.php:47;72
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageMetasController.php:52;78
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:205;252
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PostsController.php:115;176
+msgid "The {0} has been saved."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/CategoriesController.php:53;56;78;81;100;102
+msgid "category"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/CategoriesController.php:56;81
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:77;124;211;233
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:50;76
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:209
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:130;156
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageLayoutsController.php:50;75
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageMetasController.php:55;81
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:208;255
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PostsController.php:147;179
+msgid "The {0} could not be saved. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/CategoriesController.php:100
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:192
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:97
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:176
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageLayoutsController.php:94
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageMetasController.php:101
+msgid "The {0} has been deleted."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/CategoriesController.php:102
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:194
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:99
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:178
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageLayoutsController.php:96
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageMetasController.php:103
+msgid "The {0} could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:74;77;121;124;149;152;192;194;208;211;233
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:206;209
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:205;208;252;255
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PostsController.php:115;147;176;179
+msgid "content"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:149
+msgid "The {0} has been duplicated."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:152
+msgid "The {0} could not be duplicated. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:169
+msgid "Moved"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:171
+msgid "Failed to move"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:230
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:127;130;153;156;176;178
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/configure.ctp:23
+msgid "module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentController.php:279
+msgid "Module {0} has been added to Content with ID {1}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:47;50;73;76;97;99
+msgid "content module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:141
+msgid "The content module has been saved for {0} {1}."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ContentModulesController.php:143
+msgid "The content module could not be saved for {0} {1}."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:32
+msgid "{0} plugin not loaded"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:112;160
+msgid "The gallery has been saved."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:115;144;163
+msgid "The gallery could not be saved. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:141
+msgid "The gallery post has been saved."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:237
+msgid "The gallery has been deleted."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/GalleriesController.php:239
+msgid "The gallery could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/HtmlEditorController.php:61
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/add.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:10;19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit_module.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:2;6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_module.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_page.ctp:3
+msgid "Pages"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/HtmlEditorController.php:90
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Model/Table/GalleriesTable.php:134
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:26;76
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:58
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:53
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:25;82
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:3;9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/add.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_post.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Posts/index.ctp:1
+msgid "Posts"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/HtmlEditorController.php:114
+msgid "Shop Categories"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:41
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:26
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:152
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_index.ctp:29
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:13;41
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:32;95
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:91
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:108
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_index.ctp:20
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_index.ctp:20
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:33
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:42
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:55
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:36
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:65
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:33;150
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:68
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:10
+msgid "Edit"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:42
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/configure.ctp:20
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:5
+msgid "Configure"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:43
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:27
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:154
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_index.ctp:30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:42
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:5;37;96
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:92
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:15
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:111
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_index.ctp:21
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:15
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_index.ctp:21
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:38
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:14
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:39
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:66
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:12;151
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:18;69
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:6
+msgid "Delete"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/ModulesController.php:81
+msgid "Module configuration saved"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageLayoutsController.php:47;50;72;75;94;96
+msgid "page layout"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PageMetasController.php:52;55;78;81;101;103
+msgid "page meta"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:77
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:38
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:21;24
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:27
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/add.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/add.ctp:6
+msgid "Add {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:77;288;290;299;301
+msgid "page"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:81
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:6
+msgid "Sort"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:236
+msgid "The content module has been saved for Page {0}."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:238
+msgid "The content module could not be saved for Page {0}."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:288
+msgid "The {0} has been moved up."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:290;301
+msgid "The {0} could not be moved. Please, try again."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:299
+msgid "The {0} has been moved down."
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Controller/Admin/PagesController.php:309
+msgid "Shop Category tree recovery has been executed"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Model/Entity/Post.php:122
+msgid "{0} with ID {1}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Model/Entity/Post.php:188
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Model/Table/GalleriesTable.php:133
+msgid "Folder"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Setup/ContentSetup.php:36
+msgid "Default"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:1;4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:1;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:1;15
+msgid "Categories"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:2;16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:22
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:3;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:20;31
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:23;35
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:2;25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:31
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:2;16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add_post.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/index_tree.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:19;30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:22
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/add.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:7
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/add.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:13
+msgid "New {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:2;23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:2;29
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:5;10;20
+msgid "Category"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:4;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:10;16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:15;26
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:18;30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:9;19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:15;25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:4;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:14;25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:17
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:14
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:14
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:12
+msgid "List {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:22
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:31
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/add.ctp:2;6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:20
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_post.ctp:4
+msgid "Post"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/add.ctp:34
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:40
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:52
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:61
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:32
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:40
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:39
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:26
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:32
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:29
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:35
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/add.ctp:18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_page_meta.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/related_meta.ctp:11
+msgid "Submit"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:2;29
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:8
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:2;44
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:7
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/configure.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:2;18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:2;18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit_module.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:20
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_module.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_page.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_post.ctp:4
+msgid "Edit {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/edit.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:27
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:12;154
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_index.ctp:30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:15
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:42
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:7;96
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:92
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:17
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:11;111
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_index.ctp:21
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:14
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:17
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_index.ctp:21
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:40
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:8
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:39
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/_index.ctp:66
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:14;151
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:20;69
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:8
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/index.ctp:25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:150
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:106
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_index.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:29
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:41
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:16
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:7
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:8
+msgid "View"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:9
+msgid "Delete {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:24
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:23
+msgid "More"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:53
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:47
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:40
+msgid "Name"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:57;88
+msgid "Slug"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:63;80
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:75
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:70;86
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:65
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:50
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:58
+msgid "Id"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:68;103
+msgid "Is Published"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:69
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:56
+msgid "Yes"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:69
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:56
+msgid "No"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:76
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:82
+msgid "Related {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:81
+msgid "Site Id"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:82
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:61
+msgid "Refscope"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:83
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:79
+msgid "Refid"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:84
+msgid "Parent Id"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:85
+msgid "Type"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:86
+msgid "Type Params"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:87
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:50;87
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:51
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:44
+msgid "Title"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:89
+msgid "Subheading"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:90
+msgid "Use Teaser"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:91
+msgid "Teaser Html"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:92
+msgid "Teaser Link Href"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:93
+msgid "Teaser Link Caption"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:94
+msgid "Teaser Image File"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:95
+msgid "Teaser Template"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:96
+msgid "Body Html"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:97
+msgid "Image Link Href"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:98
+msgid "Image Link Target"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:99
+msgid "Image Desc"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:100
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:89
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:44
+msgid "Template"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:101
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:90
+msgid "Cssclass"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:102
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:91
+msgid "Cssid"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:104
+msgid "Publish Start Datetime"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:105
+msgid "Publish End Datetime"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:106
+msgid "Pos"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:107
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:69
+msgid "Section"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:108
+msgid "Is Home"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:109
+msgid "Is Archived"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:110
+msgid "Modified"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:111
+msgid "Created"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Categories/view.ctp:112
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:93
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:14
+msgid "Actions"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Content/index.ctp:14
+msgid "previous"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Content/index.ctp:16
+msgid "next"
+msgstr "weiter"
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:1;18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:1;9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:1;15
+msgid "Content Modules"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:8;13;23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:2;38
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:2;44
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit_module.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_module.ctp:2
+msgid "Content Module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:30
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:4;17
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:1;9
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/configure.ctp:19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:1;10
+msgid "Modules"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:35;65
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/add.ctp:25
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/edit.ctp:31
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:7;12;22;27
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/add.ctp:2;27
+msgid "Module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:54
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:43
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:40
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:33
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:33
+msgid "Label"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/_view.ctp:55
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:44
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:41
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:34
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:34
+msgid "Value"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/ContentModules/related.ctp:6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:136
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_content_modules.ctp:16
+msgid "Link existing module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:1;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:2;11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:1;4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add_post.ctp:4;7
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:21
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/index_tree.ctp:1;4;12;15
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:1;14
+msgid "Galleries"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_edit.bak.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_index.ctp:2
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:3;20;52
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:2;21;24
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/index_tree.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:4;9;19
+msgid "Gallery"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:41
+msgid "Sure ?"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:74
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:83
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:92
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:24
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/page_subposts_boxes.ctp:11
+msgid "Published"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:101
+msgid "Add Gallery Item"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:107
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:104
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:52
+msgid "Reorder (asc)"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:114;123
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:111;120
+msgid "Are you sure?"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:116
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:113
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:60
+msgid "Reorder (desc)"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/_manage.bak.ctp:130
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:128
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:162
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:178
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:60
+msgid "Debug"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:31
+msgid "Inherit description from parent gallery"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add.ctp:44
+msgid "Automatically generate slider module"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add_post.ctp:5
+msgid "Gallery Post"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/add_post.ctp:22
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/add.ctp:19
+msgid "Continue"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:17
+msgid "No parent"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:34
+msgid "Linked modules"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:42
+msgid "Create slider for this gallery"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit.ctp:97
+msgid "Add Gallery Post"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:35
+msgid "Edit parent gallery"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/edit_post.ctp:49
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:86
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:119;145
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:130
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:105;122;174
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:90
+msgid "Save Changes"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/index_tree.ctp:4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:6
+msgid "{0} (Table)"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/index_tree.ctp:15
+msgid "Loading {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:54
+msgid "View Template"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:58
+msgid "Source"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:63
+msgid "Source Folder"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:75
+msgid "Desc Html"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:88
+msgid "Image File"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:109
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:44
+msgid "Copy"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Galleries/view.ctp:121
+msgid "Add Item"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:27
+msgid "Preview {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:55
+msgid "Path"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:59
+msgid "Entity Class"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:72
+msgid "Params"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/_view.ctp:77
+msgid "Params ARR"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:32
+msgid "Open configuration editor"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Modules/edit.ctp:34
+msgid "Attention"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:4;9;19
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:2;12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:2;18
+msgid "Page Layout"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:1;14
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/add.ctp:1;4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/edit.ctp:1;10
+msgid "Page Layouts"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:55
+msgid "Is Default"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageLayouts/_view.ctp:59
+msgid "Sections"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:1;4
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:1;10
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:1
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:1;14
+msgid "Page Metas"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:2;12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:2;18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/index.ctp:3
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:4;9;19
+msgid "Page Meta"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/add.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/edit.ctp:29
+msgid "-- Select --"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:40
+msgid "Model"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:48
+msgid "Robots"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:52
+msgid "Lang"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:62
+msgid "ForeignKey"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:67
+msgid "Description"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/PageMetas/view.ctp:71
+msgid "Keywords"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:5
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/add.ctp:2;6
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:13
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:9;51
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:18
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:7
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_page.ctp:4
+msgid "Page"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:9
+msgid "Repair Tree"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:43
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:12
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:11
+msgid "Preview"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:45
+msgid "Move Up"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/_index.ctp:46
+msgid "Move Down"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/ajax_page_type_form.ctp:23
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:48
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:61
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Pages/redirect/form.ctp:11
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Pages/root/form.ctp:11
+msgid "No selection"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:17
+msgid "Edit Page: {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:107
+msgid "- Default Layout -"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:134
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Pages/content/manage.ctp:1
+msgid "Related Posts"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.bak.ctp:135
+msgid "Related content modules"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:10
+msgid "All {0}"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:12
+msgid "Info"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:73
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:121
+msgid "Edit parent"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:88
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:82
+msgid "Layout"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:91;101
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:85;95
+msgid "Use default"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:108
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:107
+msgid "Publish"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:128
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:101
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:109
+msgid "Advanced"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:131
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:76
+msgid "Navigation"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:137
+msgid "DOM"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:154
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:162
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:33
+msgid "Meta"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit.ctp:158
+msgid "Related Modules"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/edit1.ctp:115
+msgid "Parent"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:1
+msgid "Content"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:3
+msgid "List pages"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:8
+msgid "Repair"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/index_jstree.ctp:21
+msgid "Select a page"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Pages/related_posts.ctp:10
+msgid "Sortieren"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:126
+msgid "Subposts"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit.ctp:156
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/edit_parent_page.ctp:74
+msgid "Add post"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/set_image.ctp:30
+msgid "- Choose Image -"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Admin/Posts/view.ctp:25
+msgid "Details"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Cell/HtmlElementModule/display.ctp:15
+msgid "HtmlElement not found: "
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Content/upload_image_form.ctp:16
+msgid "Upload image"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Pages/shop_category/form.ctp:5
+msgid "Shop Category Id"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/edit_page.ctp:9
+msgid "Show parent post"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/page_subposts_boxes.ctp:10
+msgid "Unpublished"
+msgstr ""
+
+#: /home/flow/workspaces/cakesites/cakephp-content/src/Template/Element/Admin/Posts/page_subposts_boxes.ctp:30
+msgid "Save"
+msgstr ""

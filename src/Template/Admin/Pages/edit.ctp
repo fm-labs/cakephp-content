@@ -16,7 +16,7 @@ $this->Toolbar->addLink(
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $page->id)]
 );
 
-$this->Breadcrumbs->add(__('Pages'), ['action' => 'index']);
+$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
 $this->Breadcrumbs->add($page->title);
 
 // HEADING
@@ -70,7 +70,7 @@ $this->end();
                     ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
                 if ($page->parent_id) {
-                    echo $this->Html->link(__('Edit parent'), ['action' => 'edit', $page->parent_id]);
+                    echo $this->Html->link(__d('content', 'Edit parent'), ['action' => 'edit', $page->parent_id]);
                 }
                 ?>
                 <?php
@@ -159,7 +159,7 @@ $this->end();
         'url' => ['action' => 'relatedContentModules', $page->id]
     ]);
 
-    $this->Tabs->add(__('Debug'), ['debugOnly' => true]);
+    $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]);
     debug($page);
     ?>
 

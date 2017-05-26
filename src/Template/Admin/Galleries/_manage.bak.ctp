@@ -92,8 +92,8 @@
                     ],
                 ],
                 'rowActions' => [
-                    [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit link-frame-modal']],
-                    [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+                    [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit link-frame-modal']],
+                    [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
                 ]
             ]]);
             ?>
@@ -111,7 +111,7 @@
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
                     ['class' => 'link-frame btn'],
-                    __('Are you sure?')); ?>
+                    __d('content', 'Are you sure?')); ?>
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
@@ -120,7 +120,7 @@
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
                     ['class' => 'link-frame btn'],
-                    __('Are you sure?')); ?>
+                    __d('content', 'Are you sure?')); ?>
             </div>
 
 

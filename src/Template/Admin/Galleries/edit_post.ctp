@@ -18,7 +18,7 @@ $this->Toolbar->addPostLink([
 ]);
 ?>
 <?php
-$this->assign('title', __('Galleries'));
+$this->assign('title', __d('content', 'Galleries'));
 $this->assign('heading', $gallery->title);
 $this->assign('subheading', 'Gallery post');
 ?>
@@ -32,7 +32,7 @@ $this->assign('subheading', 'Gallery post');
         echo $this->Form->hidden('slug', ['value' => null]);
         //echo $this->Form->input('subheading');
         ?>
-        <?= $this->Html->link(__('Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $post->refid]); ?>
+        <?= $this->Html->link(__d('content', 'Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $post->refid]); ?>
 
         <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
         <?php

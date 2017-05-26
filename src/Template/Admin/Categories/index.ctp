@@ -1,13 +1,13 @@
-<?php $this->Breadcrumbs->add(__('Categories')); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Categories')); ?>
 <?php $this->loadHelper('Backend.Toolbar'); ?>
-<?php $this->Toolbar->addLink(__('New {0}', __('Category')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
+<?php $this->Toolbar->addLink(__d('content', 'New {0}', __d('content', 'Category')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <?php $this->Toolbar->addLink(
-    __('List {0}', __('Posts')),
+    __d('content', 'List {0}', __d('content', 'Posts')),
     ['controller' => 'Posts', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __('New {0}', __('Post')),
+    __d('content', 'New {0}', __d('content', 'Post')),
     ['controller' => 'Posts', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
@@ -22,9 +22,9 @@
         'fields' => $fields,
         'debug' => true,
         'rowActions' => [
-            [__d('shop','View'), ['action' => 'view', ':id'], ['class' => 'view']],
-            [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-            [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+            [__d('content','View'), ['action' => 'view', ':id'], ['class' => 'view']],
+            [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
+            [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);
     ?>

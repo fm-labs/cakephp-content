@@ -16,9 +16,9 @@
             'path'
         ],
         'rowActions' => [
-            [__d('shop','View'), ['action' => 'view', ':id'], ['class' => 'view']],
-            [__d('shop','Edit'), ['controller' => 'ModuleBuilder', 'action' => 'edit', ':id'], ['class' => 'edit']],
-            [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+            [__d('content','View'), ['action' => 'view', ':id'], ['class' => 'view']],
+            [__d('content','Edit'), ['controller' => 'ModuleBuilder', 'action' => 'edit', ':id'], ['class' => 'edit']],
+            [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);
     ?>

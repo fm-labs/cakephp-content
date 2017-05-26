@@ -10,7 +10,7 @@
             <?= $this->Form->input('id', ['label' => false, 'options' => $galleryTree, 'val' => (isset($gallery)) ? $gallery->id : null]); ?>
         </div>
         <div class="col-md-1">
-            <?= $this->Form->button(__('Edit')); ?>
+            <?= $this->Form->button(__d('content', 'Edit')); ?>
         </div>
     </div>
     <?= $this->Form->end(); ?>
@@ -38,8 +38,8 @@
             'source'
         ],
         'rowActions' => [
-            [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-            [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+            [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
+            [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);
     ?>

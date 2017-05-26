@@ -7,7 +7,7 @@
 
     <!--
     <div class="actions">
-        <?= $this->Html->link(__('Sortieren'), ['plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'sort', 'model' => 'Content.Posts', 'refscope' => 'Content.Pages', 'refid' => $content->id]); ?>
+        <?= $this->Html->link(__d('content', 'Sortieren'), ['plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'sort', 'model' => 'Content.Posts', 'refscope' => 'Content.Pages', 'refid' => $content->id]); ?>
     </div>
     -->
 
@@ -33,10 +33,10 @@
             ]
         ],
         'rowActions' => [
-            [__d('shop','Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], ['class' => 'edit']],
-            //[__d('shop','Move Up'), ['controller' => 'Posts', 'action' => 'moveUp', ':id'], ['class' => 'move up']],
-            //[__d('shop','Move Down'), ['controller' => 'Posts', 'action' => 'moveDown', ':id'], ['class' => 'move down']],
-            [__d('shop','Delete'), ['controller' => 'Posts', 'action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+            [__d('content','Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], ['class' => 'edit']],
+            //[__d('content','Move Up'), ['controller' => 'Posts', 'action' => 'moveUp', ':id'], ['class' => 'move up']],
+            //[__d('content','Move Down'), ['controller' => 'Posts', 'action' => 'moveDown', ':id'], ['class' => 'move down']],
+            [__d('content','Delete'), ['controller' => 'Posts', 'action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
         ]
     ]]);
     ?>

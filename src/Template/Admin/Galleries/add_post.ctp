@@ -4,7 +4,7 @@ $this->loadHelper('Media.Media');
 <?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery Post'))); ?>
 <?php
-$this->assign('title', __('Galleries'));
+$this->assign('title', __d('content', 'Galleries'));
 $this->assign('heading', $gallery->title);
 $this->assign('subheading', 'New gallery post');
 ?>

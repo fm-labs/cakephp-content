@@ -7,8 +7,8 @@
     <?= h($_post->title); ?>
     <br />
     <?= $this->Ui->statusLabel($_post->is_published, [], [
-        0 => [__('Unpublished'), 'default'],
-        1 => [__('Published'), 'success']
+        0 => [__d('content', 'Unpublished'), 'default'],
+        1 => [__d('content', 'Published'), 'success']
     ]); ?>
     <?= $this->Html->link('Edit Post', ['plugin' => 'content', 'controller' => 'Posts', 'action' => 'edit', $_post->id], ['class' => 'btn btn-sm']); ?>
 
@@ -27,7 +27,7 @@
         'type' => 'htmleditor',
         'editor' => $editor
     ]); ?>
-    <?= $this->Form->button(__('Save')); ?>
+    <?= $this->Form->button(__d('content', 'Save')); ?>
     <?= $this->Form->end(); ?>
 
     <!-- Tab Preview -->

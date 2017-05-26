@@ -16,7 +16,7 @@ $this->Toolbar->addPostLink([
 ?>
 <?php
 // Breadcrumbs
-$this->Breadcrumbs->add(__('Posts'), ['action' => 'index']);
+$this->Breadcrumbs->add(__d('content', 'Posts'), ['action' => 'index']);
 $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Post')));
 
 // Heading
@@ -30,7 +30,7 @@ endif;
 ?>
 <div class="posts edit">
     <?php $this->Tabs->create(); ?>
-    <?php $this->Tabs->add(__('Edit')); ?>
+    <?php $this->Tabs->add(__d('content', 'Edit')); ?>
 
     <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?php
@@ -106,7 +106,7 @@ endif;
     <?= $this->Form->end() ?>
 
     <!-- Advanced -->
-    <?php $this->Tabs->add(__('Advanced')); ?>
+    <?php $this->Tabs->add(__d('content', 'Advanced')); ?>
     <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Advanced', 'collapsed' => false]); ?>
     <?php
@@ -123,7 +123,7 @@ endif;
     <?= $this->Form->end() ?>
 
     <!-- Related Posts -->
-    <?php $this->Tabs->add(__('Subposts')); ?>
+    <?php $this->Tabs->add(__d('content', 'Subposts')); ?>
     <?php if (!$post->parent_id): ?>
         <?= $this->Form->fieldsetStart(['legend' => 'Posts', 'collapsed' => false]);  ?>
         <div class="child-posts">
@@ -147,19 +147,19 @@ endif;
                     'is_published'
                 ],
                 'rowActions' => [
-                    [__d('shop','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
-                    [__d('shop','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('shop','Are you sure you want to delete # {0}?', ':id')]]
+                    [__d('content','Edit'), ['action' => 'edit', ':id'], ['class' => 'edit']],
+                    [__d('content','Delete'), ['action' => 'delete', ':id'], ['class' => 'delete', 'confirm' => __d('content','Are you sure you want to delete # {0}?', ':id')]]
                 ]
             ]]);
             ?>
 
-            <?= $this->Html->link(__('Add post'), ['action' => 'add', 'parent_id' => $post->id], ['class' => 'btn btn-primary']); ?>
+            <?= $this->Html->link(__d('content', 'Add post'), ['action' => 'add', 'parent_id' => $post->id], ['class' => 'btn btn-primary']); ?>
         </div>
         <?= $this->Form->fieldsetEnd(); ?>
     <?php endif; ?>
 
     <!-- Meta -->
-    <?php $this->Tabs->add(__('Meta')); ?>
+    <?php $this->Tabs->add(__d('content', 'Meta')); ?>
 
     <?= $this->Form->create($post); ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => false]); ?>
@@ -175,7 +175,7 @@ endif;
     <?= $this->Form->end() ?>
 
     <!-- Debug -->
-    <?php $this->Tabs->add(__('Debug'), ['debugOnly' => true]); ?>
+    <?php $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]); ?>
     <?= $this->cell('Backend.EntityView', [$post], ['model' => 'Content.Posts']); ?>
     <?php debug($post); ?>
 
