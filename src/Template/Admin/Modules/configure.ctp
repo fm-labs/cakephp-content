@@ -1,9 +1,9 @@
 <?php
 use Banana\View\Form\ViewModuleContext;
 
-$this->Form->addContextProvider('viewmodule', function($request, $data) {
-    if ($data['entity'] instanceof \Banana\View\ViewModule) {
-        return new ViewModuleContext($request, $data);
+$this->Form->addContextProvider('viewmodule', function($request, $context) {
+    if ($context['entity'] instanceof \Banana\View\ViewModule) {
+        return new ViewModuleContext($request, $context);
     }
 });
 if (!$module->cellClass) {
