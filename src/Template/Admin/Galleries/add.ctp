@@ -31,10 +31,7 @@
         echo $this->Form->input('inherit_desc', ['label' => __d('content', 'Inherit description from parent gallery')]);
         echo $this->Form->input('desc_html', [
             'type' => 'htmleditor',
-            'editor' => [
-                'image_list_url' => '@Content.HtmlEditor.default.imageList',
-                'link_list_url' => '@Content.HtmlEditor.default.linkList'
-            ]
+            'editor' => 'content'
         ]);
         echo $this->Form->input('view_template');
         echo $this->Form->input('source');

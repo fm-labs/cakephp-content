@@ -185,7 +185,7 @@ class PostsController extends AppController
 
 
         // HtmlEditor config
-        $editor = Configure::read('Content.HtmlEditor.default');
+        $editor = Configure::read('HtmlEditor.content');
         $editor['body_class'] = $post->cssclass;
         $editor['body_id'] = $post->cssid;
 

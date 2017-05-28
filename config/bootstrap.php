@@ -4,8 +4,10 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Banana\Lib\ClassRegistry;
 
-
-//Configure::load('Content.content');
+/**
+ * Load default content config
+ */
+Configure::load('Content.content');
 
 /**
  * Load dependencies
@@ -44,10 +46,11 @@ ClassRegistry::register('ContentModule', [
     'html' => 'Content.Html'
 ]);
 
-
-Cache::config('content_menu', [
-    'className' => 'File',
-    'duration' => '+1 day',
-    'path' => CACHE,
-    'prefix' => 'content_menu_'
-]);
+if (!Cache::config('content_menu')) {
+    Cache::config('content_menu', [
+        'className' => 'File',
+        'duration' => '+1 day',
+        'path' => CACHE,
+        'prefix' => 'content_menu_'
+    ]);
+}
