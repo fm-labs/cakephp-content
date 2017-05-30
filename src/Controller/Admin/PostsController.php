@@ -18,6 +18,16 @@ class PostsController extends AppController
 {
     public $modelClass = 'Content.Posts';
 
+    public $actions = [
+        'index'     => 'Backend.Index',
+        'view'      => 'Backend.View',
+        'add'       => 'Backend.Add',
+        'edit'      => 'Backend.Edit',
+        'delete'    => 'Backend.Delete',
+        'publish'   => 'Backend.Publish',
+        'unpublish' => 'Backend.Unpublish'
+    ];
+
     /**
      * Index method
      *

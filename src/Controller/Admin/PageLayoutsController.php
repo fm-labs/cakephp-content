@@ -11,6 +11,14 @@ use Content\Controller\Admin\AppController;
 class PageLayoutsController extends AppController
 {
 
+    public $actions = [
+        'index'     => 'Backend.Index',
+        'view'      => 'Backend.View',
+        'add'       => 'Backend.Add',
+        'edit'      => 'Backend.Edit',
+        'delete'    => 'Backend.Delete',
+    ];
+
     /**
      * Index method
      *

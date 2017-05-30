@@ -14,8 +14,13 @@ class AppController extends Controller
     use BackendActionsTrait;
 
     public $actions = [
-        'index' => 'Backend.Index',
-        'view' => 'Backend.View'
+        'index'     => 'Backend.Index',
+        'view'      => 'Backend.View',
+        'add'       => 'Backend.Add',
+        'edit'      => 'Backend.Edit',
+        'delete'    => 'Backend.Delete',
+        //'publish'   => 'Backend.Publish',
+        //'unpublish' => 'Backend.Unpublish'
     ];
 
     public $paginate = [

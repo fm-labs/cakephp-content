@@ -22,6 +22,15 @@ class GalleriesController extends AppController
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
 
+    public $actions = [
+        'index'     => 'Backend.Index',
+        'view'      => 'Backend.View',
+        'add'       => 'Backend.Add',
+        'edit'      => 'Backend.Edit',
+        'delete'    => 'Backend.Delete',
+        'publish'   => 'Backend.Publish',
+        'unpublish' => 'Backend.Unpublish'
+    ];
 
     public function beforeFilter(Event $event)
     {
