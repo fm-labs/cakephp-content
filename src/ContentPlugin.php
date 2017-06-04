@@ -3,10 +3,12 @@
 namespace Content;
 
 
+use Backend\Event\RouteBuilderEvent;
 use Banana\Plugin\PluginInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
+use Cake\Routing\Router;
 
 class ContentPlugin implements PluginInterface, EventListenerInterface
 {
@@ -31,7 +33,8 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     {
         return [
             'Settings.get' => 'getSettings',
-            'Backend.Menu.get' => ['callable' => 'getBackendMenu', 'priority' => 5 ]
+            'Backend.Menu.get' => ['callable' => 'getBackendMenu', 'priority' => 5 ],
+            'Backend.Routes.build' => 'buildBackendRoutes'
         ];
     }
 
@@ -45,6 +48,15 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
                 'type' => 'boolean',
             ],
         ];
+    }
+
+    public function buildBackendRoutes(RouteBuilderEvent $event)
+    {
+        Router::scope('/content/admin', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'], function ($routes) {
+            $routes->extensions(['json']);
+            $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
+            $routes->fallbacks('DashedRoute');
+        });
     }
 
     public function getBackendMenu(Event $event)

@@ -65,10 +65,3 @@ Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], func
     $routes->fallbacks('DashedRoute');
 });
 unset($scope);
-
-// Admin routes
-Router::scope('/content/admin', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'], function ($routes) {
-    $routes->extensions(['json']);
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-    $routes->fallbacks('DashedRoute');
-});
