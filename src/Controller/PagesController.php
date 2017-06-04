@@ -1,18 +1,13 @@
 <?php
-
 namespace Content\Controller;
 
-use Cake\Core\Exception\Exception;
+use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
+use Content\Controller\Component\FrontendComponent;
 use Content\Controller\Traits\PagesDisplayActionTrait;
 use Content\Model\Table\PagesTable;
-use Cake\Core\Configure;
-use Cake\Network\Response;
-use Cake\Routing\Router;
-use Cake\View\Exception\MissingTemplateException;
-use Content\Controller\Component\FrontendComponent;
 
 /**
  * Class FrontendController
@@ -20,12 +15,15 @@ use Content\Controller\Component\FrontendComponent;
  *
  * @property FrontendComponent $Frontend
  * @property PagesTable $Pages
- * @deprecated Use FrontendController instead
+ * @todo Use FrontendController instead
  */
 class PagesController extends ContentController
 {
     use PagesDisplayActionTrait;
 
+    /**
+     * @var string
+     */
     public $modelClass = 'Content.Pages';
 
     /**
@@ -40,6 +38,9 @@ class PagesController extends ContentController
      */
     protected $_root = false;
 
+    /**
+     * Initialize method
+     */
     public function initialize()
     {
         parent::initialize();
@@ -47,18 +48,27 @@ class PagesController extends ContentController
         $this->loadComponent('RequestHandler');
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-
         $this->Auth->allow();
     }
 
+    /**
+     * @param Event $event
+     */
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
     }
 
+    /**
+     * Index method
+     */
     public function index()
     {
         $rootPage = $this->Pages->findHostRoot();
@@ -69,6 +79,9 @@ class PagesController extends ContentController
         $this->setAction('view', $rootPage->id);
     }
 
+    /**
+     * @param null $slug
+     */
     public function viewSlug($slug = null)
     {
         $page = $this->Pages->findBySlug($slug);
@@ -114,7 +127,6 @@ class PagesController extends ContentController
             throw new NotFoundException(__d('content',"Page not found"));
         }
 
-
         // force canonical url (except root pages)
         if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
             $here = Router::normalize($this->request->here);
@@ -126,9 +138,6 @@ class PagesController extends ContentController
             }
         }
 
-
-        //$this->request->params['page_id'] = $page->id;
-        //$this->Frontend->setPageId($page->id);
         $this->Frontend->setRefId($page->id);
 
         //@todo Dispatch Page.beforeExecute()
@@ -150,6 +159,4 @@ class PagesController extends ContentController
 
         $this->set('page', $page);
     }
-
-
 }

@@ -4,10 +4,16 @@ namespace Content\Model\Behavior\PageMeta;
 
 use Cake\ORM\TableRegistry;
 
+/**
+ * Class PageMetaTrait
+ *
+ * @package Content\Model\Behavior\PageMeta
+ */
 trait PageMetaTrait
 {
-    //protected $_pageMetaModel;
-
+    /**
+     * @return mixed
+     */
     protected function _getMeta()
     {
         if (!array_key_exists('meta', $this->_properties)) {
@@ -21,6 +27,9 @@ trait PageMetaTrait
         return $this->_properties['meta'];
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getMetaTitle()
     {
         $meta = $this->_getMeta();
@@ -29,6 +38,9 @@ trait PageMetaTrait
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getMetaDesc()
     {
         $meta = $this->_getMeta();
@@ -37,6 +49,9 @@ trait PageMetaTrait
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getMetaKeywords()
     {
         $meta = $this->_getMeta();
@@ -45,6 +60,9 @@ trait PageMetaTrait
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getMetaRobots()
     {
         $meta = $this->_getMeta();
@@ -53,6 +71,9 @@ trait PageMetaTrait
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getMetaLang()
     {
         $meta = $this->_getMeta();

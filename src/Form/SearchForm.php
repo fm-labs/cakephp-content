@@ -1,26 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 11/27/16
- * Time: 1:48 PM
- */
-
 namespace Content\Form;
-
 
 use Cake\Form\Form;
 use Cake\Form\Schema;
 use Cake\Validation\Validator;
 
+/**
+ * Class SearchForm
+ *
+ * @package Content\Form
+ */
 class SearchForm extends Form
 {
-
+    /**
+     * @param Schema $schema
+     * @return $this
+     */
     protected function _buildSchema(Schema $schema)
     {
         return $schema->addField('query', 'string');
     }
 
+    /**
+     * @param Validator $validator
+     * @return $this
+     */
     protected function _buildValidator(Validator $validator)
     {
         return $validator->add('query', 'length', [
@@ -29,6 +33,10 @@ class SearchForm extends Form
         ]);
     }
 
+    /**
+     * @param array $data
+     * @return bool
+     */
     protected function _execute(array $data)
     {
         // Send an email.

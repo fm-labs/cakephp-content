@@ -1,15 +1,17 @@
 <?php
-
 namespace Content\Controller\Traits;
-
 
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 
+/**
+ * Class PagesDisplayActionTrait
+ *
+ * @package Content\Controller\Traits
+ */
 trait PagesDisplayActionTrait
 {
-
     /**
      * Displays a view
      *

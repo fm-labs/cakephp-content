@@ -22,18 +22,27 @@ class PageLayout extends Entity
         'id' => false,
     ];
 
+    /**
+     * @return mixed
+     */
     protected function _getTheme()
     {
         list($theme,) = pluginSplit($this->template);
         return $theme;
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getLayout()
     {
         list(,$layout) = pluginSplit($this->template);
         return $layout;
     }
 
+    /**
+     * @return bool
+     */
     protected function _getSectionsList()
     {
         $sections = array_walk(explode(',', $this->sections), 'trim');

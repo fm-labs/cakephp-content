@@ -9,12 +9,27 @@ use Cake\ORM\Table;
 use Content\Lib\ContentManager;
 use Media\Lib\Media\MediaManager;
 
+/**
+ * Class ContentController
+ *
+ * @package Content\Controller\Admin
+ */
 abstract class ContentController extends AppController
 {
+    /**
+     * @var Table
+     */
     protected $Model;
 
+    /**
+     * @var null|string
+     */
     public $modelClass = null;
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -29,6 +44,10 @@ abstract class ContentController extends AppController
         //$this->components()->unload('RequestHandler');
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
@@ -43,7 +62,6 @@ abstract class ContentController extends AppController
         $this->set('themesAvailable', $this->getThemesAvailable());
     }
 
-
     /**
      * Index method
      *
@@ -55,7 +73,6 @@ abstract class ContentController extends AppController
         $this->set('_serialize', ['contents']);
     }
 
-    
     /**
      * Edit method
      *
@@ -77,7 +94,6 @@ abstract class ContentController extends AppController
                 $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
             }
         }
-
 
         $mm = MediaManager::get('default');
         $this->set('image_files', $mm->getSelectListRecursive());
@@ -102,6 +118,9 @@ abstract class ContentController extends AppController
         $this->set('_serialize', ['content']);
     }
 
+    /**
+     * @param null $id
+     */
     public function preview($id = null)
     {
         $this->redirect(['prefix' => false, 'plugin' => 'Content', 'controller' => 'Posts', 'action' => 'view', $id]);
@@ -128,12 +147,20 @@ abstract class ContentController extends AppController
         $this->set('_serialize', ['content']);
     }
 
+    /**
+     * @param null $id
+     * @TODO Refactore with Backend action
+     */
     public function duplicate($id = null)
     {
         $this->setAction('copy', $id);
     }
 
-
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     * @TODO Refactore with Backend action
+     */
     public function copy($id = null)
     {
         $content = $this->model()->get($id);
@@ -158,6 +185,9 @@ abstract class ContentController extends AppController
         $this->render('add');
     }
 
+    /**
+     * @param null $id
+     */
     public function moveUp($id = null)
     {
         $node = $this->model()->moveUp($this->model()->get($id));
@@ -196,7 +226,10 @@ abstract class ContentController extends AppController
         $this->redirect($this->referer(['action' => 'index']));
     }
 
-
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     */
     public function edit_modules($id = null)
     {
         $content = $this->model()->get($id, [
@@ -216,7 +249,9 @@ abstract class ContentController extends AppController
         $this->set('_serialize', ['content']);
     }
 
-
+    /**
+     * @param null $moduleId
+     */
     public function edit_module($moduleId = null)
     {
         $this->loadModel('Content.Modules');
@@ -238,6 +273,9 @@ abstract class ContentController extends AppController
         $this->set('_serialize', ['content', 'module']);
     }
 
+    /**
+     * @param null $contentId
+     */
     public function addPost($contentId = null)
     {
         $this->redirect([
@@ -249,7 +287,9 @@ abstract class ContentController extends AppController
         ]);
     }
 
-
+    /**
+     * @param null $contentId
+     */
     public function addContentModule($contentId = null)
     {
         if (!$contentId) {
@@ -292,6 +332,9 @@ abstract class ContentController extends AppController
         $this->set('contentModule', $contentModule);
     }
 
+    /**
+     * @param $contentId
+     */
     public function createModule($contentId)
     {
         $content = $this->model()->get($contentId);
@@ -348,6 +391,4 @@ abstract class ContentController extends AppController
         }
         return $this->Model;
     }
-
-
 }

@@ -10,7 +10,6 @@ use Content\Controller\Admin\AppController;
  */
 class PageMetasController extends AppController
 {
-
     /**
      * Index method
      *
@@ -105,6 +104,9 @@ class PageMetasController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * @return array
+     */
     protected function _getRobotsOptions()
     {
         return [

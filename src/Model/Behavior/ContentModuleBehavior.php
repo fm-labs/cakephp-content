@@ -77,5 +77,4 @@ class ContentModuleBehavior extends Behavior
         $events['Model.initialize'] = 'modelInitialize';
         return $events;
     }
-
 }

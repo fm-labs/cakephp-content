@@ -1,6 +1,6 @@
 <?php
-
 namespace Content\Controller;
+
 use Cake\Event\Event;
 use Content\Model\Table\CategoriesTable;
 use Content\Model\Table\PostsTable;
@@ -13,6 +13,9 @@ use Content\Model\Table\PostsTable;
  */
 class CategoriesController extends ContentController
 {
+    /**
+     * @var string
+     */
     public $modelClass = "Content.Categories";
 
     /**
@@ -28,6 +31,9 @@ class CategoriesController extends ContentController
         }
     }
 
+    /**
+     * @param null $id
+     */
     public function view($id = null)
     {
         $this->viewBuilder()->className('Content.Category');

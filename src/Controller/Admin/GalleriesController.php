@@ -20,6 +20,9 @@ class GalleriesController extends AppController
     use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
 
+    /**
+     * @var array
+     */
     public $actions = [
         'index'     => 'Backend.Index',
         'view'      => 'Backend.View',
@@ -30,6 +33,10 @@ class GalleriesController extends AppController
         'unpublish' => 'Backend.Unpublish'
     ];
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -79,7 +86,11 @@ class GalleriesController extends AppController
         $this->Backend->executeAction();
     }
 
-    public function indexTree() {
+    /**
+     * Tree index method
+     */
+    public function indexTree()
+    {
         $this->set('dataUrl', ['action' => 'treeData']);
     }
 
@@ -99,6 +110,9 @@ class GalleriesController extends AppController
         $this->set('_serialize', ['gallery']);
     }
 
+    /**
+     *
+     */
     public function treeView()
     {
         $id = $this->request->query('id');
@@ -132,6 +146,10 @@ class GalleriesController extends AppController
         $this->set('_serialize', ['gallery']);
     }
 
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     */
     public function addPost($id = null)
     {
         $gallery = $this->Galleries->get($id, [
@@ -155,9 +173,12 @@ class GalleriesController extends AppController
         $this->set('_serialize', ['gallery', 'post']);
     }
 
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     */
     public function edit($id = null)
     {
-
         $gallery = $this->Galleries->get($id, [
             'contain' => ['Parent']
         ]);
@@ -198,6 +219,10 @@ class GalleriesController extends AppController
         $this->setAction('edit', $id);
     }
 
+    /**
+     * @param null $postId
+     * @return \Cake\Network\Response|null
+     */
     public function editPost($postId = null)
     {
         $post = $this->Galleries->Posts->get($postId, [
@@ -218,7 +243,6 @@ class GalleriesController extends AppController
         }
 
         $templates = ContentManager::getAvailablePostTemplates();
-
 
         // HtmlEditor config
         $editor = Configure::read('HtmlEditor.content');

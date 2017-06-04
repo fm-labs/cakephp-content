@@ -1,16 +1,22 @@
 <?php
-
 namespace Content\Controller;
-
 
 use Cake\Event\Event;
 
+/**
+ * Class GalleriesController
+ *
+ * @package Content\Controller
+ */
 class GalleriesController extends ContentController
 {
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-
         $this->Auth->allow(['view']);
     }
 

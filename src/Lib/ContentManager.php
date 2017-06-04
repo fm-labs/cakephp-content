@@ -2,6 +2,7 @@
 namespace Content\Lib;
 
 use Banana\Lib\ClassRegistry;
+use Cake\Datasource\EntityInterface;
 use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
@@ -9,9 +10,17 @@ use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
 use Content\Model\Entity\Post;
 
+/**
+ * Class ContentManager
+ *
+ * @package Content\Lib
+ */
 class ContentManager
 {
 
+    /**
+     * @var string
+     */
     public static $version;
 
     /**
@@ -25,14 +34,18 @@ class ContentManager
         return static::$version;
     }
 
-
+    /**
+     * @return \Cake\Datasource\ResultSetInterface
+     */
     public static function getAvailablePageLayouts()
     {
         $PageLayouts = TableRegistry::get('Content.PageLayouts');
         return $PageLayouts->find('list')->all();
     }
 
-
+    /**
+     * @return EntityInterface|null
+     */
     public static function getDefaultPageLayout()
     {
         $PageLayouts = TableRegistry::get('Content.PageLayouts');
@@ -42,6 +55,7 @@ class ContentManager
 
     /**
      * @param Page $page
+     * @return null
      * @deprecated
      */
     public static function getPageHandler(Page $page)
@@ -52,7 +66,8 @@ class ContentManager
 
     /**
      * @param $post
-     * @return PostHandlerInterface
+     * @return object
+     * @deprecated
      */
     public static function getPostHandlerInstance(Post $post)
     {
@@ -62,6 +77,10 @@ class ContentManager
         return $instance;
     }
 
+    /**
+     * @param $type
+     * @return null
+     */
     public static function getPostModelByType($type)
     {
         $map = [
@@ -76,6 +95,11 @@ class ContentManager
         return null;
     }
 
+    /**
+     * @param $type
+     * @param $typeid
+     * @return EntityInterface|mixed|null
+     */
     public static function getPostByType($type, $typeid)
     {
         $modelClass = self::getPostModelByType($type);
@@ -86,11 +110,13 @@ class ContentManager
         return TableRegistry::get($modelClass)->get($typeid);
     }
 
+    /**
+     * @return array
+     */
     public static function getModulesAvailable()
     {
         return ClassRegistry::show('ContentModule');
     }
-
 
     /**
      * @return array
@@ -128,6 +154,9 @@ class ContentManager
         return $availableModules;
     }
 
+    /**
+     * @return array
+     */
     public static function getModuleCellTemplatesAvailable()
     {
         $path = 'Template' . DS . 'Module';
@@ -160,6 +189,9 @@ class ContentManager
         return array_combine($availableModules, $availableModules);
     }
 
+    /**
+     * @return array
+     */
     public static function getLayoutsAvailable()
     {
         $path = 'Template' . DS . 'Layout';
@@ -190,6 +222,9 @@ class ContentManager
         return $availableLayouts;
     }
 
+    /**
+     * @return array
+     */
     public static function getThemesAvailable()
     {
         $availableThemes = [];
@@ -218,6 +253,9 @@ class ContentManager
         return $availableThemes;
     }
 
+    /**
+     * @return array
+     */
     public static function getContentSections()
     {
         return [
@@ -304,18 +342,25 @@ class ContentManager
         return $available;
     }
 
-
-
+    /**
+     * @return array
+     */
     public static function getAvailableGalleryTemplates()
     {
         return self::getAvailableViewTemplates('Module/Flexslider');
     }
 
+    /**
+     * @return array
+     */
     public static function getAvailablePageTemplates()
     {
         return self::getAvailableViewTemplates('Pages');
     }
 
+    /**
+     * @return array
+     */
     public static function getAvailablePageTypes()
     {
         return ClassRegistry::show('PageType');
@@ -364,6 +409,9 @@ class ContentManager
         return $available;
     }
 
+    /**
+     * @return array
+     */
     public static function getAvailablePostTemplates()
     {
         $path = 'Template' . DS . 'Posts';
@@ -403,6 +451,4 @@ class ContentManager
 
         return $available;
     }
-
-
 }

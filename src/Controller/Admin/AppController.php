@@ -9,10 +9,18 @@ use Cake\Event\Event;
 use Content\Lib\ContentManager;
 use Media\Lib\Media\MediaManager;
 
+/**
+ * Class AppController
+ *
+ * @package Content\Controller\Admin
+ */
 class AppController extends Controller
 {
     use BackendActionsTrait;
 
+    /**
+     * @var array
+     */
     public $actions = [
         'index'     => 'Backend.Index',
         'view'      => 'Backend.View',
@@ -23,22 +31,35 @@ class AppController extends Controller
         //'unpublish' => 'Backend.Unpublish'
     ];
 
+    /**
+     * @var array
+     */
     public $paginate = [
         'limit' => 100,
     ];
 
+    /**
+     * Initialize
+     */
     public function initialize()
     {
         $this->loadComponent('Backend.Backend');
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         $locale = $this->request->query('locale');
         $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
-        //$this->Auth->allow();
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeRender(Event $event)
     {
         $this->set('locale', $this->locale);

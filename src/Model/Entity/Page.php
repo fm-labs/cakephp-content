@@ -3,13 +3,13 @@ namespace Content\Model\Entity;
 
 use Banana\Model\EntityTypeHandlerTrait;
 use Cake\Controller\Controller;
-use Content\Lib\ContentManager;
-use Content\Model\Behavior\PageMeta\PageMetaTrait;
-use Content\Page\AbstractPageType;
 use Cake\Core\Configure;
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
+use Content\Lib\ContentManager;
+use Content\Model\Behavior\PageMeta\PageMetaTrait;
+use Content\Page\AbstractPageType;
 use Content\Page\PageInterface;
 use Content\Page\PageTypeInterface;
 
@@ -20,12 +20,13 @@ class Page extends Entity implements PageInterface
 {
     use TranslateTrait;
     use PageMetaTrait;
-
-
     use EntityTypeHandlerTrait {
         EntityTypeHandlerTrait::handler as typeHandler;
     }
 
+    /**
+     * @var
+     */
     private $__parentTheme;
 
     /**
@@ -59,6 +60,9 @@ class Page extends Entity implements PageInterface
         'child_pages' => true,
     ];
 
+    /**
+     * @var array
+     */
     protected $_virtual = [
         'url',
         'view_url',
@@ -78,58 +82,90 @@ class Page extends Entity implements PageInterface
         return $this->typeHandler();
     }
 
+    /**
+     * @return string
+     */
     protected function _getHandlerNamespace()
     {
         return 'PageType';
     }
 
-    function getPageId() {
+    /**
+     * @return int
+     */
+    function getPageId()
+    {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     function getPageTitle()
     {
         return $this->title;
     }
 
-
+    /**
+     * @return string
+     */
     function getPageType()
     {
         return $this->type;
     }
 
+    /**
+     * @return string|array
+     */
     function getPageUrl()
     {
         return $this->handler()->getUrl();
     }
 
+    /**
+     * @return string|array
+     */
     function getPageAdminUrl()
     {
         return $this->handler()->getAdminUrl();
     }
 
+    /**
+     * @return array
+     */
     public function getPageChildren()
     {
         return $this->handler()->getChildren();
     }
 
+    /**
+     * @return bool
+     */
     public function isPagePublished()
     {
         return $this->handler()->isPublished();
     }
 
+    /**
+     * @return bool
+     */
     public function isPageHiddenInNav()
     {
         return $this->handler()->isHiddenInNav();
     }
 
-
+    /**
+     * @param Controller $controller
+     * @return mixed
+     */
     public function execute(Controller &$controller)
     {
         return $this->handler()->execute($controller);
     }
 
-
+    /**
+     * @return array
+     */
     public function _getPosts()
     {
         if (isset($this->_properties['posts'])) {
@@ -144,6 +180,9 @@ class Page extends Entity implements PageInterface
             ->toArray();
     }
 
+    /**
+     * @return \Cake\ORM\Query
+     */
     public function getPath()
     {
         return TableRegistry::get('Content.Pages')
@@ -158,6 +197,7 @@ class Page extends Entity implements PageInterface
     {
         return $this->getPageUrl();
     }
+
     /**
      * @return array|string
      * @deprecated Use getPageUrl() instead
@@ -167,7 +207,9 @@ class Page extends Entity implements PageInterface
         return $this->getPageUrl();
     }
 
-
+    /**
+     * @return string
+     */
     protected function _getPermaUrl() {
         return '/?page_id=' . $this->id;
     }
@@ -178,7 +220,6 @@ class Page extends Entity implements PageInterface
      */
     protected function _getParentTheme()
     {
-
         if ($this->get('theme')) {
             return $this->get('theme');
         }
@@ -208,5 +249,4 @@ class Page extends Entity implements PageInterface
             ->order(['Posts.pos' => 'ASC', 'Posts.id' => 'ASC'])
             ->all();
     }
-
 }

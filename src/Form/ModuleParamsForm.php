@@ -1,16 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 5/29/15
- * Time: 11:14 PM
- */
-
 namespace Content\Form;
 
 use Cake\Form\Form;
 
+/**
+ * Class ModuleParamsForm
+ * @package Content\Form
+ * @todo Check usage
+ */
 class ModuleParamsForm extends Form
 {
-
 }

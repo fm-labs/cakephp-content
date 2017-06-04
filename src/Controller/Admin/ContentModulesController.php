@@ -10,7 +10,9 @@ use Content\Controller\Admin\AppController;
  */
 class ContentModulesController extends AppController
 {
-
+    /**
+     * @var array
+     */
     public $actions = [
         'index'     => 'Backend.Index',
         'view'      => 'Backend.View',
@@ -109,6 +111,10 @@ class ContentModulesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * @param null $model
+     * @param null $modelId
+     */
     public function related($model = null, $modelId = null)
     {
 
@@ -135,9 +141,13 @@ class ContentModulesController extends AppController
         $this->set('_serialize', ['model', 'modelId', 'contentModules', 'sections', 'availableModules']);
     }
 
+    /**
+     * @param null $model
+     * @param null $modelId
+     * @return \Cake\Network\Response|null
+     */
     public function linkModule($model = null, $modelId = null)
     {
-
         $contentModule = $this->ContentModules->newEntity(
             [],
             ['validate' => false]
@@ -159,6 +169,5 @@ class ContentModulesController extends AppController
 
             return $this->redirect($redirect);
         }
-
     }
 }

@@ -1,28 +1,58 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 5/17/16
- * Time: 10:48 PM
- */
-
 namespace Content\Page;
 
-
 use Cake\Controller\Controller;
-use Cake\Datasource\EntityInterface;
+use Cake\Network\Response;
 
+/**
+ * Interface PageInterface
+ *
+ * @package Content\Page
+ */
 interface PageInterface
 {
-    //function getPageType(EntityInterface $entity);
-
+    /**
+     * @return int
+     */
     public function getPageId();
+
+    /**
+     * @return string
+     */
     public function getPageType();
+
+    /**
+     * @return string
+     */
     public function getPageTitle();
+
+    /**
+     * @return string|array
+     */
     public function getPageUrl();
+
+    /**
+     * @return string|array
+     */
     public function getPageAdminUrl();
+
+    /**
+     * @return array
+     */
     public function getPageChildren();
+
+    /**
+     * @return bool
+     */
     public function isPagePublished();
+
+    /**
+     * @return bool
+     */
     public function isPageHiddenInNav();
+
+    /**
+     * @return null|Response
+     */
     public function execute(Controller &$controller);
 }

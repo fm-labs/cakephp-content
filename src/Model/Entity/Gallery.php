@@ -14,7 +14,9 @@ use Media\Lib\Media\MediaManager;
  */
 class Gallery extends Entity
 {
-
+    /**
+     * @var Gallery
+     */
     protected $_parent;
 
     /**
@@ -31,6 +33,9 @@ class Gallery extends Entity
         'id' => false,
     ];
 
+    /**
+     * @return \Cake\Datasource\EntityInterface|Gallery|mixed|null
+     */
     protected function _getParent()
     {
         if ($this->_parent === null && isset($this->_properties['parent_id'])) {
@@ -39,6 +44,9 @@ class Gallery extends Entity
         return $this->_parent;
     }
 
+    /**
+     * @return null
+     */
     protected function _getDescHtml()
     {
         if ($this->inherit_desc && $this->parent) {
@@ -48,6 +56,9 @@ class Gallery extends Entity
         return (isset($this->_properties['desc_html'])) ? $this->_properties['desc_html'] : null;
     }
 
+    /**
+     * @return array
+     */
     protected function _getImages()
     {
         switch ($this->_properties['source']) {
@@ -59,6 +70,9 @@ class Gallery extends Entity
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function _getPublishedPosts()
     {
         return TableRegistry::get('Content.Posts')
@@ -71,6 +85,9 @@ class Gallery extends Entity
         ])->all();
     }
 
+    /**
+     * @return array
+     */
     protected function _loadImagesFromFolder()
     {
         $folder = $this->_properties['source_folder'];
@@ -89,10 +106,5 @@ class Gallery extends Entity
         });
 
         return $images;
-    }
-
-    protected function _loadImagesFromPosts()
-    {
-
     }
 }

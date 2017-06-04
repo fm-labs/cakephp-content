@@ -2,15 +2,22 @@
 
 namespace Content\Controller\Admin;
 
-use Cake\Network\Exception\NotFoundException;
-
+/**
+ * Class ContentManagerController
+ * @package Content\Controller\Admin
+ */
 class ContentManagerController extends AppController
 {
-
+    /**
+     * Index method
+     */
     public function index()
     {
     }
 
+    /**
+     * Treedata method
+     */
     public function treeData()
     {
         $this->viewBuilder()->className('Json');
@@ -20,5 +27,4 @@ class ContentManagerController extends AppController
         $this->set('tree', $sitesTree);
         $this->set('_serialize', 'tree');
     }
-
 }

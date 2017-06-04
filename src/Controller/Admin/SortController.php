@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 4/30/16
- * Time: 1:04 AM
- */
-
 namespace Content\Controller\Admin;
-
 
 use Backend\Controller\Admin\DataTableController;
 

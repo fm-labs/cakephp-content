@@ -1,15 +1,21 @@
 <?php
 namespace Content\Controller\Admin;
 
-
 use Cake\Core\Plugin;
-use Cake\Event\Event;
 use Cake\Log\Log;
-use Cake\Routing\Router;
 use Media\Lib\Media\MediaManager;
 
+/**
+ * Class HtmlEditorController
+ *
+ * @package Content\Controller\Admin
+ */
 class HtmlEditorController extends AppController
 {
+    /**
+     * TinyMCE compatible image list
+     * @param string $media
+     */
     public function imageList($media = 'images')
     {
         $this->viewBuilder()->className('Json');
@@ -32,13 +38,15 @@ class HtmlEditorController extends AppController
         $this->set('_serialize', 'list');
     }
 
+    /**
+     * TinyMCE compatible link list
+     */
     public function linkList()
     {
+        $list = [];
         $this->viewBuilder()->className('Json');
 
-        $list = [];
-
-        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function($event) {
+        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
             $_list = [];
             try {
@@ -61,7 +69,7 @@ class HtmlEditorController extends AppController
             $event->data['list'][] = ['title' => __d('content', 'Pages'), 'menu' => $_list];
         });
 
-        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function($event) {
+        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
             $_list = [];
             try {
@@ -92,7 +100,7 @@ class HtmlEditorController extends AppController
 
         if (Plugin::loaded('Shop')):
 
-            $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function($event) {
+            $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
                 $_list = [];
                 try {
@@ -117,7 +125,6 @@ class HtmlEditorController extends AppController
         endif;
 
         $event = $this->dispatchEvent('Content.HtmlEditor.buildLinkList', ['list' => $list], $this);
-
 
         $this->set('list', $event->data['list']);
         $this->set('_serialize', 'list');

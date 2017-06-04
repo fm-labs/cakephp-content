@@ -100,7 +100,9 @@ class PostsController extends AppController
         $this->set('_serialize', ['posts']);
     }
 
-
+    /**
+     * @deprecated
+     */
     public function quick()
     {
         if ($this->request->is(['post','put'])) {
@@ -223,6 +225,9 @@ class PostsController extends AppController
         $this->render($template);
     }
 
+    /**
+     * @param null $id
+     */
     public function view($id = null)
     {
         $post = $this->Posts->get($id, [

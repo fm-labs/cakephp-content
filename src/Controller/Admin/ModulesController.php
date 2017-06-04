@@ -13,15 +13,10 @@ use Content\Lib\ContentManager;
  */
 class ModulesController extends AppController
 {
-
+    /**
+     * @var string
+     */
     public $modelClass = 'Content.Modules';
-
-    public function initialize()
-    {
-        parent::initialize();
-
-        //$this->Auth->allow(['preview']);
-    }
 
     /**
      * Index method
@@ -43,7 +38,7 @@ class ModulesController extends AppController
             [__d('content', 'Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
         ]);
 
-        $this->Backend->executeAction();
+        return $this->Backend->executeAction();
     }
 
     /**
@@ -58,6 +53,9 @@ class ModulesController extends AppController
         $this->Backend->executeAction();
     }
 
+    /**
+     * @param null $id
+     */
     public function configure($id = null)
     {
         $module = $this->Modules->get($id);
@@ -89,6 +87,9 @@ class ModulesController extends AppController
         $this->set(compact('module', 'moduleOptions', 'userArgs'));
     }
 
+    /**
+     *
+     */
     public function preview()
     {
 
@@ -100,7 +101,6 @@ class ModulesController extends AppController
 
         $class = ClassRegistry::getClass('ContentModule', $path);
 
-
         $this->set('moduleClass', $class);
         $this->set('moduleParams', $params);
 
@@ -108,7 +108,6 @@ class ModulesController extends AppController
             ->layout('frontend')
             ->theme(Configure::read('Site.theme'))
             ->className('Content.Content');
-
 
         $this->set('_bare', true);
     }

@@ -15,7 +15,6 @@ use Cake\ORM\Query;
  */
 class Category extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -30,16 +29,25 @@ class Category extends Entity
         'id' => false
     ];
 
+    /**
+     * @return array
+     */
     public function getViewUrl()
     {
         return ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'view', $this->id];
     }
 
+    /**
+     * @return array
+     */
     public function getAdminUrl()
     {
         return ['prefix' => 'admin', 'plugin' => 'Content', 'controller' => 'Categories', 'action' => 'edit', $this->id];
     }
 
+    /**
+     * @return bool
+     */
     public function isPublished()
     {
         return $this->is_published;

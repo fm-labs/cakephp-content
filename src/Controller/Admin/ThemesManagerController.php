@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 5/24/15
- * Time: 4:04 PM
- */
-
 namespace Content\Controller\Admin;
-
 
 use Cake\Core\App;
 use Cake\Core\Plugin;
@@ -20,6 +12,9 @@ use Cake\Filesystem\Folder;
  */
 class ThemesManagerController extends AppController
 {
+    /**
+     * Index method
+     */
     public function index()
     {
         // get list of available themes in THEMES directory
@@ -44,6 +39,9 @@ class ThemesManagerController extends AppController
         //$this->set('themesInstalled', $themes);
     }
 
+    /**
+     * @param $themeName
+     */
     public function details($themeName)
     {
         $themePath = THEMES . $themeName . DS;

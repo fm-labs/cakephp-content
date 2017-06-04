@@ -2,17 +2,15 @@
 
 namespace Content\Controller\Component;
 
-use Banana\Lib\Banana;
-use Content\Model\Entity\Page;
 use Cake\Controller\Controller;
-use Cake\Core\Configure;
 use Cake\Controller\Component;
-use Cake\Event\Event;
+use Cake\Core\Configure;
+use Content\Model\Entity\Page;
 use Content\Model\Table\PagesTable;
-use Cake\I18n\I18n;
 
 /**
  * Class FrontendComponent
+ *
  * @package Content\Controller\Component
  */
 class FrontendComponent extends Component
@@ -27,6 +25,9 @@ class FrontendComponent extends Component
      */
     public $Pages;
 
+    /**
+     * @var array
+     */
     protected $_defaultConfig = [
         'viewClass' => 'Content.Content',
         'refscope' => 'Content.Pages',
@@ -34,8 +35,9 @@ class FrontendComponent extends Component
         'layout' => null
     ];
 
-    protected $_page;
-
+    /**
+     * @param array $config
+     */
     public function initialize(array $config)
     {
         $this->controller = $this->_registry->getController();
@@ -56,16 +58,26 @@ class FrontendComponent extends Component
         $this->setRefScope($this->_config['refscope']);
     }
 
+    /**
+     * @param $scope
+     */
     public function setRefScope($scope)
     {
         $this->controller->set('refscope', $scope);
     }
 
+    /**
+     * @param $id
+     */
     public function setRefId($id)
     {
         $this->controller->set('refid', $id);
     }
 
+    /**
+     * @param $pageId
+     * @deprecated
+     */
     public function setPageId($pageId)
     {
         $this->controller->set('page_id', $pageId);
@@ -73,57 +85,9 @@ class FrontendComponent extends Component
         $this->setRefId($pageId);
     }
 
-    public function beforeFilter(Event $event)
-    {
-        //$this->detectPage();
-    }
-
-    public function beforeRender(Event $event)
-    {
-
-        //if (!$controller->theme && $this->_theme) {
-        //    $controller->theme = $this->_theme;
-        //}
-
-        //if (!$controller->layout && $this->_layout) {
-        //    $controller->layout = $this->_layout;
-        //}
-    }
-
-    public function detectPage()
-    {
-        if (!$this->_page) {
-            $pageId = null;
-            if ($this->request->param('page_id')) {
-                $pageId = $this->request->param('page_id');
-            }
-            elseif ($this->request->query('page_id')) {
-                $pageId = $this->request->query('page_id');
-            }
-
-            $this->setPageId($pageId);
-        }
-    }
-
-    /*
-    public function setPage(Page $page)
-    {
-        $this->_page = $page;
-
-        $pageLayout = $this->Pages->getPageLayoutFor($page->id);
-        if ($pageLayout) {
-            $this->_theme = $pageLayout->theme;
-            $this->_layout = $pageLayout->layout;
-        }
-
-        $this->controller->set('page', $page);
-        $this->controller->set('pageId', $page->id);
-        $this->controller->set('pageTitle', $page->title);
-
-        $this->request->params['page_id'] = $page->id;
-    }
-    */
-
+    /**
+     * @return mixed
+     */
     public function getTheme()
     {
         return $this->_config['theme'];

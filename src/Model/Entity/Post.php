@@ -15,9 +15,8 @@ use Eav\Model\EntityAttributesTrait;
  */
 class Post extends Entity implements EntityTypeHandlerInterface, EntityAttributesInterface
 {
-
-    use EntityPostTypeHandlerTrait;
     use EntityAttributesTrait;
+    use EntityPostTypeHandlerTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -43,13 +42,19 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         'is_home' => true,
     ];
 
+    /**
+     * @var array
+     */
     protected $_virtual = [
         'url',
         'view_url',
         'children'
     ];
 
-
+    /**
+     * @param $val
+     * @return string
+     */
     protected function _setTitle($val)
     {
         return trim($val);
@@ -187,24 +192,4 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         }
         return __d('content','Read more');
     }
-
-    /*
-    protected function _getImageFiles()
-    {
-        if (is_string($this->_properties['image_files'])) {
-            $this->_properties['image_files'] = explode(',', $this->_properties['image_files']);
-        }
-
-        return $this->_properties['image_files'];
-    }
-
-    protected function _setImageFiles($val)
-    {
-        if (is_array($val)) {
-            $val = join(',', $val);
-        }
-
-        return $val;
-    }
-    */
 }

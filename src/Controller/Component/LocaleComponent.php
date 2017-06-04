@@ -5,9 +5,16 @@ use Cake\Controller\Component;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
 
+/**
+ * Class LocaleComponent
+ *
+ * @package Content\Controller\Component
+ */
 class LocaleComponent extends Component
 {
-
+    /**
+     * @param Event $event
+     */
     public function beforeFilter(Event $event)
     {
         $currentLocale = $requestLocale = I18n::locale();
@@ -32,11 +39,17 @@ class LocaleComponent extends Component
         */
     }
 
+    /**
+     * @param $locale
+     */
     public function setLocale($locale)
     {
         I18n::locale($locale);
     }
 
+    /**
+     * @return null|string
+     */
     public function getLocale()
     {
         return I18n::locale();

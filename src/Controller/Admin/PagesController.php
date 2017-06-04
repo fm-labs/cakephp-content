@@ -22,14 +22,19 @@ use Tree\Controller\TreeSortControllerTrait;
  */
 class PagesController extends ContentController
 {
-
-    use TreeSortControllerTrait;
-    use PrimaryModelAwareTrait;
-    use JsTreeAwareTrait;
     use EntityInfoActionTrait;
+    use JsTreeAwareTrait;
+    use PrimaryModelAwareTrait;
+    use TreeSortControllerTrait;
 
+    /**
+     * @var string
+     */
     public $modelClass = "Content.Pages";
 
+    /**
+     * @var array
+     */
     public $actions = [
         'index'     => 'Backend.TreeIndex',
         'view'      => 'Backend.View',
@@ -42,19 +47,24 @@ class PagesController extends ContentController
         'moveDown'  => 'Backend.TreeMoveDown',
     ];
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-
         $this->components()->unload('RequestHandler');
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
-
-
-        $this->response->header("Access-Control-Allow-Headers", "Content-Type");
+        $this->response->header("Access-Control-Allow-Headers", "Content-Type"); //@TODO Use CORS component instead
         $this->response->header("Access-Control-Allow-Origin", "*");
     }
 
@@ -94,6 +104,9 @@ class PagesController extends ContentController
         $this->Backend->executeAction();
     }
 
+    /**
+     * @deprecated
+     */
     public function quick()
     {
         if ($this->request->is(['post','put'])) {
@@ -108,10 +121,16 @@ class PagesController extends ContentController
         $this->redirect($this->referer(['action' => 'index']));
     }
 
+    /**
+     * @deprecated
+     */
     public function indexJstree()
     {
     }
 
+    /**
+     * @param null $id
+     */
     public function view ($id = null)
     {
         $content = $this->Pages->get($id, [
@@ -122,12 +141,18 @@ class PagesController extends ContentController
         $this->set('_serialize', ['content']);
     }
 
+    /**
+     * @deprecated
+     */
     public function treeView()
     {
         $id = $this->request->query('id');
         $this->setAction('manage', $id);
     }
 
+    /**
+     * @param null $id
+     */
     public function relatedPosts($id = null)
     {
         $content = $this->Pages->get($id, [
@@ -145,6 +170,10 @@ class PagesController extends ContentController
         $this->set('_serialize', ['content', 'posts']);
     }
 
+    /**
+     * @param null $id
+     * @deprecated Use MetaBehavior instead
+     */
     public function relatedPageMeta($id = null)
     {
         $PageMetas = TableRegistry::get('Content.PageMetas');
@@ -181,11 +210,9 @@ class PagesController extends ContentController
      */
     public function relatedContentModules($id = null)
     {
-
         $content = $this->Pages->get($id, [
             'contain' => ['ContentModules' => ['Modules']]
         ]);
-
 
         //@TODO Read custom sections from page layout
         $sections = ['main', 'top', 'bottom', 'before', 'after', 'left', 'right'];
@@ -203,6 +230,9 @@ class PagesController extends ContentController
         $this->set('_serialize', ['content', 'sections', 'availableModules']);
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function add()
     {
         $content = $this->Pages->newEntity();
@@ -248,6 +278,10 @@ class PagesController extends ContentController
         }
     }
 
+    /**
+     * @param null $id
+     * @return \Cake\Network\Response|null
+     */
     public function edit($id = null)
     {
         $page = $this->Pages->get($id, [
@@ -273,7 +307,9 @@ class PagesController extends ContentController
         $this->set('_serialize', ['content']);
     }
 
-
+    /**
+     * @param null $id
+     */
     public function preview($id = null)
     {
         $page = $this->Pages->get($id);
@@ -288,6 +324,10 @@ class PagesController extends ContentController
         return ContentManager::getAvailablePageTypes();
     }
 
+    /**
+     * @param null $id
+     * @todo Use MoveUpAction instead
+     */
     public function moveUp($id = null) {
         $page = $this->Pages->get($id, ['contain' => []]);
 
@@ -299,6 +339,10 @@ class PagesController extends ContentController
         $this->redirect($this->referer(['action' => 'index']));
     }
 
+    /**
+     * @param null $id
+     * @todo Use MoveDownAction instead
+     */
     public function moveDown($id = null) {
         $page = $this->Pages->get($id, ['contain' => []]);
 
@@ -310,13 +354,16 @@ class PagesController extends ContentController
         $this->redirect($this->referer(['action' => 'index']));
     }
 
+    /**
+     * Tree repair method
+     * @todo Use TreeRepairAction instead
+     */
     public function repair()
     {
         $this->Pages->recover();
         $this->Flash->success(__d('content','Shop Category tree recovery has been executed'));
         $this->redirect($this->referer(['action' => 'index']));
     }
-
 
     /**
      * @legacy
@@ -357,9 +404,7 @@ class PagesController extends ContentController
          */
 
         $id = 1;
-
-
-        $nodeFormatter = function(PageInterface $node) use (&$id) {
+        $nodeFormatter = function (PageInterface $node) use (&$id) {
 
             $publishedClass = ($node->isPagePublished()) ? 'published' : 'unpublished';
             $class = $node->getPageType();
@@ -384,7 +429,7 @@ class PagesController extends ContentController
             ];
         };
 
-        $nodesFormatter = function($nodes) use ($nodeFormatter, &$nodesFormatter) {
+        $nodesFormatter = function ($nodes) use ($nodeFormatter, &$nodesFormatter) {
             $formatted = [];
             foreach ($nodes as $node) {
                 $_node = $nodeFormatter($node);
@@ -413,17 +458,9 @@ class PagesController extends ContentController
         */
 
         $jsTree = $nodesFormatter($nodes);
-
-        //debug($jsTree);
-        //debug($nodes);
-
         $this->set('jsTree', $jsTree);
         $this->set('_serialize', 'jsTree');
-
     }
-
-
-
 
     /**
      * @legacy
@@ -498,6 +535,4 @@ class PagesController extends ContentController
         $this->set('treeData', $treeData);
         $this->set('_serialize', 'treeData');
     }
-
-
 }

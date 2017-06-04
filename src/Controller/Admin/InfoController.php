@@ -1,20 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 9/25/16
- * Time: 1:33 AM
- */
-
 namespace Banana\Controller\Admin;
 
-
-use Content\Lib\ContentManager;
-
+/**
+ * Class InfoController
+ *
+ * @package Banana\Controller\Admin
+ */
 class InfoController extends AppController
 {
+    /**
+     * @var bool|null|string
+     */
     public $modelClass = false;
 
-    public function index() {
+    /**
+     *
+     */
+    public function index()
+    {
     }
 }

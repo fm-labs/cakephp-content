@@ -13,14 +13,23 @@ use Cake\Routing\Router;
  */
 class PostsController extends ContentController
 {
+    /**
+     * @var string
+     */
     public $viewClass = 'Content.Post';
 
+    /**
+     * @var string
+     */
     public $modelClass = "Content.Posts";
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-
         $this->Auth->allow(['index', 'view', 'teaser', 'sitemap']);
     }
 
@@ -35,10 +44,13 @@ class PostsController extends ContentController
         if (!$homePost) {
             throw new NotFoundException(__d('content',"Start page not found for site ID " . $this->Site->getSiteId()));
         }
-
         $this->setAction('view', $homePost->id);
     }
 
+    /**
+     * @param null $id
+     * @throws \Exception
+     */
     public function view($id = null)
     {
         if ($id === null) {
@@ -120,7 +132,6 @@ class PostsController extends ContentController
         //    $id = $this->request->query('post_id');
         //}
 
-
         $post = $this->Posts->get($id, [
             'contain' => [],
             'media' => true
@@ -136,6 +147,9 @@ class PostsController extends ContentController
         $this->render($template);
     }
 
+    /**
+     * @deprecated Use EventListener instead
+     */
     public function sitemap()
     {
         $this->loadComponent('Sitemap.Sitemap');
