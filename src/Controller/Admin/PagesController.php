@@ -5,13 +5,12 @@ namespace Content\Controller\Admin;
 use Backend\Controller\EntityInfoActionTrait;
 use Banana\Controller\Shared\JsTreeAwareTrait;
 use Banana\Controller\Shared\PrimaryModelAwareTrait;
-use Cake\Network\Exception\NotFoundException;
-use Content\Lib\ContentManager;
-use Content\Model\Table\PagesTable;
 use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
+use Content\Lib\ContentManager;
+use Content\Model\Table\PagesTable;
 use Content\Page\PageInterface;
 use Tree\Controller\TreeSortControllerTrait;
 

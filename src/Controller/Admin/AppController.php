@@ -4,9 +4,9 @@ namespace Content\Controller\Admin;
 
 use Backend\Controller\BackendActionsTrait;
 use Cake\Controller\Controller;
-use Content\Lib\ContentManager;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Content\Lib\ContentManager;
 use Media\Lib\Media\MediaManager;
 
 class AppController extends Controller

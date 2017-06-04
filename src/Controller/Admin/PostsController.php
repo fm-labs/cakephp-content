@@ -5,8 +5,6 @@ use Cake\Core\Configure;
 use Content\Controller\Admin\AppController;
 use Content\Form\SearchForm;
 use Content\Lib\ContentManager;
-use Cake\Network\Exception\BadRequestException;
-use Cake\ORM\Table;
 use Media\Lib\Media\MediaManager;
 
 /**
@@ -16,8 +14,14 @@ use Media\Lib\Media\MediaManager;
  */
 class PostsController extends AppController
 {
+    /**
+     * @var string
+     */
     public $modelClass = 'Content.Posts';
 
+    /**
+     * @var array
+     */
     public $actions = [
         'index'     => 'Backend.Index',
         'view'      => 'Backend.View',

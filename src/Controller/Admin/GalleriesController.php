@@ -1,16 +1,14 @@
 <?php
 namespace Content\Controller\Admin;
 
+use Banana\Controller\Shared\JsTreeAwareTrait;
+use Banana\Controller\Shared\PrimaryModelAwareTrait;
 use Cake\Core\Configure;
-use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Content\Controller\Admin\AppController;
-use Banana\Controller\Shared\JsTreeAwareTrait;
-use Banana\Controller\Shared\PrimaryModelAwareTrait;
 use Content\Lib\ContentManager;
-use Crud\Controller\Component\CrudComponent;
 
 /**
  * Galleries Controller
