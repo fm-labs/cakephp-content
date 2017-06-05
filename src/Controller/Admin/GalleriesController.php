@@ -1,8 +1,8 @@
 <?php
 namespace Content\Controller\Admin;
 
-use Banana\Controller\Shared\JsTreeAwareTrait;
-use Banana\Controller\Shared\PrimaryModelAwareTrait;
+use Backend\Controller\JsTreeAwareTrait;
+use Banana\Controller\PrimaryModelAwareTrait;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;

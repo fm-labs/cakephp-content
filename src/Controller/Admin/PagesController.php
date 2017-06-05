@@ -3,8 +3,8 @@
 namespace Content\Controller\Admin;
 
 use Backend\Controller\EntityInfoActionTrait;
-use Banana\Controller\Shared\JsTreeAwareTrait;
-use Banana\Controller\Shared\PrimaryModelAwareTrait;
+use Backend\Controller\JsTreeAwareTrait;
+use Banana\Controller\PrimaryModelAwareTrait;
 use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\ORM\TableRegistry;
