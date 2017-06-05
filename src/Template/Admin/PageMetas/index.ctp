@@ -23,24 +23,7 @@
             <td><?= h($pageMeta->title) ?></td>
             <td><?= h($pageMeta->robots) ?></td>
             <td><?= h($pageMeta->lang) ?></td>
-            <td class="actions">
-                <?php
-                $menu = new Backend\Lib\Menu\Menu();
-                $menu->add(__d('content', 'View'), ['action' => 'view', $pageMeta->id]);
-
-                $dropdown = $menu->add('Dropdown');
-                $dropdown->getChildren()->add(
-                    __d('content', 'Edit'),
-                    ['action' => 'edit', $pageMeta->id],
-                    ['data-icon' => 'edit']
-                );
-                $dropdown->getChildren()->add(
-                    __d('content', 'Delete'),
-                    ['action' => 'delete', $pageMeta->id],
-                    ['data-icon' => 'trash', 'confirm' => __d('content', 'Are you sure you want to delete # {0}?', $pageMeta->id)]
-                );
-                ?>
-                <?= $this->element('Backend.Table/table_row_actions', ['menu' => $menu]); ?>
+            <td class="actions">d
             </td>
         </tr>
 
