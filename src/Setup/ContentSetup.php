@@ -2,7 +2,6 @@
 
 namespace Content\Setup;
 
-
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
@@ -15,6 +14,8 @@ use Eav\Model\Table\EavAttributesTable;
  *
  * @property EavAttributeSetsTable AttributeSets
  * @property EavAttributesTable Attributes
+ *
+ * @TODO !Experimental class!
  */
 class ContentSetup
 {
