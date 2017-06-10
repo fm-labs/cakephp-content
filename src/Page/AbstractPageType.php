@@ -13,7 +13,7 @@ abstract class AbstractPageType implements PageTypeInterface
      * @var Page
      */
     protected $page;
-    
+
     public function setEntity(EntityInterface $page)
     {
         $this->page =& $page;
@@ -22,7 +22,6 @@ abstract class AbstractPageType implements PageTypeInterface
     public function getUrl()
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {
-
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
@@ -32,7 +31,6 @@ abstract class AbstractPageType implements PageTypeInterface
                 'slug' => $this->page->slug,
             ];
         } else {
-
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',

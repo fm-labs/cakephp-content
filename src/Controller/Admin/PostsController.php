@@ -49,7 +49,7 @@ class PostsController extends AppController
 
         $this->set('fields.whitelist', ['is_published', 'title']);
         $this->set('fields', [
-            'title' => ['formatter' => function($val, $row, $args, $view) {
+            'title' => ['formatter' => function ($val, $row, $args, $view) {
                 return $view->Html->link($val, ['action' => 'edit', $row->id]);
             }]
         ]);
@@ -105,10 +105,11 @@ class PostsController extends AppController
      */
     public function quick()
     {
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $id = $this->request->data('post_id');
             if ($id) {
                 $this->redirect(['action' => 'edit', $id]);
+
                 return;
             }
         }
@@ -128,7 +129,7 @@ class PostsController extends AppController
         if ($this->request->is('post')) {
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
 
                 /*
                 if ($link == true && $refid && $refscope) {
@@ -160,17 +161,15 @@ class PostsController extends AppController
 
                 return $this->redirect(['action' => 'edit', $post->id]);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
             }
         } else {
             $this->Posts->patchEntity($post, $this->request->query, ['validate' => false]);
         }
 
-
         $this->set(compact('post'));
         $this->set('_serialize', ['content']);
     }
-
 
     /**
      * Edit method
@@ -189,16 +188,16 @@ class PostsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
+
                 return $this->redirect(['action' => 'edit', $post->id]);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
             }
         }
 
         $teaserTemplates = ContentManager::getAvailablePostTeaserTemplates();
         $templates = ContentManager::getAvailablePostTemplates();
-
 
         // HtmlEditor config
         $editor = Configure::read('HtmlEditor.content');

@@ -41,6 +41,7 @@ class Gallery extends Entity
         if ($this->_parent === null && isset($this->_properties['parent_id'])) {
             $this->_parent = TableRegistry::get('Content.Galleries')->get($this->_properties['parent_id']);
         }
+
         return $this->_parent;
     }
 
@@ -82,7 +83,7 @@ class Gallery extends Entity
             ->where([
             'refscope' => 'Content.Galleries',
             'refid' => $this->id,
-        ])->all();
+            ])->all();
     }
 
     /**
@@ -98,7 +99,7 @@ class Gallery extends Entity
         $files = $mm->listFiles();
         $images = [];
 
-        array_walk($files, function($val) use (&$images, &$mm) {
+        array_walk($files, function ($val) use (&$images, &$mm) {
             if (preg_match('/^_/', basename($val))) {
                 return;
             }

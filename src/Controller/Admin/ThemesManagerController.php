@@ -19,7 +19,7 @@ class ThemesManagerController extends AppController
     {
         // get list of available themes in THEMES directory
         $dir = new Folder(THEMES);
-        list($themeNames,) = $dir->read();
+        list($themeNames, ) = $dir->read();
 
         debug($themeNames);
 
@@ -48,7 +48,7 @@ class ThemesManagerController extends AppController
         $folder = new Folder($themePath);
 
         $folder->cd($themePath . "src/Template/Layout");
-        list(,$layoutTemplates) = $folder->read();
+        list(, $layoutTemplates) = $folder->read();
 
         $themeDetails = [
             'name' => $themeName,

@@ -210,7 +210,8 @@ class Page extends Entity implements PageInterface
     /**
      * @return string
      */
-    protected function _getPermaUrl() {
+    protected function _getPermaUrl()
+    {
         return '/?page_id=' . $this->id;
     }
 
@@ -231,6 +232,7 @@ class Page extends Entity implements PageInterface
         if ($this->get('parent_id')) {
             $Parent = TableRegistry::get('Content.Pages');
             $parent = $Parent->get($this->get('parent_id'));
+
             return $this->__parentTheme = $parent->parent_theme;
         }
 

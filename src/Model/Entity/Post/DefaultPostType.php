@@ -26,11 +26,10 @@ class DefaultPostType implements PostTypeInterface
     {
         $this->post = $entity;
     }
-    
+
     public function getViewUrl()
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {
-
             $postUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
@@ -40,7 +39,6 @@ class DefaultPostType implements PostTypeInterface
                 'slug' => $this->post->get('slug'),
             ];
         } else {
-
             $postUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
@@ -77,5 +75,4 @@ class DefaultPostType implements PostTypeInterface
     {
         return $this->post->get('is_published');
     }
-
 }

@@ -88,12 +88,13 @@ class PageView extends ContentView
             $path = $page->getPath()->toArray();
             array_shift($path); // Drop root node
             foreach ($path as $node) {
-                if (!$node->parent_id || $node->hide_in_nav) continue;
+                if (!$node->parent_id || $node->hide_in_nav) {
+                    continue;
+                }
                 $this->Breadcrumbs->add($node->getPageTitle(), $node->getPageUrl());
             }
 
             //$this->Breadcrumbs->add($page->getPageTitle(), $page->getPageUrl());
-
         }
 
         return parent::render($view, $layout);

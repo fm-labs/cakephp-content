@@ -127,19 +127,19 @@ class PagesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('lft');
-            
+
         $validator
             ->add('rght', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('rght');
-            
+
         $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
-            
+
         $validator
             //->requirePresence('slug', 'create')
             ->allowEmpty('slug');
@@ -167,15 +167,15 @@ class PagesTable extends Table
 
         $validator
             ->allowEmpty('page_template');
-            
+
         $validator
             ->add('is_published', 'valid', ['rule' => 'boolean'])
             ->allowEmpty('is_published');
-            
+
         $validator
             ->add('publish_start_date', 'valid', ['rule' => 'date'])
             ->allowEmpty('publish_start_date');
-            
+
         $validator
             ->add('publish_end_date', 'valid', ['rule' => 'date'])
             ->allowEmpty('publish_end_date');
@@ -193,6 +193,7 @@ class PagesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['parent_id'], 'ParentPages'));
+
         return $rules;
     }
 
@@ -206,7 +207,6 @@ class PagesTable extends Table
             $root = $this->findRoot();
             $startNodeId = $root->id;
         }
-
 
         $cacheKey = sprintf("pages-%s-%s", $startNodeId, md5(serialize($options)));
         $menu = Cache::read($cacheKey, 'content_menu');
@@ -237,7 +237,6 @@ class PagesTable extends Table
 
             if ($includeHidden !== true && $child->isPageHiddenInNav()) {
                 continue;
-
             } elseif ($includeHidden !== true && !$child->isPagePublished()) {
                 continue;
 
@@ -292,8 +291,6 @@ class PagesTable extends Table
         return $menu;
     }
 
-
-
     public function getMenuTree($startNodeId = null, array $options = [])
     {
         $tree = [];
@@ -304,7 +301,6 @@ class PagesTable extends Table
             $root = $this->findRoot();
             $startNodeId = $root->id;
         }
-
 
         $cacheKey = sprintf("pages-tree-%s-%s", $startNodeId, md5(serialize($options)));
         //$tree = Cache::read($cacheKey, 'content_menu');
@@ -331,7 +327,6 @@ class PagesTable extends Table
     protected function _buildMenuTree(&$tree, $children, $level = 0, $maxDepth = -1)
     {
         foreach ($children as $child) {
-
             if ($child->isPageHiddenInNav() || !$child->isPagePublished()) {
                 continue;
             }
@@ -342,10 +337,8 @@ class PagesTable extends Table
             if (($maxDepth < 0 || $level < $maxDepth) && $child->children) {
                 $this->_buildMenuTree($tree, $child->children, $level + 1, $maxDepth);
             }
-
         }
     }
-
 
     public function getPageLayoutFor($page)
     {
@@ -449,13 +442,12 @@ class PagesTable extends Table
             ->all()
             ->toArray();
 
-
         $id = 1;
-        $nodeFormatter = function(PageInterface $node) use (&$id) {
+        $nodeFormatter = function (PageInterface $node) use (&$id) {
 
             $publishedClass = ($node->isPagePublished()) ? 'published' : 'unpublished';
             $class = $node->getPageType();
-            $class.= " " . $publishedClass;
+            $class .= " " . $publishedClass;
 
             return [
                 'id' => $id++,
@@ -476,7 +468,7 @@ class PagesTable extends Table
             ];
         };
 
-        $nodesFormatter = function($nodes) use ($nodeFormatter, &$nodesFormatter) {
+        $nodesFormatter = function ($nodes) use ($nodeFormatter, &$nodesFormatter) {
             $formatted = [];
             foreach ($nodes as $node) {
                 $_node = $nodeFormatter($node);
@@ -485,10 +477,12 @@ class PagesTable extends Table
                 }
                 $formatted[] = $_node;
             }
+
             return $formatted;
         };
 
         $nodesFormatted = $nodesFormatter($nodes);
+
         return $nodesFormatted;
     }
 }

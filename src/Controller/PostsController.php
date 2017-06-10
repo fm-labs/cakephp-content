@@ -42,7 +42,7 @@ class PostsController extends ContentController
     {
         $homePost = $this->Posts->findHome($this->Site->getSiteId());
         if (!$homePost) {
-            throw new NotFoundException(__d('content',"Start page not found for site ID " . $this->Site->getSiteId()));
+            throw new NotFoundException(__d('content', "Start page not found for site ID " . $this->Site->getSiteId()));
         }
         $this->setAction('view', $homePost->id);
     }
@@ -73,7 +73,6 @@ class PostsController extends ContentController
         }
 
         try {
-
             $post = $this->Posts->get($id, [
                 'media' => true,
             ]);
@@ -94,6 +93,7 @@ class PostsController extends ContentController
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
+
                     return;
                 }
             }
@@ -104,7 +104,6 @@ class PostsController extends ContentController
 
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
-
 
         $this->viewBuilder()->className('Content.Post');
 

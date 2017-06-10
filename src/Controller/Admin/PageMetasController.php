@@ -49,6 +49,7 @@ class PageMetasController extends AppController
             $pageMeta = $this->PageMetas->patchEntity($pageMeta, $this->request->data);
             if ($this->PageMetas->save($pageMeta)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'page meta')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'page meta')));
@@ -75,6 +76,7 @@ class PageMetasController extends AppController
             $pageMeta = $this->PageMetas->patchEntity($pageMeta, $this->request->data);
             if ($this->PageMetas->save($pageMeta)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'page meta')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'page meta')));
@@ -101,6 +103,7 @@ class PageMetasController extends AppController
         } else {
             $this->Flash->error(__d('content', 'The {0} could not be deleted. Please, try again.', __d('content', 'page meta')));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 

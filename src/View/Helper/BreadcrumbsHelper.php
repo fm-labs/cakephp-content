@@ -27,7 +27,8 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
         ]
     ];
 
-    public function add($title, $url = null, array $options = []) {
+    public function add($title, $url = null, array $options = [])
+    {
         //debug('Add Crumb ' . $title);
         parent::add($title, $url, $options);
     }
@@ -38,7 +39,8 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
      * @return null|string
      * @deprecated
      */
-    public function getCrumbList(array $options = [], $startText = false) {
+    public function getCrumbList(array $options = [], $startText = false)
+    {
 
         $this->templater()->add([
             'breadcrumb_list' => '<ol{{attrs}}>{{items}}</ol>',
@@ -51,7 +53,6 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
         $separator = $options['separator'];
         $escape = $options['escape'];
         unset($options['separator'], $options['escape']);
-
 
         $crumbs = $this->_prepareCrumbs($startText, $escape);
         if (empty($crumbs)) {
@@ -78,7 +79,6 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
                 'attrs' => $this->templater()->formatAttributes($options)
             ]);
         }
-
 
         return $this->formatTemplate('breadcrumb_list', [
             'items' => $result,

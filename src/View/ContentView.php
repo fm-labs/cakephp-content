@@ -36,7 +36,6 @@ class ContentView extends View
         array $viewOptions = []
     ) {
         parent::__construct($request, $response, $eventManager, $viewOptions);
-
     }
 
     public function initialize()
@@ -68,13 +67,13 @@ class ContentView extends View
         $refscope = $this->get('refscope');
         $refid = $this->get('refid');
 
-        $page_modules = $this->_loadPageModules($section, $refscope, $refid);
-        if (count($page_modules) < 1) {
-            $page_modules = $this->_loadLayoutModules($section, $refscope, $refid);
+        $pageModules = $this->_loadPageModules($section, $refscope, $refid);
+        if (count($pageModules) < 1) {
+            $pageModules = $this->_loadLayoutModules($section, $refscope, $refid);
         }
 
         $sectionHtml = "";
-        foreach ($page_modules as $contentModule):
+        foreach ($pageModules as $contentModule) :
             $sectionHtml .= $this->contentModule($contentModule);
         endforeach;
 
@@ -131,6 +130,7 @@ class ContentView extends View
             if (Configure::read('debug')) {
                 return "Content Module with ID " . $contentModule->id . " has no module attached";
             }
+
             return null;
         }
 
@@ -151,6 +151,7 @@ class ContentView extends View
             'class' => $contentModule->cssclass,
             'data-content-module-id' => $contentModule->id
         ], $wrapperAttrs);
+
         return $this->Html->div(null, $moduleHtml, $wrapperAttrs);
     }
 
@@ -158,5 +159,4 @@ class ContentView extends View
     {
         return parent::render($view, $layout);
     }
-
 }

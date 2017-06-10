@@ -58,6 +58,7 @@ class UploadWidget implements WidgetInterface
         if (!isset($data['name']) || $data['name'] === '') {
             return [];
         }
+
         return [$data['name']];
     }
 }

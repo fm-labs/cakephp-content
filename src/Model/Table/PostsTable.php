@@ -17,7 +17,6 @@ use Cake\Validation\Validator;
 class PostsTable extends Table
 {
 
-
     /**
      * Initialize method
      *
@@ -29,7 +28,6 @@ class PostsTable extends Table
         $this->table('bc_posts');
         $this->displayField('title');
         $this->primaryKey('id');
-
 
         $this->belongsTo('Parent', [
             'className' => 'Content.Posts',
@@ -83,7 +81,6 @@ class PostsTable extends Table
             Log::warning('Media plugin is not loaded');
         }
 
-
         if (Plugin::loaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
@@ -127,10 +124,10 @@ class PostsTable extends Table
         ];
     }
 
-
     protected function _initializeSchema(\Cake\Database\Schema\Table $schema)
     {
         $schema->columnType('image_files', 'media_file');
+
         return $schema;
     }
 
@@ -164,35 +161,35 @@ class PostsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
-            
+
         $validator
             ->allowEmpty('slug');
-            
+
         $validator
             ->allowEmpty('subheading');
-            
+
         $validator
             ->allowEmpty('teaser');
-            
+
         $validator
             ->allowEmpty('body_html');
-            
+
         $validator
             ->allowEmpty('image_file');
-            
+
         $validator
             ->add('is_published', 'valid', ['rule' => 'boolean'])
             ->requirePresence('is_published', 'create')
             ->notEmpty('is_published');
-            
+
         $validator
             ->add('publish_start_datetime', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('publish_start_datetime');
-            
+
         $validator
             ->add('publish_end_datetime', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('publish_end_datetime');

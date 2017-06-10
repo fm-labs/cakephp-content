@@ -25,7 +25,7 @@ class HtmlEditorController extends AppController
             $mm = MediaManager::get($media);
             $files = $mm->getSelectListRecursive();
 
-            array_walk($files, function($filename, $idx) use (&$list, &$mm) {
+            array_walk($files, function ($filename, $idx) use (&$list, &$mm) {
                 $list[] = [
                     'title' => $idx,
                     'value' => $filename
@@ -53,7 +53,7 @@ class HtmlEditorController extends AppController
                 $this->loadModel('Content.Pages');
                 $result = $this->Pages->find()->contain([])->order('Pages.lft')->all()->toArray();
 
-                array_walk($result, function($entity) use (&$_list) {
+                array_walk($result, function ($entity) use (&$_list) {
                     $_list[] = [
                         'title' => str_repeat('_', $entity->level) . $entity->title,
                         //'value' => Router::url($entity->url, true)
@@ -61,7 +61,6 @@ class HtmlEditorController extends AppController
                         //'class' => 'foo'
                     ];
                 });
-
             } catch (\Exception $ex) {
                 Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
             }
@@ -83,14 +82,13 @@ class HtmlEditorController extends AppController
                     ->all()
                     ->toArray();
 
-                array_walk($result, function($entity) use (&$_list) {
+                array_walk($result, function ($entity) use (&$_list) {
                     $_list[] = [
                         'title' => str_repeat('_', $entity->level) . $entity->title,
                         //'value' => Router::url($entity->url, true)
                         'value' => sprintf('{{Content.Posts:%s}}', $entity->id)
                     ];
                 });
-
             } catch (\Exception $ex) {
                 Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
             }
@@ -98,8 +96,7 @@ class HtmlEditorController extends AppController
             $event->data['list'][] = ['title' => __d('content', 'Posts'), 'menu' => $_list];
         });
 
-        if (Plugin::loaded('Shop')):
-
+        if (Plugin::loaded('Shop')) :
             $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
                 $_list = [];
@@ -107,21 +104,19 @@ class HtmlEditorController extends AppController
                     $this->loadModel('Shop.ShopCategories');
                     $result = $this->ShopCategories->find()->contain([])->all()->toArray();
 
-                    array_walk($result, function($entity) use (&$_list) {
+                    array_walk($result, function ($entity) use (&$_list) {
                         $_list[] = [
                             'title' => str_repeat('_', $entity->level) . $entity->name,
                             //'value' => Router::url($entity->url, true)
                             'value' => sprintf('{{Shop.ShopCategories:%s}}', $entity->id)
                         ];
                     });
-
                 } catch (\Exception $ex) {
                     Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
                 }
 
                 $event->data['list'][] = ['title' => __d('content', 'Shop Categories'), 'menu' => $_list];
             });
-
         endif;
 
         $event = $this->dispatchEvent('Content.HtmlEditor.buildLinkList', ['list' => $list], $this);

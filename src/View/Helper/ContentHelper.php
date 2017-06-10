@@ -18,7 +18,8 @@ class ContentHelper extends Helper
      * @param $text
      * @return mixed
      */
-    public function parseUrlPlaceholders($text) {
+    public function parseUrlPlaceholders($text)
+    {
 
         //@todo Implement modelMap feature
         $modelMap = [
@@ -28,7 +29,7 @@ class ContentHelper extends Helper
 
         return $text;
 
-        $text = preg_replace_callback('/\{\{(.*)\}\}/U', function($matches) use ($modelMap) {
+        $text = preg_replace_callback('/\{\{(.*)\}\}/U', function ($matches) use ($modelMap) {
 
             $placeholder = $matches[1];
 
@@ -54,7 +55,6 @@ class ContentHelper extends Helper
                 $entity = $Table->find()->where(['id' => $id])->contain([])->first();
 
                 $url = ($entity) ? $entity->url : null;
-
             } catch (\Exception $ex) {
                 $url = null;
                 debug($ex->getMessage());
@@ -64,7 +64,6 @@ class ContentHelper extends Helper
             $url = Router::url($url);
 
             return $this->_urlPlaceholderCache[$placeholder] = $url;
-
         }, $text);
 
         return $text;
@@ -76,6 +75,4 @@ class ContentHelper extends Helper
 
         return $text;
     }
-
-
 }

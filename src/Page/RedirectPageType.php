@@ -9,6 +9,7 @@ class RedirectPageType extends AbstractPageType
     public function getUrl()
     {
         $url = $this->page->redirect_location;
+
         return Router::url($url, true);
     }
 
@@ -22,6 +23,7 @@ class RedirectPageType extends AbstractPageType
         }
 
         $controller->redirect($redirectUrl, $this->page->redirect_status);
+
         return false;
     }
 }

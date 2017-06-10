@@ -2,7 +2,6 @@
 
 namespace Content;
 
-
 use Backend\Event\RouteBuilderEvent;
 use Banana\Plugin\PluginInterface;
 use Cake\Event\Event;

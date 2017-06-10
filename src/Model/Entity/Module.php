@@ -49,7 +49,7 @@ class Module extends Entity
     public function expand()
     {
         if (isset($this->_properties['params'])) {
-            $this->setParams((array) json_decode($this->_properties['params'], true));
+            $this->setParams((array)json_decode($this->_properties['params'], true));
             $this->set($this->_properties['params_arr']);
         }
     }
@@ -127,7 +127,7 @@ class Module extends Entity
      */
     protected function _setParams($params = null)
     {
-        $this->setParams((array) json_decode($params, true));
+        $this->setParams((array)json_decode($params, true));
         $this->set($this->_properties['params_arr']);
     }
 
@@ -139,6 +139,7 @@ class Module extends Entity
         if (!isset($this->_properties['params']) && isset($this->_properties['params_arr'])) {
             $this->_properties['params'] = json_encode($this->_properties['params_arr']);
         }
+
         return (isset($this->_properties['params'])) ? $this->_properties['params'] : null;
     }
 
@@ -150,6 +151,7 @@ class Module extends Entity
         $this->_properties['params_arr'] = (isset($this->_properties['params_arr']))
             ? $this->_properties['params_arr']
             : [];
+
         return $this->_properties['params_arr'];
     }
 
@@ -164,12 +166,10 @@ class Module extends Entity
         parent::set($property, $value, $options);
 
         $dirtyParam = false;
-        foreach (array_keys((array) $this->params_arr) as $param)
-        {
+        foreach (array_keys((array)$this->params_arr) as $param) {
             if (!$this->has($param)) {
                 $this->_properties[$param] = $this->_properties['params_arr'][$param];
-            }
-            elseif ($this->dirty($param)) {
+            } elseif ($this->dirty($param)) {
                 $dirtyParam = true;
                 $this->_properties['params_arr'][$param] = $this->get($param);
             }
@@ -181,4 +181,3 @@ class Module extends Entity
         }
     }
 }
-

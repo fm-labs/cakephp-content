@@ -109,7 +109,7 @@ class CategoryView extends ContentView
                     ->find('path', ['for' => $nodeId])
                     ->where(['site_id' => $node->site_id])
                     ->all();
-                $paths->each(function(Node $node) {
+                $paths->each(function (Node $node) {
                     $this->Breadcrumbs->add($node->getLabel(), $node->getViewUrl());
                 });
             } else {

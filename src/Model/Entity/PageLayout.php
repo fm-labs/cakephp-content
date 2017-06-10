@@ -27,7 +27,8 @@ class PageLayout extends Entity
      */
     protected function _getTheme()
     {
-        list($theme,) = pluginSplit($this->template);
+        list($theme, ) = pluginSplit($this->template);
+
         return $theme;
     }
 
@@ -36,7 +37,8 @@ class PageLayout extends Entity
      */
     protected function _getLayout()
     {
-        list(,$layout) = pluginSplit($this->template);
+        list(, $layout) = pluginSplit($this->template);
+
         return $layout;
     }
 
@@ -46,6 +48,7 @@ class PageLayout extends Entity
     protected function _getSectionsList()
     {
         $sections = array_walk(explode(',', $this->sections), 'trim');
+
         return $sections;
     }
 }

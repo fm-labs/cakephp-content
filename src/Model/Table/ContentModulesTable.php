@@ -77,6 +77,7 @@ class ContentModulesTable extends Table
     {
         //$rules->add($rules->existsIn(['page_id'], 'Pages'));
         $rules->add($rules->existsIn(['module_id'], 'Modules'));
+
         return $rules;
     }
 }

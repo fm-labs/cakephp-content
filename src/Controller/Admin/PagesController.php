@@ -109,10 +109,11 @@ class PagesController extends ContentController
      */
     public function quick()
     {
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $id = $this->request->data('page_id');
             if ($id) {
                 $this->redirect(['action' => 'view', $id]);
+
                 return;
             }
         }
@@ -131,7 +132,7 @@ class PagesController extends ContentController
     /**
      * @param null $id
      */
-    public function view ($id = null)
+    public function view($id = null)
     {
         $content = $this->Pages->get($id, [
             'contain' => ['ParentPages']
@@ -239,10 +240,11 @@ class PagesController extends ContentController
         if ($this->request->is('post')) {
             $content = $this->Pages->patchEntity($content, $this->request->data);
             if ($this->Pages->save($content)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
+
                 return $this->redirect(['action' => 'edit', $content->id]);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
                 debug($content->errors());
             }
         }
@@ -253,7 +255,6 @@ class PagesController extends ContentController
         $this->set('types', $this->_getPageTypes());
         $this->set(compact('content'));
         $this->set('_serialize', ['content']);
-
     }
 
     /**
@@ -270,10 +271,11 @@ class PagesController extends ContentController
         if ($this->request->is(['post', 'put'])) {
             $this->Pages->ContentModules->patchEntity($contentModule, $this->request->data);
             if ($this->Pages->ContentModules->save($contentModule)) {
-                $this->Flash->success(__d('content','The content module has been saved for Page {0}.', $id));
+                $this->Flash->success(__d('content', 'The content module has been saved for Page {0}.', $id));
             } else {
-                $this->Flash->error(__d('content','The content module could not be saved for Page {0}.', $id));
+                $this->Flash->error(__d('content', 'The content module could not be saved for Page {0}.', $id));
             }
+
             return $this->redirect(['action' => 'edit', $id]);
         }
     }
@@ -290,10 +292,11 @@ class PagesController extends ContentController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $content = $this->Pages->patchEntity($page, $this->request->data);
             if ($this->Pages->save($content)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','content')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
+
                 return $this->redirect(['action' => 'edit', $page->id]);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','content')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
             }
         }
         $pagesTree = $this->Pages->find('treeList')->toArray();
@@ -328,13 +331,14 @@ class PagesController extends ContentController
      * @param null $id
      * @todo Use MoveUpAction instead
      */
-    public function moveUp($id = null) {
+    public function moveUp($id = null)
+    {
         $page = $this->Pages->get($id, ['contain' => []]);
 
         if ($this->Pages->moveUp($page)) {
-            $this->Flash->success(__d('content','The {0} has been moved up.', __d('content','page')));
+            $this->Flash->success(__d('content', 'The {0} has been moved up.', __d('content', 'page')));
         } else {
-            $this->Flash->error(__d('content','The {0} could not be moved. Please, try again.', __d('content','page')));
+            $this->Flash->error(__d('content', 'The {0} could not be moved. Please, try again.', __d('content', 'page')));
         }
         $this->redirect($this->referer(['action' => 'index']));
     }
@@ -343,13 +347,14 @@ class PagesController extends ContentController
      * @param null $id
      * @todo Use MoveDownAction instead
      */
-    public function moveDown($id = null) {
+    public function moveDown($id = null)
+    {
         $page = $this->Pages->get($id, ['contain' => []]);
 
         if ($this->Pages->moveDown($page)) {
-            $this->Flash->success(__d('content','The {0} has been moved down.', __d('content','page')));
+            $this->Flash->success(__d('content', 'The {0} has been moved down.', __d('content', 'page')));
         } else {
-            $this->Flash->error(__d('content','The {0} could not be moved. Please, try again.', __d('content','page')));
+            $this->Flash->error(__d('content', 'The {0} could not be moved. Please, try again.', __d('content', 'page')));
         }
         $this->redirect($this->referer(['action' => 'index']));
     }
@@ -361,7 +366,7 @@ class PagesController extends ContentController
     public function repair()
     {
         $this->Pages->recover();
-        $this->Flash->success(__d('content','Shop Category tree recovery has been executed'));
+        $this->Flash->success(__d('content', 'Shop Category tree recovery has been executed'));
         $this->redirect($this->referer(['action' => 'index']));
     }
 
@@ -408,7 +413,7 @@ class PagesController extends ContentController
 
             $publishedClass = ($node->isPagePublished()) ? 'published' : 'unpublished';
             $class = $node->getPageType();
-            $class.= " " . $publishedClass;
+            $class .= " " . $publishedClass;
 
             return [
                 'id' => $id++,
@@ -438,6 +443,7 @@ class PagesController extends ContentController
                 }
                 $formatted[] = $_node;
             }
+
             return $formatted;
         };
 
@@ -472,7 +478,6 @@ class PagesController extends ContentController
 
         $id = $this->request->query('id');
         if ($id) {
-
             $id = explode(':', $id);
             switch (count($id)) {
                 case 1:
@@ -486,8 +491,6 @@ class PagesController extends ContentController
                 default:
                     throw new BadRequestException('Invalid tree data request');
             }
-
-
         }
         //$conditions = ($id == '#') ? ['parent_id IS NULL'] : ['parent_id' => $id];
 
@@ -499,7 +502,6 @@ class PagesController extends ContentController
                 ->all()
                 ->toArray();
         } else {
-
             $page = $this->Pages->get($id);
             $nodes = $page->getChildren()->all()->toArray();
             //$nodes = $this->Pages->find('children', ['for' => $id]);

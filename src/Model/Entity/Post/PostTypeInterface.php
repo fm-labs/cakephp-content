@@ -2,7 +2,6 @@
 
 namespace Content\Model\Entity\Post;
 
-
 use Banana\Model\EntityTypeInterface;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;

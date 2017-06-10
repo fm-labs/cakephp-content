@@ -50,6 +50,7 @@ class CategoriesController extends AppController
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'category')));
@@ -75,6 +76,7 @@ class CategoriesController extends AppController
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'category')));
@@ -100,6 +102,7 @@ class CategoriesController extends AppController
         } else {
             $this->Flash->error(__d('content', 'The {0} could not be deleted. Please, try again.', __d('content', 'category')));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

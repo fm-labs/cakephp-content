@@ -2,7 +2,6 @@
 
 namespace Content\Sitemap;
 
-
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\TableRegistry;

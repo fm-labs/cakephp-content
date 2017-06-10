@@ -10,6 +10,7 @@ class StaticPageType extends AbstractPageType
         $action = ($this->page->page_template) ?: null;
         if ($action !== 'view' && $action && method_exists($this, $action)) {
             $controller->setAction($action);
+
             return false;
         }
     }

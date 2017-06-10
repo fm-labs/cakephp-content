@@ -73,7 +73,7 @@ class PagesController extends ContentController
     {
         $rootPage = $this->Pages->findHostRoot();
         if (!$rootPage) {
-            throw new NotFoundException(__d('content',"Root page not found"));
+            throw new NotFoundException(__d('content', "Root page not found"));
         }
 
         $this->setAction('view', $rootPage->id);
@@ -122,9 +122,8 @@ class PagesController extends ContentController
             ->contain(['PageLayouts'])
             ->first();
 
-
         if (!$page) {
-            throw new NotFoundException(__d('content',"Page not found"));
+            throw new NotFoundException(__d('content', "Page not found"));
         }
 
         // force canonical url (except root pages)
@@ -134,6 +133,7 @@ class PagesController extends ContentController
 
             if ($here != $canonical) {
                 $this->redirect($canonical, 301);
+
                 return;
             }
         }

@@ -38,7 +38,6 @@ class ControllerPageType extends AbstractPageType
             } else {
                 throw new Exception("Malformed controller params");
             }
-
         } elseif (count($controller) == 1) {
             $controller = $controller[0];
         } else {
@@ -49,6 +48,7 @@ class ControllerPageType extends AbstractPageType
 
         $url = compact('plugin', 'controller', 'action');
         $url = array_merge($params, $url);
+
         return $url;
     }
 
@@ -67,12 +67,14 @@ class ControllerPageType extends AbstractPageType
         if ($url['plugin'] && Plugin::loaded($url['plugin']) === false) {
             return false;
         }
+
         return parent::isPublished();
     }
 
     public function execute(Controller &$controller)
     {
         $controller->redirect($this->page->redirect_controller_url, $this->page->redirect_status);
+
         return false;
     }
 }

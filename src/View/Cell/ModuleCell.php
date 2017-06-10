@@ -36,6 +36,7 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
         array_walk(static::$defaultParams, function ($val, $idx) use (&$inputs) {
             $inputs[$idx] = ['default' => $val];
         });
+
         return $inputs;
     }
 
@@ -60,7 +61,6 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
             : array_merge(static::$defaultParams, $this->params);
 
         $this->eventManager()->on($this);
-
     }
 
     public function render($template = null)
@@ -70,6 +70,7 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
 
         try {
             $rendered = parent::render($template);
+
             return $rendered;
         } catch (\Exception $ex) {
             Log::error('ModuleCell: ' . get_class($this) . ': ' . $ex->getMessage());

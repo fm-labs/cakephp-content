@@ -123,10 +123,11 @@ class ModulesController extends AppController
         if ($this->request->is('post')) {
             $module = $this->Modules->patchEntity($module, $this->request->data);
             if ($this->Modules->save($module)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','module')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'module')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','module')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'module')));
             }
         }
         $this->set('paths', ContentManager::getModulesAvailable());
@@ -149,10 +150,11 @@ class ModulesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $module = $this->Modules->patchEntity($module, $this->request->data);
             if ($this->Modules->save($module)) {
-                $this->Flash->success(__d('content','The {0} has been saved.', __d('content','module')));
+                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'module')));
+
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__d('content','The {0} could not be saved. Please, try again.', __d('content','module')));
+                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'module')));
             }
         }
         $this->set('paths', ContentManager::getModulesAvailable());
@@ -172,10 +174,11 @@ class ModulesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $module = $this->Modules->get($id);
         if ($this->Modules->delete($module)) {
-            $this->Flash->success(__d('content','The {0} has been deleted.', __d('content','module')));
+            $this->Flash->success(__d('content', 'The {0} has been deleted.', __d('content', 'module')));
         } else {
-            $this->Flash->error(__d('content','The {0} could not be deleted. Please, try again.', __d('content','module')));
+            $this->Flash->error(__d('content', 'The {0} could not be deleted. Please, try again.', __d('content', 'module')));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -78,6 +78,7 @@ class AppController extends Controller
         $list = [];
         $mm = MediaManager::get('shop');
         $list = $mm->getSelectListRecursive();
+
         return $list;
     }
 

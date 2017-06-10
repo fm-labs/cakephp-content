@@ -86,8 +86,7 @@ trait EntityPostTypeHandlerTrait
     protected function _getChildren()
     {
         $children = $this->getChildren();
+
         return ($children) ? $children->all()->toArray() : [];
     }
-
-
 }

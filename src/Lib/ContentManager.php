@@ -31,6 +31,7 @@ class ContentManager
         if (!isset(static::$version)) {
             static::$version = @file_get_contents(Plugin::path('Content') . DS . 'VERSION.txt');
         }
+
         return static::$version;
     }
 
@@ -40,6 +41,7 @@ class ContentManager
     public static function getAvailablePageLayouts()
     {
         $PageLayouts = TableRegistry::get('Content.PageLayouts');
+
         return $PageLayouts->find('list')->all();
     }
 
@@ -50,6 +52,7 @@ class ContentManager
     {
         $PageLayouts = TableRegistry::get('Content.PageLayouts');
         $pageLayout = $PageLayouts->find()->where(['is_default' => true])->first();
+
         return $pageLayout;
     }
 
@@ -61,6 +64,7 @@ class ContentManager
     public static function getPageHandler(Page $page)
     {
         $pageType = $page->getPageType();
+
         return ClassRegistry::createInstance('PageType', $pageType, $page);
     }
 
@@ -74,6 +78,7 @@ class ContentManager
         $postType = $post->type;
         $instance = ClassRegistry::get('PostType', $postType);
         $instance->setEntity($post);
+
         return $instance;
     }
 
@@ -92,6 +97,7 @@ class ContentManager
         if (isset($map[$type])) {
             return $map[$type];
         }
+
         return null;
     }
 
@@ -129,7 +135,7 @@ class ContentManager
 
         $modulesLoader = function ($dir, $plugin = null) use (&$availableModules) {
             $folder = new Folder($dir);
-            list($namespaces,) = $folder->read();
+            list($namespaces, ) = $folder->read();
 
             foreach ($namespaces as $ns) {
                 $folder->cd($dir . DS . $ns);
@@ -164,7 +170,7 @@ class ContentManager
 
         $modulesLoader = function ($dir, $plugin = null) use (&$availableModules) {
             $folder = new Folder($dir);
-            list($namespaces,) = $folder->read();
+            list($namespaces, ) = $folder->read();
 
             foreach ($namespaces as $ns) {
                 $folder->cd($dir . DS . $ns);
@@ -199,12 +205,11 @@ class ContentManager
 
         $layoutLoader = function ($dir, $plugin = null) use (&$availableLayouts) {
             $folder = new Folder($dir);
-            list(,$layouts) = $folder->read();
+            list(, $layouts) = $folder->read();
             array_walk($layouts, function ($val) use ($plugin, $dir, &$availableLayouts) {
                 //$val = substr($val, strlen($dir . DS));
                 $val = basename($val, '.ctp');
                 if (preg_match('/^frontend(\_(.*))?$/', $val, $matches)) {
-
                     $availableLayouts[] = ($plugin) ? $plugin . "." . $val : $val;
                 }
             });
@@ -219,6 +224,7 @@ class ContentManager
         }
 
         $availableLayouts = array_combine($availableLayouts, $availableLayouts);
+
         return $availableLayouts;
     }
 
@@ -231,7 +237,7 @@ class ContentManager
 
         $themesLoader = function ($dir, $plugin = null) use (&$availableThemes) {
             $folder = new Folder($dir);
-            list($themes,) = $folder->read();
+            list($themes, ) = $folder->read();
             array_walk($themes, function ($val) use ($plugin, $dir, &$availableThemes) {
                 //$val = substr($val, strlen($dir . DS));
                 //$val = basename($val, '.ctp');
@@ -250,6 +256,7 @@ class ContentManager
         //}
 
         $availableThemes = array_combine($availableThemes, $availableThemes);
+
         return $availableThemes;
     }
 
@@ -275,7 +282,6 @@ class ContentManager
         return self::getContentSections();
     }
 
-
     /**
      * Find content view templates in app, plugins and themes templates
      * @param $path
@@ -292,6 +298,7 @@ class ContentManager
             if (preg_match('/^\_/', $val)) {
                 return false;
             }
+
             return true;
         };
         $filter = ($filter) ?: $defaultFilter;
@@ -299,7 +306,7 @@ class ContentManager
         // finder
         $filesFinder = function ($dir, $plugin) use (&$available, $filter) {
             $folder = new Folder($dir);
-            list(,$files) = $folder->read();
+            list(, $files) = $folder->read();
 
             // apply filter
             if ($filter && is_callable($filter)) {
@@ -307,7 +314,7 @@ class ContentManager
             }
 
             // extract cake template names
-            array_walk($files, function(&$val, $key) use (&$available, $plugin) {
+            array_walk($files, function (&$val, $key) use (&$available, $plugin) {
                 if (preg_match('/^([\w\_]+)\.ctp$/', $val, $matches)) {
                     $name = $matches[1];
                     //$template = ($plugin) ? $plugin . '.' . $name : $name;
@@ -339,6 +346,7 @@ class ContentManager
         //sort($available);
 
         asort($available);
+
         return $available;
     }
 
@@ -380,7 +388,7 @@ class ContentManager
         $modulesLoader = function ($dir, $plugin = null) {
             $list = [];
             $folder = new Folder($dir);
-            list(,$files) = $folder->read();
+            list(, $files) = $folder->read();
 
             array_walk($files, function ($val) use ($plugin, $dir, &$list) {
                 if (preg_match('/^teaser_([\w\_]+)\.ctp$/', $val, $matches)) {
@@ -420,13 +428,12 @@ class ContentManager
         $modulesLoader = function ($dir, $plugin = null) {
             $list = [];
             $folder = new Folder($dir);
-            list(,$files) = $folder->read();
+            list(, $files) = $folder->read();
 
             array_walk($files, function ($val) use ($plugin, $dir, &$list) {
                 if (preg_match('/^\_/', $val)) {
                     return;
-                }
-                elseif (preg_match('/^([\w\_]+)\.ctp$/', $val, $matches)) {
+                } elseif (preg_match('/^([\w\_]+)\.ctp$/', $val, $matches)) {
                     $name = $matches[1];
                     //$template = ($plugin) ? $plugin . "." . 'teaser_' . $matches[1] : 'teaser_' . $matches[1];
                     $template = $matches[1];

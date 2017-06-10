@@ -111,7 +111,6 @@ class GalleriesTable extends Table
     public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
     {
         if ($entity->get('_generate_slider')) {
-
             $Modules = TableRegistry::get('Content.Modules');
             $module = $Modules->newEntity();
             $module->name = sprintf("Mod %s", $entity->title);
@@ -142,11 +141,12 @@ class GalleriesTable extends Table
     {
         if (Plugin::loaded('Media')) {
             $mm = MediaManager::get('default');
+
             return $mm->open('gallery/')->getSelectFolderListRecursive();
         }
+
         return null;
     }
-
 
     public function toJsTree()
     {
@@ -158,7 +158,7 @@ class GalleriesTable extends Table
         //debug($nodes);
 
         $id = 1;
-        $nodeFormatter = function(Gallery $node) use (&$id) {
+        $nodeFormatter = function (Gallery $node) use (&$id) {
 
             $class = "content published";
 
@@ -181,7 +181,7 @@ class GalleriesTable extends Table
             ];
         };
 
-        $nodesFormatter = function($nodes) use ($nodeFormatter, &$nodesFormatter) {
+        $nodesFormatter = function ($nodes) use ($nodeFormatter, &$nodesFormatter) {
             $formatted = [];
             foreach ($nodes as $node) {
                 $_node = $nodeFormatter($node);
@@ -190,10 +190,12 @@ class GalleriesTable extends Table
                 }
                 $formatted[] = $_node;
             }
+
             return $formatted;
         };
 
         $nodesFormatted = $nodesFormatter($nodes);
+
         return $nodesFormatted;
     }
 }

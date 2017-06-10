@@ -36,7 +36,6 @@ class PagesMenuModule extends ViewModule
     {
 
         if (empty($this->menu)) {
-            
             $this->loadModel('Content.Pages');
             $startNodeId = $this->_getStartNodeId();
             $this->menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
@@ -68,7 +67,6 @@ class PagesMenuModule extends ViewModule
         $this->set('attrs', $params);
     }
 
-
     protected function _getStartNodeId()
     {
         if ($this->start_node > 0) {
@@ -82,6 +80,7 @@ class PagesMenuModule extends ViewModule
             }
             $nodeId = $rootNode->id;
         }
+
         return $nodeId;
     }
 }

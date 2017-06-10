@@ -35,7 +35,6 @@ class ModulesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-
         if (Plugin::loaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
@@ -71,18 +70,18 @@ class ModulesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-            
+
         $validator
             ->allowEmpty('title');
-            
+
         $validator
             ->requirePresence('path', 'create')
             ->notEmpty('path');
-            
+
         $validator
             ->allowEmpty('params');
 

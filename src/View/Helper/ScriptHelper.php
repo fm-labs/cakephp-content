@@ -43,6 +43,7 @@ class ScriptHelper extends Helper
         } else {
             $this->_scripts[$alias] = $path;
         }
+
         return $this;
     }
 
@@ -82,6 +83,7 @@ class ScriptHelper extends Helper
 
                 $this->_addScript($_path, $options);
             }
+
             return;
         }
 
@@ -97,6 +99,7 @@ class ScriptHelper extends Helper
         //debug("Loading script: " . $path . "::" . $options['block']);
 
         $this->_loaded['scripts'][$path] = true;
+
         return $this->Html->script($path, $options);
     }
-} 
+}

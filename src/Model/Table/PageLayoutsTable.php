@@ -27,7 +27,6 @@ class PageLayoutsTable extends Table
         $this->table('bc_page_layouts');
         $this->displayField('name');
         $this->primaryKey('id');
-
     }
 
     /**

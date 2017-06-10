@@ -24,12 +24,12 @@ class HtmlModule extends ViewModule
     protected function _buildSchema(ViewModuleSchema $schema)
     {
         $schema
-            ->addField('htmlstr',
-                ['type' => 'text'])
-            ;
+            ->addField(
+                'htmlstr',
+                ['type' => 'text']
+            );
 
         return $schema;
-
     }
 
     public function inputs()

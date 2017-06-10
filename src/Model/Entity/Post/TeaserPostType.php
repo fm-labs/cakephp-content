@@ -2,7 +2,6 @@
 
 namespace Content\Model\Entity\Post;
 
-
 use Cake\Datasource\EntityInterface;
 use Content\Model\Entity\Post;
 use Content\Model\Entity\Post\PostTypeInterface;
@@ -55,5 +54,4 @@ class TeaserPostType implements PostTypeInterface
     {
         return $this->post->get('is_published');
     }
-
 }

@@ -7,7 +7,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 use Content\Model\Entity\Post;
 
-class PagePostType extends DefaultPostType implements  PostTypeInterface
+class PagePostType extends DefaultPostType implements PostTypeInterface
 {
     /**
      * @var Post
@@ -21,16 +21,15 @@ class PagePostType extends DefaultPostType implements  PostTypeInterface
             'modelClass' => 'Content.Posts'
         ];
     }
-    
+
     public function setEntity(EntityInterface $entity)
     {
         $this->page = $entity;
     }
-    
+
     public function getViewUrl()
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {
-
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
@@ -40,7 +39,6 @@ class PagePostType extends DefaultPostType implements  PostTypeInterface
                 'slug' => $this->page->get('slug'),
             ];
         } else {
-
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
@@ -77,5 +75,4 @@ class PagePostType extends DefaultPostType implements  PostTypeInterface
     {
         return $this->page->get('is_published');
     }
-
 }

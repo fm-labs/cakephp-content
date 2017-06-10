@@ -75,6 +75,7 @@ class ContentModuleBehavior extends Behavior
     {
         $events = parent::implementedEvents();
         $events['Model.initialize'] = 'modelInitialize';
+
         return $events;
     }
 }

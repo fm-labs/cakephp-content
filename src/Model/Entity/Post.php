@@ -73,7 +73,8 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
      * Virtual Field 'perma_url'
      * @return string
      */
-    protected function _getPermaUrl() {
+    protected function _getPermaUrl()
+    {
         return '/?postid=' . $this->id;
     }
 
@@ -106,6 +107,7 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         if (!empty($this->_properties['teaser_image_file'])) {
             return $this->_properties['teaser_image_file'];
         }
+
         return $this->image_file;
     }
 
@@ -124,7 +126,7 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         //$refmodel = TableRegistry::get($this->refscope);
         //$ref = $refmodel->get($this->refid);
 
-        return __d('content',"{0} with ID {1}", Inflector::singularize($ref[1]), $this->refid);
+        return __d('content', "{0} with ID {1}", Inflector::singularize($ref[1]), $this->refid);
     }
 
     /**
@@ -157,6 +159,7 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         }
 
         $Model = TableRegistry::get($this->refscope);
+
         return $this->_properties['ref'] = $Model->get($this->refid);
     }
 
@@ -190,6 +193,7 @@ class Post extends Entity implements EntityTypeHandlerInterface, EntityAttribute
         if (!empty($this->_properties['teaser_link_caption'])) {
             return $this->_properties['teaser_link_caption'];
         }
-        return __d('content','Read more');
+
+        return __d('content', 'Read more');
     }
 }
