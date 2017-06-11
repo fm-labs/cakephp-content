@@ -2,7 +2,11 @@
 namespace Content\Lib;
 
 use Banana\Lib\ClassRegistry;
+use Banana\Lib\SingletonTrait;
 use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherInterface;
+use Cake\Event\EventManager;
 use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
@@ -18,10 +22,22 @@ use Content\Model\Entity\Post;
 class ContentManager
 {
 
+    use SingletonTrait {
+        SingletonTrait::getInstance as getStaticInstance;
+    }
+
     /**
      * @var string
      */
     public static $version;
+
+    /**
+     * @return ContentManager
+     */
+    public static function getInstance()
+    {
+        return self::getStaticInstance();
+    }
 
     /**
      * @return string Content plugin version nummer
@@ -57,15 +73,13 @@ class ContentManager
     }
 
     /**
-     * @param Page $page
-     * @return null
-     * @deprecated
+     * @return array
      */
-    public static function getPageHandler(Page $page)
+    public static function getAvailablePageTypes()
     {
-        $pageType = $page->getPageType();
-
-        return ClassRegistry::createInstance('PageType', $pageType, $page);
+        TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+        $PageTypes = TableRegistry::get('PageTypes');
+        return $PageTypes->find('list')->all();
     }
 
     /**
@@ -368,14 +382,6 @@ class ContentManager
 
     /**
      * @return array
-     */
-    public static function getAvailablePageTypes()
-    {
-        return ClassRegistry::show('PageType');
-    }
-
-    /**
-     * @return array
      * @deprecated Use getAvailablePostTemplates() instead
      */
     public static function getAvailablePostTeaserTemplates()
@@ -458,4 +464,5 @@ class ContentManager
 
         return $available;
     }
+
 }

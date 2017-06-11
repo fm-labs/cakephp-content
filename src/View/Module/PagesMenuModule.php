@@ -34,11 +34,11 @@ class PagesMenuModule extends ViewModule
 
     public function display()
     {
-
         if (empty($this->menu)) {
             $this->loadModel('Content.Pages');
             $startNodeId = $this->_getStartNodeId();
-            $this->menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
+            $menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
+            $this->menu = $menu->toArray();
         }
 
         $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';

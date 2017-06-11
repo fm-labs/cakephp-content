@@ -54,3 +54,10 @@ if (!Cache::config('content_menu')) {
         'prefix' => 'content_menu_'
     ]);
 }
+
+use Cake\Event\EventManager;
+EventManager::instance()->on(
+    'Server.buildMiddleware',
+    function ($event, $middlewareStack) {
+        $middlewareStack->add(new \Content\Middleware\ContentMiddleware());
+    });

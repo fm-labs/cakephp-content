@@ -4,16 +4,29 @@ namespace Content\Page;
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
 
+/**
+ * Class RootPageType
+ * @package Content\Page
+ */
 class RootPageType extends AbstractPageType
 {
-    public function getUrl()
+    /**
+     * @param EntityInterface $entity
+     * @return string
+     */
+    public function toUrl(EntityInterface $entity)
     {
         return '/';
     }
 
-    public function execute(Controller &$controller)
+    /**
+     * @param Controller $controller
+     * @param EntityInterface $entity
+     * @return bool
+     */
+    public function execute(Controller &$controller, EntityInterface $entity)
     {
-        $controller->setAction('view', $this->page->redirect_page_id);
+        $controller->setAction('view', $entity->redirect_page_id);
 
         return false;
     }

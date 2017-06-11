@@ -8,6 +8,7 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cake\Routing\Router;
+use Content\Lib\ContentManager;
 
 class ContentPlugin implements PluginInterface, EventListenerInterface
 {
@@ -31,9 +32,34 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     public function implementedEvents()
     {
         return [
+            'Content.Model.PageTypes.get' => 'getContentPageTypes',
             'Settings.get' => 'getSettings',
             'Backend.Menu.get' => ['callable' => 'getBackendMenu', 'priority' => 5 ],
             'Backend.Routes.build' => 'buildBackendRoutes'
+        ];
+    }
+
+    public function getContentPageTypes(Event $event)
+    {
+        $event->result['content'] = [
+            'title' => 'Content Page',
+            'className' => 'Content.Content'
+        ];
+        $event->result['static'] = [
+            'title' => 'Static Page',
+            'className' => 'Content.Static'
+        ];
+        $event->result['controller'] = [
+            'title' => 'Controller',
+            'className' => 'Content.Controller'
+        ];
+        $event->result['redirect'] = [
+            'title' => 'Redirect',
+            'className' => 'Content.Redirect'
+        ];
+        $event->result['root'] = [
+            'title' => 'Root Page',
+            'className' => 'Content.Root'
         ];
     }
 
@@ -118,5 +144,7 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     public function __invoke(array $config = [])
     {
         \Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());
+
+        new ContentManager();
     }
 }

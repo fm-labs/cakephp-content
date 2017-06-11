@@ -3,6 +3,7 @@
 namespace Content\View;
 
 use Cake\I18n\I18n;
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 
 class PageView extends ContentView
@@ -14,8 +15,11 @@ class PageView extends ContentView
 
         if ($this->get('page')) {
             $page = $this->get('page');
+            $handler = TableRegistry::get('Content.Pages')->getTypeHandler($page);
 
-            $metaTitle = ($page->meta_title) ?: $page->getPageTitle();
+            $title = $handler->getLabel($page);
+
+            $metaTitle = ($page->meta_title) ?: $title;
             $pageUrl = $this->Html->Url->build($page->url, true);
 
             // page title
@@ -85,6 +89,7 @@ class PageView extends ContentView
             $this->Html->meta(['property' => 'twitter:description', 'content' => $metaDescription], null, ['block' => true]);
             $this->Html->meta(['property' => 'twitter:url', 'content' => $pageUrl], null, ['block' => true]);
 
+            /*
             $path = $page->getPath()->toArray();
             array_shift($path); // Drop root node
             foreach ($path as $node) {
@@ -93,6 +98,7 @@ class PageView extends ContentView
                 }
                 $this->Breadcrumbs->add($node->getPageTitle(), $node->getPageUrl());
             }
+            */
 
             //$this->Breadcrumbs->add($page->getPageTitle(), $page->getPageUrl());
         }

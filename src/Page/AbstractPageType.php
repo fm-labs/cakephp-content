@@ -2,24 +2,46 @@
 
 namespace Content\Page;
 
+use Banana\Menu\MenuItem;
 use Cake\Datasource\EntityInterface;
-use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 
+/**
+ * Class AbstractPageType
+ *
+ * @package Content\Page
+ */
 abstract class AbstractPageType implements PageTypeInterface
 {
     /**
-     * @var Page
+     * @param EntityInterface $entity
+     * @return string
      */
-    protected $page;
-
-    public function setEntity(EntityInterface $page)
+    public function getLabel(EntityInterface $entity)
     {
-        $this->page =& $page;
+        return $entity->title;
     }
 
-    public function getUrl()
+    /**
+     * @param EntityInterface $entity
+     * @param int $maxDepth
+     * @return MenuItem
+     */
+    public function toMenuItem(EntityInterface $entity, $maxDepth = 1)
+    {
+        $title = $entity->title;
+        $url = $this->toUrl($entity);
+
+        $item = new MenuItem($title, $url);
+        return $item;
+    }
+
+    /**
+     * @param EntityInterface $entity
+     * @return array
+     */
+    public function toUrl(EntityInterface $entity)
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {
             $pageUrl = [
@@ -27,8 +49,8 @@ abstract class AbstractPageType implements PageTypeInterface
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                'page_id' => $this->page->id,
-                'slug' => $this->page->slug,
+                'page_id' => $entity->id,
+                'slug' => $entity->slug,
             ];
         } else {
             $pageUrl = [
@@ -36,42 +58,34 @@ abstract class AbstractPageType implements PageTypeInterface
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                $this->page->id,
-                'slug' => $this->page->slug,
+                $entity->id,
+                'slug' => $entity->slug,
             ];
         }
 
         return $pageUrl;
     }
 
-    public function getAdminUrl()
-    {
-        return [
-            'prefix' => 'admin',
-            'plugin' => 'Content',
-            'controller' => 'Pages',
-            'action' => 'manage',
-            $this->page->id,
-        ];
-    }
-
-    public function getChildren()
+    /**
+     * @param EntityInterface $entity
+     * @return array
+     */
+    public function findChildren(EntityInterface $entity)
     {
         return TableRegistry::get('Content.Pages')
             ->find()
-            ->where(['parent_id' => $this->page->id])
+            ->where(['parent_id' => $entity->id])
             ->orderAsc('lft')
             ->all()
             ->toArray();
     }
 
-    public function isPublished()
+    /**
+     * @param EntityInterface $entity
+     * @return bool
+     */
+    public function isEnabled(EntityInterface $entity)
     {
-        return $this->page->is_published;
-    }
-
-    public function isHiddenInNav()
-    {
-        return $this->page->hide_in_nav;
+        return ($entity->is_published && !$entity->hide_in_nav);
     }
 }

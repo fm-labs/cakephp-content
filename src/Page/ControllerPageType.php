@@ -8,10 +8,9 @@ use Exception;
 
 class ControllerPageType extends AbstractPageType
 {
-    protected function _parseUrl()
+    protected function _parseUrl(EntityInterface $entity)
     {
-        $page =& $this->page;
-        $controller = explode('::', $page->redirect_controller);
+        $controller = explode('::', $entity->redirect_controller);
         $action = 'index';
         $params = [];
         if (count($controller) == 2) {
@@ -22,10 +21,10 @@ class ControllerPageType extends AbstractPageType
                 list($action, $args) = $action;
 
                 $args = explode(',', $args);
-                array_walk($args, function ($val, $idx) use (&$params) {
+                array_walk($args, function ($val, $idx) use (&$params, &$entity) {
                     $val = trim($val);
                     if (preg_match('/^[\{](.*)[\}]$/', $val, $matches)) {
-                        $val = $this->get($matches[1]);
+                        $val = $entity->get($matches[1]);
                         $params[$matches[1]] = $val;
                     } else {
                         $params[] = $val;
@@ -52,28 +51,28 @@ class ControllerPageType extends AbstractPageType
         return $url;
     }
 
-    public function getUrl()
+    public function toUrl(EntityInterface $entity)
     {
-        $url = $this->_parseUrl();
+        $url = $this->_parseUrl($entity);
         $url['prefix'] = false;
-        $url['page_id'] = $this->page->id;
+        $url['page_id'] = $entity->id;
 
         return $url;
     }
 
-    public function isPublished()
+    public function isEnabled(EntityInterface $entity)
     {
-        $url = $this->_parseUrl();
+        $url = $this->_parseUrl($entity);
         if ($url['plugin'] && Plugin::loaded($url['plugin']) === false) {
             return false;
         }
 
-        return parent::isPublished();
+        return parent::isEnabled($entity);
     }
 
-    public function execute(Controller &$controller)
+    public function execute(Controller &$controller, EntityInterface $entity)
     {
-        $controller->redirect($this->page->redirect_controller_url, $this->page->redirect_status);
+        $controller->redirect($entity->redirect_controller_url, $entity->redirect_status);
 
         return false;
     }

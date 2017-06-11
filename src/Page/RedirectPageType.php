@@ -2,27 +2,42 @@
 namespace Content\Page;
 
 use Cake\Controller\Controller;
+use Cake\Datasource\EntityInterface;
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 
+/**
+ * Class RedirectPageType
+ * @package Content\Page
+ */
 class RedirectPageType extends AbstractPageType
 {
-    public function getUrl()
+    /**
+     * @param EntityInterface $entity
+     * @return string
+     */
+    public function toUrl(EntityInterface $entity)
     {
-        $url = $this->page->redirect_location;
+        $url = $entity->redirect_location;
 
         return Router::url($url, true);
     }
 
-    public function execute(Controller &$controller)
+    /**
+     * @param Controller $controller
+     * @param EntityInterface $entity
+     * @return bool
+     */
+    public function execute(Controller &$controller, EntityInterface $entity)
     {
-        if ($this->page->redirect_page_id) {
-            $page = $this->Pages->get($this->page->redirect_page_id, ['contain' => []]);
+        if ($entity->redirect_page_id) {
+            $page = TableRegistry::get('Content.Pages')->get($entity->redirect_page_id, ['contain' => []]);
             $redirectUrl = $page->url;
         } else {
-            $redirectUrl = $this->page->redirect_location;
+            $redirectUrl = $entity->redirect_location;
         }
 
-        $controller->redirect($redirectUrl, $this->page->redirect_status);
+        $controller->redirect($redirectUrl, $entity->redirect_status);
 
         return false;
     }

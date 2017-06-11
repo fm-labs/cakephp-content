@@ -1,26 +1,33 @@
 <?php
 namespace Content\Model\Table;
 
+use Banana\Menu\Menu;
+use Banana\Menu\MenuItem;
 use Cake\Cache\Cache;
 use Cake\Core\Plugin;
-use Content\Model\Entity\Page;
-use Cake\ORM\Query;
+use Cake\Datasource\EntityInterface;
+use Cake\ORM\TableRegistry;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
-use Content\Model\Table\PageModulesTable;
-use Content\Model\Table\PageLayoutsTable;
+use Content\Lib\PageTypeRegistry;
+use Content\Model\Entity\Page;
 use Content\Page\PageInterface;
+use Content\Page\PageTypeInterface;
 
 /**
  * Pages Model
  *
- * @property PageModulesTable $PageModules
  * @property PageLayoutsTable $PageLayouts
  */
 class PagesTable extends Table
 {
+
+    /**
+     * @var PageTypeRegistry
+     */
+    protected $_types;
 
     /**
      * Initialize method
@@ -48,15 +55,6 @@ class PagesTable extends Table
         $this->addBehavior('Banana.Publishable');
         $this->addBehavior('Backend.JsTree', ['dataFields' => ['slug', 'type']]);
 
-        //$this->addBehavior('Content.Page');
-
-        /*
-        $this->addBehavior('Tree.SimpleTree', [
-            'field' => 'pos',
-            'scope' => []
-        ]);
-        */
-
         $this->belongsTo('ParentPages', [
             'className' => 'Content.Pages',
             'foreignKey' => 'parent_id'
@@ -70,21 +68,6 @@ class PagesTable extends Table
             'className' => 'Content.PageLayouts',
             'foreignKey' => 'page_layout_id'
         ]);
-
-        /*
-        $this->hasMany('PageModules', [
-            'className' => 'Content.PageModules',
-            'foreignKey' => 'page_id'
-        ]);
-        */
-
-        /*
-        $this->hasMany('PageModules', [
-            'className' => 'Content.ContentModules',
-            'foreignKey' => 'refid',
-            'conditions' => ['refscope' => 'Content.Pages']
-        ]);
-        */
 
         $this->hasMany('Posts', [
             'className' => 'Content.Posts',
@@ -114,6 +97,8 @@ class PagesTable extends Table
                     'filterEmpty' => true
                 ]);
         }
+
+        $this->_loadPageTypes();
     }
 
     /**
@@ -197,6 +182,29 @@ class PagesTable extends Table
         return $rules;
     }
 
+    /**
+     * Load available page types into types registry
+     */
+    protected function _loadPageTypes()
+    {
+        if (!TableRegistry::config('PageTypes')) {
+            TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+        }
+        $PageTypes = TableRegistry::get('PageTypes');
+
+        $types = $PageTypes->find()->all();
+
+        $this->_types = new PageTypeRegistry();
+        foreach ($types as $type => $config) {
+            $this->_types->load($type, $config);
+        }
+    }
+
+    /**
+     * @param null $startNodeId
+     * @param array $options
+     * @return array|mixed
+     */
     public function getMenu($startNodeId = null, array $options = [])
     {
         $options += ['maxDepth' => null, 'includeHidden' => null];
@@ -207,11 +215,9 @@ class PagesTable extends Table
             $root = $this->findRoot();
             $startNodeId = $root->id;
         }
-
         $cacheKey = sprintf("pages-%s-%s", $startNodeId, md5(serialize($options)));
         $menu = Cache::read($cacheKey, 'content_menu');
         if (empty($menu)) {
-            $menu = [];
             if ($startNodeId) {
                 $children = $this
                     ->find('children', ['for' => $startNodeId])
@@ -222,70 +228,57 @@ class PagesTable extends Table
 
                 $menu = $this->_buildMenu($children, 0, $maxDepth, $includeHidden);
             }
-            Cache::write($cacheKey, $menu, 'content_menu');
+            Cache::write($cacheKey, $menu->toArray(), 'content_menu');
         }
 
         return $menu;
     }
 
+    /**
+     * @param Page $page
+     * @return PageTypeInterface
+     */
+    public function getTypeHandler(EntityInterface $page)
+    {
+        $type = $page->type;
+        if (!$this->_types->has($type)) {
+            throw new \RuntimeException("No type handler for $type registered");
+        }
+        return $this->_types->get($type);
+    }
+
+    /**
+     * @param $children
+     * @param int $level
+     * @param int $maxDepth
+     * @param null $includeHidden
+     * @return Menu
+     */
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
-        $menu = [];
+        $menu = new Menu();
         foreach ($children as $child) {
-            $isActive = false;
-            $class = $child->cssclass;
 
-            if ($includeHidden !== true && $child->isPageHiddenInNav()) {
+            try {
+
+                $handler = $this->getTypeHandler($child);
+                $item = $handler->toMenuItem($child);
+
+            } catch (\Exception $ex) {
+                debug($ex->getMessage());
                 continue;
-            } elseif ($includeHidden !== true && !$child->isPagePublished()) {
+            }
+
+            if (!$includeHidden && !$handler->isEnabled($child)) {
                 continue;
-
-                //} elseif ($this->request->param('page_id') == $child->id) {
-                //    $isActive = true;
-
-                /*
-            } elseif ($child->type == 'controller') {
-                $plugin = $this->request->param('plugin');
-                $controller = $this->request->param('controller');
-                $needle = ($plugin)
-                    ? Inflector::camelize($plugin) . '.' . Inflector::camelize($controller)
-                    : Inflector::camelize($controller);
-            */
-                //if ($child->redirect_location == $needle) {
-                //    $isActive = true;
-                //}
             }
 
-            if ($isActive) {
-                $class .= ' active';
+            if (($maxDepth < 0 || $level < $maxDepth) && $handler->findChildren($child)) {
+                $_children = $this->_buildMenu($handler->findChildren($child), $level + 1, $maxDepth);
+                $item->setChildren($_children);
             }
 
-            $itemPageId = $child->getPageId();
-            $item = [
-                'data-id' => $itemPageId,
-                'title' => $child->getPageTitle(),
-                'url' => $child->getPageUrl(),
-                'class' => $class,
-                '_children' => []
-            ];
-
-            //$indexKey = count($this->_index) . ':' . Router::url($item['url'], true);
-            //$this->_index[$indexKey] = str_repeat('_', $level - 1) . $item['title'];
-            //if ($isActive) {
-            //    $this->_activeIndex = $indexKey;
-            //}
-
-            /*
-            if ($child->children) {
-                $item['_children'] = $this->_buildMenu($child->children);
-            }
-            */
-
-            if (($maxDepth < 0 || $level < $maxDepth) && $child->getPageChildren()) {
-                $item['_children'] = $this->_buildMenu($child->getPageChildren(), $level + 1, $maxDepth);
-            }
-
-            $menu[] = $item;
+            $menu->addItem($item);
         }
 
         return $menu;
@@ -327,12 +320,13 @@ class PagesTable extends Table
     protected function _buildMenuTree(&$tree, $children, $level = 0, $maxDepth = -1)
     {
         foreach ($children as $child) {
-            if ($child->isPageHiddenInNav() || !$child->isPagePublished()) {
+            $handler = $this->getTypeHandler($child);
+            if (!$handler->isEnabled($child)) {
                 continue;
             }
 
-            $key = $child->id . ':' . Router::url($child->getPageUrl());
-            $tree[$key] = str_repeat('_', $level) . $child->getPageTitle();
+            $key = $child->id . ':' . Router::url($handler->toUrl($child));
+            $tree[$key] = str_repeat('_', $level) . $handler->getLabel($child);
 
             if (($maxDepth < 0 || $level < $maxDepth) && $child->children) {
                 $this->_buildMenuTree($tree, $child->children, $level + 1, $maxDepth);
@@ -429,60 +423,5 @@ class PagesTable extends Table
             ->first();
 
         return $page['id'];
-    }
-
-    /**
-     * @param null $rootId
-     * @return mixed
-     * @deprecated Use JsTreeBehavior instead.
-     */
-    public function toJsTree($rootId = null)
-    {
-        $nodes = $this->find('threaded')
-            ->all()
-            ->toArray();
-
-        $id = 1;
-        $nodeFormatter = function (PageInterface $node) use (&$id) {
-
-            $publishedClass = ($node->isPagePublished()) ? 'published' : 'unpublished';
-            $class = $node->getPageType();
-            $class .= " " . $publishedClass;
-
-            return [
-                'id' => $id++,
-                'text' => $node->getPageTitle(),
-                'icon' => $class,
-                'state' => [
-                    'opened' => false,
-                    'disabled' => false,
-                    'selected' => false,
-                ],
-                'children' => [],
-                'li_attr' => ['class' => $class],
-                'a_attr' => [],
-                'data' => [
-                    'type' => $node->getPageType(),
-                    'viewUrl' => Router::url($node->getPageAdminUrl()),
-                ]
-            ];
-        };
-
-        $nodesFormatter = function ($nodes) use ($nodeFormatter, &$nodesFormatter) {
-            $formatted = [];
-            foreach ($nodes as $node) {
-                $_node = $nodeFormatter($node);
-                if ($node->getPageChildren()) {
-                    $_node['children'] = $nodesFormatter($node->getPageChildren());
-                }
-                $formatted[] = $_node;
-            }
-
-            return $formatted;
-        };
-
-        $nodesFormatted = $nodesFormatter($nodes);
-
-        return $nodesFormatted;
     }
 }

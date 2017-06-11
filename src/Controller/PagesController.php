@@ -143,7 +143,8 @@ class PagesController extends ContentController
         //@todo Dispatch Page.beforeExecute()
 
         // Execute page
-        if ($page->execute($this) === false) {
+        $handler = $this->Pages->getTypeHandler($page);
+        if ($handler->execute($this, $page) === false) {
             return;
         }
         //@todo Dispatch Page.afterExecute();
@@ -158,5 +159,10 @@ class PagesController extends ContentController
         $this->viewBuilder()->layout($layout);
 
         $this->set('page', $page);
+    }
+
+    protected function __invokePage($page)
+    {
+
     }
 }

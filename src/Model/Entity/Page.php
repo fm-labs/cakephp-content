@@ -16,13 +16,10 @@ use Content\Page\PageTypeInterface;
 /**
  * Page Entity.
  */
-class Page extends Entity implements PageInterface
+class Page extends Entity
 {
     use TranslateTrait;
     use PageMetaTrait;
-    use EntityTypeHandlerTrait {
-        EntityTypeHandlerTrait::handler as typeHandler;
-    }
 
     /**
      * @var
@@ -64,8 +61,6 @@ class Page extends Entity implements PageInterface
      * @var array
      */
     protected $_virtual = [
-        'url',
-        'view_url',
         'meta_title',
         'meta_desc',
         'meta_keywords',
@@ -74,93 +69,12 @@ class Page extends Entity implements PageInterface
     ];
 
     /**
-     * @return PageTypeInterface
-     * @throws \Exception
+     * @return \Cake\ORM\Query
      */
-    public function handler()
+    public function getPath()
     {
-        return $this->typeHandler();
-    }
-
-    /**
-     * @return string
-     */
-    protected function _getHandlerNamespace()
-    {
-        return 'PageType';
-    }
-
-    /**
-     * @return int
-     */
-    function getPageId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    function getPageTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @return string
-     */
-    function getPageType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return string|array
-     */
-    function getPageUrl()
-    {
-        return $this->handler()->getUrl();
-    }
-
-    /**
-     * @return string|array
-     */
-    function getPageAdminUrl()
-    {
-        return $this->handler()->getAdminUrl();
-    }
-
-    /**
-     * @return array
-     */
-    public function getPageChildren()
-    {
-        return $this->handler()->getChildren();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPagePublished()
-    {
-        return $this->handler()->isPublished();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPageHiddenInNav()
-    {
-        return $this->handler()->isHiddenInNav();
-    }
-
-    /**
-     * @param Controller $controller
-     * @return mixed
-     */
-    public function execute(Controller &$controller)
-    {
-        return $this->handler()->execute($controller);
+        return TableRegistry::get('Content.Pages')
+            ->find('path', ['for' => $this->id]);
     }
 
     /**
@@ -178,41 +92,6 @@ class Page extends Entity implements PageInterface
             ->order(['Posts.pos' => 'DESC'])
             ->all()
             ->toArray();
-    }
-
-    /**
-     * @return \Cake\ORM\Query
-     */
-    public function getPath()
-    {
-        return TableRegistry::get('Content.Pages')
-            ->find('path', ['for' => $this->id]);
-    }
-
-    /**
-     * @return array|string
-     * @deprecated Use getPageUrl() instead
-     */
-    protected function _getUrl()
-    {
-        return $this->getPageUrl();
-    }
-
-    /**
-     * @return array|string
-     * @deprecated Use getPageUrl() instead
-     */
-    protected function _getViewUrl()
-    {
-        return $this->getPageUrl();
-    }
-
-    /**
-     * @return string
-     */
-    protected function _getPermaUrl()
-    {
-        return '/?page_id=' . $this->id;
     }
 
     /**

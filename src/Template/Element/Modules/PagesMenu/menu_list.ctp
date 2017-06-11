@@ -7,7 +7,7 @@
         $attr['itemprop'] = 'url';
     ?>
     <li><?= $this->Html->link($title, $url, $attr); ?>
-    <?php if ($node['_children']): ?>
+    <?php if ($node['children']): ?>
         <?php echo $this->element($element, ['menu' => $node['_children'], 'level' => $level + 1, 'class' => $class]); ?>
     <?php endif; ?>
     </li>
