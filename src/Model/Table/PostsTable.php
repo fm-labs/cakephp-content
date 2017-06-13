@@ -3,10 +3,7 @@ namespace Content\Model\Table;
 
 use Content\Model\Entity\Post;
 use Cake\Core\Plugin;
-use Cake\Form\Schema;
 use Cake\Log\Log;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -71,6 +68,18 @@ class PostsTable extends Table
                     'image_file' => [
                         'config' => 'images'
                     ],
+                    'image_file_2' => [
+                        'config' => 'images'
+                    ],
+                    'image_file_3' => [
+                        'config' => 'images'
+                    ],
+                    'image_file_4' => [
+                        'config' => 'images'
+                    ],
+                    'image_file_5' => [
+                        'config' => 'images'
+                    ],
                     'image_files' => [
                         'config' => 'images',
                         'multiple' => true
@@ -97,20 +106,6 @@ class PostsTable extends Table
                     'filterEmpty' => true
                 ]);
         }
-
-        /*
-        if (Plugin::loaded('Attachment')) {
-            $this->addBehavior('Attachment.Attachment', [
-                'dataDir' => WWW_ROOT . 'attachments' . DS . 'posts' . DS,
-                'dataUrl' => '/attachments/posts/',
-                'fields' => [
-                    'image_file' => ['uploadConfig' => 'posts_images']
-                ]
-            ]);
-        } else {
-            Log::warning('Attachment plugin is not loaded');
-        }
-        */
     }
 
     public function implementedAttributes()
@@ -124,6 +119,10 @@ class PostsTable extends Table
         ];
     }
 
+    /**
+     * @param \Cake\Database\Schema\Table $schema
+     * @return \Cake\Database\Schema\Table
+     */
     protected function _initializeSchema(\Cake\Database\Schema\Table $schema)
     {
         $schema->columnType('image_files', 'media_file');

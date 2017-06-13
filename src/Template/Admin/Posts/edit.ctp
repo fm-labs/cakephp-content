@@ -78,6 +78,10 @@ endif;
 
     <?= $this->Form->input('teaser_image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
     <?= $this->Form->input('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->input('image_file_2', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->input('image_file_3', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->input('image_file_4', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->input('image_file_5', ['type' => 'media_picker', 'config' => 'images']); ?>
 
 
     <?php /* $this->cell('Media.ImageSelect', [[

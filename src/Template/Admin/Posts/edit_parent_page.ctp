@@ -1,5 +1,5 @@
 <?php
-$this->loadHelper('AdminLte.Box');
+$this->loadHelper('Backend.Box');
 $this->loadHelper('Backend.DataTable');
 $this->loadHelper('Bootstrap.Tabs');
 

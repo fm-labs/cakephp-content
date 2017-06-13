@@ -5,31 +5,28 @@ namespace Content\View\Helper;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\View\Helper;
-use Cake\View\View;
 
+/**
+ * Class ContentHelper
+ *
+ * @package Content\View\Helper
+ */
 class ContentHelper extends Helper
 {
-
+    /**
+     * @var array
+     */
     protected $_urlPlaceholderCache = [];
 
     /**
      * Replace url placeholders with format `{{Plugin.Model:id}}`
      *
      * @param $text
-     * @return mixed
+     * @return string
      */
     public function parseUrlPlaceholders($text)
     {
-
-        //@todo Implement modelMap feature
-        $modelMap = [
-            'Content.Pages' => 'Content.Posts',
-            'Content.Posts' => 'Content.Posts'
-        ];
-
-        return $text;
-
-        $text = preg_replace_callback('/\{\{(.*)\}\}/U', function ($matches) use ($modelMap) {
+        $text = preg_replace_callback('/\{\{(.*)\}\}/U', function ($matches) {
 
             $placeholder = $matches[1];
 
@@ -53,7 +50,6 @@ class ContentHelper extends Helper
             try {
                 $Table = TableRegistry::get($modelName);
                 $entity = $Table->find()->where(['id' => $id])->contain([])->first();
-
                 $url = ($entity) ? $entity->url : null;
             } catch (\Exception $ex) {
                 $url = null;
@@ -69,6 +65,10 @@ class ContentHelper extends Helper
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
     public function userHtml($text)
     {
         $text = $this->parseUrlPlaceholders($text);

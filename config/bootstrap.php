@@ -1,8 +1,10 @@
 <?php
+use Banana\Lib\ClassRegistry;
 use Banana\Plugin\PluginLoader;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
-use Banana\Lib\ClassRegistry;
+use Cake\Event\EventManager;
+use Cake\ORM\TableRegistry;
 
 /**
  * Load default content config
@@ -55,7 +57,10 @@ if (!Cache::config('content_menu')) {
     ]);
 }
 
-use Cake\Event\EventManager;
+
+TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+
+
 EventManager::instance()->on(
     'Server.buildMiddleware',
     function ($event, $middlewareStack) {

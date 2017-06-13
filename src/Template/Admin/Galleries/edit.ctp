@@ -1,5 +1,5 @@
 <?php $this->loadHelper('Bootstrap.Tabs'); ?>
-<?php $this->loadHelper('AdminLte.Box'); ?>
+<?php $this->loadHelper('Backend.Box'); ?>
 <?php $this->Breadcrumbs->add(__d('content', 'Galleries'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($gallery->title); ?>
 <?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
