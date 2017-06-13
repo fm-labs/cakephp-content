@@ -7,15 +7,15 @@ use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
 use Content\Model\EntityPostTypeHandlerTrait;
-use Eav\Model\EntityAttributesInterface;
-use Eav\Model\EntityAttributesTrait;
+//use Eav\Model\EntityAttributesInterface;
+//use Eav\Model\EntityAttributesTrait;
 
 /**
  * Post Entity.
  */
-class Post extends Entity implements EntityTypeHandlerInterface, EntityAttributesInterface
+class Post extends Entity implements EntityTypeHandlerInterface //, EntityAttributesInterface
 {
-    use EntityAttributesTrait;
+    //use EntityAttributesTrait;
     use EntityPostTypeHandlerTrait;
 
     /**
