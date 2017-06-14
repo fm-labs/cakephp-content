@@ -183,6 +183,11 @@ class PagesTable extends Table
         return $rules;
     }
 
+    /**
+     * @param Event $event
+     * @param EntityInterface $entity
+     * @param \ArrayObject $options
+     */
     public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
     {
         Cache::clear(false, 'content_menu');
