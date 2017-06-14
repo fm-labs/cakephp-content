@@ -1,6 +1,7 @@
 <?php
 namespace Content\View\Module;
 
+use Banana\Menu\Menu;
 use Cake\Cache\Cache;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
@@ -38,7 +39,8 @@ class PagesMenuModule extends ViewModule
             $this->loadModel('Content.Pages');
             $startNodeId = $this->_getStartNodeId();
             $menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
-            $this->menu = $menu->toArray();
+            $menu = ($menu instanceof Menu) ? $menu->toArray() : (array) $menu;
+            $this->menu = $menu;
         }
 
         $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';
