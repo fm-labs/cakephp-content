@@ -6,6 +6,7 @@ use Banana\Menu\MenuItem;
 use Cake\Cache\Cache;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -180,6 +181,11 @@ class PagesTable extends Table
         $rules->add($rules->existsIn(['parent_id'], 'ParentPages'));
 
         return $rules;
+    }
+
+    public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    {
+        Cache::clear(false, 'content_menu');
     }
 
     /**
