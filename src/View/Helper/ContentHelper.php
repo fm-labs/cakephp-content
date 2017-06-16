@@ -43,21 +43,20 @@ class ContentHelper extends Helper
                 $id = array_shift($args);
             }
 
-            if (isset($modelMap[$modelName])) {
-                $modelName = $modelMap[$modelName];
-            }
-
             try {
+                list($plugin, $model) = pluginSplit($modelName);
+                $url = ['plugin' => $plugin, 'controller' => $model, 'action' => 'view', $id];
+
+                /*
                 $Table = TableRegistry::get($modelName);
                 $entity = $Table->find()->where(['id' => $id])->contain([])->first();
                 $url = ($entity) ? $entity->url : null;
+                */
+                $url = Router::url($url);
             } catch (\Exception $ex) {
-                $url = null;
+                $url = '/';
                 debug($ex->getMessage());
             }
-
-            $url = ($url) ?: '/';
-            $url = Router::url($url);
 
             return $this->_urlPlaceholderCache[$placeholder] = $url;
         }, $text);

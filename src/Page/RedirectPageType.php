@@ -37,8 +37,6 @@ class RedirectPageType extends AbstractPageType
             $redirectUrl = $entity->redirect_location;
         }
 
-        $controller->redirect($redirectUrl, $entity->redirect_status);
-
-        return false;
+        return $controller->redirect($redirectUrl, $entity->redirect_status);
     }
 }

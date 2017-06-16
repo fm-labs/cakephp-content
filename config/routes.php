@@ -6,28 +6,40 @@ if (Configure::read('Content.Router.disableRootUrl') !== true) {
     Router::connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
 }
 
+Router::scope('/', function(\Cake\Routing\RouteBuilder $routes) {
+
+    if (Configure::read('Content.Router.enablePrettyUrls')) {
+        $routes->connect('/:slug/:page_id/*',
+            ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
+            ['page_id' => '\d+', 'pass' => ['page_id'], '_name' => 'page']
+        );
+
+        // Page by pageId
+        $routes->connect('/:page_id',
+            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+            ['page_id' => '\d+', 'pass' => ['page_id']]
+        );
+    }
+});
+
 $scope = '/' . trim(Configure::read('Content.Router.scope'), '/');
 Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], function($routes) {
 
     //$routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
 
     // Page by slug and pageId
-    $routes->connect('/:slug/:page_id/*',
-        ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
-        ['page_id' => '\d+', 'pass' => ['page_id'], '_name' => 'page']
-    );
+    if (Configure::read('Content.Router.enablePrettyUrls')) {
+        $routes->connect('/:slug/:page_id/*',
+            ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
+            ['page_id' => '\d+', 'pass' => ['page_id'], '_name' => 'page']
+        );
 
-    // Page by pageId
-    $routes->connect('/:page_id',
-        ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-        ['page_id' => '\d+', 'pass' => ['page_id']]
-    );
-
-    // Page by slug
-    $routes->connect('/:slug',
-        ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-        ['pass' => []]
-    );
+        // Page by pageId
+        $routes->connect('/:page_id',
+            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+            ['page_id' => '\d+', 'pass' => ['page_id']]
+        );
+    }
 
     // Pages with '/page' prefix (@deprecated)
     $routes->connect('/page/:slug/:page_id/*',
@@ -61,6 +73,12 @@ Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], func
         ['pass' => [], '_name' => 'postslug']
     );
 
+
+    // Page by slug
+    $routes->connect('/:slug',
+        ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+        ['pass' => []]
+    );
 
     $routes->fallbacks('DashedRoute');
 });

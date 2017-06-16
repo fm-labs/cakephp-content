@@ -22,12 +22,11 @@ class RootPageType extends AbstractPageType
     /**
      * @param Controller $controller
      * @param EntityInterface $entity
-     * @return bool
+     * @return \Cake\Network\Response|null|void
      */
     public function execute(Controller &$controller, EntityInterface $entity)
     {
         $controller->setAction('view', $entity->redirect_page_id);
-
-        return false;
+        //return $controller->render('view');
     }
 }

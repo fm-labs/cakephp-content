@@ -96,7 +96,6 @@ class PagesController extends ContentController
      */
     public function view($id = null)
     {
-        Configure::write('debug', false);
         if ($id === null) {
             switch (true) {
                 case $this->request->query('page_id'):
@@ -128,6 +127,7 @@ class PagesController extends ContentController
 
         // force canonical url (except root pages)
         if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
+            debug("blaa");
             $here = Router::normalize($this->request->here);
             $canonical = Router::normalize($page->url);
 
@@ -140,29 +140,15 @@ class PagesController extends ContentController
 
         $this->Frontend->setRefId($page->id);
 
-        //@todo Dispatch Page.beforeExecute()
-
-        // Execute page
-        $handler = $this->Pages->getTypeHandler($page);
-        if ($handler->execute($this, $page) === false) {
-            return;
-        }
-        //@todo Dispatch Page.afterExecute();
-
         $this->viewBuilder()->className('Content.Page');
 
-        $view = ($page->page_template) ?: $page->type;
-        $view = ($this->request->query('view')) ?: $view;
-        $this->viewBuilder()->template($view);
-
-        $layout = ($page->page_layout) ? $page->page_layout->template : null;
-        $this->viewBuilder()->layout($layout);
-
-        $this->set('page', $page);
-    }
-
-    protected function __invokePage($page)
-    {
-
+        //@todo Dispatch Page.beforeExecute()
+        // Execute page
+        $handler = $this->Pages->getTypeHandler($page);
+        $response = $handler->execute($this, $page);
+        if ($response) {
+            return $response;
+        }
+        //@todo Dispatch Page.afterExecute();
     }
 }
