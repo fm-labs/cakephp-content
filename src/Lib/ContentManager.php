@@ -3,6 +3,7 @@ namespace Content\Lib;
 
 use Banana\Lib\ClassRegistry;
 use Banana\Lib\SingletonTrait;
+use Cake\Collection\Collection;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventDispatcherInterface;
@@ -242,7 +243,7 @@ class ContentManager
     }
 
     /**
-     * @return array
+     * @return Collection
      */
     public static function getThemesAvailable()
     {
@@ -270,7 +271,7 @@ class ContentManager
 
         $availableThemes = array_combine($availableThemes, $availableThemes);
 
-        return $availableThemes;
+        return new Collection($availableThemes);
     }
 
     /**
