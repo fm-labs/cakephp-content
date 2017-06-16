@@ -9,8 +9,7 @@ return [
     ],
     'Content' => [
         'Router' => [
-            'scope' => 'content',
-            'enablePrettyUrls' => false,
+            'enablePrettyUrls' => true,
             'forceCanonical' => false,
         ],
     ]

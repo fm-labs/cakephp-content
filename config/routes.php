@@ -2,12 +2,15 @@
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 
-if (Configure::read('Content.Router.disableRootUrl') !== true) {
-    Router::connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
-}
-
+// root scope routes
 Router::scope('/', function(\Cake\Routing\RouteBuilder $routes) {
 
+    // map root page to content pages controller
+    if (Configure::read('Content.Router.disableRootUrl') !== true) {
+        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+    }
+
+    // map pretty urls in the root scope
     if (Configure::read('Content.Router.enablePrettyUrls')) {
         $routes->connect('/:slug/:page_id/*',
             ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
@@ -22,10 +25,10 @@ Router::scope('/', function(\Cake\Routing\RouteBuilder $routes) {
     }
 });
 
-$scope = '/' . trim(Configure::read('Content.Router.scope'), '/');
-Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], function($routes) {
+// content plugin routes
+Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], function($routes) {
 
-    //$routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+    $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
 
     // Page by slug and pageId
     if (Configure::read('Content.Router.enablePrettyUrls')) {
@@ -82,4 +85,3 @@ Router::scope($scope, ['plugin' => 'Content', '_namePrefix' => 'content:'], func
 
     $routes->fallbacks('DashedRoute');
 });
-unset($scope);
