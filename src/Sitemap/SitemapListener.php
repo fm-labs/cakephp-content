@@ -27,8 +27,8 @@ class SitemapListener implements EventListenerInterface
         $event->subject()->add($Pages->find('published')->find('sitemap')->toArray(), 'pages');
 
         // Posts
-        $Posts = TableRegistry::get('Content.Posts');
-        $Posts->addBehavior('Seo.Sitemap', ['fields' => ['loc' => 'url', 'lastmod' => 'modified']]);
-        $event->subject()->add($Posts->find('published')->find('sitemap')->toArray(), 'posts');
+        //$Posts = TableRegistry::get('Content.Posts');
+        //$Posts->addBehavior('Seo.Sitemap', ['fields' => ['loc' => 'url', 'lastmod' => 'modified']]);
+        //$event->subject()->add($Posts->find('published')->find('sitemap')->toArray(), 'posts');
     }
 }

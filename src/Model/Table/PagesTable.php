@@ -2,8 +2,9 @@
 namespace Content\Model\Table;
 
 use Banana\Menu\Menu;
-use Banana\Menu\MenuItem;
 use Cake\Cache\Cache;
+use Cake\Collection\Collection;
+use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
@@ -14,8 +15,8 @@ use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\Lib\PageTypeRegistry;
 use Content\Model\Entity\Page;
-use Content\Page\PageInterface;
 use Content\Page\PageTypeInterface;
+use Seo\Sitemap\SitemapLocation;
 
 /**
  * Pages Model
@@ -246,7 +247,7 @@ class PagesTable extends Table
     }
 
     /**
-     * @param Page $page
+     * @param EntityInterface|Page $page
      * @return PageTypeInterface
      */
     public function getTypeHandler(EntityInterface $page)
@@ -295,6 +296,11 @@ class PagesTable extends Table
         return $menu;
     }
 
+    /**
+     * @param null $startNodeId
+     * @param array $options
+     * @return array
+     */
     public function getMenuTree($startNodeId = null, array $options = [])
     {
         $tree = [];
@@ -328,6 +334,12 @@ class PagesTable extends Table
         return $tree;
     }
 
+    /**
+     * @param $tree
+     * @param $children
+     * @param int $level
+     * @param int $maxDepth
+     */
     protected function _buildMenuTree(&$tree, $children, $level = 0, $maxDepth = -1)
     {
         foreach ($children as $child) {
@@ -345,6 +357,10 @@ class PagesTable extends Table
         }
     }
 
+    /**
+     * @param $page
+     * @return null
+     */
     public function getPageLayoutFor($page)
     {
         if (is_numeric($page)) {
@@ -366,6 +382,9 @@ class PagesTable extends Table
         return null;
     }
 
+    /**
+     * @return mixed
+     */
     public function findRoot()
     {
         $rootPage = $this
@@ -380,6 +399,11 @@ class PagesTable extends Table
         return $rootPage;
     }
 
+    /**
+     * @param bool|false $fallback
+     * @param null $host
+     * @return mixed
+     */
     public function findHostRoot($fallback = false, $host = null)
     {
         if (is_null($host)) {
@@ -403,6 +427,10 @@ class PagesTable extends Table
         return $page;
     }
 
+    /**
+     * @param null $slug
+     * @return mixed
+     */
     public function findBySlug($slug = null)
     {
         $page = $this
@@ -434,5 +462,54 @@ class PagesTable extends Table
             ->first();
 
         return $page['id'];
+    }
+
+    /**
+     * @return Collection
+     */
+    public function findSitemap()
+    {
+        $locations = [];
+
+        $root = $this->findHostRoot();
+        $locations[] = new SitemapLocation(Router::url('/', true), 1, 'weekly');
+
+        $pages = $this->find('children', ['for' => $root->id])->find('threaded')->order(['lft' => 'ASC'])->contain([])->all();
+        $this->_buildSitemap($locations, $pages);
+
+        return new Collection($locations);
+    }
+
+    /**
+     * @param $locations
+     * @param $pages
+     * @return void
+     */
+    protected function _buildSitemap(&$locations, $pages, $level = 0)
+    {
+        foreach ($pages as $page) {
+
+            $handler = $this->getTypeHandler($page);
+            if (!$handler->isEnabled($page)) {
+                continue;
+            }
+
+            $url = Router::url($handler->toUrl($page), true);
+
+            // skip external urls
+            $baseUrl = Configure::read('App.fullBaseUrl');
+            if (substr($url, 0, strlen($baseUrl)) . '/' !== $baseUrl  . '/') {
+                continue;
+            }
+            $priority = 1 - ( $level / 10 );
+            $lastmod = $page->modified;
+            $changefreq = 'weekly';
+
+            $locations[] = new SitemapLocation($url, $priority, $lastmod, $changefreq);
+
+            if ($page->children) {
+                $this->_buildSitemap($locations, $page->children, $level + 1);
+            }
+        }
     }
 }
