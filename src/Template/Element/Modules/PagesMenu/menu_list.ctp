@@ -8,7 +8,7 @@
     ?>
     <li><?= $this->Html->link($title, $url, $attr); ?>
     <?php if ($node['children']): ?>
-        <?php echo $this->element($element, ['menu' => $node['_children'], 'level' => $level + 1, 'class' => $class]); ?>
+        <?php echo $this->element($element, ['menu' => $node['children'], 'level' => $level + 1, 'class' => $class]); ?>
     <?php endif; ?>
     </li>
 <?php endforeach; ?>

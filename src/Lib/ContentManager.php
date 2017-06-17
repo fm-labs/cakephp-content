@@ -249,6 +249,7 @@ class ContentManager
     {
         $availableThemes = [];
 
+        /*
         $themesLoader = function ($dir, $plugin = null) use (&$availableThemes) {
             $folder = new Folder($dir);
             list($themes, ) = $folder->read();
@@ -260,9 +261,11 @@ class ContentManager
                 }
             });
         };
+        */
+        $availableThemes = Plugin::loaded();
 
         // load app modules
-        $themesLoader(THEMES, null);
+        //$themesLoader(THEMES, null);
         // load modules from loaded plugins
         //foreach (Plugin::loaded() as $plugin) {
         //    $_path = Plugin::path($plugin) . 'src' . DS . $path;
