@@ -83,7 +83,7 @@ class GalleriesController extends AppController
             'source' => []
         ]);
 
-        $this->Backend->executeAction();
+        $this->Action->execute();
     }
 
     /**

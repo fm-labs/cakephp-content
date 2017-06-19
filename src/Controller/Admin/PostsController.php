@@ -54,7 +54,7 @@ class PostsController extends AppController
             }]
         ]);
 
-        $this->Backend->executeAction();
+        $this->Action->execute();
     }
 
     /**

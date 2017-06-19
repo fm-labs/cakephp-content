@@ -38,7 +38,7 @@ class ModulesController extends AppController
             [__d('content', 'Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
         ]);
 
-        return $this->Backend->executeAction();
+        return $this->Action->execute();
     }
 
     /**
@@ -50,7 +50,7 @@ class ModulesController extends AppController
      */
     public function view($id = null)
     {
-        $this->Backend->executeAction();
+        $this->Action->execute();
     }
 
     /**

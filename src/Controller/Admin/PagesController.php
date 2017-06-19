@@ -92,7 +92,7 @@ class PagesController extends ContentController
             ]
         ]);
 
-        $this->Backend->executeAction();
+        $this->Action->execute();
     }
 
     /**
