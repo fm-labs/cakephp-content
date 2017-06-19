@@ -59,14 +59,6 @@ class PagesController extends ContentController
     }
 
     /**
-     * @param Event $event
-     */
-    public function beforeRender(Event $event)
-    {
-        parent::beforeRender($event);
-    }
-
-    /**
      * Index method
      */
     public function index()
@@ -127,7 +119,6 @@ class PagesController extends ContentController
 
         // force canonical url (except root pages)
         if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
-            debug("blaa");
             $here = Router::normalize($this->request->here);
             $canonical = Router::normalize($page->url);
 

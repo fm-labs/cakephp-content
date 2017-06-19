@@ -18,11 +18,11 @@ class StaticPageType extends AbstractPageType
      */
     public function execute(Controller &$controller, EntityInterface $entity)
     {
-        $action = ($entity->page_template) ?: null;
+        $action = ($entity->get('page_template')) ?: null;
         if ($action !== 'view' && $action && method_exists($this, $action)) {
             $controller->setAction($action);
-
-            return false;
         }
+
+        $controller->render($action);
     }
 }
