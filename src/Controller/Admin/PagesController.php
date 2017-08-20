@@ -36,6 +36,7 @@ class PagesController extends ContentController
      * @var array
      */
     public $actions = [
+        /*
         'index'     => 'Backend.TreeIndex',
         'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
@@ -47,6 +48,7 @@ class PagesController extends ContentController
         'moveDown'  => 'Backend.TreeMoveDown',
         'sort'      => 'Backend.TreeSort',
         'repair'    => 'Backend.TreeRepair',
+        */
     ];
 
     /**
@@ -80,6 +82,7 @@ class PagesController extends ContentController
             //}]
         ]);
 
+        /*
         $this->set('actions', [
             [
                 __d('content', 'Add {0}', __d('content', 'page')),
@@ -91,6 +94,7 @@ class PagesController extends ContentController
                 ['class' => 'link-modal-frame', 'data-modal-reload' => true, 'data-icon' => 'sitemap']
             ]
         ]);
+        */
 
         $this->Action->execute();
     }
