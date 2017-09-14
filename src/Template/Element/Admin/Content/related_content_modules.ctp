@@ -1,4 +1,6 @@
 <?php
+//@deprecated --> REMOVE
+
 $sections = (isset($sections)) ? $sections : ['top', 'before', 'main', 'after', 'bottom', 'header', 'footer'];
 ?>
 <?php foreach($sections as $section): ?>

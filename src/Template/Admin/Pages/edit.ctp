@@ -3,9 +3,10 @@ use Cake\Utility\Inflector;
 
 $this->loadHelper('Bootstrap.Panel');
 $this->loadHelper('Bootstrap.Tabs');
-//$this->extend('/Admin/Content/edit');
+$this->extend('Backend./Admin/Action/edit');
 
 // EXTEND: TOOLBAR
+/*
 $this->Toolbar->addLink(__d('content','New {0}', __d('content','Page')), ['action' => 'add'], ['data-icon' => 'plus']);
 $this->Toolbar->addLink(__d('content','All {0}', __d('content','Pages')), ['action' => 'index'], ['data-icon' => 'list']);
 $this->Toolbar->addLink(__d('content','Preview'), ['action' => 'preview', $page->id], ['data-icon' => 'eye', 'target' => '_preview']);
@@ -16,15 +17,11 @@ $this->Toolbar->addLink(
     ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $page->id)]
 );
 
-$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
-$this->Breadcrumbs->add($page->title);
 
-// HEADING
-$this->assign('title', $page->title);
-$this->assign('heading', $page->title);
+*/
 
 // LEFT
-$this->loadHelper('Bootstrap.Menu');
+//$this->loadHelper('Bootstrap.Menu');
 
 /*
 $this->start('left');
@@ -38,130 +35,83 @@ $this->end();
 */
 
 // CONTENT
+// HEADING
+$this->assign('title', $page->title);
+//$this->assign('heading', $page->title);
+$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index']);
+$this->Breadcrumbs->add($page->title);
 ?>
 <?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
-<div class="pages">
+<div class="form">
+    <?= $this->Form->create($page, ['novalidate' => 'novalidate']); ?>
+    <?= $this->Form->input('title'); ?>
 
-    <?php $this->Tabs->start(); ?>
+    <?php
+    // page type specific form input injection via elements
+    $typeElement = 'Content.Admin/Pages/' . $page->type . '/form';
+    if ($page->type && $this->elementExists($typeElement)) {
+        echo $this->Html->div('', $this->element($typeElement, compact('page')));
+    }
+    ?>
 
+    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => true]); ?>
+        <?php
+        echo $this->Form->input('type', [
+            'id' => 'select-type',
+            'disabled' => isset($page->type)
+            //'class' => 'select-ajax',
+            //'data-target' => 'select-type-params-form',
+            //'data-url' => ['action' => 'ajaxPageTypeForm']
+        ]);
+        ?>
+        <?php
+        echo $this->Form->input('parent_id',
+            ['options' => $pagesTree, 'empty' => '- Root Node -']);
+
+        if ($page->parent_id) {
+            echo $this->Html->link(__d('content', 'Edit parent'), ['action' => 'edit', $page->parent_id]);
+        }
+        echo $this->Form->input('slug');
+        ?>
+
+        <?php
+        echo $this->Form->input('page_layout_id',
+            ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
+        ?>
+        <?php
+        if ($page->page_layout_id) {
+            echo $this->Html->link('Edit Layout', '#');
+        }
+        ?>
+        <?php
+        echo $this->Form->input('page_template',
+            //['type' => 'text']
+            ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
+        );
+        ?>
+
+        <?= $this->Form->input('hide_in_nav'); ?>
+        <?= $this->Form->input('hide_in_sitemap'); ?>
+        <?= $this->Form->input('cssid'); ?>
+        <?= $this->Form->input('cssclass'); ?>
+
+    <?= $this->Form->fieldsetEnd(); ?>
+
+
+    <div class="actions">
+        <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
+    </div>
+
+    <?= $this->Form->end() ?>
+    <!-- EOF PAGE EDIT FORM -->
 
     <?php
     $typeElement = 'Content.Admin/Pages/' . $page->type . '/manage';
     if ($page->type && $this->elementExists($typeElement)): ?>
-        <?php $this->Tabs->add(__d('content', 'Page')); ?>
+        <?php //$this->Tabs->add(__d('content', 'Page')); ?>
         <div><?php echo $this->element($typeElement, compact('page')); ?></div>
     <?php endif; ?>
 
-    <?php $this->Tabs->add(__d('content', 'Edit')); ?>
-        <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
+    <?php debug($page); ?>
 
-                <?php
-                echo $this->Form->input('type', [
-                    'id' => 'select-type',
-                    'disabled' => isset($page->type)
-                    //'class' => 'select-ajax',
-                    //'data-target' => 'select-type-params-form',
-                    //'data-url' => ['action' => 'ajaxPageTypeForm']
-                ]);
-                ?>
-
-                <?php
-                echo $this->Form->input('parent_id',
-                    ['options' => $pagesTree, 'empty' => '- Root Node -']);
-
-                if ($page->parent_id) {
-                    echo $this->Html->link(__d('content', 'Edit parent'), ['action' => 'edit', $page->parent_id]);
-                }
-                ?>
-                <?php
-                echo $this->Form->input('title');
-                echo $this->Form->input('slug');
-                ?>
-
-                <?php
-                $typeElement = 'Content.Admin/Pages/' . $page->type . '/form';
-                ?>
-                <?php if ($page->type && $this->elementExists($typeElement)): ?>
-                    <div><?php echo $this->element($typeElement, compact('page')); ?></div>
-                <?php endif; ?>
-
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => false]); ?>
-                <?php
-                echo $this->Form->input('page_layout_id',
-                    ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
-                ?>
-                <?php
-                if ($page->page_layout_id) {
-                    echo $this->Html->link('Edit Layout', '#');
-                }
-                ?>
-                <?php
-                echo $this->Form->input('page_template',
-                    //['type' => 'text']
-                    ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
-                );
-                ?>
-                <?= $this->Form->fieldsetEnd(); ?>
-
-
-
-                <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
-                <?php
-                echo $this->Form->input('is_published');
-                ?>
-                <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
-                <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
-                <?= $this->Form->fieldsetEnd(); ?>
-
-
-
-            <div class="actions text-right">
-                <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
-            </div>
-
-        <?= $this->Form->end() ?>
-        <!-- # -->
-
-
-
-        <?php
-            $this->Tabs->add(__d('content', 'Advanced'));
-        ?>
-        <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
-        <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
-        <?= $this->Form->input('hide_in_nav'); ?>
-        <?= $this->Form->input('hide_in_sitemap'); ?>
-        <?= $this->Form->fieldsetEnd(); ?>
-
-
-        <?= $this->Form->fieldsetStart(['legend' => __d('content', 'DOM'), 'collapsed' => false]); ?>
-        <?= $this->Form->input('cssid'); ?>
-        <?= $this->Form->input('cssclass'); ?>
-        <?= $this->Form->fieldsetEnd(); ?>
-
-
-
-        <div class="actions">
-            <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
-        </div>
-
-        <?= $this->Form->end() ?>
-        <!-- EOF PAGE EDIT FORM -->
-        <?php debug($page); ?>
-
-
-    <?php
-    $this->Tabs->add(__d('content', 'Meta'), [
-        'url' => ['action' => 'relatedPageMeta', $page->id]
-    ]);
-
-    $this->Tabs->add(__d('content', 'Related Modules'), [
-        'url' => ['action' => 'relatedContentModules', $page->id]
-    ]);
-
-    $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]);
-    debug($page);
-    ?>
-
-    <?php echo $this->Tabs->render(); ?>
 </div>

@@ -36,18 +36,17 @@ class PagesController extends ContentController
      * @var array
      */
     public $actions = [
-        /*
         'index'     => 'Backend.TreeIndex',
-        'view'      => 'Backend.View',
+        //'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
         'edit'      => 'Backend.Edit',
         'delete'    => 'Backend.Delete',
         'publish'   => 'Backend.Publish',
-        'unpublish' => 'Backend.Unpublish',
-        'moveUp'    => 'Backend.TreeMoveUp',
-        'moveDown'  => 'Backend.TreeMoveDown',
         'sort'      => 'Backend.TreeSort',
         'repair'    => 'Backend.TreeRepair',
+        /*
+        'moveUp'    => 'Backend.TreeMoveUp',
+        'moveDown'  => 'Backend.TreeMoveDown',
         */
     ];
 
@@ -59,6 +58,9 @@ class PagesController extends ContentController
     {
         parent::beforeFilter($event);
         $this->components()->unload('RequestHandler');
+
+        $this->Action->registerInline('relatedPageMeta', ['form' => true, 'label' => 'Meta']);
+        $this->Action->registerInline('relatedContentModules', ['form' => true, 'label' => __('Related Modules')]);
     }
 
     /**
@@ -268,7 +270,31 @@ class PagesController extends ContentController
         $this->set('pageTemplates', ContentManager::getAvailablePageTemplates());
 
         $this->set('page', $page);
-        $this->set('_serialize', ['content']);
+        $this->set('_serialize', 'page');
+        $this->set('_entity', 'page');
+
+
+        /*
+        $this->Tabs->add(__d('content', 'Meta'), [
+            'url' => ['action' => 'relatedPageMeta', $page->id]
+        ]);
+
+        $this->Tabs->add(__d('content', 'Related Modules'), [
+            'url' => ['action' => 'relatedContentModules', $page->id]
+        ]);
+
+        $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]);
+        debug($page);
+        */
+
+        /*
+        $this->set('tabs', [
+            'meta' => ['title' => __d('content', 'Meta'), 'url' => ['action' => 'relatedPageMeta', $page->id]],
+            'related_content_modules' => ['title' => __d('content', 'Related Modules'), 'url' => ['action' => 'relatedContentModules', $page->id]],
+        ]);
+        */
+
+        $this->Action->execute();
     }
 
     /**
