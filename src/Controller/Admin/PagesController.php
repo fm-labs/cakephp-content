@@ -36,7 +36,8 @@ class PagesController extends ContentController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.TreeIndex',
+        'index'     => 'Backend.FooTableIndex',
+        //'index2'     => 'Backend.TreeIndex',
         //'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
         'edit'      => 'Backend.Edit',
@@ -69,6 +70,32 @@ class PagesController extends ContentController
      * @return void
      */
     public function index()
+    {
+        $this->paginate = [
+            'contain' => ['ParentPages'],
+            'order' => ['Pages.lft ASC'],
+            'limit' => 200,
+            'maxLimit' => 200,
+        ];
+
+        $this->set([
+           'ajax' => true
+        ]);
+        $this->set('fields', [
+           'is_published' => [
+               'type' => 'boolean'
+           ]
+        ]);
+        $this->set('fields.whitelist', ['title', 'type', 'is_published']);
+        $this->Action->execute();
+    }
+
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index2()
     {
         $this->paginate = [
             'contain' => ['ParentPages'],

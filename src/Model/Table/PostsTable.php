@@ -93,6 +93,15 @@ class PostsTable extends Table
         if (Plugin::loaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
+                ->add('q', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['title']
+                ])
                 ->add('title', 'Search.Like', [
                     'before' => true,
                     'after' => true,
@@ -128,6 +137,12 @@ class PostsTable extends Table
         $schema->columnType('image_files', 'media_file');
 
         return $schema;
+    }
+
+    public function buildInputs(\Banana\Model\TableInputSchema $inputs)
+    {
+        //$inputs->addField('teaser_html', ['type' => 'Html']);
+        return $inputs;
     }
 
     /**

@@ -83,9 +83,20 @@ class PagesTable extends Table
             'translationTable' => 'bc_i18n'
         ]);
 
+        //$this->addBehavior('Banana.InputSchema');
+
         if (Plugin::loaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
+                ->add('q', 'Search.Like', [
+                    'before' => true,
+                    'after' => true,
+                    'fieldMode' => 'OR',
+                    'comparison' => 'LIKE',
+                    'wildcardAny' => '*',
+                    'wildcardOne' => '?',
+                    'field' => ['title']
+                ])
                 ->add('title', 'Search.Like', [
                     'before' => true,
                     'after' => true,
@@ -101,6 +112,13 @@ class PagesTable extends Table
         }
 
         $this->_loadPageTypes();
+    }
+
+
+    public function buildInputs(\Banana\Model\TableInputSchema $inputs)
+    {
+        $inputs->addField('meta_desc', ['type' => 'Html']);
+        return $inputs;
     }
 
     /**

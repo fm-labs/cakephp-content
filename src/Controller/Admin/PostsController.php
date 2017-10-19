@@ -23,7 +23,8 @@ class PostsController extends AppController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.Index',
+        'index'     => 'Backend.FooTableIndex',
+        'index2'     => 'Backend.Index',
         'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
         'edit'      => 'Backend.Edit',
@@ -38,6 +39,30 @@ class PostsController extends AppController
      * @return void
      */
     public function index()
+    {
+        /*
+        $this->set('paginate', [
+            'contain' => [],
+            'order' => ['Posts.title ASC'],
+            'conditions' => ['Posts.refscope' => 'Content.Pages'],
+            'limit' => 200,
+            'maxLimit' => 200,
+        ]);
+        */
+        $this->set('fields.whitelist', ['title', 'is_published']);
+        $this->set('filter', true);
+        $this->set('ajax', true);
+        $this->set('rowActions', ['view', 'edit', 'delete']);
+
+        $this->Action->execute();
+    }
+
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index2()
     {
         $this->paginate = [
             'contain' => [],
