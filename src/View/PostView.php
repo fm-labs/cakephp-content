@@ -83,7 +83,7 @@ class PostView extends ContentView
             }
 
             //@TODO Wrap in try/catch block
-            if ($post->image) {
+            if ($post->image && is_object($post->image)) {
                 $thumb = $this->Media->thumbnailUrl($post->image->filepath, ['width' => 200, 'height' => 200], true);
                 $this->Html->meta(['property' => 'og:image', 'content' => $thumb], null, ['block' => true]);
                 $this->Html->meta(['property' => 'twitter:image', 'content' => $thumb], null, ['block' => true]);

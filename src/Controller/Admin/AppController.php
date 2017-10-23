@@ -5,6 +5,7 @@ namespace Content\Controller\Admin;
 use Backend\Controller\BackendActionsTrait;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Content\Lib\ContentManager;
 use Media\Lib\Media\MediaManager;
@@ -76,8 +77,11 @@ class AppController extends Controller
     protected function _getGalleryList()
     {
         $list = [];
-        $mm = MediaManager::get('shop');
-        $list = $mm->getSelectListRecursive();
+
+        if (Plugin::loaded('Media')) {
+            $mm = MediaManager::get('shop');
+            $list = $mm->getSelectListRecursive();
+        }
 
         return $list;
     }

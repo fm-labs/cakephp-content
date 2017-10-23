@@ -139,13 +139,14 @@ class GalleriesTable extends Table
      */
     public function getSourceFolders()
     {
+        $folders = [];
         if (Plugin::loaded('Media')) {
             $mm = MediaManager::get('default');
 
             return $mm->open('gallery/')->getSelectFolderListRecursive();
         }
 
-        return null;
+        return $folders;
     }
 
     public function toJsTree()

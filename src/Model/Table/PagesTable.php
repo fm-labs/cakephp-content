@@ -13,6 +13,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
+use Content\Exception\MissingPageTypeHandlerException;
 use Content\Lib\PageTypeRegistry;
 use Content\Model\Entity\Page;
 use Content\Page\PageTypeInterface;
@@ -272,7 +273,7 @@ class PagesTable extends Table
     {
         $type = $page->type;
         if (!$this->_types->has($type)) {
-            throw new \RuntimeException("No type handler for $type registered");
+            throw new MissingPageTypeHandlerException(['type' => $type]);
         }
         return $this->_types->get($type);
     }
@@ -290,11 +291,15 @@ class PagesTable extends Table
         foreach ($children as $child) {
 
             try {
-
                 $handler = $this->getTypeHandler($child);
                 $item = $handler->toMenuItem($child);
 
+            } catch (MissingPageTypeHandlerException $ex) {
+                //@todo handle exception
+                //debug($ex->getMessage());
+                continue;
             } catch (\Exception $ex) {
+                //@todo handle exception
                 debug($ex->getMessage());
                 continue;
             }

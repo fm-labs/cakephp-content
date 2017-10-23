@@ -2,10 +2,7 @@
 namespace Content\Controller\Admin;
 
 use Cake\Core\Configure;
-use Content\Controller\Admin\AppController;
-use Content\Form\SearchForm;
 use Content\Lib\ContentManager;
-use Media\Lib\Media\MediaManager;
 
 /**
  * Posts Controller

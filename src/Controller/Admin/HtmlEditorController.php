@@ -22,8 +22,11 @@ class HtmlEditorController extends AppController
 
         $list = [];
         try {
-            $mm = MediaManager::get($media);
-            $files = $mm->getSelectListRecursive();
+            $files = [];
+            if (Plugin::loaded('Media')) {
+                $mm = MediaManager::get($media);
+                $files = $mm->getSelectListRecursive();
+            }
 
             array_walk($files, function ($filename, $idx) use (&$list, &$mm) {
                 $list[] = [

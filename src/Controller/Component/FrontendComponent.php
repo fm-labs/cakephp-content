@@ -5,6 +5,7 @@ namespace Content\Controller\Component;
 use Cake\Controller\Controller;
 use Cake\Controller\Component;
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Content\Model\Entity\Page;
 use Content\Model\Table\PagesTable;
 
@@ -42,18 +43,20 @@ class FrontendComponent extends Component
     {
         $this->controller = $this->_registry->getController();
 
-        if (is_null($this->_config['theme'])) {
-            $this->_config['theme'] = Configure::read('Site.theme');
-        }
+        $layout = ($this->_config['layout']) ?: 'frontend';
+        $theme = ($this->_config['theme']) ?: Configure::read('Site.theme');
+        $viewClass = $this->_config['viewClass'];
 
-        if (is_null($this->_config['layout'])) {
-            $this->_config['layout'] = 'frontend';
+        // check if theme plugin is loaded
+        if ($theme && !Plugin::loaded($theme)) {
+            debug("Warning: Configured site theme '$theme' is not loaded");
+            $theme = null;
         }
 
         $this->controller->loadComponent('Flash');
-        $this->controller->viewBuilder()->className($this->_config['viewClass']);
-        $this->controller->viewBuilder()->theme($this->_config['theme']);
-        $this->controller->viewBuilder()->layout($this->_config['layout']);
+        $this->controller->viewBuilder()->className($viewClass);
+        $this->controller->viewBuilder()->layout($layout);
+        $this->controller->viewBuilder()->theme($theme);
 
         $this->setRefScope($this->_config['refscope']);
     }

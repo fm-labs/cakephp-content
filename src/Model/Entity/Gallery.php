@@ -1,6 +1,7 @@
 <?php
 namespace Content\Model\Entity;
 
+use Cake\Core\Plugin;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Media\Lib\Media\MediaManager;
@@ -91,21 +92,23 @@ class Gallery extends Entity
      */
     protected function _loadImagesFromFolder()
     {
-        $folder = $this->_properties['source_folder'];
-
-        $mm = MediaManager::get('default');
-        $mm->open($folder);
-
-        $files = $mm->listFiles();
         $images = [];
 
-        array_walk($files, function ($val) use (&$images, &$mm) {
-            if (preg_match('/^_/', basename($val))) {
-                return;
-            }
-            $images[] = $mm->getFileUrl($val);
-        });
+        if (Plugin::loaded('Media')) {
+            $folder = $this->_properties['source_folder'];
+            $mm = MediaManager::get('default');
+            $mm->open($folder);
 
+            $files = $mm->listFiles();
+
+            array_walk($files, function ($val) use (&$images, &$mm) {
+                if (preg_match('/^_/', basename($val))) {
+                    return;
+                }
+                $images[] = $mm->getFileUrl($val);
+            });
+
+        }
         return $images;
     }
 }

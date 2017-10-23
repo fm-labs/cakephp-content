@@ -2,6 +2,7 @@
 namespace Content\Controller\Admin;
 
 use Cake\Core\Exception\Exception;
+use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\Form\Form;
 use Cake\Network\Exception\NotFoundException;
@@ -95,8 +96,12 @@ abstract class ContentController extends AppController
             }
         }
 
-        $mm = MediaManager::get('default');
-        $this->set('image_files', $mm->getSelectListRecursive());
+        if (Plugin::loaded('Media')) {
+            $mm = MediaManager::get('default');
+            $this->set('image_files', $mm->getSelectListRecursive());
+        } else {
+            $this->Flash->info(__("Recommended plugin: Media"));
+        }
 
         $this->set(compact('content'));
         $this->set('_serialize', ['content']);

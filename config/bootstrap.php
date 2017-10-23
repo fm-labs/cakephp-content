@@ -14,8 +14,10 @@ Configure::load('Content.content');
 /**
  * Load dependencies
  */
+// @todo Let the application know, that we support the Eav plugin  -> Remove hard dependency -> Recommend plugin usage
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-PluginLoader::load('Media', ['enabled' => true, 'configs' => true, 'bootstrap' => true, 'routes' => true]);
+// @todo Let the application know, that we support the Media plugin  -> Remove hard dependency -> Recommend plugin usage
+//PluginLoader::load('Media', ['enabled' => true, 'configs' => true, 'bootstrap' => true, 'routes' => true]);
 
 
 /**
@@ -60,7 +62,7 @@ if (!Cache::config('content_menu')) {
 
 TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
 
-
+//@TODO Move to Plugin handler
 EventManager::instance()->on(
     'Server.buildMiddleware',
     function ($event, $middlewareStack) {

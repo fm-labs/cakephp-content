@@ -9,6 +9,7 @@ use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cake\Routing\Router;
 use Content\Lib\ContentManager;
+use Settings\SettingsManager;
 
 class ContentPlugin implements PluginInterface, EventListenerInterface
 {
@@ -33,7 +34,7 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     {
         return [
             'Content.Model.PageTypes.get' => 'getContentPageTypes',
-            'Settings.get' => 'getSettings',
+            'Settings.build' => 'buildSettings',
             'Backend.Menu.get' => ['callable' => 'getBackendMenu', 'priority' => 5 ],
             'Backend.Routes.build' => 'buildBackendRoutes'
         ];
@@ -63,16 +64,21 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
         ];
     }
 
-    public function getSettings(Event $event)
+    /**
+     * @param Event $event
+     */
+    public function buildSettings(Event $event)
     {
-        $event->result['Content'] = [
-            'Router.enablePrettyUrls' => [
-                'type' => 'boolean',
-            ],
-            'Router.forceCanonical' => [
-                'type' => 'boolean',
-            ],
-        ];
+        if ($event->subject() instanceof SettingsManager) {
+            $event->subject()->add('Content', 'title', [
+                'Router.enablePrettyUrls' => [
+                    'type' => 'boolean',
+                ],
+                'Router.forceCanonical' => [
+                    'type' => 'boolean',
+                ],
+            ]);
+        }
     }
 
     public function buildBackendRoutes(RouteBuilderEvent $event)
@@ -143,6 +149,7 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
      */
     public function __invoke(array $config = [])
     {
+        //@todo Let the application know that we support sitemaps via the Sitemap plugin
         \Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());
 
         new ContentManager();
