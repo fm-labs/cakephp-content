@@ -105,13 +105,16 @@ $this->Breadcrumbs->add($page->title);
     <?= $this->Form->end() ?>
     <!-- EOF PAGE EDIT FORM -->
 
+    <div>
     <?php
+    /*
     $typeElement = 'Content.Admin/Pages/' . $page->type . '/manage';
-    if ($page->type && $this->elementExists($typeElement)): ?>
-        <?php //$this->Tabs->add(__d('content', 'Page')); ?>
-        <div><?php echo $this->element($typeElement, compact('page')); ?></div>
-    <?php endif; ?>
-
+    if ($page->type && $this->elementExists($typeElement)) {
+        echo $this->element($typeElement, compact('page'));
+    }
+    */
+    ?>
+    </div>
     <?php debug($page); ?>
 
 </div>
