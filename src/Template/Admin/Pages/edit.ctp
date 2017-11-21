@@ -50,7 +50,9 @@ $this->Breadcrumbs->add($page->title);
     // page type specific form input injection via elements
     $typeElement = 'Content.Admin/Pages/' . $page->type . '/form';
     if ($page->type && $this->elementExists($typeElement)) {
+        //echo $this->Form->fieldsetStart(['legend' => __d('content', $page->type), 'collapsed' => false]);
         echo $this->Html->div('', $this->element($typeElement, compact('page')));
+        //echo $this->Form->fieldsetEnd();
     }
     ?>
 
@@ -106,14 +108,16 @@ $this->Breadcrumbs->add($page->title);
     <!-- EOF PAGE EDIT FORM -->
 
     <div>
-    <?php
-    /*
-    $typeElement = 'Content.Admin/Pages/' . $page->type . '/manage';
-    if ($page->type && $this->elementExists($typeElement)) {
-        echo $this->element($typeElement, compact('page'));
-    }
-    */
-    ?>
+
+        <?php
+        // page type specific form input injection via elements
+        $typeElement = 'Content.Admin/Pages/' . $page->type . '/related';
+        if ($page->type && $this->elementExists($typeElement)) {
+            //echo $this->Form->fieldsetStart(['legend' => __d('content', $page->type), 'collapsed' => false]);
+            echo $this->Html->div('', $this->element($typeElement, compact('page')));
+            //echo $this->Form->fieldsetEnd();
+        }
+        ?>
     </div>
     <?php debug($page); ?>
 

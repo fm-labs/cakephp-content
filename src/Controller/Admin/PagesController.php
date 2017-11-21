@@ -36,9 +36,9 @@ class PagesController extends ContentController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.FooTableIndex',
-        //'index2'     => 'Backend.TreeIndex',
-        //'view'      => 'Backend.View',
+        //'index'     => 'Backend.Index',
+        'index'     => 'Backend.TreeIndex',
+        'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
         'edit'      => 'Backend.Edit',
         'delete'    => 'Backend.Delete',
@@ -79,12 +79,13 @@ class PagesController extends ContentController
         ];
 
         $this->set([
-           'ajax' => true
+           //'ajax' => true
         ]);
         $this->set('fields', [
-           'is_published' => [
+            'title', 'type',
+            'is_published' => [
                'type' => 'boolean'
-           ]
+            ]
         ]);
         $this->set('fields.whitelist', ['title', 'type', 'is_published']);
         $this->Action->execute();
@@ -134,11 +135,22 @@ class PagesController extends ContentController
     public function view($id = null)
     {
         $content = $this->Pages->get($id, [
-            'contain' => ['ParentPages']
+            'contain' => ['ParentPages', 'Posts']
         ]);
 
-        $this->set('content', $content);
-        $this->set('_serialize', ['content']);
+        $this->set('related', [
+            'Posts' => [
+                'fields' => [
+                    'id', 'title', 'slug', 'pos', 'is_published'
+                ],
+                'rowActions' => [
+                    'edit' => [__('Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], []]
+                ]
+            ]
+        ]);
+        $this->set('entity', $content);
+
+        $this->Action->execute();
     }
 
     /**

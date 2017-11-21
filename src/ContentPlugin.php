@@ -70,7 +70,7 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     public function buildSettings(Event $event)
     {
         if ($event->subject() instanceof SettingsManager) {
-            $event->subject()->add('Content', 'title', [
+            $event->subject()->add('Content', [
                 'Router.enablePrettyUrls' => [
                     'type' => 'boolean',
                 ],

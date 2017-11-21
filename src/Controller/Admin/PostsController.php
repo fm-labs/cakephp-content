@@ -20,7 +20,7 @@ class PostsController extends AppController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.FooTableIndex',
+        'index'     => 'Backend.Index',
         'index2'     => 'Backend.Index',
         'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
