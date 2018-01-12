@@ -143,7 +143,7 @@ class GalleriesTable extends Table
         if (Plugin::loaded('Media')) {
             $mm = MediaManager::get('default');
 
-            return $mm->open('gallery/')->getSelectFolderListRecursive();
+            return $mm->getSelectFolderListRecursive('gallery/');
         }
 
         return $folders;

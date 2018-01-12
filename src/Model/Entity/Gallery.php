@@ -97,10 +97,7 @@ class Gallery extends Entity
         if (Plugin::loaded('Media')) {
             $folder = $this->_properties['source_folder'];
             $mm = MediaManager::get('default');
-            $mm->open($folder);
-
-            $files = $mm->listFiles();
-
+            $files = $mm->listFiles($folder);
             array_walk($files, function ($val) use (&$images, &$mm) {
                 if (preg_match('/^_/', basename($val))) {
                     return;
