@@ -6,6 +6,7 @@ use Backend\Event\RouteBuilderEvent;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
+use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Content\Lib\ContentManager;
 use Settings\SettingsManager;
@@ -82,11 +83,9 @@ class ContentPlugin implements EventListenerInterface
 
     public function buildBackendRoutes(RouteBuilderEvent $event)
     {
-        Router::scope('/content/admin', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'], function ($routes) {
-            $routes->extensions(['json']);
+        $event->subject()->scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'], function(RouteBuilder $routes) {
             $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-            $routes->fallbacks('DashedRoute');
-        });
+            $routes->fallbacks('DashedRoute');        });
     }
 
     public function getBackendMenu(Event $event)
