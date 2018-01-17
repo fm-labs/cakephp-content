@@ -3,7 +3,6 @@
 namespace Content;
 
 use Backend\Event\RouteBuilderEvent;
-use Banana\Plugin\PluginInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
@@ -11,7 +10,7 @@ use Cake\Routing\Router;
 use Content\Lib\ContentManager;
 use Settings\SettingsManager;
 
-class ContentPlugin implements PluginInterface, EventListenerInterface
+class ContentPlugin implements EventListenerInterface
 {
 
     /**
@@ -144,14 +143,13 @@ class ContentPlugin implements PluginInterface, EventListenerInterface
     }
 
     /**
-     * @param array $config
-     * @return void
+     * @param EventManager $eventManager
      */
-    public function __invoke(array $config = [])
+    public function __invoke(EventManager $eventManager)
     {
         //@todo Let the application know that we support sitemaps via the Sitemap plugin
-        \Cake\Event\EventManager::instance()->on(new \Content\Sitemap\SitemapListener());
+        $eventManager->on(new \Content\Sitemap\SitemapListener());
 
-        new ContentManager();
+        //new ContentManager();
     }
 }

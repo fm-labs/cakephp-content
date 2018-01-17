@@ -63,8 +63,9 @@ if (!Cache::config('content_menu')) {
 TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
 
 //@TODO Move to Plugin handler
-EventManager::instance()->on(
-    'Server.buildMiddleware',
-    function ($event, $middlewareStack) {
-        $middlewareStack->add(new \Content\Middleware\ContentMiddleware());
-    });
+//EventManager::instance()->on(
+//    'Server.buildMiddleware',
+//    function ($event, $middlewareStack) {
+//        $middlewareStack->add(new \Content\Middleware\ContentMiddleware());
+//    });
+
