@@ -35,7 +35,8 @@ class ContentPlugin implements EventListenerInterface
         return [
             'Content.Model.PageTypes.get' => 'getContentPageTypes',
             'Settings.build' => 'buildSettings',
-            'Backend.Menu.get' => ['callable' => 'getBackendMenu', 'priority' => 5 ],
+            'Backend.Menu.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
+            'Backend.Sidebar.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
             'Backend.Routes.build' => 'buildBackendRoutes'
         ];
     }
@@ -83,12 +84,15 @@ class ContentPlugin implements EventListenerInterface
 
     public function buildBackendRoutes(RouteBuilderEvent $event)
     {
-        $event->subject()->scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'], function(RouteBuilder $routes) {
-            $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-            $routes->fallbacks('DashedRoute');        });
+        $event->subject()->scope('/content',
+            ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'],
+            function(RouteBuilder $routes) {
+                $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
+                $routes->fallbacks('DashedRoute');
+            });
     }
 
-    public function getBackendMenu(Event $event)
+    public function buildBackendMenu(Event $event)
     {
         $event->subject()->addItem([
             'title' => 'Content',
@@ -121,7 +125,17 @@ class ContentPlugin implements EventListenerInterface
                     'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
                     'data-icon' => 'image'
                 ],
+            ],
+        ]);
+    }
 
+    public function buildBackendSidebarMenu(Event $event)
+    {
+        $event->subject()->addItem([
+            'title' => 'Design',
+            'url' => ['plugin' => 'Content', 'controller' => 'Themes', 'action' => 'index'],
+            'data-icon' => 'paint-brush',
+            'children' => [
                 'page_layouts' => [
                     'title' => 'Layouts',
                     'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
