@@ -3,6 +3,8 @@
 namespace Content;
 
 use Backend\Event\RouteBuilderEvent;
+use Backend\View\BackendView;
+use Banana\Menu\Menu;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
@@ -36,8 +38,9 @@ class ContentPlugin implements EventListenerInterface
             'Content.Model.PageTypes.get' => 'getContentPageTypes',
             'Settings.build' => 'buildSettings',
             'Backend.Menu.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
-            'Backend.Sidebar.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
-            'Backend.Routes.build' => 'buildBackendRoutes'
+            //'Backend.SysMenu.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
+            'Backend.Routes.build' => 'buildBackendRoutes',
+            'View.beforeLayout' => ['callable' => 'beforeLayout']
         ];
     }
 
@@ -64,6 +67,70 @@ class ContentPlugin implements EventListenerInterface
             'className' => 'Content.Root'
         ];
     }
+
+    public function beforeLayout(Event $event)
+    {
+        if ($event->subject() instanceof BackendView && $event->subject()->plugin == "Content") {
+            $menu = new Menu($this->_getMenuItems());
+            $menu->addItems($this->_getDesignMenuItems());
+            $event->subject()->set('backend.sidebar.menu', $menu);
+        }
+    }
+
+    protected function _getDesignMenuItems()
+    {
+        return [
+            'page_layouts' => [
+                'title' => 'Layouts',
+                'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
+                'data-icon' => 'columns'
+            ],
+            'modules' => [
+                'title' => 'Modules',
+                'url' => ['plugin' => 'Content', 'controller' => 'Modules', 'action' => 'index'],
+                'data-icon' => 'puzzle-piece'
+            ],
+            'content_modules' => [
+                'title' => 'Content Modules',
+                'url' => ['plugin' => 'Content', 'controller' => 'ContentModules', 'action' => 'index'],
+                'data-icon' => 'object-group'
+            ]
+        ];
+    }
+
+    protected function _getMenuItems()
+    {
+        return [
+
+            /*
+            'categories' => [
+                'title' => 'Categories',
+                'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
+                'data-icon' => 'folder-o',
+            ],
+            */
+
+            'pages' => [
+                'title' => 'Pages',
+                'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
+                'data-icon' => 'sitemap',
+            ],
+
+            'posts' => [
+                'title' => 'Posts',
+                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
+                'data-icon' => 'file-o',
+            ],
+
+            'galleries' => [
+                'title' => 'Galleries',
+                'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
+                'data-icon' => 'image'
+            ],
+
+        ];
+    }
+
 
     /**
      * @param Event $event
@@ -98,61 +165,19 @@ class ContentPlugin implements EventListenerInterface
             'title' => 'Content',
             'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
             'data-icon' => 'book',
-            'children' => [
-
-                /*
-                'categories' => [
-                    'title' => 'Categories',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
-                    'data-icon' => 'folder-o',
-                ],
-                */
-
-                'pages' => [
-                    'title' => 'Pages',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                    'data-icon' => 'sitemap',
-                ],
-
-                'posts' => [
-                    'title' => 'Posts',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
-                    'data-icon' => 'file-o',
-                ],
-
-                'galleries' => [
-                    'title' => 'Galleries',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
-                    'data-icon' => 'image'
-                ],
-            ],
+            'children' => $this->_getMenuItems()
         ]);
     }
 
     public function buildBackendSidebarMenu(Event $event)
     {
-        $event->subject()->addItem([
-            'title' => 'Design',
-            'url' => ['plugin' => 'Content', 'controller' => 'Themes', 'action' => 'index'],
-            'data-icon' => 'paint-brush',
-            'children' => [
-                'page_layouts' => [
-                    'title' => 'Layouts',
-                    'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
-                    'data-icon' => 'columns'
-                ],
-                'modules' => [
-                    'title' => 'Modules',
-                    'url' => ['plugin' => 'Content', 'controller' => 'Modules', 'action' => 'index'],
-                    'data-icon' => 'puzzle-piece'
-                ],
-                'content_modules' => [
-                    'title' => 'Content Modules',
-                    'url' => ['plugin' => 'Content', 'controller' => 'ContentModules', 'action' => 'index'],
-                    'data-icon' => 'object-group'
-                ]
-            ],
-        ]);
+//        $event->subject()->addItem([
+//            'title' => 'Design',
+//            'url' => ['plugin' => 'Content', 'controller' => 'Themes', 'action' => 'index'],
+//            'data-icon' => 'paint-brush',
+//            'children' => [
+//            ],
+//        ]);
     }
 
     /**
