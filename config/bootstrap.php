@@ -3,6 +3,7 @@ use Banana\Lib\ClassRegistry;
 use Banana\Plugin\PluginLoader;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
 
@@ -18,6 +19,29 @@ Configure::load('Content.content');
 //Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
 // @todo Let the application know, that we support the Media plugin  -> Remove hard dependency -> Recommend plugin usage
 //PluginLoader::load('Media', ['enabled' => true, 'configs' => true, 'bootstrap' => true, 'routes' => true]);
+Plugin::load('Bootstrap');
+
+Configure::write('Content.PageTypes.content', [
+    'title' => 'Content Page',
+    'className' => 'Content.Content'
+]);
+
+Configure::write('Content.PageTypes.static',[
+    'title' => 'Static Page',
+    'className' => 'Content.Static'
+]);
+Configure::write('Content.PageTypes.controller',[
+    'title' => 'Controller',
+    'className' => 'Content.Controller'
+]);
+Configure::write('Content.PageTypes.redirect',[
+    'title' => 'Redirect',
+    'className' => 'Content.Redirect'
+]);
+Configure::write('Content.PageTypes.root',[
+    'title' => 'Root Page',
+    'className' => 'Content.Root'
+]);
 
 
 /**

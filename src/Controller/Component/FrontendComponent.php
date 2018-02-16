@@ -49,7 +49,7 @@ class FrontendComponent extends Component
 
         // check if theme plugin is loaded
         if ($theme && !Plugin::loaded($theme)) {
-            debug("Warning: Configured site theme '$theme' is not loaded");
+            debug("Warning: Configured site theme '$theme' is not loaded. Is the plugin loaded?");
             $theme = null;
         }
 

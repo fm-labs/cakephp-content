@@ -7,6 +7,9 @@ use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Content\Lib\PageTypeRegistry;
 
+/**
+ * @deprecated
+ */
 class PageTypesTable extends ArrayTable
 {
     /**

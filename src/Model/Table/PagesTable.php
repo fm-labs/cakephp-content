@@ -218,12 +218,13 @@ class PagesTable extends Table
      */
     protected function _loadPageTypes()
     {
-        if (!TableRegistry::config('PageTypes')) {
-            TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
-        }
-        $PageTypes = TableRegistry::get('PageTypes');
+//        if (!TableRegistry::config('PageTypes')) {
+//            TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+//        }
+//        $PageTypes = TableRegistry::get('PageTypes');
+//        $types = $PageTypes->find()->all();
 
-        $types = $PageTypes->find()->all();
+        $types = (array) Configure::read('Content.PageTypes');
 
         $this->_types = new PageTypeRegistry();
         foreach ($types as $type => $config) {
@@ -296,7 +297,7 @@ class PagesTable extends Table
 
             } catch (MissingPageTypeHandlerException $ex) {
                 //@todo handle exception
-                //debug($ex->getMessage());
+                debug($ex->getMessage());
                 continue;
             } catch (\Exception $ex) {
                 //@todo handle exception
@@ -432,6 +433,8 @@ class PagesTable extends Table
         if (is_null($host)) {
             $host = (defined('BANANA_HOST')) ? BANANA_HOST : env('HTTP_HOST');
         }
+
+        debug($host);
 
         $page = $this
             ->find()

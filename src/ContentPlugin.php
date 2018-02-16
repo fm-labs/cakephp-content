@@ -35,7 +35,7 @@ class ContentPlugin implements EventListenerInterface
     public function implementedEvents()
     {
         return [
-            'Content.Model.PageTypes.get' => 'getContentPageTypes',
+            //'Content.Model.PageTypes.get' => 'getContentPageTypes', //@deprecated
             'Settings.build' => 'buildSettings',
             'Backend.Menu.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
             //'Backend.SysMenu.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
