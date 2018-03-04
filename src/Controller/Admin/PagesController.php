@@ -238,25 +238,35 @@ class PagesController extends ContentController
      */
     public function add()
     {
-        $content = $this->Pages->newEntity();
-        if ($this->request->is('post')) {
-            $content = $this->Pages->patchEntity($content, $this->request->data);
-            if ($this->Pages->save($content)) {
-                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
+//        $content = $this->Pages->newEntity();
+//        if ($this->request->is('post')) {
+//            $content = $this->Pages->patchEntity($content, $this->request->data);
+//            if ($this->Pages->save($content)) {
+//                $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
+//
+//                return $this->redirect(['action' => 'edit', $content->id]);
+//            } else {
+//                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
+//                debug($content->errors());
+//            }
+//        }
 
-                return $this->redirect(['action' => 'edit', $content->id]);
-            } else {
-                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
-                debug($content->errors());
-            }
-        }
+        $this->set('fields', [
+            'parent_id' => ['input' => ['data-placeholder' => 'No parent']],
+            'type' => ['input' => ['default' => 'content', 'empty' => false]]
+        ]);
+
+        $this->set('fields.whitelist', [
+            'parent_id', 'type', 'title'
+        ]);
 
         $pagesTree = $this->Pages->find('treeList')->toArray();
-        $this->set('pagesTree', $pagesTree);
-
+        $this->set('parents', $pagesTree);
         $this->set('types', $this->_getPageTypes());
-        $this->set(compact('content'));
-        $this->set('_serialize', ['content']);
+//        $this->set(compact('content'));
+//        $this->set('_serialize', ['content']);
+
+        $this->Action->execute();
     }
 
     /**
@@ -304,7 +314,7 @@ class PagesController extends ContentController
         $pagesTree = $this->Pages->find('treeList')->toArray();
         $this->set('pagesTree', $pagesTree);
 
-        $this->set('types', ContentManager::getAvailablePageTypes());
+        $this->set('types', $this->_getPageTypes());
         $this->set('pageLayouts', ContentManager::getAvailablePageLayouts());
         $this->set('pageTemplates', ContentManager::getAvailablePageTemplates());
 
@@ -350,6 +360,12 @@ class PagesController extends ContentController
      */
     protected function _getPageTypes()
     {
-        return ContentManager::getAvailablePageTypes();
+        $types = ContentManager::getAvailablePageTypes();
+        $list = [];
+        foreach ($types as $type => $config) {
+            $list[$type] = $config['title'];
+        }
+
+        return $list;
     }
 }

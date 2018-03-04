@@ -78,6 +78,8 @@ class ContentManager
      */
     public static function getAvailablePageTypes()
     {
+        return Configure::read('Content.PageTypes');
+
         $PageTypes = TableRegistry::get('PageTypes');
         return $PageTypes->find('list')->all();
     }

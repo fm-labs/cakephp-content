@@ -60,7 +60,8 @@ $this->Breadcrumbs->add($page->title);
         <?php
         echo $this->Form->input('type', [
             'id' => 'select-type',
-            'disabled' => isset($page->type)
+            'disabled' => isset($page->type),
+            'default' => 'content',
             //'class' => 'select-ajax',
             //'data-target' => 'select-type-params-form',
             //'data-url' => ['action' => 'ajaxPageTypeForm']

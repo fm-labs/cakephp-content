@@ -38,6 +38,7 @@ class ContentPlugin implements EventListenerInterface
             //'Content.Model.PageTypes.get' => 'getContentPageTypes', //@deprecated
             'Settings.build' => 'buildSettings',
             'Backend.Menu.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
+            'Backend.Sidebar.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
             //'Backend.SysMenu.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
             'Backend.Routes.build' => 'buildBackendRoutes',
             'View.beforeLayout' => ['callable' => 'beforeLayout']
@@ -71,9 +72,9 @@ class ContentPlugin implements EventListenerInterface
     public function beforeLayout(Event $event)
     {
         if ($event->subject() instanceof BackendView && $event->subject()->plugin == "Content") {
-            $menu = new Menu($this->_getMenuItems());
-            $menu->addItems($this->_getDesignMenuItems());
-            $event->subject()->set('backend.sidebar.menu', $menu);
+            //$menu = new Menu($this->_getMenuItems());
+            //$menu->addItems($this->_getDesignMenuItems());
+            //$event->subject()->set('backend.sidebar.menu', $menu);
         }
     }
 
