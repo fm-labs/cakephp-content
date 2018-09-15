@@ -43,7 +43,9 @@ $this->Breadcrumbs->add($page->title);
 ?>
 <?php $this->Html->script('/backend/libs/jquery-ui/jquery-ui.min.js', ['block' => true]); ?>
 <div class="form">
-    <?= $this->Form->create($page, ['novalidate' => 'novalidate']); ?>
+    <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
+
+    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Page'), 'collapsed' => false]); ?>
     <?= $this->Form->input('title'); ?>
 
     <?php
@@ -55,8 +57,9 @@ $this->Breadcrumbs->add($page->title);
         //echo $this->Form->fieldsetEnd();
     }
     ?>
+    <?= $this->Form->fieldsetEnd(); ?>
 
-    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => true]); ?>
+    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
         <?php
         echo $this->Form->input('type', [
             'id' => 'select-type',
@@ -101,10 +104,7 @@ $this->Breadcrumbs->add($page->title);
     <?= $this->Form->fieldsetEnd(); ?>
 
 
-    <div class="actions">
-        <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
-    </div>
-
+    <?= $this->Form->submit(__d('content','Save Changes'), ['class' => 'save btn btn-primary']) ?>
     <?= $this->Form->end() ?>
     <!-- EOF PAGE EDIT FORM -->
 
