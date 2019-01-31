@@ -433,6 +433,7 @@ class PagesTable extends Table
         if (is_null($host)) {
             $host = (defined('BANANA_HOST')) ? BANANA_HOST : $host;
             $host = (!$host && defined('BC_SITE_HOST')) ? BC_SITE_HOST : $host;
+            $host = ($host) ?: $_SERVER['HTTP_HOST'];
         }
 
         $page = $this

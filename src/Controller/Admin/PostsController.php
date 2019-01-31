@@ -20,13 +20,12 @@ class PostsController extends AppController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.Index',
-        'index2'     => 'Backend.Index',
-        'view'      => 'Backend.View',
-        'add'       => 'Backend.Add',
-        'edit'      => 'Backend.Edit',
-        'delete'    => 'Backend.Delete',
-        'publish'   => 'Backend.Publish',
+        'index' => 'Backend.Index',
+        'view' => 'Backend.View',
+        'add' => 'Backend.Add',
+        'edit' => 'Backend.Edit',
+        'delete' => 'Backend.Delete',
+        'publish' => 'Backend.Publish',
         'unpublish' => 'Backend.Unpublish'
     ];
 
@@ -36,30 +35,6 @@ class PostsController extends AppController
      * @return void
      */
     public function index()
-    {
-        /*
-        $this->set('paginate', [
-            'contain' => [],
-            'order' => ['Posts.title ASC'],
-            'conditions' => ['Posts.refscope' => 'Content.Pages'],
-            'limit' => 200,
-            'maxLimit' => 200,
-        ]);
-        */
-        $this->set('fields.whitelist', ['title', 'is_published']);
-        $this->set('filter', true);
-        $this->set('ajax', true);
-        $this->set('rowActions', ['view', 'edit', 'delete']);
-
-        $this->Action->execute();
-    }
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
-    public function index2()
     {
         $this->paginate = [
             'contain' => [],
@@ -83,6 +58,7 @@ class PostsController extends AppController
      * Index method
      *
      * @return void
+     * @deprecated
      */
     public function _index()
     {
@@ -117,7 +93,6 @@ class PostsController extends AppController
         }
 
         $this->set('postsList', $this->Posts->find('list')->where($scope)->order($order));
-
         $this->set('posts', $posts);
         $this->set('_serialize', ['posts']);
     }
@@ -221,10 +196,11 @@ class PostsController extends AppController
         $teaserTemplates = ContentManager::getAvailablePostTeaserTemplates();
         $templates = ContentManager::getAvailablePostTemplates();
 
-        // HtmlEditor config
-        $editor = Configure::read('HtmlEditor.content');
-        $editor['body_class'] = $post->cssclass;
-        $editor['body_id'] = $post->cssid;
+        //@TODO HtmlEditor config
+        //$editor = Configure::read('HtmlEditor.content');
+        //$editor['body_class'] = $post->cssclass;
+        //$editor['body_id'] = $post->cssid;
+        $editor = [];
 
         $template = 'edit';
         /*

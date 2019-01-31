@@ -6,6 +6,7 @@ use Cake\Controller\Controller;
 use Cake\Controller\Component;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Event\Event;
 use Content\Model\Entity\Page;
 use Content\Model\Table\PagesTable;
 
@@ -59,6 +60,10 @@ class FrontendComponent extends Component
         $this->controller->viewBuilder()->theme($theme);
 
         $this->setRefScope($this->_config['refscope']);
+    }
+
+    public function beforeRender(Event $event)
+    {
     }
 
     /**
