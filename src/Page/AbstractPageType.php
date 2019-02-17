@@ -34,6 +34,7 @@ abstract class AbstractPageType implements PageTypeInterface
         $url = $this->toUrl($entity);
 
         $item = new MenuItem($title, $url, ['class' => $entity->cssclass]);
+
         return $item;
     }
 

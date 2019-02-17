@@ -39,7 +39,7 @@ class PagesMenuModule extends ViewModule
             $this->loadModel('Content.Pages');
             $startNodeId = $this->_getStartNodeId();
             $menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
-            $menu = ($menu instanceof Menu) ? $menu->toArray() : (array) $menu;
+            $menu = ($menu instanceof Menu) ? $menu->toArray() : (array)$menu;
             $this->menu = $menu;
         }
 

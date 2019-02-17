@@ -115,10 +115,10 @@ class PagesTable extends Table
         $this->_loadPageTypes();
     }
 
-
     public function buildInputs(\Banana\Model\TableInputSchema $inputs)
     {
         $inputs->addField('meta_desc', ['type' => 'Html']);
+
         return $inputs;
     }
 
@@ -224,7 +224,7 @@ class PagesTable extends Table
 //        $PageTypes = TableRegistry::get('PageTypes');
 //        $types = $PageTypes->find()->all();
 
-        $types = (array) Configure::read('Content.PageTypes');
+        $types = (array)Configure::read('Content.PageTypes');
 
         $this->_types = new PageTypeRegistry();
         foreach ($types as $type => $config) {
@@ -276,6 +276,7 @@ class PagesTable extends Table
         if (!$this->_types->has($type)) {
             throw new MissingPageTypeHandlerException(['type' => $type]);
         }
+
         return $this->_types->get($type);
     }
 
@@ -290,11 +291,9 @@ class PagesTable extends Table
     {
         $menu = new Menu();
         foreach ($children as $child) {
-
             try {
                 $handler = $this->getTypeHandler($child);
                 $item = $handler->toMenuItem($child);
-
             } catch (MissingPageTypeHandlerException $ex) {
                 //@todo handle exception
                 debug($ex->getMessage());
@@ -514,7 +513,6 @@ class PagesTable extends Table
     protected function _buildSitemap(&$locations, $pages, $level = 0)
     {
         foreach ($pages as $page) {
-
             $handler = $this->getTypeHandler($page);
             if (!$handler->isEnabled($page)) {
                 continue;

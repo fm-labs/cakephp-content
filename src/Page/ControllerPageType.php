@@ -99,6 +99,7 @@ class ControllerPageType extends AbstractPageType
     {
         $url = $this->toUrl($entity);
         $status = ($entity->get('redirect_status')) ?: 302;
+
         return $controller->redirect($url, $status);
     }
 }

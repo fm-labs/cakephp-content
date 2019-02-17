@@ -118,7 +118,6 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
         ];
     }
 
-
     /**
      * @param Event $event
      */
@@ -136,12 +135,14 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
 
     public function buildBackendRoutes(RouteBuilderEvent $event)
     {
-        $event->subject()->scope('/content',
+        $event->subject()->scope(
+            '/content',
             ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'],
-            function(RouteBuilder $routes) {
+            function (RouteBuilder $routes) {
                 $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
                 $routes->fallbacks('DashedRoute');
-            });
+            }
+        );
     }
 
     public function buildBackendMenu(Event $event)
@@ -235,12 +236,10 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
 
     public function middleware(MiddlewareQueue $middleware)
     {
-
     }
 
     public function backendBootstrap(Backend $backend)
     {
-
     }
 
     public function backendRoutes(RouteBuilder $routes)
@@ -255,6 +254,5 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
      */
     public function __invoke(array $config = [])
     {
-
     }
 }

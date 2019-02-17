@@ -322,7 +322,6 @@ class PagesController extends ContentController
         $this->set('_serialize', 'page');
         $this->set('_entity', 'page');
 
-
         /*
         $this->Tabs->add(__d('content', 'Meta'), [
             'url' => ['action' => 'relatedPageMeta', $page->id]

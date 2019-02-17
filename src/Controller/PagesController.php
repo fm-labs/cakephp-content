@@ -89,7 +89,6 @@ class PagesController extends ContentController
     public function view($id = null)
     {
         try {
-
             if ($id === null) {
                 switch (true) {
                     case $this->request->query('page_id'):
@@ -143,10 +142,8 @@ class PagesController extends ContentController
                 return $response;
             }
             //@todo Dispatch Page.afterExecute();
-
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
-
     }
 }

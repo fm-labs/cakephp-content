@@ -81,6 +81,7 @@ class ContentManager
         return Configure::read('Content.PageTypes');
 
         $PageTypes = TableRegistry::get('PageTypes');
+
         return $PageTypes->find('list')->all();
     }
 
@@ -469,5 +470,4 @@ class ContentManager
 
         return $available;
     }
-
 }

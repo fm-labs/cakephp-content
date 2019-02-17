@@ -38,6 +38,7 @@ class RedirectPageType extends AbstractPageType
         $target = ($target) ?: $entity->redirect_target;
 
         $item = new MenuItem($title, $url, ['class' => $entity->cssclass, 'target' => $target]);
+
         return $item;
     }
 

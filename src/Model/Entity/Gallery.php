@@ -104,8 +104,8 @@ class Gallery extends Entity
                 }
                 $images[] = $mm->getFileUrl($val);
             });
-
         }
+
         return $images;
     }
 }
