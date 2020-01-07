@@ -7,13 +7,8 @@ use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 use Content\Model\Entity\Post;
 
-class PagePostType extends DefaultPostType implements PostTypeInterface
+class PagePostType extends DefaultPostType
 {
-    /**
-     * @var Post
-     */
-    protected $page;
-
     public static function describe()
     {
         return [
@@ -22,35 +17,64 @@ class PagePostType extends DefaultPostType implements PostTypeInterface
         ];
     }
 
-    public function setEntity(EntityInterface $entity)
+    /**
+     * {@inheritDoc}
+     */
+    public function getViewUrl()
     {
-        $this->page = $entity;
+        if ($this->post->get('slug')) {
+            return [
+                'prefix' => false,
+                'plugin' => 'Content',
+                'controller' => 'Pages',
+                'action' => 'view',
+                'slug' => $this->post->get('slug')
+            ];
+        }
+
+        return [
+            'prefix' => false,
+            'plugin' => 'Content',
+            'controller' => 'Pages',
+            'action' => 'view',
+            'id' => $this->post->get('id')
+        ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getPermaUrl()
+    {
+        return "/?page=" . $this->post->get('id');
+    }
+
+    /*
     public function getViewUrl()
     {
         if (Configure::read('Content.Router.enablePrettyUrls')) {
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
-                'controller' => 'Posts',
+                'controller' => 'Pages',
                 'action' => 'view',
-                //'page_id' => $this->page->get('id'),
-                'slug' => $this->page->get('slug'),
+                //'page_id' => $this->post->get('id'),
+                'slug' => $this->post->get('slug'),
             ];
         } else {
             $pageUrl = [
                 'prefix' => false,
                 'plugin' => 'Content',
-                'controller' => 'Posts',
+                'controller' => 'Pages',
                 'action' => 'view',
-                $this->page->get('id'),
-                'slug' => $this->page->get('slug'),
+                $this->post->get('id'),
+                'slug' => $this->post->get('slug'),
             ];
         }
 
         return $pageUrl;
     }
+    */
 
     public function getAdminUrl()
     {
@@ -59,7 +83,7 @@ class PagePostType extends DefaultPostType implements PostTypeInterface
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'manage',
-            $this->page->get('id'),
+            $this->post->get('id'),
         ];
     }
 
@@ -67,12 +91,12 @@ class PagePostType extends DefaultPostType implements PostTypeInterface
     {
         return TableRegistry::get('Content.Posts')
             ->find()
-            ->where(['parent_id' => $this->page->get('id')])
+            ->where(['parent_id' => $this->post->get('id')])
             ->order(['pos' => 'ASC']);
     }
 
     public function isPublished()
     {
-        return $this->page->get('is_published');
+        return $this->post->get('is_published');
     }
 }

@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * PageModules Model
  */
-class ContentModulesTable extends Table
+class ContentModulesTable extends BaseTable
 {
 
     /**
@@ -20,7 +20,7 @@ class ContentModulesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('bc_content_modules');
+        $this->table(self::$tablePrefix . 'content_modules');
         $this->displayField('id');
         $this->primaryKey('id');
         /*

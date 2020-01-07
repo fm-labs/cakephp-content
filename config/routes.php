@@ -78,10 +78,12 @@ Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], 
 
 
     // Page by slug
+    /*
     $routes->connect('/:slug',
         ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
         ['pass' => []]
     );
+    */
 
     $routes->fallbacks('DashedRoute');
 });

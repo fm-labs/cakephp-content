@@ -1,7 +1,7 @@
 <?php
 namespace Content\Controller;
 
-use App\Controller\AppController;
+use App\Controller\AppController as BaseAppController;
 use Cake\Event\Event;
 
 /**
@@ -9,17 +9,18 @@ use Cake\Event\Event;
  *
  * @package Content\Controller
  */
-class ContentController extends AppController
+abstract class ContentController extends BaseAppController
 {
     /**
      * Initialize method
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->loadComponent('User.Auth', [
             'logoutRedirect' => '/'
         ]);
-        //$this->loadComponent('Banana.Site');
         $this->loadComponent('Content.Frontend');
     }
 

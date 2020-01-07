@@ -8,12 +8,20 @@ use Cake\ORM\Query;
 
 interface PostTypeInterface extends EntityTypeInterface
 {
+    /**
+     * @deprecated
+     */
     public static function describe();
 
     /**
      * @return string|array
      */
     public function getViewUrl();
+
+    /**
+     * @return string|array
+     */
+    public function getPermaUrl();
 
     /**
      * @return string|array

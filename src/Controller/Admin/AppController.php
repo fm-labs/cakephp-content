@@ -2,8 +2,6 @@
 
 namespace Content\Controller\Admin;
 
-use Backend\Controller\BackendActionsTrait;
-use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
@@ -15,19 +13,17 @@ use Media\Lib\Media\MediaManager;
  *
  * @package Content\Controller\Admin
  */
-class AppController extends Controller
+class AppController extends \Backend\Controller\Controller
 {
-    use BackendActionsTrait;
-
     /**
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.Index',
-        'view'      => 'Backend.View',
-        'add'       => 'Backend.Add',
-        'edit'      => 'Backend.Edit',
-        'delete'    => 'Backend.Delete',
+        'index' => 'Backend.Index',
+        'view' => 'Backend.View',
+        'add' => 'Backend.Add',
+        'edit' => 'Backend.Edit',
+        'delete' => 'Backend.Delete',
         //'publish'   => 'Backend.Publish',
         //'unpublish' => 'Backend.Unpublish'
     ];
@@ -40,25 +36,18 @@ class AppController extends Controller
     ];
 
     /**
-     * Initialize
-     */
-    public function initialize()
-    {
-        $this->loadComponent('Backend.Backend');
-    }
-
-    /**
-     * @param Event $event
+     * @param Event $event The controller event
      * @return \Cake\Network\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
+        //@TODO Move shop language selection to a component
         $locale = $this->request->query('locale');
         $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
     }
 
     /**
-     * @param Event $event
+     * @param Event $event The controller event
      * @return \Cake\Network\Response|null|void
      */
     public function beforeRender(Event $event)
@@ -72,6 +61,7 @@ class AppController extends Controller
     }
 
     /**
+     * @return array
      * @deprecated
      */
     protected function _getGalleryList()
@@ -87,6 +77,7 @@ class AppController extends Controller
     }
 
     /**
+     * @return array
      * @deprecated
      */
     protected function getModulesAvailable()
@@ -95,6 +86,7 @@ class AppController extends Controller
     }
 
     /**
+     * @return array
      * @deprecated
      */
     protected function getModuleTemplatesAvailable()
@@ -103,6 +95,7 @@ class AppController extends Controller
     }
 
     /**
+     * @return array
      * @deprecated
      */
     protected function getLayoutsAvailable()
@@ -111,6 +104,7 @@ class AppController extends Controller
     }
 
     /**
+     * @return array
      * @deprecated
      */
     protected function getThemesAvailable()

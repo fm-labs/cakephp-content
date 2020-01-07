@@ -51,7 +51,7 @@ class RedirectPageType extends AbstractPageType
     {
         if ($entity->redirect_page_id) {
             $page = TableRegistry::get('Content.Pages')->get($entity->redirect_page_id, ['contain' => []]);
-            $redirectUrl = $page->url;
+            $redirectUrl = $page->getUrl();
         } else {
             $redirectUrl = $entity->redirect_location;
         }

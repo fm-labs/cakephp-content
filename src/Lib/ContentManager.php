@@ -118,6 +118,14 @@ class ContentManager
         return null;
     }
 
+    public static function getMenuById($menuId)
+    {
+        /* @var \Content\Model\Table\MenusTable $Menus */
+        $Menus = TableRegistry::get('Content.Menus');
+
+        return $Menus->getMenu($menuId);
+    }
+
     /**
      * @param $type
      * @param $typeid

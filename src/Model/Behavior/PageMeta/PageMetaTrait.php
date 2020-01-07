@@ -17,10 +17,14 @@ trait PageMetaTrait
     protected function _getMeta()
     {
         if (!array_key_exists('meta', $this->_properties)) {
-            $this->_properties['meta'] = TableRegistry::get('Content.PageMetas')
-                ->find()
-                ->where(['PageMetas.model' => $this->_pageMetaModel, 'PageMetas.foreignKey' => $this->id])
-                ->first();
+            try {
+                $this->_properties['meta'] = TableRegistry::get('Content.PageMetas')
+                    ->find()
+                    ->where(['PageMetas.model' => $this->_pageMetaModel, 'PageMetas.foreignKey' => $this->id])
+                    ->first();
+            } catch (\Exception $ex) {
+                $this->_properties['meta'] = [];
+            }
         }
 
         return $this->_properties['meta'];

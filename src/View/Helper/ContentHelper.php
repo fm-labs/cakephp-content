@@ -46,12 +46,6 @@ class ContentHelper extends Helper
             try {
                 list($plugin, $model) = pluginSplit($modelName);
                 $url = ['plugin' => $plugin, 'controller' => $model, 'action' => 'view', $id];
-
-                /*
-                $Table = TableRegistry::get($modelName);
-                $entity = $Table->find()->where(['id' => $id])->contain([])->first();
-                $url = ($entity) ? $entity->url : null;
-                */
                 $url = Router::url($url);
             } catch (\Exception $ex) {
                 $url = '/';

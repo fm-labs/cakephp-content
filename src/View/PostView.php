@@ -2,9 +2,11 @@
 
 namespace Content\View;
 
+use Cake\Core\Plugin;
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
+use Cake\Utility\Security;
 use Cake\Utility\Text;
 
 class PostView extends ContentView
@@ -19,12 +21,20 @@ class PostView extends ContentView
     public function render($view = null, $layout = null)
     {
         if ($this->get('post')) {
-            $this->loadHelper('Media.Media');
-
             $post = $this->get('post');
+            $thumb = null;
+
+            if (Plugin::loaded('Media')) {
+                $this->loadHelper('Media.Media');
+                if ($post->image && is_object($post->image)) {
+                    $thumb = $this->Media->thumbnailUrl($post->image->filepath, ['width' => 200, 'height' => 200], true);
+                }
+            }
 
             $metaTitle = ($post->meta_title) ?: $post->title;
-            $postUrl = $this->Html->Url->build($post->url, true);
+            $metaDescription = ($post->meta_desc) ?: Text::truncate(strip_tags($post->teaser_html), 150, ['exact' => false]);
+            $metaDescription = ($metaDescription) ?: Text::truncate(strip_tags($post->body_html), 150, ['exact' => false]);
+            $postUrl = $this->Html->Url->build($post->getUrl(), true);
 
             // post title
             $this->assign('title', $metaTitle);
@@ -39,7 +49,6 @@ class PostView extends ContentView
             $metaRobots = 'index,follow';
             $this->Html->meta(['name' => 'robots', 'content' => $metaRobots], null, ['block' => true]);
 
-            $metaDescription = ($post->meta_desc) ?: $post->title;
             $this->Html->meta(['name' => 'description', 'content' => $metaDescription, 'lang' => $metaLang], null, ['block' => true]);
 
             $metaKeywords = ($post->meta_keywords) ?: $post->title;
@@ -82,9 +91,7 @@ class PostView extends ContentView
                 $this->Html->meta(['property' => 'article:modified_time', 'content' => $modifiedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
-            //@TODO Wrap in try/catch block
-            if ($post->image && is_object($post->image)) {
-                $thumb = $this->Media->thumbnailUrl($post->image->filepath, ['width' => 200, 'height' => 200], true);
+            if ($thumb !== null) {
                 $this->Html->meta(['property' => 'og:image', 'content' => $thumb], null, ['block' => true]);
                 $this->Html->meta(['property' => 'twitter:image', 'content' => $thumb], null, ['block' => true]);
             }

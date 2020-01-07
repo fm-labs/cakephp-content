@@ -84,12 +84,3 @@ ClassRegistry::register('PageType', [
 //    'pages_submenu' => 'Content.PagesMenu',
 //    'html' => 'Content.Html'
 //]);
-
-
-//@TODO Move to Plugin handler
-//EventManager::instance()->on(
-//    'Server.buildMiddleware',
-//    function ($event, $middlewareStack) {
-//        $middlewareStack->add(new \Content\Middleware\ContentMiddleware());
-//    });
-

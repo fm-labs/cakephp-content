@@ -19,7 +19,7 @@ use Media\Lib\Media\MediaManager;
  * Galleries Model
  *
  */
-class GalleriesTable extends Table
+class GalleriesTable extends BaseTable
 {
 
     /**
@@ -32,7 +32,7 @@ class GalleriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('bc_galleries');
+        $this->table(self::$tablePrefix . 'galleries');
         $this->displayField('title');
         $this->primaryKey('id');
 

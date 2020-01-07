@@ -9,7 +9,7 @@ $this->assign('heading', __d('content','Add {0}', __d('content','Post')));
     <?= $this->Form->create($post); ?>
     <?php
         echo $this->Form->input('title');
-        echo $this->Form->hidden('type', ['default' => 'post']);
+        echo $this->Form->input('type', ['default' => 'post']);
         echo $this->Form->hidden('parent_id');
         echo $this->Form->hidden('refscope');
         echo $this->Form->hidden('refid');

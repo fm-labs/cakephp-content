@@ -17,7 +17,7 @@ use Cake\Validation\Validator;
  * @method \Content\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \Content\Model\Entity\Category findOrCreate($search, callable $callback = null, $options = [])
  */
-class CategoriesTable extends Table
+class CategoriesTable extends BaseTable
 {
 
     /**
@@ -30,7 +30,7 @@ class CategoriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('bc_categories');
+        $this->table(self::$tablePrefix . 'categories');
         $this->displayField('name');
         $this->primaryKey('id');
 

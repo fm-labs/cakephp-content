@@ -6,13 +6,8 @@ use Cake\Datasource\EntityInterface;
 use Content\Model\Entity\Post;
 use Content\Model\Entity\Post\PostTypeInterface;
 
-class TeaserPostType implements PostTypeInterface
+class TeaserPostType extends DefaultPostType
 {
-    /**
-     * @var Post
-     */
-    protected $post;
-
     /**
      * @return array
      */
@@ -22,11 +17,6 @@ class TeaserPostType implements PostTypeInterface
             'title' => 'Teaser',
             'modelClass' => 'Content.Posts'
         ];
-    }
-
-    public function setEntity(EntityInterface $entity)
-    {
-        $this->post = $entity;
     }
 
     public function getViewUrl()

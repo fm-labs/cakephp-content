@@ -4,7 +4,7 @@ namespace Content\View;
 
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
+use Cake\Utility\Text;
 
 class PageView extends ContentView
 {
@@ -14,13 +14,14 @@ class PageView extends ContentView
         $this->helpers()->load('Time');
 
         if ($this->get('page')) {
+            /* \Content\Model\Entity\Post $page */
             $page = $this->get('page');
-            $handler = TableRegistry::get('Content.Pages')->getTypeHandler($page);
-
-            $title = $handler->getLabel($page);
+            //$handler = TableRegistry::get('Content.Pages')->getTypeHandler($page);
+            //$title = $handler->getLabel($page);
+            $title = $page->title;
 
             $metaTitle = ($page->meta_title) ?: $title;
-            $pageUrl = $this->Html->Url->build($page->url, true);
+            $pageUrl = $this->Html->Url->build($page->getUrl(), true);
 
             // page title
             $this->assign('title', $metaTitle);
@@ -32,10 +33,10 @@ class PageView extends ContentView
             $metaLang = ($page->meta_lang) ?: I18n::locale();
             $this->Html->meta(['name' => 'language', 'content' => $metaLang], null, ['block' => true]);
 
-            $metaRobots = 'index,follow';
+            $metaRobots = ($page->meta_robots) ?: 'index,follow';
             $this->Html->meta(['name' => 'robots', 'content' => $metaRobots], null, ['block' => true]);
 
-            $metaDescription = ($page->meta_desc) ?: $page->title;
+            $metaDescription = ($page->meta_desc) ?: Text::truncate(strip_tags($page->body_html), 150, ['exact' => false]);
             $this->Html->meta(['name' => 'description', 'content' => $metaDescription, 'lang' => $metaLang], null, ['block' => true]);
 
             $metaKeywords = ($page->meta_keywords) ?: $page->title;

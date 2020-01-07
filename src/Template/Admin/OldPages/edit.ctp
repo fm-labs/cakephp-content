@@ -3,7 +3,7 @@ use Cake\Utility\Inflector;
 
 $this->loadHelper('Bootstrap.Panel');
 $this->loadHelper('Bootstrap.Tabs');
-$this->extend('Backend./Admin/Action/edit');
+//$this->extend('Backend./Admin/Action/edit');
 
 // EXTEND: TOOLBAR
 /*

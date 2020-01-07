@@ -2,11 +2,14 @@
 namespace Content\Model\Entity;
 
 use Banana\Model\EntityTypeHandlerInterface;
+use Banana\Model\EntityTypeHandlerTrait;
 use Cake\Core\Configure;
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
-use Content\Model\EntityPostTypeHandlerTrait;
+use Cake\Utility\Text;
+use Content\Model\Entity\Post\PostTypeInterface;
 
 //use Eav\Model\EntityAttributesInterface;
 //use Eav\Model\EntityAttributesTrait;
@@ -14,10 +17,13 @@ use Content\Model\EntityPostTypeHandlerTrait;
 /**
  * Post Entity.
  */
-class Post extends Entity implements EntityTypeHandlerInterface //, EntityAttributesInterface
+class Post extends Entity /*implements EntityTypeHandlerInterface*/
 {
     //use EntityAttributesTrait;
-    use EntityPostTypeHandlerTrait;
+
+    use EntityTypeHandlerTrait {
+        EntityTypeHandlerTrait::handler as typeHandler;
+    }
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -48,9 +54,75 @@ class Post extends Entity implements EntityTypeHandlerInterface //, EntityAttrib
      */
     protected $_virtual = [
         'url',
-        'view_url',
-        'children'
+        //'view_url',
+        'children',
+        'excerpt_html'
     ];
+
+    /**
+     * @return PostTypeInterface
+     * @throws \Exception
+     */
+    public function handler()
+    {
+        return $this->typeHandler();
+    }
+
+    protected function _getHandlerNamespace()
+    {
+        return 'PostType';
+    }
+
+    /**
+     * Alias for 'getViewUrl'
+     * @return array|string
+     */
+    public function getUrl()
+    {
+        return $this->getViewUrl();
+    }
+
+    /**
+     * @return array|string
+     * @throws \Exception
+     */
+    public function getViewUrl()
+    {
+        return $this->handler()->getViewUrl();
+    }
+
+    public function getPermaUrl()
+    {
+        return $this->handler()->getPermaUrl();
+    }
+
+    /**
+     * @return array|string
+     * @throws \Exception
+     */
+    public function getAdminUrl()
+    {
+        return $this->handler()->getAdminUrl();
+    }
+
+    /**
+     * @return bool
+     * @throws \Exception
+     */
+    public function isPublished()
+    {
+        return $this->handler()->isPublished();
+    }
+
+    /**
+     * @return \Cake\ORM\Query
+     * @throws \Exception
+     * @TODO This method should return an resultset instead of an query
+     */
+    public function getChildren()
+    {
+        return $this->handler()->getChildren();
+    }
 
     /**
      * @param $val
@@ -59,6 +131,30 @@ class Post extends Entity implements EntityTypeHandlerInterface //, EntityAttrib
     protected function _setTitle($val)
     {
         return trim($val);
+    }
+
+    protected function _getViewUrl()
+    {
+        return $this->getViewUrl();
+    }
+
+    protected function _getAdminUrl()
+    {
+        return $this->getAdminUrl();
+    }
+
+    /*
+    protected function _getIsPublished()
+    {
+        return $this->isPublished();
+    }
+    */
+
+    protected function _getChildren()
+    {
+        $children = $this->getChildren();
+
+        return ($children) ? $children->all()->toArray() : [];
     }
 
     /**
@@ -95,6 +191,17 @@ class Post extends Entity implements EntityTypeHandlerInterface //, EntityAttrib
     protected function _getImages()
     {
         return $this->image_files;
+    }
+
+    protected function _getExcerptHtml()
+    {
+        $excerpt = $this->teaser_html;
+        if (!$excerpt) {
+            $excerpt = strip_tags($this->body_html);
+            $excerpt = Text::truncate($excerpt, 500);
+        }
+
+        return $excerpt;
     }
 
     /**

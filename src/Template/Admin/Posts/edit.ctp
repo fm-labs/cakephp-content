@@ -1,6 +1,6 @@
 <?php
 $this->loadHelper('Bootstrap.Tabs');
-$this->loadHelper('Media.MediaPicker');
+//$this->loadHelper('Media.MediaPicker');
 
 // Toolbar
 $this->Toolbar->addLink([

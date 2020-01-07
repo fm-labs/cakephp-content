@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * PageLayouts Model
  *
  */
-class PageLayoutsTable extends Table
+class PageLayoutsTable extends BaseTable
 {
 
     /**
@@ -24,7 +24,7 @@ class PageLayoutsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('bc_page_layouts');
+        $this->table(self::$tablePrefix . 'page_layouts');
         $this->displayField('name');
         $this->primaryKey('id');
     }

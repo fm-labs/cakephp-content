@@ -3,25 +3,20 @@
 namespace Content;
 
 use Backend\Backend;
-use Backend\BackendPluginInterface;
-use Backend\Event\RouteBuilderEvent;
 use Backend\View\BackendView;
 use Banana\Application;
-use Banana\Menu\Menu;
-use Banana\Plugin\PluginInterface;
+use Banana\Plugin\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
-use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
-use Cake\Routing\Router;
-use Content\Lib\ContentManager;
-use Settings\SettingsInterface;
 use Settings\SettingsManager;
 
-class ContentPlugin implements PluginInterface, BackendPluginInterface, SettingsInterface, EventListenerInterface
+class ContentPlugin extends BasePlugin implements EventListenerInterface
 {
+    protected $_name = "Content";
+
     /**
      * Returns a list of events this object is implementing. When the class is registered
      * in an event manager, each individual method will be associated with the respective event.
@@ -33,34 +28,7 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
     public function implementedEvents()
     {
         return [
-            //'Content.Model.PageTypes.get' => 'getContentPageTypes', //@deprecated
-            'Backend.Menu.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
-            'Backend.Sidebar.build' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
-            //'Backend.SysMenu.build' => ['callable' => 'buildBackendSidebarMenu', 'priority' => 50 ],
-        ];
-    }
-
-    public function getContentPageTypes(Event $event)
-    {
-        $event->result['content'] = [
-            'title' => 'Content Page',
-            'className' => 'Content.Content'
-        ];
-        $event->result['static'] = [
-            'title' => 'Static Page',
-            'className' => 'Content.Static'
-        ];
-        $event->result['controller'] = [
-            'title' => 'Controller',
-            'className' => 'Content.Controller'
-        ];
-        $event->result['redirect'] = [
-            'title' => 'Redirect',
-            'className' => 'Content.Redirect'
-        ];
-        $event->result['root'] = [
-            'title' => 'Root Page',
-            'className' => 'Content.Root'
+            'Backend.Menu.build.admin_primary' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
         ];
     }
 
@@ -96,11 +64,10 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
                 'data-icon' => 'folder-o',
             ],
             */
-
-            'pages' => [
+            'posts' => [
                 'title' => 'Pages',
                 'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                'data-icon' => 'sitemap',
+                'data-icon' => 'file-o',
             ],
 
             'posts' => [
@@ -115,13 +82,24 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
                 'data-icon' => 'image'
             ],
 
+            'menus' => [
+                'title' => 'Menus',
+                'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+                'data-icon' => 'sitemap',
+            ],
+            'pages' => [
+                'title' => 'Pages (Old)',
+                'url' => ['plugin' => 'Content', 'controller' => 'OldPages', 'action' => 'index'],
+                'data-icon' => 'sitemap',
+            ],
+
         ];
     }
 
     /**
      * @param Event $event
      */
-    public function buildSettings(SettingsManager $settings)
+    public function buildSettings(Event $event, SettingsManager $settings)
     {
         $settings->add('Content', [
             'Router.enablePrettyUrls' => [
@@ -133,21 +111,9 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
         ]);
     }
 
-    public function buildBackendRoutes(RouteBuilderEvent $event)
+    public function buildBackendMenu(Event $event, \Banana\Menu\Menu $menu)
     {
-        $event->subject()->scope(
-            '/content',
-            ['plugin' => 'Content', '_namePrefix' => 'content:admin:', 'prefix' => 'admin'],
-            function (RouteBuilder $routes) {
-                $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-                $routes->fallbacks('DashedRoute');
-            }
-        );
-    }
-
-    public function buildBackendMenu(Event $event)
-    {
-        $event->subject()->addItem([
+        $menu->addItem([
             'title' => 'Content',
             'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
             'data-icon' => 'book',
@@ -155,23 +121,14 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
         ]);
     }
 
-    public function buildBackendSidebarMenu(Event $event)
-    {
-//        $event->subject()->addItem([
-//            'title' => 'Design',
-//            'url' => ['plugin' => 'Content', 'controller' => 'Themes', 'action' => 'index'],
-//            'data-icon' => 'paint-brush',
-//            'children' => [
-//            ],
-//        ]);
-    }
-
     public function bootstrap(Application $app)
     {
+        parent::bootstrap($app);
+
         $eventManager = EventManager::instance();
 
-        $eventManager->on(new \Content\Sitemap\SitemapListener());
         $eventManager->on($this);
+        $eventManager->on(new \Content\Sitemap\SitemapListener());
     }
 
     public function routes(RouteBuilder $routes)
@@ -234,25 +191,11 @@ class ContentPlugin implements PluginInterface, BackendPluginInterface, Settings
 //        $routes->fallbacks('DashedRoute');
     }
 
-    public function middleware(MiddlewareQueue $middleware)
-    {
-    }
-
-    public function backendBootstrap(Backend $backend)
-    {
-    }
-
     public function backendRoutes(RouteBuilder $routes)
     {
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
         $routes->fallbacks('DashedRoute');
-    }
 
-    /**
-     * @param array $config
-     * @return void
-     */
-    public function __invoke(array $config = [])
-    {
+        return $routes;
     }
 }

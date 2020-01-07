@@ -15,7 +15,7 @@ use Cake\Validation\Validator;
  * Modules Model
  *
  */
-class ModulesTable extends Table
+class ModulesTable extends BaseTable
 {
     protected function _initializeSchema(Schema\Table $table)
     {
@@ -31,7 +31,7 @@ class ModulesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('bc_modules');
+        $this->table(self::$tablePrefix . 'modules');
         $this->displayField('name');
         $this->primaryKey('id');
 

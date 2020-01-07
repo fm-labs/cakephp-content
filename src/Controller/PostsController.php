@@ -40,11 +40,14 @@ class PostsController extends ContentController
      */
     public function index()
     {
-        $homePost = $this->Posts->findHome($this->Site->getSiteId());
-        if (!$homePost) {
-            throw new NotFoundException(__d('content', "Start page not found for site ID " . $this->Site->getSiteId()));
-        }
-        $this->setAction('view', $homePost->id);
+        $posts = $this->Posts->find()
+            ->find('published')
+            ->where(['Posts.type' => 'post'])
+            ->orderDesc('id');
+
+        $posts = $this->paginate($posts);
+
+        $this->set('posts', $posts);
     }
 
     /**

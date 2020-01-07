@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * PageMetas Model
  *
  */
-class PageMetasTable extends Table
+class PageMetasTable extends BaseTable
 {
 
     /**
@@ -24,7 +24,7 @@ class PageMetasTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('bc_page_metas');
+        $this->table(self::$tablePrefix . 'page_metas');
         $this->displayField('title');
         $this->primaryKey('id');
     }

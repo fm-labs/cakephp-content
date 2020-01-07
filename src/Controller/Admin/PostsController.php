@@ -2,6 +2,7 @@
 namespace Content\Controller\Admin;
 
 use Cake\Core\Configure;
+use Cake\Routing\Router;
 use Content\Lib\ContentManager;
 
 /**
@@ -11,6 +12,8 @@ use Content\Lib\ContentManager;
  */
 class PostsController extends AppController
 {
+    protected $postType = 'post';
+
     /**
      * @var string
      */
@@ -22,7 +25,7 @@ class PostsController extends AppController
     public $actions = [
         'index' => 'Backend.Index',
         'view' => 'Backend.View',
-        'add' => 'Backend.Add',
+        //'add' => 'Backend.Add',
         'edit' => 'Backend.Edit',
         'delete' => 'Backend.Delete',
         'publish' => 'Backend.Publish',
@@ -39,15 +42,23 @@ class PostsController extends AppController
         $this->paginate = [
             'contain' => [],
             'order' => ['Posts.title ASC'],
-            'conditions' => ['Posts.refscope' => 'Content.Pages'],
+            'conditions' => ['Posts.type' => $this->postType],
             'limit' => 200,
             'maxLimit' => 200,
         ];
 
-        $this->set('fields.whitelist', ['title', 'is_published']);
+        $this->set('fields.whitelist', ['title', 'type', 'slug', 'is_published']);
         $this->set('fields', [
             'title' => ['formatter' => function ($val, $row, $args, $view) {
                 return $view->Html->link($val, ['action' => 'edit', $row->id]);
+            }],
+            'type' => ['formatter' => function($val, $row, $args, $view) {
+                $out = $val;
+                $out.= "<br />";
+                $out .= "Url: " . $view->Html->link($row->getViewUrl()) . "<br />";
+                $out .= "PermaUrl: " . $view->Html->link($row->getPermaUrl()) . "<br />";
+                $out .= "Admin Url: " . $view->Html->link($row->getAdminUrl()) . "<br />";
+                return $out;
             }]
         ]);
 
@@ -123,7 +134,10 @@ class PostsController extends AppController
     public function add()
     {
         $post = $this->Posts->newEntity($this->request->query, ['validate' => false]);
+        $post->type = $this->postType;
+
         if ($this->request->is('post')) {
+            $post->accessible('type', false);
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));

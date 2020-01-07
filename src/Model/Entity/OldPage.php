@@ -16,7 +16,7 @@ use Content\Page\PageTypeInterface;
 /**
  * Page Entity.
  */
-class Page extends Entity
+class OldPage extends Entity
 {
     use TranslateTrait;
     use PageMetaTrait;
@@ -73,7 +73,7 @@ class Page extends Entity
      */
     public function getPath()
     {
-        return TableRegistry::get('Content.Pages')
+        return TableRegistry::get('Content.OldPages')
             ->find('path', ['for' => $this->id]);
     }
 
@@ -86,7 +86,7 @@ class Page extends Entity
             return $this->_properties['posts'];
         }
 
-        return TableRegistry::get('Content.Pages')->Posts
+        return TableRegistry::get('Content.OldPages')->Posts
             ->find('sorted')
             ->where([ 'Posts.refscope' => 'Content.Pages', 'Posts.refid' => $this->id])
             ->order(['Posts.pos' => 'DESC'])
@@ -109,7 +109,7 @@ class Page extends Entity
         }
 
         if ($this->get('parent_id')) {
-            $Parent = TableRegistry::get('Content.Pages');
+            $Parent = TableRegistry::get('Content.OldPages');
             $parent = $Parent->get($this->get('parent_id'));
 
             return $this->__parentTheme = $parent->parent_theme;

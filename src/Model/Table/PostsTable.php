@@ -1,6 +1,8 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\ORM\TableRegistry;
 use Content\Model\Entity\Post;
 use Cake\Core\Plugin;
 use Cake\Log\Log;
@@ -11,7 +13,7 @@ use Cake\Validation\Validator;
  * Posts Model
  *
  */
-class PostsTable extends Table
+class PostsTable extends BaseTable
 {
 
     /**
@@ -22,7 +24,7 @@ class PostsTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('bc_posts');
+        $this->table(self::$tablePrefix . 'posts');
         $this->displayField('title');
         $this->primaryKey('id');
 
@@ -210,4 +212,30 @@ class PostsTable extends Table
 
         return $validator;
     }
+
+    /*
+    public function getTypeHandler()
+    {
+        $types = TableRegistry::get('Content.Menus')->getTypes();
+
+        $handlerBuilder = function (EntityInterface $entity) use ($types) {
+            $type = $entity->get('type');
+            $params = (array)$entity->get('type_params');
+
+            if (!isset($types[$type])) {
+                throw new \Exception('Unknown page type: ' . $type);
+            }
+
+            $className = $types[$type]['className'];
+            if (!class_exists($className)) {
+                throw new \Exception('Class not found: ' . $className);
+            }
+
+            //$params += $entity->extract(['type', 'title', 'hide_in_nav', 'hide_in_sitemap', 'cssid', 'cssclass']);
+            $handler = new $className($params);
+
+            return $handler;
+        };
+    }
+    */
 }

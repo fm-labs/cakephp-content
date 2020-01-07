@@ -42,12 +42,14 @@ class ContentView extends View
     {
         $this->loadHelper('Content.Breadcrumbs');
         $this->loadHelper('Content.Content');
-        $this->loadHelper('Form', [
+        $this->loadHelper('Content.Meta');
+        $this->loadHelper('Content.Shortcode');
+        /*$this->loadHelper('Form', [
             'className' => 'Bootstrap\View\Helper\FormHelper',
-        ]);
+        ]);*/
 
         // collect additional helpers
-        $event = new Event('Content.View.Helper.get', $this);
+        $event = new Event('Content.View.initialize', $this);
         $this->eventManager()->dispatch($event);
     }
 
@@ -153,6 +155,25 @@ class ContentView extends View
         ], $wrapperAttrs);
 
         return $this->Html->div(null, $moduleHtml, $wrapperAttrs);
+    }
+
+    public function fetch($name, $default = '')
+    {
+        $content = parent::fetch($name);
+
+        if ($this->getCurrentType() == 'layout') {
+            if ($name !== 'content'/* && !$content */) {
+                $elementPath = 'Layout/' . $this->layout . '/' . $name;
+                if ($this->elementExists($elementPath)) {
+                    $content .= $this->element($elementPath);
+                }
+            }
+        }
+
+        // render short codes
+        //$content = $this->renderShortCodes($content);
+
+        return ($content) ?: $default;
     }
 
     public function render($view = null, $layout = null)

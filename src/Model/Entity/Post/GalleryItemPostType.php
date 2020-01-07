@@ -7,24 +7,14 @@ use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 use Content\Model\Entity\Post;
 
-class GalleryItemPostType extends DefaultPostType implements PostTypeInterface
+class GalleryItemPostType extends DefaultPostType
 {
-    /**
-     * @var Post
-     */
-    protected $post;
-
     public static function describe()
     {
         return [
             'title' => 'Gallery Item',
             'modelClass' => 'Content.Posts'
         ];
-    }
-
-    public function setEntity(EntityInterface $entity)
-    {
-        $this->post = $entity;
     }
 
     public function getViewUrl()

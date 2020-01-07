@@ -20,11 +20,11 @@ use Content\Page\PageTypeInterface;
 use Seo\Sitemap\SitemapLocation;
 
 /**
- * Pages Model
+ * OldPages Model
  *
  * @property PageLayoutsTable $PageLayouts
  */
-class PagesTable extends Table
+class OldPagesTable extends BaseTable
 {
 
     /**
@@ -40,7 +40,7 @@ class PagesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('bc_pages');
+        $this->table(self::$tablePrefix . 'pages');
         $this->displayField('title');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
@@ -56,14 +56,17 @@ class PagesTable extends Table
         ]);
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable');
-        $this->addBehavior('Backend.JsTree', ['dataFields' => ['slug', 'type']]);
+
+        $this->addBehavior('Backend.JsTree', [
+            'dataFields' => ['slug', 'type']
+        ]);
 
         $this->belongsTo('ParentPages', [
-            'className' => 'Content.Pages',
+            'className' => 'Content.OldPages',
             'foreignKey' => 'parent_id'
         ]);
         $this->hasMany('ChildPages', [
-            'className' => 'Content.Pages',
+            'className' => 'Content.OldPages',
             'foreignKey' => 'parent_id'
         ]);
 
@@ -426,6 +429,7 @@ class PagesTable extends Table
      * @param bool|false $fallback
      * @param null $host
      * @return mixed
+     * @todo Remove multi-site constants
      */
     public function findHostRoot($fallback = false, $host = null)
     {
@@ -491,6 +495,7 @@ class PagesTable extends Table
 
     /**
      * @return Collection
+     * @todo Move to SitemapListener
      */
     public function findSitemap()
     {
@@ -509,6 +514,7 @@ class PagesTable extends Table
      * @param $locations
      * @param $pages
      * @return void
+     * @todo Move to SitemapListener
      */
     protected function _buildSitemap(&$locations, $pages, $level = 0)
     {
@@ -522,7 +528,7 @@ class PagesTable extends Table
 
             // skip external urls
             $baseUrl = Configure::read('App.fullBaseUrl');
-            if (substr($url, 0, strlen($baseUrl)) . '/' !== $baseUrl  . '/') {
+            if (substr($url, 0, strlen($baseUrl)) . '/' !== $baseUrl . '/') {
                 continue;
             }
             $priority = 1 - ( $level / 10 );

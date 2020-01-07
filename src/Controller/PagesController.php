@@ -15,7 +15,6 @@ use Content\Model\Table\PagesTable;
  *
  * @property FrontendComponent $Frontend
  * @property PagesTable $Pages
- * @todo Use FrontendController instead
  */
 class PagesController extends ContentController
 {
@@ -24,7 +23,7 @@ class PagesController extends ContentController
     /**
      * @var string
      */
-    public $modelClass = 'Content.Pages';
+    public $modelClass = 'Content.Posts';
 
     /**
      * @var string
@@ -46,6 +45,11 @@ class PagesController extends ContentController
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Content.Frontend');
+
+        $this->Frontend->setRefScope('Content.Pages');
+
+        //$this->viewBuilder()->className('Content.Page');
     }
 
     /**
@@ -60,24 +64,17 @@ class PagesController extends ContentController
 
     /**
      * Index method
+     *
+     * @return void
      */
     public function index()
     {
-        $rootPage = $this->Pages->findHostRoot();
+        $rootPage = null;
         if (!$rootPage) {
             throw new NotFoundException(__d('content', "Root page not found"));
         }
 
         $this->setAction('view', $rootPage->id);
-    }
-
-    /**
-     * @param null $slug
-     */
-    public function viewSlug($slug = null)
-    {
-        $page = $this->Pages->findBySlug($slug);
-        $this->setAction('view', $page->id);
     }
 
     /**
@@ -98,30 +95,31 @@ class PagesController extends ContentController
                         $id = $this->request->param('page_id');
                         break;
                     case $this->request->query('slug'):
-                        $id = $this->Pages->findIdBySlug($this->request->query('slug'));
+                        $id = $this->Posts->findIdBySlug($this->request->query('slug'));
                         break;
                     case $this->request->param('slug'):
-                        $id = $this->Pages->findIdBySlug($this->request->param('slug'));
+                        $id = $this->Posts->findIdBySlug($this->request->param('slug'));
                         break;
                     default:
                         //throw new NotFoundException();
                 }
             }
 
-            $page = $this->Pages
+            $page = $this->Posts
                 ->find('published')
-                ->where(['Pages.id' => $id])
-                ->contain(['PageLayouts'])
+                ->where(['Posts.id' => $id, 'Posts.type' => 'page'])
+                ->contain([])
                 ->first();
 
             if (!$page) {
                 throw new NotFoundException(__d('content', "Page not found"));
             }
 
+            /*
             // force canonical url (except root pages)
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($page->url);
+                $canonical = Router::normalize($page->getUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -132,8 +130,6 @@ class PagesController extends ContentController
 
             $this->Frontend->setRefId($page->id);
 
-            $this->viewBuilder()->className('Content.Page');
-
             //@todo Dispatch Page.beforeExecute()
             // Execute page
             $handler = $this->Pages->getTypeHandler($page);
@@ -141,6 +137,9 @@ class PagesController extends ContentController
             if ($response) {
                 return $response;
             }
+            */
+
+            $this->set('page', $page);
             //@todo Dispatch Page.afterExecute();
         } catch (\Exception $ex) {
             throw $ex;
