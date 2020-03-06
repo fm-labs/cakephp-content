@@ -28,7 +28,7 @@
  * @param jsTree array jsTree params. See jsTree documentation for options
  * @link https://www.jstree.com/
  */
-$selected = $this->request->query('id');
+$selected = $this->request->getQuery('id');
 $dataUrl = $this->get('dataUrl', ['action' => 'treeData']);
 
 

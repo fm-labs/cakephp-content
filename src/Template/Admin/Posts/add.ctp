@@ -8,8 +8,8 @@ $this->assign('heading', __d('content','Add {0}', __d('content','Post')));
 <div class="posts">
     <?= $this->Form->create($post); ?>
     <?php
-        echo $this->Form->input('title');
-        echo $this->Form->input('type', ['default' => 'post']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('type', ['default' => 'post']);
         echo $this->Form->hidden('parent_id');
         echo $this->Form->hidden('refscope');
         echo $this->Form->hidden('refid');

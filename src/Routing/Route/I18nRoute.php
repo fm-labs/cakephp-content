@@ -14,7 +14,7 @@ class I18nRoute extends Route
         //}
 
         //if (!isset($params['locale'])) {
-        //    $params['locale'] = I18n::locale();
+        //    $params['locale'] = I18n::getLocale();
         //}
 
         //debug($params);
@@ -25,7 +25,7 @@ class I18nRoute extends Route
     {
         //debug($url);
         if (!isset($url['locale'])) {
-            $url['locale'] = I18n::locale();
+            $url['locale'] = I18n::getLocale();
         }
         $result = parent::match($url, $context);
         //debug($result);

@@ -10,16 +10,7 @@ use Cake\ORM\TableRegistry;
 /**
  * Load default content config
  */
-Configure::load('Content.content'); //@TODO remove
-
-/**
- * Load dependencies
- */
-// @todo Let the application know, that we support the Eav plugin  -> Remove hard dependency -> Recommend plugin usage
-//Plugin::load('Eav', ['bootstrap' => false, 'routes' => true]);
-// @todo Let the application know, that we support the Media plugin  -> Remove hard dependency -> Recommend plugin usage
-//PluginLoader::load('Media', ['enabled' => true, 'configs' => true, 'bootstrap' => true, 'routes' => true]);
-Plugin::load('Bootstrap');
+Configure::load('Content.content');
 
 Configure::write('Content.PageTypes.content', [
     'title' => 'Content Page',
@@ -44,8 +35,8 @@ Configure::write('Content.PageTypes.root',[
 ]);
 
 
-if (!Cache::config('content_menu')) {
-    Cache::config('content_menu', [
+if (!Cache::getConfig('content_menu')) {
+    Cache::setConfig('content_menu', [
         'className' => 'File',
         'duration' => '+1 day',
         'path' => CACHE,
@@ -53,7 +44,7 @@ if (!Cache::config('content_menu')) {
     ]);
 }
 
-TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+TableRegistry::getTableLocator()->setConfig('PageTypes', ['className' => 'Content.PageTypes']);
 
 /**
  * Register classes

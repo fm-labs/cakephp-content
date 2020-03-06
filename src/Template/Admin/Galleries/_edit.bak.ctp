@@ -15,19 +15,19 @@
 <div class="form">
     <?= $this->Form->create($gallery, ['url' => ['action' => 'edit', $gallery->id]]); ?>
         <?php
-        echo $this->Form->input('parent_id', ['empty' => true]);
-        echo $this->Form->input('title');
-        echo $this->Form->input('inherit_desc');
-        echo $this->Form->input('desc_html', [
+        echo $this->Form->control('parent_id', ['empty' => true]);
+        echo $this->Form->control('title');
+        echo $this->Form->control('inherit_desc');
+        echo $this->Form->control('desc_html', [
             'type' => 'htmleditor',
             'editor' => [
                 'image_list_url' => '@Content.HtmlEditor.default.imageList',
                 'link_list_url' => '@Content.HtmlEditor.default.linkList'
             ]
         ]);
-        echo $this->Form->input('view_template');
-        echo $this->Form->input('source', ['empty' => true]);
-        echo $this->Form->input('source_folder', ['empty' => true]);
+        echo $this->Form->control('view_template');
+        echo $this->Form->control('source', ['empty' => true]);
+        echo $this->Form->control('source_folder', ['empty' => true]);
         ?>
     <?= $this->Form->button(__d('content','Submit')) ?>
     <?= $this->Form->end() ?>

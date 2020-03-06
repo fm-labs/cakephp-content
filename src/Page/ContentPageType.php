@@ -20,10 +20,10 @@ class ContentPageType extends AbstractPageType
     {
         $view = ($entity->get('page_template')) ?: $entity->get('type');
         $view = ($controller->request->getQuery('view')) ?: $view; //@todo Remove statement. Debug only
-        $controller->viewBuilder()->template($view);
+        $controller->viewBuilder()->setTemplate($view);
 
         $layout = ($entity->get('page_layout')) ? $entity->get('page_layout')->get('template') : null;
-        $controller->viewBuilder()->layout($layout);
+        $controller->viewBuilder()->setLayout($layout);
 
         $controller->set('page', $entity);
     }

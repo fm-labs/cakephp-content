@@ -24,7 +24,7 @@ class PostView extends ContentView
             $post = $this->get('post');
             $thumb = null;
 
-            if (Plugin::loaded('Media')) {
+            if (Plugin::isLoaded('Media')) {
                 $this->loadHelper('Media.Media');
                 if ($post->image && is_object($post->image)) {
                     $thumb = $this->Media->thumbnailUrl($post->image->filepath, ['width' => 200, 'height' => 200], true);
@@ -43,7 +43,7 @@ class PostView extends ContentView
             $this->Html->meta(['link' => $postUrl, 'rel' => 'canonical'], null, ['block' => true]);
 
             // meta tags
-            $metaLang = ($post->meta_lang) ?: I18n::locale();
+            $metaLang = ($post->meta_lang) ?: I18n::getLocale();
             $this->Html->meta(['name' => 'language', 'content' => $metaLang], null, ['block' => true]);
 
             $metaRobots = 'index,follow';

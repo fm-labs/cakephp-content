@@ -22,8 +22,8 @@
     <?= $this->Form->create($_post, ['data-ajax' => 1, 'url' => ['action' => 'edit', 'parent_id' => $post->id, '_ext' => 'json']]); ?>
     <?= $this->Form->hidden('id'); ?>
     <?= $this->Form->hidden('type'); ?>
-    <?= $this->Form->input('title'); ?>
-    <?= $this->Form->input('body_html', [
+    <?= $this->Form->control('title'); ?>
+    <?= $this->Form->control('body_html', [
         'type' => 'htmleditor',
         'editor' => $editor
     ]); ?>

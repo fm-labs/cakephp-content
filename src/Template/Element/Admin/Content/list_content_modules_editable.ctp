@@ -41,8 +41,8 @@
             <?= $this->Form->create(null, ['idPrefix' => $section, 'url' => ['action' => 'linkModule', $content->id]]); ?>
             <?= $this->Form->hidden('refscope', ['default' => 'Content.Pages']); ?>
             <?= $this->Form->hidden('refid', ['default' => $content->id]); ?>
-            <?= $this->Form->input('module_id', ['options' => $availableModules, 'label' => false]); ?>
-            <?= $this->Form->input('section', ['type' => 'hidden', 'value' => $section]); ?>
+            <?= $this->Form->control('module_id', ['options' => $availableModules, 'label' => false]); ?>
+            <?= $this->Form->control('section', ['type' => 'hidden', 'value' => $section]); ?>
             <?= $this->Form->button('Add module'); ?>
             <?= $this->Form->end(); ?>
         </div>

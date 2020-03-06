@@ -30,7 +30,7 @@ abstract class ContentController extends BaseAppController
      */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->config('authorize', 'Controller');
+        $this->Auth->setConfig('authorize', 'Controller');
         parent::beforeFilter($event);
     }
 

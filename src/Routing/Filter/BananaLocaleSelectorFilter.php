@@ -21,9 +21,9 @@ class ContentLocaleSelectorFilter extends LocaleSelectorFilter
     {
         parent::beforeDispatch($event);
 
-        $request = $event->data['request'];
-        if ($request->session()->check(static::$sessionKey)) {
-            $locale = $request->session()->read(static::$sessionKey);
+        $request = $event->getData('request');
+        if ($request->getSession()->check(static::$sessionKey)) {
+            $locale = $request->getSession()->read(static::$sessionKey);
 
             if (!$locale || (!empty($this->_locales) && !in_array($locale, $this->_locales))) {
                 return;
@@ -35,7 +35,7 @@ class ContentLocaleSelectorFilter extends LocaleSelectorFilter
         /*
         if (!isset($request->getParam('locale'))) {
             debug("add locale to request");
-            $request->addParams(['locale' => I18n::locale()]);
+            $request->addParams(['locale' => I18n::getLocale()]);
         }
         */
     }

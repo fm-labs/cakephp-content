@@ -30,7 +30,7 @@ class PageView extends ContentView
             $this->Html->meta(['link' => $pageUrl, 'rel' => 'canonical'], null, ['block' => true]);
 
             // meta tags
-            $metaLang = ($page->meta_lang) ?: I18n::locale();
+            $metaLang = ($page->meta_lang) ?: I18n::getLocale();
             $this->Html->meta(['name' => 'language', 'content' => $metaLang], null, ['block' => true]);
 
             $metaRobots = ($page->meta_robots) ?: 'index,follow';

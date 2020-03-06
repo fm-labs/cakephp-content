@@ -28,15 +28,15 @@ $this->assign('subheading', 'Gallery post');
     <div class="col-md-9">
         <?php
         echo $this->Form->hidden('type');
-        echo $this->Form->input('title');
+        echo $this->Form->control('title');
         echo $this->Form->hidden('slug', ['value' => null]);
-        //echo $this->Form->input('subheading');
+        //echo $this->Form->control('subheading');
         ?>
         <?= $this->Html->link(__d('content', 'Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $post->refid]); ?>
 
         <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
         <?php
-        echo $this->Form->input('body_html', [
+        echo $this->Form->control('body_html', [
             'type' => 'htmleditor',
             'editor' => $editor
         ]);
@@ -51,26 +51,26 @@ $this->assign('subheading', 'Gallery post');
         <!-- Publish -->
         <?= $this->Form->fieldsetStart(['legend' => 'Publish']); ?>
         <?php
-        echo $this->Form->input('is_published');
-        echo $this->Form->input('publish_start_date', ['type' => 'datepicker']);
-        echo $this->Form->input('publish_end_date', ['type' => 'datepicker']);
+        echo $this->Form->control('is_published');
+        echo $this->Form->control('publish_start_date', ['type' => 'datepicker']);
+        echo $this->Form->control('publish_end_date', ['type' => 'datepicker']);
         ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
         <!-- Media -->
         <?= $this->Form->fieldsetStart(['legend' => 'Media', 'collapsed' => false]); ?>
-        <?= $this->Form->input('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
+        <?= $this->Form->control('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
 
         <!-- Advanced -->
         <?= $this->Form->fieldsetStart(['legend' => 'Advanced', 'collapsed' => true]); ?>
             <?php
-            echo $this->Form->input('refscope');
-            echo $this->Form->input('refid');
-            echo $this->Form->input('cssclass');
-            echo $this->Form->input('cssid');
-            echo $this->Form->input('pos', ['readonly' => true]);
+            echo $this->Form->control('refscope');
+            echo $this->Form->control('refid');
+            echo $this->Form->control('cssclass');
+            echo $this->Form->control('cssid');
+            echo $this->Form->control('pos', ['readonly' => true]);
             ?>
         <?= $this->Form->fieldsetEnd(); ?>
     </div>

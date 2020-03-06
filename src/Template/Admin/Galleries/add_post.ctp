@@ -12,7 +12,7 @@ $this->assign('subheading', 'New gallery post');
     <?= $this->Form->create($post); ?>
     <div class="ui form">
         <?php
-        echo $this->Form->input('title');
+        echo $this->Form->control('title');
         echo $this->Form->hidden('refscope', ['default' => 'Content.Galleries']);
         echo $this->Form->hidden('refid');
         echo $this->Form->hidden('is_published', ['default' => 0]);

@@ -25,9 +25,9 @@
     <?= $this->Form->create($category, ['class' => 'no-ajax']); ?>
         <div class="ui form">
         <?php
-                echo $this->Form->input('name');
-                echo $this->Form->input('slug');
-                echo $this->Form->input('is_published');
+                echo $this->Form->control('name');
+                echo $this->Form->control('slug');
+                echo $this->Form->control('is_published');
         ?>
         </div>
 

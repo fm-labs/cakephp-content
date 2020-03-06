@@ -24,26 +24,26 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
         <div class="twelve wide column">
             <div class="ui form">
                 <?php
-                echo $this->Form->input('title');
-                echo $this->Form->input('slug');
-                echo $this->Form->input('type', ['id' => 'select-type']);
+                echo $this->Form->control('title');
+                echo $this->Form->control('slug');
+                echo $this->Form->control('type', ['id' => 'select-type']);
 
                 ?>
                 <div class="select-type select-type-redirect select-type-root">
                     <?php
-                        echo $this->Form->input('redirect_location', [
+                        echo $this->Form->control('redirect_location', [
                         ]);
                     ?>
                 </div>
                 <div class="select-type select-type-controller select-type-module select-type-cell">
                     <?php
-                        echo $this->Form->input('redirect_controller', [
+                        echo $this->Form->control('redirect_controller', [
                         ]);
                     ?>
                 </div>
                 <div class="select-type select-type-page select-type-root">
                     <?php
-                    echo $this->Form->input('redirect_page_id', [
+                    echo $this->Form->control('redirect_page_id', [
                         'options' => $pagesTree,
                         'empty' => __d('content','No selection')
                     ]);
@@ -51,7 +51,7 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 </div>
                 <div class="select-type select-type-redirect select-type-controller select-type-page select-type-root">
                     <?php
-                        echo $this->Form->input('redirect_status', [
+                        echo $this->Form->control('redirect_status', [
                             'options' => [301 => 'Permanent (301)', 302 => 'Temporary (302)'],
                             'default' => 302
                         ]);
@@ -61,10 +61,10 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 <fieldset class="collapsed">
                     <legend>Meta</legend>
                     <div>
-                        <?= $this->Form->input('meta_desc'); ?>
-                        <?= $this->Form->input('meta_keywords'); ?>
-                        <?= $this->Form->input('meta_lang'); ?>
-                        <?= $this->Form->input('meta_robots'); ?>
+                        <?= $this->Form->control('meta_desc'); ?>
+                        <?= $this->Form->control('meta_keywords'); ?>
+                        <?= $this->Form->control('meta_lang'); ?>
+                        <?= $this->Form->control('meta_robots'); ?>
                     </div>
                 </fieldset>
 
@@ -72,8 +72,8 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 <fieldset class="collapsed">
                     <legend>Navigation</legend>
                     <div>
-                        <?= $this->Form->input('hide_in_nav'); ?>
-                        <?= $this->Form->input('hide_in_sitemap'); ?>
+                        <?= $this->Form->control('hide_in_nav'); ?>
+                        <?= $this->Form->control('hide_in_sitemap'); ?>
                     </div>
                 </fieldset>
 
@@ -88,22 +88,22 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
             <h5 class="ui attached header">Publish</h5>
             <div class="ui attached segment form">
                 <?php
-                echo $this->Form->input('is_published');
-                echo $this->Form->input('publish_start_date', ['type' => 'datepicker']);
-                echo $this->Form->input('publish_end_date', ['type' => 'datepicker']);
+                echo $this->Form->control('is_published');
+                echo $this->Form->control('publish_start_date', ['type' => 'datepicker']);
+                echo $this->Form->control('publish_end_date', ['type' => 'datepicker']);
                 ?>
             </div>
             <h5 class="ui attached header">Structure</h5>
             <div class="ui attached segment form">
                 <?php
-                echo $this->Form->input('parent_id',
+                echo $this->Form->control('parent_id',
                     ['options' => $pagesTree, 'empty' => '- Root Node -']);
                 ?>
             </div>
             <h5 class="ui attached header">Layout</h5>
             <div class="ui attached segment form">
                 <?php
-                echo $this->Form->input('page_layout_id',
+                echo $this->Form->control('page_layout_id',
                     ['empty' => __d('content','- Default Layout -'), 'options' => $pageLayouts]);
 
                 if ($content->page_layout_id) {
@@ -111,13 +111,13 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 }
                 ?>
                 <?php
-                echo $this->Form->input('page_template',
+                echo $this->Form->control('page_template',
                     ['type' => 'text']
                     //['empty' => __d('content','- Default Template -'), 'options' => $pageTemplates]
                 );
                 ?>
-                <?= $this->Form->input('cssid'); ?>
-                <?= $this->Form->input('cssclass'); ?>
+                <?= $this->Form->control('cssid'); ?>
+                <?= $this->Form->control('cssclass'); ?>
             </div>
 
         </div>
@@ -189,10 +189,10 @@ $this->assign('heading', __d('content','Edit Page: {0}', $content->title));
                 <h3>Link existing module</h3>
                 <div class="ui form">
                     <?= $this->Form->create(null, ['url' => ['action' => 'linkModule', $content->id]]); ?>
-                    <?= $this->Form->input('refscope', ['default' => 'Content.Pages']); ?>
-                    <?= $this->Form->input('refid', ['default' => $content->id]); ?>
-                    <?= $this->Form->input('module_id', ['options' => $availableModules]); ?>
-                    <?= $this->Form->input('section'); ?>
+                    <?= $this->Form->control('refscope', ['default' => 'Content.Pages']); ?>
+                    <?= $this->Form->control('refid', ['default' => $content->id]); ?>
+                    <?= $this->Form->control('module_id', ['options' => $availableModules]); ?>
+                    <?= $this->Form->control('section'); ?>
                     <?= $this->Form->submit('Link module'); ?>
                     <?= $this->Form->end(); ?>
                 </div>

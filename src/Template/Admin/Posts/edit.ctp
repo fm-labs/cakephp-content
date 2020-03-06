@@ -35,53 +35,53 @@ endif;
     <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?php
     echo $this->Form->hidden('type');
-    echo $this->Form->input('title');
-    echo $this->Form->input('slug');
-    //echo $this->Form->input('subheading');
+    echo $this->Form->control('title');
+    echo $this->Form->control('slug');
+    //echo $this->Form->control('subheading');
     ?>
     <?php
-    echo $this->Form->input('use_teaser');
+    echo $this->Form->control('use_teaser');
     ?>
 
     <?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
     <!-- Teaser -->
     <?php
-    echo $this->Form->input('teaser_html', [
+    echo $this->Form->control('teaser_html', [
         'type' => 'htmleditor',
         'editor' => $editor
     ]);
     ?>
     <?php
-    //echo $this->Form->input('teaser_link_caption');
-    //echo $this->Form->input('teaser_link_href');
-    //echo $this->Form->input('teaser_image_file', ['type' => 'media_picker']);
-    echo $this->Form->input('teaser_template', ['empty' => '- Default -']);
+    //echo $this->Form->control('teaser_link_caption');
+    //echo $this->Form->control('teaser_link_href');
+    //echo $this->Form->control('teaser_image_file', ['type' => 'media_picker']);
+    echo $this->Form->control('teaser_template', ['empty' => '- Default -']);
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
     <!-- Content -->
     <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
     <?php
-    echo $this->Form->input('body_html', [
+    echo $this->Form->control('body_html', [
         'type' => 'htmleditor',
         'editor' => $editor
     ]);
     ?>
 
     <?php
-    echo $this->Form->input('template', ['empty' => '- Default -']);
+    echo $this->Form->control('template', ['empty' => '- Default -']);
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
     <!-- Media / Images -->
     <?= $this->Form->fieldsetStart(['legend' => 'Images', 'collapsed' => false]);  ?>
 
-    <?= $this->Form->input('teaser_image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
-    <?= $this->Form->input('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
-    <?= $this->Form->input('image_file_2', ['type' => 'media_picker', 'config' => 'images']); ?>
-    <?= $this->Form->input('image_file_3', ['type' => 'media_picker', 'config' => 'images']); ?>
-    <?= $this->Form->input('image_file_4', ['type' => 'media_picker', 'config' => 'images']); ?>
-    <?= $this->Form->input('image_file_5', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('teaser_image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('image_file', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('image_file_2', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('image_file_3', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('image_file_4', ['type' => 'media_picker', 'config' => 'images']); ?>
+    <?= $this->Form->control('image_file_5', ['type' => 'media_picker', 'config' => 'images']); ?>
 
 
     <?php /* $this->cell('Media.ImageSelect', [[
@@ -99,9 +99,9 @@ endif;
     <!-- Publish -->
     <?= $this->Form->fieldsetStart(['legend' => 'Publish']); ?>
     <?php
-    echo $this->Form->input('is_published');
-    echo $this->Form->input('publish_start_date', ['type' => 'datepicker']);
-    echo $this->Form->input('publish_end_date', ['type' => 'datepicker']);
+    echo $this->Form->control('is_published');
+    echo $this->Form->control('publish_start_date', ['type' => 'datepicker']);
+    echo $this->Form->control('publish_end_date', ['type' => 'datepicker']);
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
@@ -114,11 +114,11 @@ endif;
     <?= $this->Form->create($post, ['horizontal' => true]); ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Advanced', 'collapsed' => false]); ?>
     <?php
-    echo $this->Form->input('refscope');
-    echo $this->Form->input('refid');
-    echo $this->Form->input('cssclass');
-    echo $this->Form->input('cssid');
-    echo $this->Form->input('order');
+    echo $this->Form->control('refscope');
+    echo $this->Form->control('refid');
+    echo $this->Form->control('cssclass');
+    echo $this->Form->control('cssid');
+    echo $this->Form->control('order');
     ?>
     <?= $this->Form->fieldsetEnd(); ?>
 
@@ -168,11 +168,11 @@ endif;
     <?= $this->Form->create($post); ?>
     <?= $this->Form->fieldsetStart(['legend' => 'Meta', 'collapsed' => false]); ?>
 
-    <?= $this->Form->input('meta_title'); ?>
-    <?= $this->Form->input('meta_desc'); ?>
-    <?= $this->Form->input('meta_keywords'); ?>
-    <?= $this->Form->input('meta_lang'); ?>
-    <?= $this->Form->input('meta_robots'); ?>
+    <?= $this->Form->control('meta_title'); ?>
+    <?= $this->Form->control('meta_desc'); ?>
+    <?= $this->Form->control('meta_keywords'); ?>
+    <?= $this->Form->control('meta_lang'); ?>
+    <?= $this->Form->control('meta_robots'); ?>
 
     <?= $this->Form->fieldsetEnd(); ?>
     <?= $this->Form->button(__d('content','Save Changes'), ['class' => 'btn btn-primary btn-block']) ?>

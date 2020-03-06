@@ -35,7 +35,7 @@ class ModulesTable extends BaseTable
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        if (Plugin::loaded('Search')) {
+        if (Plugin::isLoaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
                 ->add('name', 'Search.Like', [

@@ -61,14 +61,14 @@ class PostsController extends ContentController
                 case $this->request->getQuery('post_id'):
                     $id = $this->request->getQuery('post_id');
                     break;
-                case $this->request->param('post_id'):
-                    $id = $this->request->param('post_id');
+                case $this->request->getParam('post_id'):
+                    $id = $this->request->getParam('post_id');
                     break;
                 case $this->request->getQuery('slug'):
                     $id = $this->Posts->findIdBySlug($this->request->getQuery('slug'));
                     break;
-                case $this->request->param('slug'):
-                    $id = $this->Posts->findIdBySlug($this->request->param('slug'));
+                case $this->request->getParam('slug'):
+                    $id = $this->Posts->findIdBySlug($this->request->getParam('slug'));
                     break;
                 default:
                     //throw new NotFoundException();

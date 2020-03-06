@@ -40,11 +40,11 @@
     <div class="users ui attached segment">
         <div class="ui form">
         <?php
-                echo $this->Form->input('refscope');
-                echo $this->Form->input('refid');
-                echo $this->Form->input('template');
-                echo $this->Form->input('module_id', ['options' => $modules]);
-                echo $this->Form->input('section');
+                echo $this->Form->control('refscope');
+                echo $this->Form->control('refid');
+                echo $this->Form->control('template');
+                echo $this->Form->control('module_id', ['options' => $modules]);
+                echo $this->Form->control('section');
         ?>
         </div>
     </div>

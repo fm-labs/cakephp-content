@@ -24,7 +24,7 @@ class PageMetasTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->table(self::$tablePrefix . 'page_metas');
+        $this->setTable(self::$tablePrefix . 'page_metas');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
     }

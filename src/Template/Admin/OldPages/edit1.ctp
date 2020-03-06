@@ -30,11 +30,11 @@ $this->assign('title', $page->title);
     <div class="row">
         <div class="col-md-9">
             <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('slug');
+            echo $this->Form->control('title');
+            echo $this->Form->control('slug');
             ?>
             <?php
-            echo $this->Form->input('type', [
+            echo $this->Form->control('type', [
                 'id' => 'select-type',
                 //'class' => 'select-ajax',
                 //'data-target' => 'select-type-params-form',
@@ -44,19 +44,19 @@ $this->assign('title', $page->title);
             <div id="select-type-params-form"></div>
             <div class="select-type select-type-redirect select-type-root">
                 <?php
-                echo $this->Form->input('redirect_location', [
+                echo $this->Form->control('redirect_location', [
                 ]);
                 ?>
             </div>
             <div class="select-type select-type-controller select-type-module select-type-cell">
                 <?php
-                echo $this->Form->input('redirect_controller', [
+                echo $this->Form->control('redirect_controller', [
                 ]);
                 ?>
             </div>
             <div class="select-type select-type-page select-type-root">
                 <?php
-                echo $this->Form->input('redirect_page_id', [
+                echo $this->Form->control('redirect_page_id', [
                     'options' => $pagesTree,
                     'empty' => __d('content','No selection')
                 ]);
@@ -64,7 +64,7 @@ $this->assign('title', $page->title);
             </div>
             <div class="select-type select-type-redirect select-type-controller select-type-page select-type-root">
                 <?php
-                echo $this->Form->input('redirect_status', [
+                echo $this->Form->control('redirect_status', [
                     'options' => [301 => 'Permanent (301)', 302 => 'Temporary (302)'],
                     'default' => 302
                 ]);
@@ -74,14 +74,14 @@ $this->assign('title', $page->title);
         <div class="col-md-3">
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
-            <?= $this->Form->input('hide_in_nav'); ?>
-            <?= $this->Form->input('hide_in_sitemap'); ?>
+            <?= $this->Form->control('hide_in_nav'); ?>
+            <?= $this->Form->control('hide_in_sitemap'); ?>
             <?= $this->Form->fieldsetEnd(); ?>
 
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => true]); ?>
             <?php
-            echo $this->Form->input('page_layout_id',
+            echo $this->Form->control('page_layout_id',
                 ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
             ?>
             <?php
@@ -90,7 +90,7 @@ $this->assign('title', $page->title);
             }
             ?>
             <?php
-            echo $this->Form->input('page_template',
+            echo $this->Form->control('page_template',
                 //['type' => 'text']
                 ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
             );
@@ -99,22 +99,22 @@ $this->assign('title', $page->title);
 
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => true]); ?>
-            <?= $this->Form->input('cssid'); ?>
-            <?= $this->Form->input('cssclass'); ?>
+            <?= $this->Form->control('cssid'); ?>
+            <?= $this->Form->control('cssclass'); ?>
             <?= $this->Form->fieldsetEnd(); ?>
 
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
             <?php
-            echo $this->Form->input('is_published');
+            echo $this->Form->control('is_published');
             ?>
-            <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
-            <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
+            <?php echo $this->Form->control('publish_start_date', ['type' => 'datepicker']); ?>
+            <?php echo $this->Form->control('publish_end_date', ['type' => 'datepicker']); ?>
             <?= $this->Form->fieldsetEnd(); ?>
 
             <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Parent'), 'collapsed' => false]); ?>
             <?php
-            echo $this->Form->input('parent_id',
+            echo $this->Form->control('parent_id',
                 ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
             if ($page->parent_id) {

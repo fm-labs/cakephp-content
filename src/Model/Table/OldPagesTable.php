@@ -40,7 +40,7 @@ class OldPagesTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->table(self::$tablePrefix . 'pages');
+        $this->setTable(self::$tablePrefix . 'pages');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
@@ -89,7 +89,7 @@ class OldPagesTable extends BaseTable
 
         //$this->addBehavior('Banana.InputSchema');
 
-        if (Plugin::loaded('Search')) {
+        if (Plugin::isLoaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
                 ->add('q', 'Search.Like', [
@@ -221,8 +221,8 @@ class OldPagesTable extends BaseTable
      */
     protected function _loadPageTypes()
     {
-//        if (!TableRegistry::config('PageTypes')) {
-//            TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
+//        if (!TableRegistry::getConfig('PageTypes')) {
+//            TableRegistry::setConfig('PageTypes', ['className' => 'Content.PageTypes']);
 //        }
 //        $PageTypes = TableRegistry::getTableLocator()->get('PageTypes');
 //        $types = $PageTypes->find()->all();

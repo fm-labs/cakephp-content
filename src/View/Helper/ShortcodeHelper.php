@@ -33,7 +33,8 @@ class ShortcodeHelper extends Helper
     {
         /* @var \Cake\View\View $view */
         $view = $event->getSubject();
-        $content = $view->Blocks->get('content');
+        //$content = $view->Blocks->get('content');
+        $content = $view->fetch('content');
 
         $content = $this->renderShortCodes($content);
         $view->assign('content', $content);

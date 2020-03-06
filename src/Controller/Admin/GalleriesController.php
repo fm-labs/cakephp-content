@@ -41,7 +41,7 @@ class GalleriesController extends AppController
     {
         parent::beforeFilter($event);
 
-        if (!Plugin::loaded('Media')) {
+        if (!Plugin::isLoaded('Media')) {
             //$this->request->param('action', 'index');
             $this->Flash->warning(__d('content', '{0} plugin not loaded', 'Media'));
         }

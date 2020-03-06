@@ -5,6 +5,7 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
 use Cake\Utility\Inflector;
+use Cake\Utility\Text;
 use Cake\View\Helper;
 
 /**
@@ -109,7 +110,7 @@ class MetaHelper extends Helper
 
         //$this->setCharset(Configure::read('App.encoding'));
         //$this->setViewport('width=device-width, initial-scale=1');
-        $this->setLanguage(I18n::locale());
+        $this->setLanguage(I18n::getLocale());
         $this->setRobots("index,follow");
         //$this->setApplicationName("Test App");
         //$this->setLinkCanonical("https://www.example.org/canonical");
@@ -118,7 +119,7 @@ class MetaHelper extends Helper
     public function set($name, $meta = null)
     {
         // myName => setMyName($value)
-        $_name = Inflector::camelize(Inflector::slug($name, '_'));
+        $_name = Inflector::camelize(Text::slug($name, '_'));
         $_method = 'set' . $_name;
         if (method_exists($this, $_method)) {
             return call_user_func([$this, $_method], $meta);
@@ -136,13 +137,13 @@ class MetaHelper extends Helper
     public function __call($method, $args)
     {
         if (preg_match('/^setLink([\w]+)$/', $method, $matches)) {
-            $name = Inflector::slug(Inflector::underscore($matches[1]));
+            $name = Text::slug(Inflector::underscore($matches[1]));
             $content = (isset($args[0])) ? $args[0] : null;
 
             return $this->_setLink($name, $content);
 
         } elseif (preg_match('/^set([\w]+)$/', $method, $matches)) {
-            $name = Inflector::slug(Inflector::underscore($matches[1]));
+            $name = Text::slug(Inflector::underscore($matches[1]));
             $content = (isset($args[0])) ? $args[0] : null;
 
             return $this->_setMeta($name, $content);
@@ -190,7 +191,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('description', [
             'name' => 'description',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::locale()
+            'lang' => ($lang) ?: I18n::getLocale()
         ]);
     }
 
@@ -199,7 +200,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('keywords', [
             'name' => 'keywords',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::locale()
+            'lang' => ($lang) ?: I18n::getLocale()
         ]);
     }
 

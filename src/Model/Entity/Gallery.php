@@ -94,7 +94,7 @@ class Gallery extends Entity
     {
         $images = [];
 
-        if (Plugin::loaded('Media')) {
+        if (Plugin::isLoaded('Media')) {
             $folder = $this->_properties['source_folder'];
             $mm = MediaManager::get('default');
             $files = $mm->listFiles($folder);

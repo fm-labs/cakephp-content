@@ -23,11 +23,11 @@
         <?php
                 echo $this->Form->hidden('model');
                 echo $this->Form->hidden('foreignKey');
-                echo $this->Form->input('title');
-                echo $this->Form->input('description');
-                echo $this->Form->input('keywords');
-                echo $this->Form->input('robots', ['options' => $robots, 'empty' => __d('content', '-- Select --')]);
-                echo $this->Form->input('lang');
+                echo $this->Form->control('title');
+                echo $this->Form->control('description');
+                echo $this->Form->control('keywords');
+                echo $this->Form->control('robots', ['options' => $robots, 'empty' => __d('content', '-- Select --')]);
+                echo $this->Form->control('lang');
         ?>
         </div>
     </div>

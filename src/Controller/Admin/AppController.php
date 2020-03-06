@@ -53,11 +53,6 @@ class AppController extends \Backend\Controller\Controller
     public function beforeRender(Event $event)
     {
         $this->set('locale', $this->locale);
-
-        //@TODO Move to a CORSComponent
-        $this->response->header("Access-Control-Allow-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization");
-        $this->response->header("Access-Control-Allow-Origin", "*");
-        $this->response->header("Access-Control-Allow-Credentials", "true");
     }
 
     /**
@@ -68,7 +63,7 @@ class AppController extends \Backend\Controller\Controller
     {
         $list = [];
 
-        if (Plugin::loaded('Media')) {
+        if (Plugin::isLoaded('Media')) {
             $mm = MediaManager::get('shop');
             $list = $mm->getSelectListRecursive();
         }

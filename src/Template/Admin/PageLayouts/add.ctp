@@ -15,10 +15,10 @@
     <div class="users ui basic segment">
         <div class="ui form">
         <?php
-                echo $this->Form->input('name');
-                echo $this->Form->input('template');
-                echo $this->Form->input('sections');
-                echo $this->Form->input('is_default');
+                echo $this->Form->control('name');
+                echo $this->Form->control('template');
+                echo $this->Form->control('sections');
+                echo $this->Form->control('is_default');
         ?>
         </div>
     </div>

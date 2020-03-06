@@ -26,7 +26,7 @@ try {
         <div class="col-md-6">
             <?php echo $this->Form->create($moduleCell); ?>
             <?php echo $this->Form->allInputs($moduleCell->inputs(), ['fieldset' => false]); ?>
-            <?= $this->Form->input('_save', ['type' => 'checkbox', 'default' => 0, 'label' => 'Save (Leave unchecked for preview)']); ?>
+            <?= $this->Form->control('_save', ['type' => 'checkbox', 'default' => 0, 'label' => 'Save (Leave unchecked for preview)']); ?>
 
             <?= $this->Form->submit('Preview / Save'); ?>
             <?php echo $this->Form->end(); ?>

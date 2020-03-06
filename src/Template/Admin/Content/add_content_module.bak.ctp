@@ -4,7 +4,7 @@
     <h3>Add Module for Page: <?= h($content->title); ?> [<?= h($modulePath); ?>] in [<?= h($section); ?>]</h3>
     <?php
     echo $this->Form->create($moduleForm, ['class' => 'ui form']);
-    //echo $this->Form->input('_path', ['value' => $modulePath]);
+    //echo $this->Form->control('_path', ['value' => $modulePath]);
     echo $this->Form->allInputs($moduleFormInputs, ['legend' => false, 'fieldset' => false]);
     echo $this->Form->button('Save');
     echo $this->Form->end();

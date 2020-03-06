@@ -61,7 +61,7 @@ class PostsTable extends BaseTable
         //$this->addBehavior('Eav.Attributes');
 
         //@TODO Refactor with initalization hook
-        if (Plugin::loaded('Media')) {
+        if (Plugin::isLoaded('Media')) {
             $this->addBehavior('Media.Media', [
                 'fields' => [
                     'teaser_image_file' => [
@@ -92,7 +92,7 @@ class PostsTable extends BaseTable
             Log::warning('Media plugin is not loaded');
         }
 
-        if (Plugin::loaded('Search')) {
+        if (Plugin::isLoaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
                 ->add('q', 'Search.Like', [

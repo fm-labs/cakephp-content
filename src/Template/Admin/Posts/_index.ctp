@@ -12,7 +12,7 @@ $this->assign('title', __d('content','Posts'));
 
     <!-- Quick Search
     <?= $this->Form->create(null, ['id' => 'quickfinder', 'url' => ['action' => 'quick'], 'class' => 'no-ajax']); ?>
-    <?= $this->Form->input('post_id', [
+    <?= $this->Form->control('post_id', [
         'options' => $postsList,
         'label' => false,
         'empty' => '- Quick Search -'
@@ -24,10 +24,10 @@ $this->assign('title', __d('content','Posts'));
     <div class="row">
         <div class="col-md-6 col-md-offset-6">
             <?= $this->Form->create(null, ['method' => 'GET', 'horizontal' => true]); ?>
-            <?= $this->Form->input('q', [
+            <?= $this->Form->control('q', [
                 'type' => 'datalist',
                 'options' => $postsList->toArray(),
-                'value' => $this->request->query('q'),
+                'value' => $this->request->getQuery('q'),
                 'placeholder' => 'Enter search word',
                 'label' => 'Search',
             ]); ?>

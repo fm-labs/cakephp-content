@@ -23,7 +23,7 @@ class HtmlEditorController extends AppController
         $list = [];
         try {
             $files = [];
-            if (Plugin::loaded('Media')) {
+            if (Plugin::isLoaded('Media')) {
                 $mm = MediaManager::get($media);
                 $files = $mm->getSelectListRecursive();
             }
@@ -68,7 +68,7 @@ class HtmlEditorController extends AppController
                 Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
             }
 
-            $event->data['list'][] = ['title' => __d('content', 'Pages'), 'menu' => $_list];
+            $event->getData('list')[] = ['title' => __d('content', 'Pages'), 'menu' => $_list];
         });
 
         $this->getEventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
@@ -96,10 +96,10 @@ class HtmlEditorController extends AppController
                 Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
             }
 
-            $event->data['list'][] = ['title' => __d('content', 'Posts'), 'menu' => $_list];
+            $event->getData('list')[] = ['title' => __d('content', 'Posts'), 'menu' => $_list];
         });
 
-        if (Plugin::loaded('Shop')) :
+        if (Plugin::isLoaded('Shop')) :
             $this->getEventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
                 $_list = [];
@@ -118,13 +118,13 @@ class HtmlEditorController extends AppController
                     Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
                 }
 
-                $event->data['list'][] = ['title' => __d('content', 'Shop Categories'), 'menu' => $_list];
+                $event->getData('list')[] = ['title' => __d('content', 'Shop Categories'), 'menu' => $_list];
             });
         endif;
 
         $event = $this->dispatchEvent('Content.HtmlEditor.buildLinkList', ['list' => $list], $this);
 
-        $this->set('list', $event->data['list']);
+        $this->set('list', $event->getData('list'));
         $this->set('_serialize', 'list');
     }
 }

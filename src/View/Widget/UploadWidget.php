@@ -47,7 +47,7 @@ class UploadWidget implements WidgetInterface
             //$html .= h($file->source) . '<br />';
             //$html .= $this->Html->image($file->url, ['width' => 200]);
         }
-        //$this->Form->input('image_upload', ['type' => 'file']);
+        //$this->Form->control('image_upload', ['type' => 'file']);
     }
 
     /**

@@ -7,7 +7,7 @@
     <?= $this->Form->create(null, ['method' => 'GET']); ?>
     <div class="row">
         <div class="col-md-11">
-            <?= $this->Form->input('id', ['label' => false, 'options' => $galleryTree, 'val' => (isset($gallery)) ? $gallery->id : null]); ?>
+            <?= $this->Form->control('id', ['label' => false, 'options' => $galleryTree, 'val' => (isset($gallery)) ? $gallery->id : null]); ?>
         </div>
         <div class="col-md-1">
             <?= $this->Form->button(__d('content', 'Edit')); ?>

@@ -49,15 +49,15 @@ class FrontendComponent extends Component
         $viewClass = $this->_config['viewClass'];
 
         // check if theme plugin is loaded
-        if ($theme && !Plugin::loaded($theme)) {
+        if ($theme && !Plugin::isLoaded($theme)) {
             debug("Warning: Configured site theme '$theme' is not loaded. Is the plugin loaded?");
             $theme = null;
         }
 
         $this->controller->loadComponent('Flash');
-        $this->controller->viewBuilder()->className($viewClass);
-        $this->controller->viewBuilder()->layout($layout);
-        $this->controller->viewBuilder()->theme($theme);
+        $this->controller->viewBuilder()->setClassName($viewClass);
+        $this->controller->viewBuilder()->setLayout($layout);
+        $this->controller->viewBuilder()->setTheme($theme);
 
         $this->setRefScope($this->_config['refscope']);
     }

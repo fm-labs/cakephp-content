@@ -47,7 +47,7 @@ class GalleriesTable extends BaseTable
             'conditions' => ['refscope' => 'Content.Galleries']
         ]);
 
-        if (Plugin::loaded('Search')) {
+        if (Plugin::isLoaded('Search')) {
             $this->addBehavior('Search.Search');
             $this->searchManager()
                 ->add('title', 'Search.Like', [
@@ -140,7 +140,7 @@ class GalleriesTable extends BaseTable
     public function getSourceFolders()
     {
         $folders = [];
-        if (Plugin::loaded('Media')) {
+        if (Plugin::isLoaded('Media')) {
             $mm = MediaManager::get('default');
 
             return $mm->getSelectFolderListRecursive('gallery/');

@@ -23,7 +23,7 @@ class ContentSetup
 
     public function __construct()
     {
-        if (!Plugin::loaded('Eav')) {
+        if (!Plugin::isLoaded('Eav')) {
             throw new MissingPluginException(['plugin' => 'Eav']);
         }
 

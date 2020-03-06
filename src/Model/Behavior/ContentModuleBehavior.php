@@ -37,14 +37,14 @@ class ContentModuleBehavior extends Behavior
      */
     public function modelInitialize(Event $event)
     {
-        $tableAlias = $event->getSubject()->alias();
+        $tableAlias = $event->getSubject()->getAlias();
 
         if (!$this->getConfig('alias')) {
-            $this->config('alias', Inflector::singularize($tableAlias) . 'Modules');
+            $this->setConfig('alias', Inflector::singularize($tableAlias) . 'Modules');
         }
 
         if (!$this->getConfig('scope')) {
-            $this->config('scope', $tableAlias);
+            $this->setConfig('scope', $tableAlias);
         }
 
         $this->_prepareTable($event->getSubject());

@@ -27,7 +27,7 @@ class ThemesManagerController extends AppController
         foreach ($themeNames as $theme) {
             $themes[] = [
                 'name' => $theme,
-                'loaded' => Plugin::loaded($theme),
+                'loaded' => Plugin::isLoaded($theme),
             ];
         }
         $this->set('themesAvailable', $themes);

@@ -44,9 +44,9 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
                     <?= $this->Form->hidden('level'); ?>
 
                     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Menu Item'), 'collapsed' => false]); ?>
-                    <?= $this->Form->input('parent_id', ['empty' => true, 'options' => $menuTreeList]); ?>
-                    <?= $this->Form->input('title'); ?>
-                    <?= $this->Form->input('type', ['options' => $this->get('menuTypes')]); ?>
+                    <?= $this->Form->control('parent_id', ['empty' => true, 'options' => $menuTreeList]); ?>
+                    <?= $this->Form->control('title'); ?>
+                    <?= $this->Form->control('type', ['options' => $this->get('menuTypes')]); ?>
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->fieldsetStart(['legend' => \Cake\Utility\Inflector::humanize($menuItem->type), 'collapsed' => false]); ?>
@@ -62,18 +62,18 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
-                    <?= $this->Form->input('cssid'); ?>
-                    <?= $this->Form->input('cssclass'); ?>
-                    <?= $this->Form->input('hide_in_nav'); ?>
-                    <?= $this->Form->input('hide_in_sitemap'); ?>
+                    <?= $this->Form->control('cssid'); ?>
+                    <?= $this->Form->control('cssclass'); ?>
+                    <?= $this->Form->control('hide_in_nav'); ?>
+                    <?= $this->Form->control('hide_in_sitemap'); ?>
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Legacy'), 'collapsed' => true]); ?>
-                    <?= $this->Form->input('redirect_location'); ?>
-                    <?= $this->Form->input('redirect_controller'); ?>
-                    <?= $this->Form->input('redirect_page_id', ['type' => 'text']); ?>
-                    <?= $this->Form->input('redirect_status'); ?>
-                    <?= $this->Form->input('slug'); ?>
+                    <?= $this->Form->control('redirect_location'); ?>
+                    <?= $this->Form->control('redirect_controller'); ?>
+                    <?= $this->Form->control('redirect_page_id', ['type' => 'text']); ?>
+                    <?= $this->Form->control('redirect_status'); ?>
+                    <?= $this->Form->control('slug'); ?>
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->submit(); ?>

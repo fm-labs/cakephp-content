@@ -46,7 +46,7 @@ $this->Breadcrumbs->add($page->title);
     <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
 
     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Page'), 'collapsed' => false]); ?>
-    <?= $this->Form->input('title'); ?>
+    <?= $this->Form->control('title'); ?>
 
     <?php
     // page type specific form input injection via elements
@@ -61,7 +61,7 @@ $this->Breadcrumbs->add($page->title);
 
     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
         <?php
-        echo $this->Form->input('type', [
+        echo $this->Form->control('type', [
             'id' => 'select-type',
             'disabled' => isset($page->type),
             'default' => 'content',
@@ -71,17 +71,17 @@ $this->Breadcrumbs->add($page->title);
         ]);
         ?>
         <?php
-        echo $this->Form->input('parent_id',
+        echo $this->Form->control('parent_id',
             ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
         if ($page->parent_id) {
             echo $this->Html->link(__d('content', 'Edit parent'), ['action' => 'edit', $page->parent_id]);
         }
-        echo $this->Form->input('slug');
+        echo $this->Form->control('slug');
         ?>
 
         <?php
-        echo $this->Form->input('page_layout_id',
+        echo $this->Form->control('page_layout_id',
             ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
         ?>
         <?php
@@ -90,16 +90,16 @@ $this->Breadcrumbs->add($page->title);
         }
         ?>
         <?php
-        echo $this->Form->input('page_template',
+        echo $this->Form->control('page_template',
             //['type' => 'text']
             ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
         );
         ?>
 
-        <?= $this->Form->input('hide_in_nav'); ?>
-        <?= $this->Form->input('hide_in_sitemap'); ?>
-        <?= $this->Form->input('cssid'); ?>
-        <?= $this->Form->input('cssclass'); ?>
+        <?= $this->Form->control('hide_in_nav'); ?>
+        <?= $this->Form->control('hide_in_sitemap'); ?>
+        <?= $this->Form->control('cssid'); ?>
+        <?= $this->Form->control('cssclass'); ?>
 
     <?= $this->Form->fieldsetEnd(); ?>
 

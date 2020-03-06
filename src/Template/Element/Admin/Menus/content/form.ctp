@@ -4,7 +4,7 @@ $pages = \Cake\ORM\TableRegistry::get('Content.Posts')
     ->where(['Posts.type' => 'page'])
     ->toArray();
 
-echo $this->Form->input('type_params.post_id', [
+echo $this->Form->control('type_params.post_id', [
     'label' => __d('content', 'Page'),
     'options' => $pages,
     'empty' => __('Select page'),

@@ -56,7 +56,7 @@ $this->end();
         <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
 
                 <?php
-                echo $this->Form->input('type', [
+                echo $this->Form->control('type', [
                     'id' => 'select-type',
                     'disabled' => isset($page->type)
                     //'class' => 'select-ajax',
@@ -66,7 +66,7 @@ $this->end();
                 ?>
 
                 <?php
-                echo $this->Form->input('parent_id',
+                echo $this->Form->control('parent_id',
                     ['options' => $pagesTree, 'empty' => '- Root Node -']);
 
                 if ($page->parent_id) {
@@ -74,8 +74,8 @@ $this->end();
                 }
                 ?>
                 <?php
-                echo $this->Form->input('title');
-                echo $this->Form->input('slug');
+                echo $this->Form->control('title');
+                echo $this->Form->control('slug');
                 ?>
 
                 <?php
@@ -87,7 +87,7 @@ $this->end();
 
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Layout'), 'collapsed' => false]); ?>
                 <?php
-                echo $this->Form->input('page_layout_id',
+                echo $this->Form->control('page_layout_id',
                     ['empty' => true, 'options' => $pageLayouts, 'data-placeholder' => __d('content', 'Use default')]);
                 ?>
                 <?php
@@ -96,7 +96,7 @@ $this->end();
                 }
                 ?>
                 <?php
-                echo $this->Form->input('page_template',
+                echo $this->Form->control('page_template',
                     //['type' => 'text']
                     ['empty' => true, 'options' => $pageTemplates, 'data-placeholder' => __d('content', 'Use default')]
                 );
@@ -107,10 +107,10 @@ $this->end();
 
                 <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Publish'), 'collapsed' => false]); ?>
                 <?php
-                echo $this->Form->input('is_published');
+                echo $this->Form->control('is_published');
                 ?>
-                <?php echo $this->Form->input('publish_start_date', ['type' => 'datepicker']); ?>
-                <?php echo $this->Form->input('publish_end_date', ['type' => 'datepicker']); ?>
+                <?php echo $this->Form->control('publish_start_date', ['type' => 'datepicker']); ?>
+                <?php echo $this->Form->control('publish_end_date', ['type' => 'datepicker']); ?>
                 <?= $this->Form->fieldsetEnd(); ?>
 
 
@@ -129,14 +129,14 @@ $this->end();
         ?>
         <?= $this->Form->create($page, ['novalidate' => 'novalidate', 'horizontal' => true]); ?>
         <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Navigation'), 'collapsed' => false]); ?>
-        <?= $this->Form->input('hide_in_nav'); ?>
-        <?= $this->Form->input('hide_in_sitemap'); ?>
+        <?= $this->Form->control('hide_in_nav'); ?>
+        <?= $this->Form->control('hide_in_sitemap'); ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
 
         <?= $this->Form->fieldsetStart(['legend' => __d('content', 'DOM'), 'collapsed' => false]); ?>
-        <?= $this->Form->input('cssid'); ?>
-        <?= $this->Form->input('cssclass'); ?>
+        <?= $this->Form->control('cssid'); ?>
+        <?= $this->Form->control('cssclass'); ?>
         <?= $this->Form->fieldsetEnd(); ?>
 
 

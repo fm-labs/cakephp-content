@@ -66,8 +66,8 @@
         <?= $this->Form->create(null, ['url' => ['action' => 'linkModule', $content->id]]); ?>
         <?= $this->Form->hidden('refscope', ['default' => 'Content.Pages']); ?>
         <?= $this->Form->hidden('refid', ['default' => $content->id]); ?>
-        <?= $this->Form->input('module_id', ['options' => $availableModules]); ?>
-        <?= $this->Form->input('section'); ?>
+        <?= $this->Form->control('module_id', ['options' => $availableModules]); ?>
+        <?= $this->Form->control('section'); ?>
         <?= $this->Form->button('Link module'); ?>
         <?= $this->Form->end(); ?>
     </div>

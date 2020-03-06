@@ -94,14 +94,14 @@ class OldPagesController extends ContentController
                     case $this->request->getQuery('page_id'):
                         $id = $this->request->getQuery('page_id');
                         break;
-                    case $this->request->param('page_id'):
-                        $id = $this->request->param('page_id');
+                    case $this->request->getParam('page_id'):
+                        $id = $this->request->getParam('page_id');
                         break;
                     case $this->request->getQuery('slug'):
                         $id = $this->OldPages->findIdBySlug($this->request->getQuery('slug'));
                         break;
-                    case $this->request->param('slug'):
-                        $id = $this->OldPages->findIdBySlug($this->request->param('slug'));
+                    case $this->request->getParam('slug'):
+                        $id = $this->OldPages->findIdBySlug($this->request->getParam('slug'));
                         break;
                     default:
                         //throw new NotFoundException();

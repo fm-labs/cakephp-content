@@ -40,7 +40,7 @@ abstract class ContentController extends AppController
         }
 
         $this->loadComponent('RequestHandler');
-        //debug($this->RequestHandler->config('viewClassMap'));
+        //debug($this->RequestHandler->getConfig('viewClassMap'));
         //debug($this->RequestHandler->ext);
         //$this->components()->unload('RequestHandler');
     }
@@ -96,7 +96,7 @@ abstract class ContentController extends AppController
             }
         }
 
-        if (Plugin::loaded('Media')) {
+        if (Plugin::isLoaded('Media')) {
             $mm = MediaManager::get('default');
             $this->set('image_files', $mm->getSelectListRecursive());
         } else {

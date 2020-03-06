@@ -53,7 +53,7 @@ class PagesMenuModule extends ViewModule
 
         $this->set('index', $this->_index);
         $this->set('activeIndex', $this->_activeIndex);
-        $this->set('activePageId', $this->request->param('page_id'));
+        $this->set('activePageId', $this->request->getParam('page_id'));
     }
 
     public function selectbox($params = [])

@@ -15,13 +15,13 @@
     <div class="users ui basic segment">
         <div class="ui form">
         <?php
-        echo $this->Form->input('model');
-        echo $this->Form->input('foreignKey');
-        echo $this->Form->input('title');
-        echo $this->Form->input('description');
-        echo $this->Form->input('keywords');
-        echo $this->Form->input('robots', ['options' => $robots, 'empty' => __d('content', '-- Select --')]);
-        echo $this->Form->input('lang');
+        echo $this->Form->control('model');
+        echo $this->Form->control('foreignKey');
+        echo $this->Form->control('title');
+        echo $this->Form->control('description');
+        echo $this->Form->control('keywords');
+        echo $this->Form->control('robots', ['options' => $robots, 'empty' => __d('content', '-- Select --')]);
+        echo $this->Form->control('lang');
         ?>
         </div>
     </div>

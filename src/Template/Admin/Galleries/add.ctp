@@ -26,19 +26,19 @@
     <?= $this->Form->create($gallery, ['class' => 'no-ajax']); ?>
     <div class="ui form">
         <?php
-        echo $this->Form->input('parent_id', ['empty' => true]);
-        echo $this->Form->input('title', ['placeholder' => 'Slider']);
-        echo $this->Form->input('inherit_desc', ['label' => __d('content', 'Inherit description from parent gallery')]);
-        echo $this->Form->input('desc_html', [
+        echo $this->Form->control('parent_id', ['empty' => true]);
+        echo $this->Form->control('title', ['placeholder' => 'Slider']);
+        echo $this->Form->control('inherit_desc', ['label' => __d('content', 'Inherit description from parent gallery')]);
+        echo $this->Form->control('desc_html', [
             'type' => 'htmleditor',
             'editor' => 'content'
         ]);
-        echo $this->Form->input('view_template');
-        echo $this->Form->input('source');
-        echo $this->Form->input('source_folder');
+        echo $this->Form->control('view_template');
+        echo $this->Form->control('source');
+        echo $this->Form->control('source_folder');
 
 
-        echo $this->Form->input('_generate_slider', ['type' => 'checkbox', 'label' => __d('content', 'Automatically generate slider module')]);
+        echo $this->Form->control('_generate_slider', ['type' => 'checkbox', 'label' => __d('content', 'Automatically generate slider module')]);
         ?>
     </div>
     <?= $this->Form->button(__d('content','Submit')) ?>

@@ -17,7 +17,7 @@ class LocaleComponent extends Component
      */
     public function beforeFilter(Event $event)
     {
-        $currentLocale = $requestLocale = I18n::locale();
+        $currentLocale = $requestLocale = I18n::getLocale();
         if ($this->request->getParam('locale')) {
             $requestLocale = $this->request->getParam('locale');
         } elseif (isset($this->request->query['locale'])) {
@@ -30,12 +30,12 @@ class LocaleComponent extends Component
 
         // set locale in session
         /*
-        if (!$this->request->session()->check('Content.locale')) {
-            $this->request->session()->write('Content.locale', $locale);
+        if (!$this->request->getSession()->check('Content.locale')) {
+            $this->request->getSession()->write('Content.locale', $locale);
         } else {
-            //$this->request->session()->delete('Content.locale');
+            //$this->request->getSession()->delete('Content.locale');
         }
-        debug("Locale: " . I18n::locale());
+        debug("Locale: " . I18n::getLocale());
         */
     }
 
@@ -52,6 +52,6 @@ class LocaleComponent extends Component
      */
     public function getLocale()
     {
-        return I18n::locale();
+        return I18n::getLocale();
     }
 }

@@ -29,10 +29,10 @@
     <div class="users ui attached segment">
         <div class="ui form">
         <?php
-                echo $this->Form->input('name');
-                echo $this->Form->input('title');
-                echo $this->Form->input('path');
-                echo $this->Form->input('params');
+                echo $this->Form->control('name');
+                echo $this->Form->control('title');
+                echo $this->Form->control('path');
+                echo $this->Form->control('params');
         ?>
         </div>
     </div>
