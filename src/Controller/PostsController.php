@@ -3,7 +3,7 @@ namespace Content\Controller;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use Cake\Routing\Router;
 
 /**
@@ -25,7 +25,7 @@ class PostsController extends ContentController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -58,14 +58,14 @@ class PostsController extends ContentController
     {
         if ($id === null) {
             switch (true) {
-                case $this->request->query('post_id'):
-                    $id = $this->request->query('post_id');
+                case $this->request->getQuery('post_id'):
+                    $id = $this->request->getQuery('post_id');
                     break;
                 case $this->request->param('post_id'):
                     $id = $this->request->param('post_id');
                     break;
-                case $this->request->query('slug'):
-                    $id = $this->Posts->findIdBySlug($this->request->query('slug'));
+                case $this->request->getQuery('slug'):
+                    $id = $this->Posts->findIdBySlug($this->request->getQuery('slug'));
                     break;
                 case $this->request->param('slug'):
                     $id = $this->Posts->findIdBySlug($this->request->param('slug'));
@@ -108,11 +108,11 @@ class PostsController extends ContentController
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
 
-        $this->viewBuilder()->className('Content.Post');
+        $this->viewBuilder()->setClassName('Content.Post');
 
         //$template = ($post->template) ?: ((!$post->parent_id) ? $post->type . '_parent' : $post->type);
         $template = ($post->template) ?: $post->type;
-        $template = ($this->request->query('template')) ?: $template;
+        $template = ($this->request->getQuery('template')) ?: $template;
         $template = ($template) ?: null;
 
         $this->render($template);
@@ -123,15 +123,15 @@ class PostsController extends ContentController
      *
      * @param string|null $id Post id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      * @deprecated
      */
     public function teaser($id = null)
     {
-        $this->viewBuilder()->className('Content.Post');
+        $this->viewBuilder()->setClassName('Content.Post');
 
-        //if ($id === null && $this->request->query('post_id')) {
-        //    $id = $this->request->query('post_id');
+        //if ($id === null && $this->request->getQuery('post_id')) {
+        //    $id = $this->request->getQuery('post_id');
         //}
 
         $post = $this->Posts->get($id, [
@@ -143,7 +143,7 @@ class PostsController extends ContentController
         $this->set('_serialize', ['post']);
 
         $template = ($post->teaser_template) ?: $post->type;
-        $template = ($this->request->query('template')) ?: $template;
+        $template = ($this->request->getQuery('template')) ?: $template;
         $template = ($template) ?: null;
 
         $this->render($template);

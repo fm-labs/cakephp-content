@@ -46,7 +46,7 @@ class ModulesController extends AppController
      *
      * @param string|null $id Module id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
@@ -93,8 +93,8 @@ class ModulesController extends AppController
     public function preview()
     {
 
-        $path = $this->request->query('path');
-        $params = $this->request->query('params');
+        $path = $this->request->getQuery('path');
+        $params = $this->request->getQuery('params');
         if ($params) {
             $params = json_decode(base64_decode($params), true);
         }
@@ -107,7 +107,7 @@ class ModulesController extends AppController
         $this->viewBuilder()
             ->layout('frontend')
             ->theme(Configure::read('Site.theme'))
-            ->className('Content.Content');
+            ->setClassName('Content.Content');
 
         $this->set('_bare', true);
     }
@@ -140,7 +140,7 @@ class ModulesController extends AppController
      *
      * @param string|null $id Module id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
@@ -167,7 +167,7 @@ class ModulesController extends AppController
      *
      * @param string|null $id Module id.
      * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function delete($id = null)
     {

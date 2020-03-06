@@ -20,7 +20,7 @@ class CategoriesController extends ContentController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -36,7 +36,7 @@ class CategoriesController extends ContentController
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->className('Content.Category');
+        $this->viewBuilder()->setClassName('Content.Category');
         $category = $this->Categories->get($id);
 
         if (!$this->request->is('requested')) {

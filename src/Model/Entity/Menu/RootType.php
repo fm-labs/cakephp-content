@@ -22,7 +22,7 @@ class RootType extends BaseType
      */
     public function getLabel()
     {
-        return $this->config('label');
+        return $this->getConfig('label');
     }
 
     /**

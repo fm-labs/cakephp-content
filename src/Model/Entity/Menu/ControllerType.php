@@ -14,7 +14,7 @@ class ControllerType extends BaseType
      */
     public function getLabel()
     {
-        return $this->config('title');
+        return $this->getConfig('title');
     }
 
     /**
@@ -23,8 +23,8 @@ class ControllerType extends BaseType
     public function getUrl()
     {
         return $this->_parseUrl(
-            $this->config('controller'),
-            $this->config('controller_action')
+            $this->getConfig('controller'),
+            $this->getConfig('controller_action')
         );
     }
 

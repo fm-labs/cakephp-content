@@ -21,8 +21,8 @@ class ContentModulesTable extends BaseTable
     public function initialize(array $config)
     {
         $this->table(self::$tablePrefix . 'content_modules');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
         /*
         $this->belongsTo('Pages', [
             'foreignKey' => 'page_id',

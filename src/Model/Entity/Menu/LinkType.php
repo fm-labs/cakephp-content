@@ -13,7 +13,7 @@ class LinkType extends BaseType
      */
     public function getLabel()
     {
-        return $this->config('title');
+        return $this->getConfig('title');
     }
 
     /**
@@ -21,7 +21,7 @@ class LinkType extends BaseType
      */
     public function getUrl()
     {
-        return $this->config('link_url');
+        return $this->getConfig('link_url');
     }
 
     /**

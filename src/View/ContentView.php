@@ -4,8 +4,8 @@ namespace Content\View;
 use Banana\View\ViewModuleTrait;
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Network\Request;
-use Cake\Network\Response;
+use Cake\Http\ServerRequest as Request;
+use Cake\Http\Response;
 use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
 use Cake\View\View;
@@ -50,7 +50,7 @@ class ContentView extends View
 
         // collect additional helpers
         $event = new Event('Content.View.initialize', $this);
-        $this->eventManager()->dispatch($event);
+        $this->getEventManager()->dispatch($event);
     }
 
     public function section($section, array $options = [])
@@ -95,7 +95,7 @@ class ContentView extends View
     protected function _loadPageModules($section = null, $refscope = null, $refid = null)
     {
         // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
-        return TableRegistry::get('Content.ContentModules')->find()
+        return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
             ->where(['section' => $section, 'refscope' => $refscope, 'refid' => $refid])
             ->contain(['Modules'])
             ->all();
@@ -104,7 +104,7 @@ class ContentView extends View
     protected function _loadLayoutModules($section = null, $refscope = null, $refid = null)
     {
         // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
-        return TableRegistry::get('Content.ContentModules')->find()
+        return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
             ->where(['section' => $section, 'refid IS NULL', 'or' => ['refscope' => $refscope, 'refscope IS NULL']])
             ->contain(['Modules'])
             ->all();

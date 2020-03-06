@@ -20,7 +20,7 @@ class ContentManagerController extends AppController
      */
     public function treeData()
     {
-        $this->viewBuilder()->className('Json');
+        $this->viewBuilder()->setClassName('Json');
 
         $this->loadModel('Banana.Sites');
         $sitesTree = $this->Sites->toJsTree();

@@ -18,8 +18,8 @@ class LocaleComponent extends Component
     public function beforeFilter(Event $event)
     {
         $currentLocale = $requestLocale = I18n::locale();
-        if (isset($this->request->params['locale'])) {
-            $requestLocale = $this->request->params['locale'];
+        if ($this->request->getParam('locale')) {
+            $requestLocale = $this->request->getParam('locale');
         } elseif (isset($this->request->query['locale'])) {
             $requestLocale = $this->request->query['locale'];
         }

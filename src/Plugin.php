@@ -2,18 +2,16 @@
 
 namespace Content;
 
-use Backend\Backend;
-use Backend\View\BackendView;
-use Banana\Application;
 use Banana\Plugin\BasePlugin;
 use Cake\Core\Configure;
+use Cake\Core\PluginApplicationInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cake\Routing\RouteBuilder;
 use Settings\SettingsManager;
 
-class ContentPlugin extends BasePlugin implements EventListenerInterface
+class Plugin extends BasePlugin implements EventListenerInterface
 {
     protected $_name = "Content";
 
@@ -64,7 +62,7 @@ class ContentPlugin extends BasePlugin implements EventListenerInterface
                 'data-icon' => 'folder-o',
             ],
             */
-            'posts' => [
+            'pages' => [
                 'title' => 'Pages',
                 'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
                 'data-icon' => 'file-o',
@@ -121,17 +119,16 @@ class ContentPlugin extends BasePlugin implements EventListenerInterface
         ]);
     }
 
-    public function bootstrap(Application $app)
+    public function bootstrap(PluginApplicationInterface $app)
     {
         parent::bootstrap($app);
 
         $eventManager = EventManager::instance();
-
         $eventManager->on($this);
         $eventManager->on(new \Content\Sitemap\SitemapListener());
     }
 
-    public function routes(RouteBuilder $routes)
+    public function routes($routes)
     {
 //        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
 //

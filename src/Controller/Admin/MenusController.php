@@ -28,7 +28,7 @@ class MenusController extends AppController
 
         $menuItem = null;
 
-        $menuId = $this->request->query('menu_id');
+        $menuId = $this->request->getQuery('menu_id');
         if ($menuId) {
             $menu = $this->Menus->getMenu($menuId);
             //$menu = \Content\Lib\ContentManager::getMenuById(8);
@@ -36,8 +36,8 @@ class MenusController extends AppController
             $this->set(compact('menu'));
         }
 
-        if ($this->request->query('menu_item_id')) {
-            $menuItemId = $this->request->query('menu_item_id');
+        if ($this->request->getQuery('menu_item_id')) {
+            $menuItemId = $this->request->getQuery('menu_item_id');
             $menuItem = $this->Menus->get($menuItemId);
 
             if ($this->request->is(['put', 'post'])) {
@@ -52,13 +52,13 @@ class MenusController extends AppController
                     $this->redirect(['action' => 'index', 'menu_item_id' => $menuItem->id]);
                 } else {
                     $this->Flash->error("Something went wrong");
-                    debug($menuItem->errors());
+                    debug($menuItem->getErrors());
                 }
             }
 
             $this->set(compact('menuItem'));
 
-        } elseif ($this->request->query('add')) {
+        } elseif ($this->request->getQuery('add')) {
             $menuItem = $this->Menus->newEntity(['type' => 'root', 'parent_id' => null]);
 
             if ($this->request->is(['put', 'post'])) {
@@ -72,7 +72,7 @@ class MenusController extends AppController
                     $this->redirect(['action' => 'index', 'menu_item_id' => $menuItem->id]);
                 } else {
                     $this->Flash->error("Something went wrong");
-                    debug($menuItem->errors());
+                    debug($menuItem->getErrors());
                 }
             }
 

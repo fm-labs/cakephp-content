@@ -5,7 +5,7 @@ use Cake\Core\Exception\Exception;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\Form\Form;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\Table;
 use Content\Lib\ContentManager;
 use Media\Lib\Media\MediaManager;
@@ -29,7 +29,7 @@ abstract class ContentController extends AppController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -47,14 +47,14 @@ abstract class ContentController extends AppController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
 
         if ($this->request->is('json')) {
-            $this->viewBuilder()->className('Json');
+            $this->viewBuilder()->setClassName('Json');
         }
 
         $this->set('layoutsAvailable', $this->getLayoutsAvailable());
@@ -79,7 +79,7 @@ abstract class ContentController extends AppController
      *
      * @param string|null $id Post id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
@@ -112,7 +112,7 @@ abstract class ContentController extends AppController
      *
      * @param string|null $id Post id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
@@ -164,7 +164,7 @@ abstract class ContentController extends AppController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      * @TODO Refactore with Backend action
      */
     public function copy($id = null)
@@ -201,7 +201,7 @@ abstract class ContentController extends AppController
         $node = $this->model()->moveUp($this->model()->get($id));
 
         if ($this->request->is('ajax')) {
-            $this->viewBuilder()->className('Json');
+            $this->viewBuilder()->setClassName('Json');
         } else {
             if ($node) {
                 $this->Flash->success(__d('content', 'Moved'));
@@ -220,7 +220,7 @@ abstract class ContentController extends AppController
      *
      * @param string|null $id Post id.
      * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function delete($id = null)
     {
@@ -236,7 +236,7 @@ abstract class ContentController extends AppController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function edit_modules($id = null)
     {
@@ -302,11 +302,11 @@ abstract class ContentController extends AppController
     public function addContentModule($contentId = null)
     {
         if (!$contentId) {
-            $contentId = $this->request->query('content_id');
+            $contentId = $this->request->getQuery('content_id');
         }
 
-        $isAjax = ($this->request->query('ajax') || $this->request->is('ajax'));
-        $isIframe = $this->request->query('iframe');
+        $isAjax = ($this->request->getQuery('ajax') || $this->request->is('ajax'));
+        $isIframe = $this->request->getQuery('iframe');
 
         if ($isIframe || $isAjax) {
             $this->layout = "iframe_module";
@@ -327,7 +327,7 @@ abstract class ContentController extends AppController
                 $this->Flash->success(__d('content', 'Module {0} has been added to Content with ID {1}', $contentModule->module, $contentModule->refid));
                 //$this->redirect(['action' => 'edit', $content->id]);
             } else {
-                debug($contentModule->errors());
+                debug($contentModule->getErrors());
                 $this->Flash->error('Ups. Something went wrong while creating the content module.');
             }
         } else {

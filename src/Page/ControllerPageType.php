@@ -93,7 +93,7 @@ class ControllerPageType extends AbstractPageType
     /**
      * @param Controller $controller
      * @param EntityInterface $entity
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function execute(Controller &$controller, EntityInterface $entity)
     {

@@ -26,7 +26,7 @@ abstract class ContentController extends BaseAppController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -41,7 +41,7 @@ abstract class ContentController extends BaseAppController
     public function isAuthorized($user = null)
     {
         // Any registered user can access public functions
-        if (empty($this->request->params['prefix'])) {
+        if (empty($this->request->getParam('prefix'))) {
             return true;
         }
 

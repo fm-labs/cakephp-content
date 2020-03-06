@@ -12,7 +12,7 @@ class ModulesController extends ContentController
 {
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -25,7 +25,7 @@ class ModulesController extends ContentController
      */
     public function view($id = null)
     {
-        if ($this->request->query('iframe') === true) {
+        if ($this->request->getQuery('iframe') === true) {
             $this->viewBuilder()->layout("Content.iframe/module");
         }
 

@@ -14,7 +14,7 @@ use Content\Setup\ContentSetup;
 class SetupController extends AppController
 {
     /**
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      * @throws \Exception
      */
     public function activate()

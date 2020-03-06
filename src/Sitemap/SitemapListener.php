@@ -22,13 +22,13 @@ class SitemapListener implements EventListenerInterface
     public function getSitemap(Event $event)
     {
         // Pages
-        $Pages = TableRegistry::get('Content.Pages');
+        $Pages = TableRegistry::getTableLocator()->get('Content.Pages');
         $Pages->addBehavior('Seo.Sitemap', ['fields' => ['loc' => 'url', 'lastmod' => 'modified']]);
-        $event->subject()->add($Pages->find('published')->find('sitemap')->toArray(), 'pages');
+        $event->getSubject()->add($Pages->find('published')->find('sitemap')->toArray(), 'pages');
 
         // Posts
-        //$Posts = TableRegistry::get('Content.Posts');
+        //$Posts = TableRegistry::getTableLocator()->get('Content.Posts');
         //$Posts->addBehavior('Seo.Sitemap', ['fields' => ['loc' => 'url', 'lastmod' => 'modified']]);
-        //$event->subject()->add($Posts->find('published')->find('sitemap')->toArray(), 'posts');
+        //$event->getSubject()->add($Posts->find('published')->find('sitemap')->toArray(), 'posts');
     }
 }

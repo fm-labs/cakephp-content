@@ -231,7 +231,7 @@ class Post extends Entity /*implements EntityTypeHandlerInterface*/
 
         $ref = pluginSplit($this->refscope);
 
-        //$refmodel = TableRegistry::get($this->refscope);
+        //$refmodel = TableRegistry::getTableLocator()->get($this->refscope);
         //$ref = $refmodel->get($this->refid);
 
         return __d('content', "{0} with ID {1}", Inflector::singularize($ref[1]), $this->refid);
@@ -266,7 +266,7 @@ class Post extends Entity /*implements EntityTypeHandlerInterface*/
             return $this->_properties['ref'];
         }
 
-        $Model = TableRegistry::get($this->refscope);
+        $Model = TableRegistry::getTableLocator()->get($this->refscope);
 
         return $this->_properties['ref'] = $Model->get($this->refid);
     }

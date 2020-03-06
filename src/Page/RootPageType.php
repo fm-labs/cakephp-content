@@ -22,7 +22,7 @@ class RootPageType extends AbstractPageType
     /**
      * @param Controller $controller
      * @param EntityInterface $entity
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function execute(Controller &$controller, EntityInterface $entity)
     {

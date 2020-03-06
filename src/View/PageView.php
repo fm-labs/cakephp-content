@@ -16,7 +16,7 @@ class PageView extends ContentView
         if ($this->get('page')) {
             /* \Content\Model\Entity\Post $page */
             $page = $this->get('page');
-            //$handler = TableRegistry::get('Content.Pages')->getTypeHandler($page);
+            //$handler = TableRegistry::getTableLocator()->get('Content.Pages')->getTypeHandler($page);
             //$title = $handler->getLabel($page);
             $title = $page->title;
 

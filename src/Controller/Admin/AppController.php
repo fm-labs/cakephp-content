@@ -37,18 +37,18 @@ class AppController extends \Backend\Controller\Controller
 
     /**
      * @param Event $event The controller event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
         //@TODO Move shop language selection to a component
-        $locale = $this->request->query('locale');
+        $locale = $this->request->getQuery('locale');
         $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
     }
 
     /**
      * @param Event $event The controller event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeRender(Event $event)
     {

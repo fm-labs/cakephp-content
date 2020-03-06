@@ -36,7 +36,7 @@ class PageLayoutsController extends AppController
      *
      * @param string|null $id Page Layout id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
@@ -70,7 +70,7 @@ class PageLayoutsController extends AppController
      *
      * @param string|null $id Page Layout id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
@@ -96,7 +96,7 @@ class PageLayoutsController extends AppController
      *
      * @param string|null $id Page Layout id.
      * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function delete($id = null)
     {

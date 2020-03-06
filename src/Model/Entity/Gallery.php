@@ -40,7 +40,7 @@ class Gallery extends Entity
     protected function _getParent()
     {
         if ($this->_parent === null && isset($this->_properties['parent_id'])) {
-            $this->_parent = TableRegistry::get('Content.Galleries')->get($this->_properties['parent_id']);
+            $this->_parent = TableRegistry::getTableLocator()->get('Content.Galleries')->get($this->_properties['parent_id']);
         }
 
         return $this->_parent;
@@ -77,7 +77,7 @@ class Gallery extends Entity
      */
     protected function _getPublishedPosts()
     {
-        return TableRegistry::get('Content.Posts')
+        return TableRegistry::getTableLocator()->get('Content.Posts')
             ->find('all', ['media' => true])
             ->find('sorted')
             ->find('published')

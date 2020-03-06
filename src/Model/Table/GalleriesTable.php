@@ -33,8 +33,8 @@ class GalleriesTable extends BaseTable
         parent::initialize($config);
 
         $this->table(self::$tablePrefix . 'galleries');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Parent', [
             'className' => 'Content.Galleries',
@@ -111,7 +111,7 @@ class GalleriesTable extends BaseTable
     public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
     {
         if ($entity->get('_generate_slider')) {
-            $Modules = TableRegistry::get('Content.Modules');
+            $Modules = TableRegistry::getTableLocator()->get('Content.Modules');
             $module = $Modules->newEntity();
             $module->name = sprintf("Mod %s", $entity->title);
             $module->path = "flexslider";

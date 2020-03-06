@@ -18,7 +18,7 @@ class HtmlEditorController extends AppController
      */
     public function imageList($media = 'images')
     {
-        $this->viewBuilder()->className('Json');
+        $this->viewBuilder()->setClassName('Json');
 
         $list = [];
         try {
@@ -47,9 +47,9 @@ class HtmlEditorController extends AppController
     public function linkList()
     {
         $list = [];
-        $this->viewBuilder()->className('Json');
+        $this->viewBuilder()->setClassName('Json');
 
-        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
+        $this->getEventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
             $_list = [];
             try {
@@ -71,7 +71,7 @@ class HtmlEditorController extends AppController
             $event->data['list'][] = ['title' => __d('content', 'Pages'), 'menu' => $_list];
         });
 
-        $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
+        $this->getEventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
             $_list = [];
             try {
@@ -100,7 +100,7 @@ class HtmlEditorController extends AppController
         });
 
         if (Plugin::loaded('Shop')) :
-            $this->eventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
+            $this->getEventManager()->on('Content.HtmlEditor.buildLinkList', function ($event) {
 
                 $_list = [];
                 try {

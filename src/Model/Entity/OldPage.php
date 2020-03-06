@@ -73,7 +73,7 @@ class OldPage extends Entity
      */
     public function getPath()
     {
-        return TableRegistry::get('Content.OldPages')
+        return TableRegistry::getTableLocator()->get('Content.OldPages')
             ->find('path', ['for' => $this->id]);
     }
 
@@ -86,7 +86,7 @@ class OldPage extends Entity
             return $this->_properties['posts'];
         }
 
-        return TableRegistry::get('Content.OldPages')->Posts
+        return TableRegistry::getTableLocator()->get('Content.OldPages')->Posts
             ->find('sorted')
             ->where([ 'Posts.refscope' => 'Content.Pages', 'Posts.refid' => $this->id])
             ->order(['Posts.pos' => 'DESC'])
@@ -109,7 +109,7 @@ class OldPage extends Entity
         }
 
         if ($this->get('parent_id')) {
-            $Parent = TableRegistry::get('Content.OldPages');
+            $Parent = TableRegistry::getTableLocator()->get('Content.OldPages');
             $parent = $Parent->get($this->get('parent_id'));
 
             return $this->__parentTheme = $parent->parent_theme;
@@ -124,7 +124,7 @@ class OldPage extends Entity
      */
     protected function _getPublishedPosts()
     {
-        return TableRegistry::get('Content.Posts')
+        return TableRegistry::getTableLocator()->get('Content.Posts')
             ->find('published')
             ->where(['Posts.refscope' => 'Content.Pages', 'Posts.refid' => $this->id])
             ->order(['Posts.pos' => 'ASC', 'Posts.id' => 'ASC'])

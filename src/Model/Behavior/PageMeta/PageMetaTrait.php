@@ -18,7 +18,7 @@ trait PageMetaTrait
     {
         if (!array_key_exists('meta', $this->_properties)) {
             try {
-                $this->_properties['meta'] = TableRegistry::get('Content.PageMetas')
+                $this->_properties['meta'] = TableRegistry::getTableLocator()->get('Content.PageMetas')
                     ->find()
                     ->where(['PageMetas.model' => $this->_pageMetaModel, 'PageMetas.foreignKey' => $this->id])
                     ->first();

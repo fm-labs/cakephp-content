@@ -89,7 +89,7 @@ class PagePostType extends DefaultPostType
 
     public function getChildren()
     {
-        return TableRegistry::get('Content.Posts')
+        return TableRegistry::getTableLocator()->get('Content.Posts')
             ->find()
             ->where(['parent_id' => $this->post->get('id')])
             ->order(['pos' => 'ASC']);

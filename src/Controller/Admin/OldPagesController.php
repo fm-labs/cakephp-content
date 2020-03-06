@@ -6,7 +6,7 @@ use Backend\Controller\EntityInfoActionTrait;
 use Backend\Controller\JsTreeAwareTrait;
 use Banana\Controller\PrimaryModelAwareTrait;
 use Cake\Event\Event;
-use Cake\Network\Exception\BadRequestException;
+use Cake\Http\Exception\BadRequestException;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Content\Lib\ContentManager;
@@ -53,7 +53,7 @@ class OldPagesController extends ContentController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -179,7 +179,7 @@ class OldPagesController extends ContentController
      */
     public function relatedPageMeta($id = null)
     {
-        $PageMetas = TableRegistry::get('Content.PageMetas');
+        $PageMetas = TableRegistry::getTableLocator()->get('Content.PageMetas');
 
         $content = $this->OldPages->get($id, [
             'contain' => []
@@ -236,7 +236,7 @@ class OldPagesController extends ContentController
     }
 
     /**
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
@@ -249,7 +249,7 @@ class OldPagesController extends ContentController
 //                return $this->redirect(['action' => 'edit', $content->id]);
 //            } else {
 //                $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
-//                debug($content->errors());
+//                debug($content->getErrors());
 //            }
 //        }
 
@@ -273,7 +273,7 @@ class OldPagesController extends ContentController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      * @deprecated Use ContentModulesController->linkModule() instead
      */
     public function linkModule($id = null)
@@ -296,7 +296,7 @@ class OldPagesController extends ContentController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function edit($id = null)
     {

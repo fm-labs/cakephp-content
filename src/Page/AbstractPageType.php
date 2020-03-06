@@ -73,7 +73,7 @@ abstract class AbstractPageType implements PageTypeInterface
      */
     public function findChildren(EntityInterface $entity)
     {
-        return TableRegistry::get('Content.Pages')
+        return TableRegistry::getTableLocator()->get('Content.Pages')
             ->find()
             ->where(['parent_id' => $entity->id])
             ->orderAsc('lft')

@@ -30,9 +30,9 @@ class CategoriesTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->table(self::$tablePrefix . 'categories');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable(self::$tablePrefix . 'categories');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->hasMany('Posts', [
             'className' => 'Content.Posts',

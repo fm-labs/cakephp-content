@@ -33,7 +33,7 @@ class Menu extends Entity
      */
     protected function handler()
     {
-        $types = TableRegistry::get('Content.Menus')->getTypes();
+        $types = TableRegistry::getTableLocator()->get('Content.Menus')->getTypes();
 
         $handlerBuilder = function (Menu $entity) use ($types) {
             $type = $entity->get('type');

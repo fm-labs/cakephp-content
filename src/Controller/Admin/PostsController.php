@@ -77,11 +77,11 @@ class PostsController extends AppController
         $scope = ['Posts.refscope' => 'Content.Posts', 'Posts.refid IS' => null];
         $order = ['Posts.title' => 'ASC'];
 
-        $q = $this->request->query('q');
+        $q = $this->request->getQuery('q');
         if ($q) {
             $scope['Posts.title LIKE'] = '%' . $q . '%';
         }
-        $type = $this->request->query('type');
+        $type = $this->request->getQuery('type');
         if ($type) {
             $scope['Posts.type'] = $type;
         }
@@ -162,10 +162,10 @@ class PostsController extends AppController
                         if ($this->ContentModules->save($contentModule)) {
                             $this->Flash->success(__d('content','Content module has been created for post {0}', $content->id));
                         } else {
-                            debug($contentModule->errors());
+                            debug($contentModule->getErrors());
                         }
                     } else {
-                        debug($module->errors());
+                        debug($module->getErrors());
                     }
                 }
                 */
@@ -187,7 +187,7 @@ class PostsController extends AppController
      *
      * @param string|null $id Post id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {

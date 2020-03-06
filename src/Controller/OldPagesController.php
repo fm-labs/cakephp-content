@@ -3,7 +3,7 @@ namespace Content\Controller;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use Cake\Routing\Router;
 use Content\Controller\Component\FrontendComponent;
 use Content\Controller\Traits\PagesDisplayActionTrait;
@@ -50,7 +50,7 @@ class OldPagesController extends ContentController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -82,7 +82,7 @@ class OldPagesController extends ContentController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|void
+     * @return \Cake\Http\Response|void
      * @throws \Exception
      * @deprecated Use 'display' method instead
      */
@@ -91,14 +91,14 @@ class OldPagesController extends ContentController
         try {
             if ($id === null) {
                 switch (true) {
-                    case $this->request->query('page_id'):
-                        $id = $this->request->query('page_id');
+                    case $this->request->getQuery('page_id'):
+                        $id = $this->request->getQuery('page_id');
                         break;
                     case $this->request->param('page_id'):
                         $id = $this->request->param('page_id');
                         break;
-                    case $this->request->query('slug'):
-                        $id = $this->OldPages->findIdBySlug($this->request->query('slug'));
+                    case $this->request->getQuery('slug'):
+                        $id = $this->OldPages->findIdBySlug($this->request->getQuery('slug'));
                         break;
                     case $this->request->param('slug'):
                         $id = $this->OldPages->findIdBySlug($this->request->param('slug'));
@@ -132,7 +132,7 @@ class OldPagesController extends ContentController
 
             $this->Frontend->setRefId($page->id);
 
-            $this->viewBuilder()->className('Content.Page');
+            $this->viewBuilder()->setClassName('Content.Page');
 
             //@todo Dispatch Page.beforeExecute()
             // Execute page

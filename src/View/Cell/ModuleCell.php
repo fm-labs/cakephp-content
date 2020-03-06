@@ -5,8 +5,8 @@ use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cake\Log\Log;
-use Cake\Network\Request;
-use Cake\Network\Response;
+use Cake\Http\ServerRequest as Request;
+use Cake\Http\Response;
 use Cake\View\Cell;
 
 abstract class ModuleCell extends Cell implements EventListenerInterface
@@ -43,8 +43,8 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
     /**
      * Constructor.
      *
-     * @param \Cake\Network\Request $request The request to use in the cell.
-     * @param \Cake\Network\Response $response The response to use in the cell.
+     * @param \Cake\Http\ServerRequest $request The request to use in the cell.
+     * @param \Cake\Http\Response $response The response to use in the cell.
      * @param \Cake\Event\EventManager $eventManager The eventManager to bind events to.
      * @param array $cellOptions Cell options to apply.
      */
@@ -60,13 +60,13 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
             ? array_merge(static::$defaultParams, $this->params, $this->module->params_arr)
             : array_merge(static::$defaultParams, $this->params);
 
-        $this->eventManager()->on($this);
+        $this->getEventManager()->on($this);
     }
 
     public function render($template = null)
     {
         $this->viewBuilder()
-            ->className('Content.Content');
+            ->setClassName('Content.Content');
 
         try {
             $rendered = parent::render($template);

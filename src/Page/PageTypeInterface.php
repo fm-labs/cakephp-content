@@ -7,7 +7,7 @@ use Banana\Menu\MenuItem;
 use Cake\Collection\Collection;
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
-use Cake\Network\Response;
+use Cake\Http\Response;
 
 /**
  * Interface PageTypeInterface

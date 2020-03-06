@@ -32,7 +32,7 @@ class PageType extends BaseType
     public function __construct(EntityInterface $entity)
     {
         parent::__construct($entity);
-        $this->_post = $this->_getPost($this->config('post_id'));
+        $this->_post = $this->_getPost($this->getConfig('post_id'));
     }
 
     /**
@@ -40,7 +40,7 @@ class PageType extends BaseType
      */
     public function getLabel()
     {
-        $label = $this->config('title');
+        $label = $this->getConfig('title');
         if (!$label) {
             $label = get_class($this);
         }
@@ -69,7 +69,7 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'view',
-            'id' => $this->config('post_id')
+            'id' => $this->getConfig('post_id')
         ];
         */
         return $this->_post->getUrl();
@@ -86,7 +86,7 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Main',
             'action' => 'index',
-            'query' => ['p' => $this->config('post_id')]
+            'query' => ['p' => $this->getConfig('post_id')]
         ];
         */
         return $this->_post->getPermaUrl();
@@ -127,6 +127,6 @@ class PageType extends BaseType
      */
     protected function _getPost($id)
     {
-        return TableRegistry::get('Content.Posts')->get($id);
+        return TableRegistry::getTableLocator()->get('Content.Posts')->get($id);
     }
 }

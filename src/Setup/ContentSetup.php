@@ -27,8 +27,8 @@ class ContentSetup
             throw new MissingPluginException(['plugin' => 'Eav']);
         }
 
-        $this->AttributeSets = TableRegistry::get('Eav.EavAttributeSets');
-        $this->Attributes = TableRegistry::get('Eav.EavAttributes');
+        $this->AttributeSets = TableRegistry::getTableLocator()->get('Eav.EavAttributeSets');
+        $this->Attributes = TableRegistry::getTableLocator()->get('Eav.EavAttributes');
     }
 
     public function activate()

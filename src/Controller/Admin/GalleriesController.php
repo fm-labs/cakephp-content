@@ -35,7 +35,7 @@ class GalleriesController extends AppController
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -54,8 +54,8 @@ class GalleriesController extends AppController
      */
     public function index()
     {
-        if ($this->request->query('id')) {
-            $this->redirect(['action' => 'edit', $this->request->query('id')]);
+        if ($this->request->getQuery('id')) {
+            $this->redirect(['action' => 'edit', $this->request->getQuery('id')]);
         }
 
         $this->paginate['limit'] = 100;
@@ -99,7 +99,7 @@ class GalleriesController extends AppController
      *
      * @param string|null $id Gallery id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
@@ -115,7 +115,7 @@ class GalleriesController extends AppController
      */
     public function treeView()
     {
-        $id = $this->request->query('id');
+        $id = $this->request->getQuery('id');
         $this->setAction('edit', $id);
     }
 
@@ -149,7 +149,7 @@ class GalleriesController extends AppController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function addPost($id = null)
     {
@@ -177,7 +177,7 @@ class GalleriesController extends AppController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function edit($id = null)
     {
@@ -201,7 +201,7 @@ class GalleriesController extends AppController
         $viewTemplates = ContentManager::getAvailableGalleryTemplates();
         $galleryPosts = $this->Galleries->Posts->find('sorted')->where(['refid' => $id]);
 
-        $modules = TableRegistry::get('Content.Modules')->find()->where([
+        $modules = TableRegistry::getTableLocator()->get('Content.Modules')->find()->where([
             'path' => 'flexslider',
             'params' => json_encode(['gallery_id' => (int)$id])
         ])->all()->toArray();
@@ -215,7 +215,7 @@ class GalleriesController extends AppController
      *
      * @param string|null $id Gallery id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function manage($id = null)
     {
@@ -224,7 +224,7 @@ class GalleriesController extends AppController
 
     /**
      * @param null $postId
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null
      */
     public function editPost($postId = null)
     {
@@ -262,7 +262,7 @@ class GalleriesController extends AppController
      *
      * @param string|null $id Gallery id.
      * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function delete($id = null)
     {

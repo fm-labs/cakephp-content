@@ -25,8 +25,8 @@ class PostsTable extends BaseTable
     public function initialize(array $config)
     {
         $this->table(self::$tablePrefix . 'posts');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Parent', [
             'className' => 'Content.Posts',
@@ -216,7 +216,7 @@ class PostsTable extends BaseTable
     /*
     public function getTypeHandler()
     {
-        $types = TableRegistry::get('Content.Menus')->getTypes();
+        $types = TableRegistry::getTableLocator()->get('Content.Menus')->getTypes();
 
         $handlerBuilder = function (EntityInterface $entity) use ($types) {
             $type = $entity->get('type');

@@ -41,8 +41,8 @@ class OldPagesTable extends BaseTable
     public function initialize(array $config)
     {
         $this->table(self::$tablePrefix . 'pages');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->addBehavior('Tree.Tree', [
             'level' => 'level'
@@ -224,7 +224,7 @@ class OldPagesTable extends BaseTable
 //        if (!TableRegistry::config('PageTypes')) {
 //            TableRegistry::config('PageTypes', ['className' => 'Content.PageTypes']);
 //        }
-//        $PageTypes = TableRegistry::get('PageTypes');
+//        $PageTypes = TableRegistry::getTableLocator()->get('PageTypes');
 //        $types = $PageTypes->find()->all();
 
         $types = (array)Configure::read('Content.PageTypes');

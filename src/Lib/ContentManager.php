@@ -57,7 +57,7 @@ class ContentManager
      */
     public static function getAvailablePageLayouts()
     {
-        $PageLayouts = TableRegistry::get('Content.PageLayouts');
+        $PageLayouts = TableRegistry::getTableLocator()->get('Content.PageLayouts');
 
         return $PageLayouts->find('list')->all();
     }
@@ -67,7 +67,7 @@ class ContentManager
      */
     public static function getDefaultPageLayout()
     {
-        $PageLayouts = TableRegistry::get('Content.PageLayouts');
+        $PageLayouts = TableRegistry::getTableLocator()->get('Content.PageLayouts');
         $pageLayout = $PageLayouts->find()->where(['is_default' => true])->first();
 
         return $pageLayout;
@@ -80,7 +80,7 @@ class ContentManager
     {
         return Configure::read('Content.PageTypes');
 
-        $PageTypes = TableRegistry::get('PageTypes');
+        $PageTypes = TableRegistry::getTableLocator()->get('PageTypes');
 
         return $PageTypes->find('list')->all();
     }
@@ -121,7 +121,7 @@ class ContentManager
     public static function getMenuById($menuId)
     {
         /* @var \Content\Model\Table\MenusTable $Menus */
-        $Menus = TableRegistry::get('Content.Menus');
+        $Menus = TableRegistry::getTableLocator()->get('Content.Menus');
 
         return $Menus->getMenu($menuId);
     }
@@ -138,7 +138,7 @@ class ContentManager
             return null;
         }
 
-        return TableRegistry::get($modelClass)->get($typeid);
+        return TableRegistry::getTableLocator()->get($modelClass)->get($typeid);
     }
 
     /**

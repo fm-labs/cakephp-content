@@ -29,7 +29,7 @@ class FlexsliderModule extends ViewModule
         };
 
         //$galleries = function() {
-        //    return TableRegistry::get('Content.Galleries')->find('list');
+        //    return TableRegistry::getTableLocator()->get('Content.Galleries')->find('list');
         //};
 
         $schema
@@ -50,7 +50,7 @@ class FlexsliderModule extends ViewModule
         $id = ($id) ?: $this->gallery_id;
         $template = $this->template;
 
-        $gallery = TableRegistry::get('Content.Galleries')->get($id, [
+        $gallery = TableRegistry::getTableLocator()->get('Content.Galleries')->get($id, [
             'contain' => ['Posts'],
             'media' => true,
         ]);
@@ -58,7 +58,7 @@ class FlexsliderModule extends ViewModule
 
         $template = $template ?: $gallery->view_template;
         $this->viewBuilder()
-            ->className('Content.Content')
+            ->setClassName('Content.Content')
             ->template($template);
     }
 }

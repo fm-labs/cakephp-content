@@ -3,7 +3,7 @@ namespace Content\Controller;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use Cake\Routing\Router;
 use Content\Controller\Component\FrontendComponent;
 use Content\Controller\Traits\PagesDisplayActionTrait;
@@ -49,12 +49,12 @@ class PagesController extends ContentController
 
         $this->Frontend->setRefScope('Content.Pages');
 
-        //$this->viewBuilder()->className('Content.Page');
+        //$this->viewBuilder()->setClassName('Content.Page');
     }
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -79,7 +79,7 @@ class PagesController extends ContentController
 
     /**
      * @param null $id
-     * @return \Cake\Network\Response|void
+     * @return \Cake\Http\Response|void
      * @throws \Exception
      * @deprecated Use 'display' method instead
      */
@@ -88,14 +88,14 @@ class PagesController extends ContentController
         try {
             if ($id === null) {
                 switch (true) {
-                    case $this->request->query('page_id'):
-                        $id = $this->request->query('page_id');
+                    case $this->request->getQuery('page_id'):
+                        $id = $this->request->getQuery('page_id');
                         break;
                     case $this->request->param('page_id'):
                         $id = $this->request->param('page_id');
                         break;
-                    case $this->request->query('slug'):
-                        $id = $this->Posts->findIdBySlug($this->request->query('slug'));
+                    case $this->request->getQuery('slug'):
+                        $id = $this->Posts->findIdBySlug($this->request->getQuery('slug'));
                         break;
                     case $this->request->param('slug'):
                         $id = $this->Posts->findIdBySlug($this->request->param('slug'));

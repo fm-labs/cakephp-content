@@ -31,7 +31,7 @@ class ShopCategoryType extends BaseType
     public function __construct(EntityInterface $entity)
     {
         parent::__construct($entity);
-        $this->_category = $this->_getShopCategory($this->config('shop_category_id'));
+        $this->_category = $this->_getShopCategory($this->getConfig('shop_category_id'));
     }
 
     /**
@@ -39,7 +39,7 @@ class ShopCategoryType extends BaseType
      */
     public function getLabel()
     {
-        $label = $this->config('title');
+        $label = $this->getConfig('title');
         if (!$label) {
             $label = $this->_category->get('name');
         }
@@ -65,7 +65,7 @@ class ShopCategoryType extends BaseType
             'plugin' => 'Shop',
             'controller' => 'Shop',
             'action' => 'index',
-            'query' => ['c' => $this->config('shop_category_id')]
+            'query' => ['c' => $this->getConfig('shop_category_id')]
         ];
     }
 
@@ -96,11 +96,11 @@ class ShopCategoryType extends BaseType
         );
 
         // inject child shop categories
-        $depth = min($maxDepth, $this->config('shop_subcategories_depth'));
+        $depth = min($maxDepth, $this->getConfig('shop_subcategories_depth'));
         if ($depth < 0 || $depth > 0) {
-            $children = TableRegistry::get('Shop.ShopCategories')
+            $children = TableRegistry::getTableLocator()->get('Shop.ShopCategories')
                 ->find()
-                ->where(['parent_id' => $this->config('shop_category_id')])
+                ->where(['parent_id' => $this->getConfig('shop_category_id')])
                 ->contain([])
                 ->orderAsc('lft')
                 ->all();
@@ -144,6 +144,6 @@ class ShopCategoryType extends BaseType
      */
     protected function _getShopCategory($id)
     {
-        return TableRegistry::get('Shop.ShopCategories')->get($id, ['contain' => []]);
+        return TableRegistry::getTableLocator()->get('Shop.ShopCategories')->get($id, ['contain' => []]);
     }
 }

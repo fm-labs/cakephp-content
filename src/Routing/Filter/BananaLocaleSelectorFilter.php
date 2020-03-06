@@ -33,7 +33,7 @@ class ContentLocaleSelectorFilter extends LocaleSelectorFilter
         }
 
         /*
-        if (!isset($request->params['locale'])) {
+        if (!isset($request->getParam('locale'))) {
             debug("add locale to request");
             $request->addParams(['locale' => I18n::locale()]);
         }

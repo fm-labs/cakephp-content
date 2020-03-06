@@ -26,11 +26,11 @@ class CategoriesController extends AppController
      *
      * @param string|null $id Category id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->className('Content.Category');
+        $this->viewBuilder()->setClassName('Content.Category');
         $category = $this->Categories->get($id, [
             'contain' => ['Posts']
         ]);
@@ -65,7 +65,7 @@ class CategoriesController extends AppController
      *
      * @param string|null $id Category id.
      * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
@@ -91,7 +91,7 @@ class CategoriesController extends AppController
      *
      * @param string|null $id Category id.
      * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
     public function delete($id = null)
     {

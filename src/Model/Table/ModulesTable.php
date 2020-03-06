@@ -32,8 +32,8 @@ class ModulesTable extends BaseTable
     public function initialize(array $config)
     {
         $this->table(self::$tablePrefix . 'modules');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         if (Plugin::loaded('Search')) {
             $this->addBehavior('Search.Search');

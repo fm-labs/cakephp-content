@@ -12,7 +12,7 @@ class GalleriesController extends ContentController
 {
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -25,7 +25,7 @@ class GalleriesController extends ContentController
      *
      * @param string|null $id Gallery id.
      * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      * @deprecated Use FlexsliderModuleCell instead.
      */
     public function view($id = null)

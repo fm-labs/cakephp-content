@@ -102,10 +102,10 @@ class CategoryView extends ContentView
             // @TODO Use some category <-> menuitem mapping cache (performance)
             // @TODO Fallback to auto-detection, which nodes arle linked with this category, fetch path of first match
             // @TODO Skip breadcrumbs for inline categorys
-            $nodeId = $this->request->query('node_id');
+            $nodeId = $this->request->getQuery('node_id');
             if ($nodeId) {
-                $node = TableRegistry::get('Content.Nodes')->get($nodeId);
-                $paths = TableRegistry::get('Content.Nodes')
+                $node = TableRegistry::getTableLocator()->get('Content.Nodes')->get($nodeId);
+                $paths = TableRegistry::getTableLocator()->get('Content.Nodes')
                     ->find('path', ['for' => $nodeId])
                     ->where(['site_id' => $node->site_id])
                     ->all();

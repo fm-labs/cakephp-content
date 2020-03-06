@@ -28,8 +28,8 @@ class MenusTable extends BaseTable
     public function initialize(array $config)
     {
         $this->table(self::$tablePrefix . 'pages');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->addBehavior('Tree.Tree', [
             'level' => 'level'
