@@ -24,7 +24,7 @@ class PageLayoutsTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->table(self::$tablePrefix . 'page_layouts');
+        $this->setTable(self::$tablePrefix . 'page_layouts');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
     }

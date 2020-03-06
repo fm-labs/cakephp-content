@@ -19,7 +19,7 @@ class ModulesTable extends BaseTable
 {
     protected function _initializeSchema(Schema\Table $table)
     {
-        //$table->columnType('params', 'json');
+        //$table->setColumnType('params', 'json');
         return $table;
     }
 
@@ -31,7 +31,7 @@ class ModulesTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->table(self::$tablePrefix . 'modules');
+        $this->setTable(self::$tablePrefix . 'modules');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 

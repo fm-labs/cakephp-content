@@ -18,10 +18,11 @@ class LocaleComponent extends Component
     public function beforeFilter(Event $event)
     {
         $currentLocale = $requestLocale = I18n::getLocale();
-        if ($this->request->getParam('locale')) {
-            $requestLocale = $this->request->getParam('locale');
-        } elseif (isset($this->request->query['locale'])) {
-            $requestLocale = $this->request->query['locale'];
+        $request = $this->getController()->getRequest();
+        if ($request->getParam('locale')) {
+            $requestLocale = $request->getParam('locale');
+        } elseif ($request->getQuery('locale')) {
+            $requestLocale = $request->getQuery('locale');
         }
 
         if ($currentLocale != $requestLocale) {
@@ -30,10 +31,10 @@ class LocaleComponent extends Component
 
         // set locale in session
         /*
-        if (!$this->request->getSession()->check('Content.locale')) {
-            $this->request->getSession()->write('Content.locale', $locale);
+        if (!$request->getSession()->check('Content.locale')) {
+            $request->getSession()->write('Content.locale', $locale);
         } else {
-            //$this->request->getSession()->delete('Content.locale');
+            //$request->getSession()->delete('Content.locale');
         }
         debug("Locale: " . I18n::getLocale());
         */
@@ -44,7 +45,7 @@ class LocaleComponent extends Component
      */
     public function setLocale($locale)
     {
-        I18n::locale($locale);
+        I18n::setLocale($locale);
     }
 
     /**

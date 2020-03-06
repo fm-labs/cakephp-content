@@ -32,7 +32,7 @@ class GalleriesTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->table(self::$tablePrefix . 'galleries');
+        $this->setTable(self::$tablePrefix . 'galleries');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
 

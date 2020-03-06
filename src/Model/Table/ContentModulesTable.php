@@ -20,7 +20,7 @@ class ContentModulesTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->table(self::$tablePrefix . 'content_modules');
+        $this->setTable(self::$tablePrefix . 'content_modules');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
         /*

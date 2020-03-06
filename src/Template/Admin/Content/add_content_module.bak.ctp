@@ -5,7 +5,7 @@
     <?php
     echo $this->Form->create($moduleForm, ['class' => 'ui form']);
     //echo $this->Form->control('_path', ['value' => $modulePath]);
-    echo $this->Form->allInputs($moduleFormInputs, ['legend' => false, 'fieldset' => false]);
+    echo $this->Form->allControls($moduleFormInputs, ['legend' => false, 'fieldset' => false]);
     echo $this->Form->button('Save');
     echo $this->Form->end();
     ?>

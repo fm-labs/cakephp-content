@@ -21,8 +21,8 @@ abstract class BaseType implements MenuTypeInterface
     public function __construct(EntityInterface $entity)
     {
         $this->entity = $entity;
-        $this->config($entity->get('type_params'));
-        $this->config($entity->extract($this->_extractVars));
+        $this->setConfig($entity->get('type_params'));
+        $this->setConfig($entity->extract($this->_extractVars));
     }
 
     /**

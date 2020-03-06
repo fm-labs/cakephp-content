@@ -24,7 +24,7 @@ class PostsTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->table(self::$tablePrefix . 'posts');
+        $this->setTable(self::$tablePrefix . 'posts');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
 
@@ -131,12 +131,12 @@ class PostsTable extends BaseTable
     }
 
     /**
-     * @param \Cake\Database\Schema\Table $schema
-     * @return \Cake\Database\Schema\Table
+     * @param \Cake\Database\Schema\TableSchema $schema
+     * @return \Cake\Database\Schema\TableSchema
      */
-    protected function _initializeSchema(\Cake\Database\Schema\Table $schema)
+    protected function _initializeSchema(\Cake\Database\Schema\TableSchema $schema)
     {
-        $schema->columnType('image_files', 'media_file');
+        $schema->setColumnType('image_files', 'media_file');
 
         return $schema;
     }

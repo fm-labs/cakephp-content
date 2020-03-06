@@ -5,6 +5,7 @@ use Banana\Menu\Menu;
 use Cake\Cache\Cache;
 use Cake\Collection\Collection;
 use Cake\Core\Configure;
+use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
@@ -27,7 +28,7 @@ class MenusTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->table(self::$tablePrefix . 'pages');
+        $this->setTable(self::$tablePrefix . 'pages');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
@@ -52,9 +53,9 @@ class MenusTable extends BaseTable
         */
     }
 
-    protected function _initializeSchema(\Cake\Database\Schema\Table $schema)
+    protected function _initializeSchema(TableSchema $schema)
     {
-        $schema->columnType('type_params', 'json');
+        $schema->setColumnType('type_params', 'json');
 
         return $schema;
     }
