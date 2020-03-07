@@ -128,6 +128,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
     public function routes($routes)
     {
+        parent::routes($routes);
 //        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
 //
 //        // Page by slug and pageId
