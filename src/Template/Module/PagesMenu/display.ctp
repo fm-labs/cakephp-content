@@ -1,4 +1,5 @@
 <?php
+$this->loadHelper('Bootstrap.Ui');
 echo $this->element(
     $element_path, [
         'class' => $class,

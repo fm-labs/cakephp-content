@@ -22,6 +22,7 @@ abstract class ContentController extends BaseAppController
             'logoutRedirect' => '/'
         ]);
         $this->loadComponent('Content.Frontend');
+        $this->loadComponent('Content.Locale');
     }
 
     /**

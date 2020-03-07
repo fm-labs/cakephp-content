@@ -42,8 +42,6 @@ class FrontendComponent extends Component
      */
     public function initialize(array $config)
     {
-        $this->controller = $this->_registry->getController();
-
         $layout = ($this->_config['layout']) ?: 'frontend';
         $theme = ($this->_config['theme']) ?: Configure::read('Site.theme');
         $viewClass = $this->_config['viewClass'];
@@ -54,10 +52,10 @@ class FrontendComponent extends Component
             $theme = null;
         }
 
-        $this->controller->loadComponent('Flash');
-        $this->controller->viewBuilder()->setClassName($viewClass);
-        $this->controller->viewBuilder()->setLayout($layout);
-        $this->controller->viewBuilder()->setTheme($theme);
+        $this->getController()->loadComponent('Flash');
+        $this->getController()->viewBuilder()->setClassName($viewClass);
+        $this->getController()->viewBuilder()->setLayout($layout);
+        $this->getController()->viewBuilder()->setTheme($theme);
 
         $this->setRefScope($this->_config['refscope']);
     }
@@ -71,7 +69,7 @@ class FrontendComponent extends Component
      */
     public function setRefScope($scope)
     {
-        $this->controller->set('refscope', $scope);
+        $this->getController()->set('refscope', $scope);
     }
 
     /**
@@ -79,7 +77,7 @@ class FrontendComponent extends Component
      */
     public function setRefId($id)
     {
-        $this->controller->set('refid', $id);
+        $this->getController()->set('refid', $id);
     }
 
     /**
@@ -88,7 +86,7 @@ class FrontendComponent extends Component
      */
     public function setPageId($pageId)
     {
-        $this->controller->set('page_id', $pageId);
+        $this->getController()->set('page_id', $pageId);
         $this->setRefScope('Content.Pages');
         $this->setRefId($pageId);
     }

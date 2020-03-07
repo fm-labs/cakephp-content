@@ -160,7 +160,7 @@ class PostsTable extends BaseTable
             ])
             ->select('id')
             ->contain([])
-            ->hydrate(false)
+            ->enableHydration(false)
             ->first();
 
         return $post['id'];

@@ -222,7 +222,7 @@ class OldPagesTable extends BaseTable
     protected function _loadPageTypes()
     {
 //        if (!TableRegistry::getConfig('PageTypes')) {
-//            TableRegistry::setConfig('PageTypes', ['className' => 'Content.PageTypes']);
+//            TableRegistry::getTableLocator()->setConfig('PageTypes', ['className' => 'Content.PageTypes']);
 //        }
 //        $PageTypes = TableRegistry::getTableLocator()->get('PageTypes');
 //        $types = $PageTypes->find()->all();
@@ -487,7 +487,7 @@ class OldPagesTable extends BaseTable
             ])
             ->select('id')
             ->contain([])
-            ->hydrate(false)
+            ->enableHydration(false)
             ->first();
 
         return $page['id'];

@@ -123,7 +123,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
         $eventManager = EventManager::instance();
         $eventManager->on($this);
-        $eventManager->on(new \Content\Sitemap\SitemapListener());
+        //$eventManager->on(new \Content\Sitemap\SitemapListener());
     }
 
     public function routes($routes)
