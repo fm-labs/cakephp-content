@@ -7,7 +7,6 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
-use Content\Controller\Admin\AppController;
 use Content\Lib\ContentManager;
 
 /**
@@ -17,8 +16,8 @@ use Content\Lib\ContentManager;
  */
 class GalleriesController extends AppController
 {
-    use PrimaryModelAwareTrait;
     use JsTreeAwareTrait;
+    use PrimaryModelAwareTrait;
 
     /**
      * @var array

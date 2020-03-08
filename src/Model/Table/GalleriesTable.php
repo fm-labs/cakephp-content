@@ -1,18 +1,15 @@
 <?php
 namespace Content\Model\Table;
 
+use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
-use Content\Lib\ContentManager;
-use Content\Model\Entity\Gallery;
-use Cake\Core\Plugin;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
+use Content\Lib\ContentManager;
+use Content\Model\Entity\Gallery;
 use Media\Lib\Media\MediaManager;
 
 /**

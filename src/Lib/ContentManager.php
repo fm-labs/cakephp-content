@@ -4,15 +4,12 @@ namespace Content\Lib;
 use Banana\Lib\ClassRegistry;
 use Banana\Lib\SingletonTrait;
 use Cake\Collection\Collection;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventManager;
-use Content\Model\Entity\Page;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
+use Cake\Datasource\EntityInterface;
 use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
+use Content\Model\Entity\Page;
 use Content\Model\Entity\Post;
 
 /**
