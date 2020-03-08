@@ -30,7 +30,7 @@ class GalleriesController extends AppController
         'edit'      => 'Backend.Edit',
         'delete'    => 'Backend.Delete',
         'publish'   => 'Backend.Publish',
-        'unpublish' => 'Backend.Unpublish'
+        'unpublish' => 'Backend.Unpublish',
     ];
 
     /**
@@ -68,7 +68,7 @@ class GalleriesController extends AppController
             'title' => [
                 'formatter' => function ($val, $row, $args, $view) {
                     return $view->Html->link($val, ['action' => 'edit', $row->id]);
-                }
+                },
             ],
             //'parent.title' => [],
             'parent_id' => [
@@ -77,10 +77,10 @@ class GalleriesController extends AppController
                         return $view->Html->link($row->parent['title'], ['action' => 'edit', $val]);
                         //return h($val->title);
                     }
-                }
+                },
             ],
             'view_template' => [],
-            'source' => []
+            'source' => [],
         ]);
 
         $this->Action->execute();
@@ -104,7 +104,7 @@ class GalleriesController extends AppController
     public function view($id = null)
     {
         $gallery = $this->Galleries->get($id, [
-            'contain' => ['Posts']
+            'contain' => ['Posts'],
         ]);
         $this->set('gallery', $gallery);
         $this->set('_serialize', ['gallery']);
@@ -154,12 +154,12 @@ class GalleriesController extends AppController
     public function addPost($id = null)
     {
         $gallery = $this->Galleries->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         $post = $this->Galleries->Posts->newEntity([
             'refscope' => 'Content.Galleries',
-            'refid' => $id
+            'refid' => $id,
         ]);
         if ($this->request->is('post')) {
             $post = $this->Galleries->Posts->patchEntity($post, $this->request->data);
@@ -182,7 +182,7 @@ class GalleriesController extends AppController
     public function edit($id = null)
     {
         $gallery = $this->Galleries->get($id, [
-            'contain' => ['Parent']
+            'contain' => ['Parent'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $gallery = $this->Galleries->patchEntity($gallery, $this->request->data);
@@ -203,7 +203,7 @@ class GalleriesController extends AppController
 
         $modules = TableRegistry::getTableLocator()->get('Content.Modules')->find()->where([
             'path' => 'flexslider',
-            'params' => json_encode(['gallery_id' => (int)$id])
+            'params' => json_encode(['gallery_id' => (int)$id]),
         ])->all()->toArray();
 
         $this->set(compact('gallery', 'parents', 'sources', 'sourceFolders', 'viewTemplates', 'galleryPosts', 'modules'));

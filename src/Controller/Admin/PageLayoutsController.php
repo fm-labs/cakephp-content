@@ -75,7 +75,7 @@ class PageLayoutsController extends AppController
     public function edit($id = null)
     {
         $pageLayout = $this->PageLayouts->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pageLayout = $this->PageLayouts->patchEntity($pageLayout, $this->request->data);

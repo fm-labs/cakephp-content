@@ -32,7 +32,7 @@ class ContentModulesTable extends BaseTable
         $this->belongsTo('Modules', [
             'foreignKey' => 'module_id',
             'joinType' => 'INNER',
-            'className' => 'Content.Modules'
+            'className' => 'Content.Modules',
         ]);
     }
 

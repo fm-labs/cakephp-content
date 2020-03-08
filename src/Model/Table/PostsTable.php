@@ -30,29 +30,29 @@ class PostsTable extends BaseTable
 
         $this->belongsTo('Parent', [
             'className' => 'Content.Posts',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
 
         $this->addBehavior('Timestamp');
 
         $this->addBehavior('Translate', [
             'fields' => ['title', 'slug', 'teaser_html', 'teaser_link_caption', 'body_html'],
-            'translationTable' => 'bc_i18n'
+            'translationTable' => 'bc_i18n',
         ]);
 
         $this->addBehavior('Content.ContentModule', [
             'alias' => 'ContentModules',
             'scope' => 'Content.Posts',
-            'concat' => 'body_html'
+            'concat' => 'body_html',
         ]);
 
         $this->addBehavior('Tree.SimpleTree', [
             'field' => 'pos',
-            'scope' => ['refscope', 'refid']
+            'scope' => ['refscope', 'refid'],
         ]);
 
         $this->addBehavior('Banana.Copyable', [
-            'excludeFields' => ['is_published']
+            'excludeFields' => ['is_published'],
         ]);
 
         $this->addBehavior('Banana.Sluggable');
@@ -65,28 +65,28 @@ class PostsTable extends BaseTable
             $this->addBehavior('Media.Media', [
                 'fields' => [
                     'teaser_image_file' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_file' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_file_2' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_file_3' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_file_4' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_file_5' => [
-                        'config' => 'images'
+                        'config' => 'images',
                     ],
                     'image_files' => [
                         'config' => 'images',
-                        'multiple' => true
-                    ]
-                ]
+                        'multiple' => true,
+                    ],
+                ],
             ]);
         } else {
             Log::warning('Media plugin is not loaded');
@@ -102,7 +102,7 @@ class PostsTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['title']
+                    'field' => ['title'],
                 ])
                 ->add('title', 'Search.Like', [
                     'before' => true,
@@ -111,10 +111,10 @@ class PostsTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['title']
+                    'field' => ['title'],
                 ])
                 ->value('is_published', [
-                    'filterEmpty' => true
+                    'filterEmpty' => true,
                 ]);
         }
     }
@@ -125,8 +125,8 @@ class PostsTable extends BaseTable
         return [
             'test_attribute' => [
                 'type' => 'string',
-                'is_required' => true
-            ]
+                'is_required' => true,
+            ],
         ];
     }
 
@@ -156,7 +156,7 @@ class PostsTable extends BaseTable
         $post = $this
             ->find()
             ->where([
-                'slug' => $slug
+                'slug' => $slug,
             ])
             ->select('id')
             ->contain([])

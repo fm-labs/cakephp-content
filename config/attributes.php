@@ -4,10 +4,10 @@ return [
         'Models' => [
             'Content.Post' => [
                 'html_meta_title' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'html_meta_desc' => [
-                    'type' => 'text'
+                    'type' => 'text',
                 ],
                 'html_meta_robots' => [
                     'type' => 'select',
@@ -16,9 +16,9 @@ return [
                 ],
                 'faq_category_id' => [
                     'type' => 'select',
-                    'model' => 'Content.Category'
-                ]
-            ]
-        ]
-    ]
+                    'model' => 'Content.Category',
+                ],
+            ],
+        ],
+    ],
 ];

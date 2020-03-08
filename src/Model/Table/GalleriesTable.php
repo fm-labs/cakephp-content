@@ -44,7 +44,7 @@ class GalleriesTable extends BaseTable
         $this->hasMany('Posts', [
             'className' => 'Content.Posts',
             'foreignKey' => 'refid',
-            'conditions' => ['refscope' => 'Content.Galleries']
+            'conditions' => ['refscope' => 'Content.Galleries'],
         ]);
 
         if (Plugin::isLoaded('Search')) {
@@ -57,13 +57,13 @@ class GalleriesTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['title']
+                    'field' => ['title'],
                 ])
                 ->value('parent_id', [
-                    'filterEmpty' => true
+                    'filterEmpty' => true,
                 ])
                 ->value('is_published', [
-                    'filterEmpty' => true
+                    'filterEmpty' => true,
                 ]);
         }
     }
@@ -130,7 +130,7 @@ class GalleriesTable extends BaseTable
     {
         return [
             'folder' => __d('content', 'Folder'),
-            'posts' => __d('content', 'Posts')
+            'posts' => __d('content', 'Posts'),
         ];
     }
 
@@ -178,7 +178,7 @@ class GalleriesTable extends BaseTable
                 'data' => [
                     'type' => 'content',
                     'viewUrl' => Router::url(['controller' => 'Galleries', 'action' => 'manage', $node->id]),
-                ]
+                ],
             ];
         };
 

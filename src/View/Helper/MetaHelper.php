@@ -141,7 +141,6 @@ class MetaHelper extends Helper
             $content = (isset($args[0])) ? $args[0] : null;
 
             return $this->_setLink($name, $content);
-
         } elseif (preg_match('/^set([\w]+)$/', $method, $matches)) {
             $name = Text::slug(Inflector::underscore($matches[1]));
             $content = (isset($args[0])) ? $args[0] : null;
@@ -158,7 +157,7 @@ class MetaHelper extends Helper
 
         return $this;
     }
-    
+
     protected function _setLink($name, $url)
     {
         $link = ['rel' => $name, 'link' => $url];
@@ -177,12 +176,11 @@ class MetaHelper extends Helper
         return $this->_setMeta('viewport', $value);
     }
 
-
     public function setLanguage($value)
     {
         return $this->_setMeta('language', [
             'name' => 'language',
-            'content' => $value
+            'content' => $value,
         ]);
     }
 
@@ -191,7 +189,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('description', [
             'name' => 'description',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::getLocale()
+            'lang' => ($lang) ?: I18n::getLocale(),
         ]);
     }
 
@@ -200,7 +198,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('keywords', [
             'name' => 'keywords',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::getLocale()
+            'lang' => ($lang) ?: I18n::getLocale(),
         ]);
     }
 

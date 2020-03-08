@@ -19,7 +19,7 @@ class ScriptHelper extends Helper
 
     protected $_scripts = [
         'jquery' => 'Content.jquery/jquery-1.11.2.min',
-        'content_shared' => 'Content.shared'
+        'content_shared' => 'Content.shared',
 
     ];
 

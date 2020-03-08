@@ -84,8 +84,8 @@ class OldPagesController extends ContentController
         $this->set('fields', [
             'title', 'type',
             'is_published' => [
-               'type' => 'boolean'
-            ]
+               'type' => 'boolean',
+            ],
         ]);
         $this->set('fields.whitelist', ['title', 'type', 'is_published']);
         $this->Action->execute();
@@ -135,18 +135,18 @@ class OldPagesController extends ContentController
     public function view($id = null)
     {
         $content = $this->OldPages->get($id, [
-            'contain' => ['ParentPages', 'Posts']
+            'contain' => ['ParentPages', 'Posts'],
         ]);
 
         $this->set('related', [
             'Posts' => [
                 'fields' => [
-                    'id', 'title', 'slug', 'pos', 'is_published'
+                    'id', 'title', 'slug', 'pos', 'is_published',
                 ],
                 'rowActions' => [
-                    'edit' => [__('Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], []]
-                ]
-            ]
+                    'edit' => [__('Edit'), ['controller' => 'Posts', 'action' => 'edit', ':id'], []],
+                ],
+            ],
         ]);
         $this->set('entity', $content);
 
@@ -159,7 +159,7 @@ class OldPagesController extends ContentController
     public function relatedPosts($id = null)
     {
         $content = $this->OldPages->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         $posts = $this->OldPages->Posts
@@ -182,7 +182,7 @@ class OldPagesController extends ContentController
         $PageMetas = TableRegistry::getTableLocator()->get('Content.PageMetas');
 
         $content = $this->OldPages->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         $pageMeta = $content->meta;
@@ -216,7 +216,7 @@ class OldPagesController extends ContentController
     public function relatedContentModules($id = null)
     {
         $content = $this->OldPages->get($id, [
-            'contain' => ['ContentModules' => ['Modules']]
+            'contain' => ['ContentModules' => ['Modules']],
         ]);
 
         //@TODO Read custom sections from page layout
@@ -255,11 +255,11 @@ class OldPagesController extends ContentController
 
         $this->set('fields', [
             'parent_id' => ['input' => ['data-placeholder' => 'No parent']],
-            'type' => ['input' => ['default' => 'content', 'empty' => false]]
+            'type' => ['input' => ['default' => 'content', 'empty' => false]],
         ]);
 
         $this->set('fields.whitelist', [
-            'parent_id', 'type', 'title'
+            'parent_id', 'type', 'title',
         ]);
 
         $pagesTree = $this->OldPages->find('treeList')->toArray();
@@ -301,7 +301,7 @@ class OldPagesController extends ContentController
     public function edit($id = null)
     {
         $page = $this->OldPages->get($id, [
-            'contain' => ['PageLayouts', 'Posts']
+            'contain' => ['PageLayouts', 'Posts'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $content = $this->OldPages->patchEntity($page, $this->request->data);

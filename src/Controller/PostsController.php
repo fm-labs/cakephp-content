@@ -136,7 +136,7 @@ class PostsController extends ContentController
 
         $post = $this->Posts->get($id, [
             'contain' => [],
-            'media' => true
+            'media' => true,
         ]);
 
         $this->set('post', $post);

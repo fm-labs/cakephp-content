@@ -13,7 +13,7 @@ class GalleryItemPostType extends DefaultPostType
     {
         return [
             'title' => 'Gallery Item',
-            'modelClass' => 'Content.Posts'
+            'modelClass' => 'Content.Posts',
         ];
     }
 

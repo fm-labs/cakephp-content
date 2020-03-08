@@ -2,7 +2,8 @@
 
 namespace Content\View\Shortcode;
 
-class TestShortcode extends Shortcode {
+class TestShortcode extends Shortcode
+{
 
     public function __invoke($name, $params, $content)
     {

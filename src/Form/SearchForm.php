@@ -29,7 +29,7 @@ class SearchForm extends Form
     {
         return $validator->add('query', 'length', [
             'rule' => ['minLength', 1],
-            'message' => 'A query is required'
+            'message' => 'A query is required',
         ]);
     }
 

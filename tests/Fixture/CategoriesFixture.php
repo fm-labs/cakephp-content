@@ -49,7 +49,7 @@ class CategoriesFixture extends TestFixture
             'id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
             'slug' => 'Lorem ipsum dolor sit amet',
-            'is_published' => 1
+            'is_published' => 1,
         ],
     ];
 }

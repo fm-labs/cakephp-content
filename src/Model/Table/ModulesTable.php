@@ -45,7 +45,7 @@ class ModulesTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['name']
+                    'field' => ['name'],
                 ])
                 ->add('path', 'Search.Like', [
                     'before' => true,
@@ -54,7 +54,7 @@ class ModulesTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['path']
+                    'field' => ['path'],
                 ]);
         }
     }

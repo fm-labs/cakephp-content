@@ -21,7 +21,7 @@ class DefaultPostType implements PostTypeInterface
     {
         return [
             'title' => 'Standard Post',
-            'modelClass' => 'Content.Posts'
+            'modelClass' => 'Content.Posts',
         ];
     }
 
@@ -64,7 +64,6 @@ class DefaultPostType implements PostTypeInterface
 
         return $postUrl;
     }
-
 
     public function getPermaUrl()
     {

@@ -39,7 +39,7 @@ class ContentModulesFixture extends TestFixture
             'template' => '',
             'priority' => 0,
             'cssclass' => null,
-            'cssid' => null
+            'cssid' => null,
         ],
     ];
 }

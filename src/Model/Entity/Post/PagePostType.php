@@ -13,7 +13,7 @@ class PagePostType extends DefaultPostType
     {
         return [
             'title' => 'Page',
-            'modelClass' => 'Content.Posts'
+            'modelClass' => 'Content.Posts',
         ];
     }
 
@@ -28,7 +28,7 @@ class PagePostType extends DefaultPostType
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                'slug' => $this->post->get('slug')
+                'slug' => $this->post->get('slug'),
             ];
         }
 
@@ -37,7 +37,7 @@ class PagePostType extends DefaultPostType
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'view',
-            'id' => $this->post->get('id')
+            'id' => $this->post->get('id'),
         ];
     }
 

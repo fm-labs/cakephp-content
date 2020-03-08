@@ -65,7 +65,7 @@ class ShopCategoryType extends BaseType
             'plugin' => 'Shop',
             'controller' => 'Shop',
             'action' => 'index',
-            'query' => ['c' => $this->getConfig('shop_category_id')]
+            'query' => ['c' => $this->getConfig('shop_category_id')],
         ];
     }
 
@@ -125,7 +125,7 @@ class ShopCategoryType extends BaseType
                 'controller' => 'Categories',
                 'action' => 'view',
                 'category' => $category->get('slug'),
-                'category_id' => $category->get('id')
+                'category_id' => $category->get('id'),
             ];
         }
 
@@ -134,7 +134,7 @@ class ShopCategoryType extends BaseType
             'plugin' => 'Shop',
             'controller' => 'Categories',
             'action' => 'view',
-            'id' => $category->get('id')
+            'id' => $category->get('id'),
         ];
     }
 

@@ -18,7 +18,7 @@ class ContentModulesController extends AppController
         'view'      => 'Backend.View',
         'add'       => 'Backend.Add',
         'edit'      => 'Backend.Edit',
-        'delete'    => 'Backend.Delete'
+        'delete'    => 'Backend.Delete',
     ];
 
     /**
@@ -76,7 +76,7 @@ class ContentModulesController extends AppController
     public function edit($id = null)
     {
         $contentModule = $this->ContentModules->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contentModule = $this->ContentModules->patchEntity($contentModule, $this->request->data);
@@ -123,7 +123,7 @@ class ContentModulesController extends AppController
 
         $contentModules = $this->ContentModules->find()->where([
             'refscope' => $model,
-            'refid' => $modelId
+            'refid' => $modelId,
         ])->contain(['Modules'])->all();
 
         //@TODO Read custom sections from page layout

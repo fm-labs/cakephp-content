@@ -23,8 +23,8 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
             'wrapper' => '<ol{{attrs}}>{{content}}</ol>',
             'item' => '<li itemscope itemtype="http://schema.org/breadcrumb"{{attrs}}><a href="{{url}}" itemprop="url"{{innerAttrs}}><span itemprop="title">{{title}}</span></a></li>{{separator}}',
             'itemWithoutLink' => '<li itemscope itemtype="http://schema.org/breadcrumb"{{attrs}}><span itemprop="title"{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-            'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
-        ]
+            'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
+        ],
     ];
 
     public function add($title, $url = null, array $options = [])
@@ -44,7 +44,7 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
 
         $this->templater()->add([
             'breadcrumb_list' => '<ol{{attrs}}>{{items}}</ol>',
-            'breadcrumb_item' => '<li{{attrs}}>{{content}}</li>'
+            'breadcrumb_item' => '<li{{attrs}}>{{content}}</li>',
         ]);
 
         $defaults = ['separator' => '', 'escape' => true];
@@ -64,7 +64,7 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
         foreach ($crumbs as $which => $crumb) {
             $options = [
                 'itemscope' => true,
-                'itemtype' => "http://schema.org/breadcrumb"
+                'itemtype' => "http://schema.org/breadcrumb",
             ];
             if (empty($crumb[1])) {
                 $elementContent = $crumb[0];
@@ -76,13 +76,13 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
 
             $result .= $this->formatTemplate('breadcrumb_item', [
                 'content' => $elementContent,
-                'attrs' => $this->templater()->formatAttributes($options)
+                'attrs' => $this->templater()->formatAttributes($options),
             ]);
         }
 
         return $this->formatTemplate('breadcrumb_list', [
             'items' => $result,
-            'attrs' => $this->templater()->formatAttributes($listOptions)
+            'attrs' => $this->templater()->formatAttributes($listOptions),
         ]);
     }
 }

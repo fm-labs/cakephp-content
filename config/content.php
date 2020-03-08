@@ -4,7 +4,7 @@ return [
         'content' => [
             'convert_urls' => false,
             '@image_list' => ['plugin' => 'Content', 'controller' => 'HtmlEditor', 'action' => 'imageList'],
-            '@link_list' => ['plugin' => 'Content', 'controller' => 'HtmlEditor', 'action' => 'linkList']
+            '@link_list' => ['plugin' => 'Content', 'controller' => 'HtmlEditor', 'action' => 'linkList'],
         ],
     ],
     'Content' => [
@@ -12,5 +12,5 @@ return [
             'enablePrettyUrls' => false,
             'forceCanonical' => false,
         ],
-    ]
+    ],
 ];

@@ -42,7 +42,7 @@ class ShortcodeHelper extends Helper
 
     public function renderShortCodes($html)
     {
-        $callback = function($matches) {
+        $callback = function ($matches) {
             //debug($matches);
 
             $shortcode = $closecode = $content = null;
@@ -66,7 +66,7 @@ class ShortcodeHelper extends Helper
             // parse shortcode params
             $args = explode(" ", trim($args));
             $params = [];
-            array_walk($args, function($v) use (&$params) {
+            array_walk($args, function ($v) use (&$params) {
                 $attr = explode("=", $v);
                 if (count($attr) == 2) {
                     list($key, $val) = $attr;

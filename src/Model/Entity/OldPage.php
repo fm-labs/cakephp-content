@@ -65,7 +65,7 @@ class OldPage extends Entity
         'meta_desc',
         'meta_keywords',
         'meta_robots',
-        'meta_lang'
+        'meta_lang',
     ];
 
     /**

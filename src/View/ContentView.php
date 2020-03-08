@@ -151,7 +151,7 @@ class ContentView extends View
         $wrapperAttrs = array_merge([
             'id' => $contentModule->cssid,
             'class' => $contentModule->cssclass,
-            'data-content-module-id' => $contentModule->id
+            'data-content-module-id' => $contentModule->id,
         ], $wrapperAttrs);
 
         return $this->Html->div(null, $moduleHtml, $wrapperAttrs);

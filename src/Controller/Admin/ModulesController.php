@@ -27,7 +27,7 @@ class ModulesController extends AppController
     {
         $this->paginate = [
             'limit' => 50,
-            'order' => ['Modules.name' => 'ASC']
+            'order' => ['Modules.name' => 'ASC'],
         ];
 
         $this->set('fields.whitelist', ['name', 'path', 'params']);
@@ -35,7 +35,7 @@ class ModulesController extends AppController
         $this->set('rowActions', [
             [__d('content', 'Edit'), ['action' => 'edit', ':id']],
             [__d('content', 'Configure'), ['action' => 'configure', ':id']],
-            [__d('content', 'Delete'), ['action' => 'delete', ':id'], ['type' => 'post']]
+            [__d('content', 'Delete'), ['action' => 'delete', ':id'], ['type' => 'post']],
         ]);
 
         return $this->Action->execute();
@@ -145,7 +145,7 @@ class ModulesController extends AppController
     public function edit($id = null)
     {
         $module = $this->Modules->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $module = $this->Modules->patchEntity($module, $this->request->data);

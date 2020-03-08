@@ -84,7 +84,7 @@ abstract class ContentController extends AppController
     public function edit($id = null)
     {
         $content = $this->model()->get($id, [
-            'contain' => ['ContentModules' => ['Modules']]
+            'contain' => ['ContentModules' => ['Modules']],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $content = $this->model()->patchEntity($content, $this->request->data);
@@ -117,7 +117,7 @@ abstract class ContentController extends AppController
     public function view($id = null)
     {
         $content = $this->model()->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         $this->set('content', $content);
         $this->set('_serialize', ['content']);
@@ -241,7 +241,7 @@ abstract class ContentController extends AppController
     public function edit_modules($id = null)
     {
         $content = $this->model()->get($id, [
-            'contain' => ['ContentModules' => ['Modules']]
+            'contain' => ['ContentModules' => ['Modules']],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $content = $this->model()->patchEntity($content, $this->request->data);
@@ -292,7 +292,7 @@ abstract class ContentController extends AppController
             'action' => 'add',
             'refscope' => 'Content.Pages',
             'refid' => $contentId,
-            'link' => true
+            'link' => true,
         ]);
     }
 

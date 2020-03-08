@@ -32,7 +32,7 @@ class CategoriesController extends AppController
     {
         $this->viewBuilder()->setClassName('Content.Category');
         $category = $this->Categories->get($id, [
-            'contain' => ['Posts']
+            'contain' => ['Posts'],
         ]);
         $this->set('category', $category);
         $this->set('_serialize', ['category']);
@@ -70,7 +70,7 @@ class CategoriesController extends AppController
     public function edit($id = null)
     {
         $category = $this->Categories->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);

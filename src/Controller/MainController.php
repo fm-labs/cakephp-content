@@ -6,6 +6,5 @@ class MainController extends ContentController
 {
     public function index()
     {
-
     }
 }

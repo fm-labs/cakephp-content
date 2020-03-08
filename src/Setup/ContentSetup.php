@@ -41,13 +41,13 @@ class ContentSetup
            'test_attribute' => [
                'title' => 'Test Attribute String',
                'type' => 'string',
-               'is_required' => true
+               'is_required' => true,
            ],
             'test_attribute_int' => [
                 'title' => 'Test Attribute Int',
                 'type' => 'int',
-                'is_required' => true
-            ]
+                'is_required' => true,
+            ],
         ]);
     }
 

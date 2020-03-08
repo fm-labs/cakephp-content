@@ -86,7 +86,7 @@ class PagesFixture extends TestFixture
             'hide_in_nav' => 0,
             'hide_in_sitemap' => 0,
             'created' => '2016-04-17 18:58:39',
-            'modified' => '2016-04-17 18:58:39'
+            'modified' => '2016-04-17 18:58:39',
         ],
         [
             'id' => 2,
@@ -111,7 +111,7 @@ class PagesFixture extends TestFixture
             'hide_in_nav' => 0,
             'hide_in_sitemap' => 0,
             'created' => '2016-04-17 18:58:39',
-            'modified' => '2016-04-17 18:58:39'
+            'modified' => '2016-04-17 18:58:39',
         ],
     ];
 }

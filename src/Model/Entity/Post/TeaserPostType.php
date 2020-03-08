@@ -15,7 +15,7 @@ class TeaserPostType extends DefaultPostType
     {
         return [
             'title' => 'Teaser',
-            'modelClass' => 'Content.Posts'
+            'modelClass' => 'Content.Posts',
         ];
     }
 

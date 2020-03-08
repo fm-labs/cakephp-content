@@ -112,7 +112,7 @@ class PostsFixture extends TestFixture
             'pos' => 1,
             'section' => '',
             'modified' => '2016-04-27 17:15:43',
-            'created' => '2016-04-27 17:15:43'
+            'created' => '2016-04-27 17:15:43',
         ],
         [
             'id' => 2,
@@ -150,7 +150,7 @@ class PostsFixture extends TestFixture
             'pos' => 2,
             'section' => '',
             'modified' => '2016-04-27 17:15:43',
-            'created' => '2016-04-27 17:15:43'
+            'created' => '2016-04-27 17:15:43',
         ],
         [
             'id' => 3,
@@ -188,7 +188,7 @@ class PostsFixture extends TestFixture
             'pos' => 3,
             'section' => '',
             'modified' => '2016-04-27 17:15:43',
-            'created' => '2016-04-27 17:15:43'
+            'created' => '2016-04-27 17:15:43',
         ],
         [
             'id' => 4,
@@ -226,7 +226,7 @@ class PostsFixture extends TestFixture
             'pos' => 4,
             'section' => '',
             'modified' => '2016-04-27 17:15:43',
-            'created' => '2016-04-27 17:15:43'
+            'created' => '2016-04-27 17:15:43',
         ],
     ];
 }

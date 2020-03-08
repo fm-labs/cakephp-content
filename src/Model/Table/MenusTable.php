@@ -33,16 +33,16 @@ class MenusTable extends BaseTable
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->addBehavior('Tree.Tree', [
-            'level' => 'level'
+            'level' => 'level',
         ]);
 
         $this->belongsTo('ParentMenus', [
             'className' => 'Content.Menus',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
         $this->hasMany('ChildMenus', [
             'className' => 'Content.Menus',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
 
         /*
@@ -225,10 +225,10 @@ class MenusTable extends BaseTable
 
     /**
      * @param Event $event
-     * @param EntityInterface $entity
+     * @param EntityInterface $data
      * @param \ArrayObject $options
      */
-    public function beforeMarshal(Event $event,  \ArrayObject $data, \ArrayObject $options)
+    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
         //debug($data);
     }
@@ -357,7 +357,6 @@ class MenusTable extends BaseTable
                 //@todo handle exception
                 debug($ex->getMessage());
             }
-
         }
 
         return $menu;

@@ -29,7 +29,7 @@ class PostsController extends AppController
         'edit' => 'Backend.Edit',
         'delete' => 'Backend.Delete',
         'publish' => 'Backend.Publish',
-        'unpublish' => 'Backend.Unpublish'
+        'unpublish' => 'Backend.Unpublish',
     ];
 
     /**
@@ -52,14 +52,15 @@ class PostsController extends AppController
             'title' => ['formatter' => function ($val, $row, $args, $view) {
                 return $view->Html->link($val, ['action' => 'edit', $row->id]);
             }],
-            'type' => ['formatter' => function($val, $row, $args, $view) {
+            'type' => ['formatter' => function ($val, $row, $args, $view) {
                 $out = $val;
-                $out.= "<br />";
+                $out .= "<br />";
                 $out .= "Url: " . $view->Html->link($row->getViewUrl()) . "<br />";
                 $out .= "PermaUrl: " . $view->Html->link($row->getPermaUrl()) . "<br />";
                 $out .= "Admin Url: " . $view->Html->link($row->getAdminUrl()) . "<br />";
+
                 return $out;
-            }]
+            }],
         ]);
 
         $this->Action->execute();
@@ -243,7 +244,7 @@ class PostsController extends AppController
     {
         $post = $this->Posts->get($id, [
             'contain' => ['ContentModules' => ['Modules']],
-            'media' => true
+            'media' => true,
         ]);
 
         $this->set('post', $post);

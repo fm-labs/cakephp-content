@@ -22,7 +22,6 @@ use Content\Model\Entity\Post;
  */
 class ContentManager
 {
-
     use SingletonTrait {
         SingletonTrait::getInstance as getStaticInstance;
     }

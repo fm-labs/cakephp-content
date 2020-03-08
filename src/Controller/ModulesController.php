@@ -30,7 +30,7 @@ class ModulesController extends ContentController
         }
 
         $module = $this->Modules->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         $module = $this->Modules->modularize($module);
         $this->set('module', $module);

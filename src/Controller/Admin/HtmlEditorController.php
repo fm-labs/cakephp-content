@@ -31,7 +31,7 @@ class HtmlEditorController extends AppController
             array_walk($files, function ($filename, $idx) use (&$list, &$mm) {
                 $list[] = [
                     'title' => $idx,
-                    'value' => $filename
+                    'value' => $filename,
                 ];
             });
         } catch (\Exception $ex) {
@@ -89,7 +89,7 @@ class HtmlEditorController extends AppController
                     $_list[] = [
                         'title' => str_repeat('_', $entity->level) . $entity->title,
                         //'value' => Router::url($entity->url, true)
-                        'value' => sprintf('{{Content.Posts:%s}}', $entity->id)
+                        'value' => sprintf('{{Content.Posts:%s}}', $entity->id),
                     ];
                 });
             } catch (\Exception $ex) {
@@ -111,7 +111,7 @@ class HtmlEditorController extends AppController
                         $_list[] = [
                             'title' => str_repeat('_', $entity->level) . $entity->name,
                             //'value' => Router::url($entity->url, true)
-                            'value' => sprintf('{{Shop.ShopCategories:%s}}', $entity->id)
+                            'value' => sprintf('{{Shop.ShopCategories:%s}}', $entity->id),
                         ];
                     });
                 } catch (\Exception $ex) {

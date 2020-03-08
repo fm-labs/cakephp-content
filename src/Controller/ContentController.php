@@ -19,7 +19,7 @@ abstract class ContentController extends BaseAppController
         parent::initialize();
 
         $this->loadComponent('User.Auth', [
-            'logoutRedirect' => '/'
+            'logoutRedirect' => '/',
         ]);
         $this->loadComponent('Content.Frontend');
         $this->loadComponent('Content.Locale');

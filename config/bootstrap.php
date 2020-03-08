@@ -14,33 +14,32 @@ Configure::load('Content.content');
 
 Configure::write('Content.PageTypes.content', [
     'title' => 'Content Page',
-    'className' => 'Content.Content'
+    'className' => 'Content.Content',
 ]);
 
-Configure::write('Content.PageTypes.static',[
+Configure::write('Content.PageTypes.static', [
     'title' => 'Static Page',
-    'className' => 'Content.Static'
+    'className' => 'Content.Static',
 ]);
-Configure::write('Content.PageTypes.controller',[
+Configure::write('Content.PageTypes.controller', [
     'title' => 'Controller',
-    'className' => 'Content.Controller'
+    'className' => 'Content.Controller',
 ]);
-Configure::write('Content.PageTypes.redirect',[
+Configure::write('Content.PageTypes.redirect', [
     'title' => 'Redirect',
-    'className' => 'Content.Redirect'
+    'className' => 'Content.Redirect',
 ]);
-Configure::write('Content.PageTypes.root',[
+Configure::write('Content.PageTypes.root', [
     'title' => 'Root Page',
-    'className' => 'Content.Root'
+    'className' => 'Content.Root',
 ]);
-
 
 if (!Cache::getConfig('content_menu')) {
     Cache::setConfig('content_menu', [
         'className' => 'File',
         'duration' => '+1 day',
         'path' => CACHE,
-        'prefix' => 'content_menu_'
+        'prefix' => 'content_menu_',
     ]);
 }
 

@@ -30,7 +30,7 @@ class Module extends Entity
      * @var array
      */
     protected $_virtual = [
-        'cellClass'
+        'cellClass',
     ];
 
     /**
@@ -93,7 +93,7 @@ class Module extends Entity
             'controller' => 'Modules',
             'action' => 'preview',
             'path' => $this->path,
-            'params' => base64_encode(json_encode($paramsArr))
+            'params' => base64_encode(json_encode($paramsArr)),
         ];
 
         return $url;

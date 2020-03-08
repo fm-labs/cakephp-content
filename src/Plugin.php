@@ -34,18 +34,18 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'page_layouts' => [
                 'title' => 'Layouts',
                 'url' => ['plugin' => 'Content', 'controller' => 'PageLayouts', 'action' => 'index'],
-                'data-icon' => 'columns'
+                'data-icon' => 'columns',
             ],
             'modules' => [
                 'title' => 'Modules',
                 'url' => ['plugin' => 'Content', 'controller' => 'Modules', 'action' => 'index'],
-                'data-icon' => 'puzzle-piece'
+                'data-icon' => 'puzzle-piece',
             ],
             'content_modules' => [
                 'title' => 'Content Modules',
                 'url' => ['plugin' => 'Content', 'controller' => 'ContentModules', 'action' => 'index'],
-                'data-icon' => 'object-group'
-            ]
+                'data-icon' => 'object-group',
+            ],
         ];
     }
 
@@ -75,7 +75,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'galleries' => [
                 'title' => 'Galleries',
                 'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
-                'data-icon' => 'image'
+                'data-icon' => 'image',
             ],
 
             'menus' => [
@@ -113,7 +113,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'title' => 'Content',
             'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
             'data-icon' => 'book',
-            'children' => $this->_getMenuItems()
+            'children' => $this->_getMenuItems(),
         ]);
     }
 

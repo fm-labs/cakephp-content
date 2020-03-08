@@ -20,7 +20,7 @@ class ContentModuleBehavior extends Behavior
     protected $_defaultConfig = [
         'alias' => null,
         'scope' => null,
-        'className' => 'Content.ContentModules'
+        'className' => 'Content.ContentModules',
     ];
 
     /**
@@ -62,7 +62,7 @@ class ContentModuleBehavior extends Behavior
         $table->hasMany($config['alias'], [
             'className' => $config['className'],
             'foreignKey' => 'refid',
-            'conditions' => ['refscope' => $config['scope']]
+            'conditions' => ['refscope' => $config['scope']],
         ]);
     }
 

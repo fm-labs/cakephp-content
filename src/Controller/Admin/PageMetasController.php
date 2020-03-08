@@ -31,7 +31,7 @@ class PageMetasController extends AppController
     public function view($id = null)
     {
         $pageMeta = $this->PageMetas->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         $this->set('pageMeta', $pageMeta);
         $this->set('_serialize', ['pageMeta']);
@@ -70,7 +70,7 @@ class PageMetasController extends AppController
     public function edit($id = null)
     {
         $pageMeta = $this->PageMetas->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pageMeta = $this->PageMetas->patchEntity($pageMeta, $this->request->data);

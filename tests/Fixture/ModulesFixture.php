@@ -35,7 +35,7 @@ class ModulesFixture extends TestFixture
             'name' => 'Mod Slider Home',
             'title' => null,
             'path' => 'flexslider',
-            'params' => '{"gallery_id":"2"}'
+            'params' => '{"gallery_id":"2"}',
         ],
     ];
 }

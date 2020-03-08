@@ -37,7 +37,7 @@ class CategoriesTable extends BaseTable
         $this->hasMany('Posts', [
             'className' => 'Content.Posts',
             'foreignKey' => 'refid',
-            'conditions' => ['Posts.refscope' => 'Content.Categories']
+            'conditions' => ['Posts.refscope' => 'Content.Categories'],
         ]);
     }
 

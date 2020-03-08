@@ -20,7 +20,6 @@ use Content\Model\Entity\Post\PostTypeInterface;
 class Post extends Entity /*implements EntityTypeHandlerInterface*/
 {
     //use EntityAttributesTrait;
-
     use EntityTypeHandlerTrait {
         EntityTypeHandlerTrait::handler as typeHandler;
     }
@@ -56,7 +55,7 @@ class Post extends Entity /*implements EntityTypeHandlerInterface*/
         'url',
         //'view_url',
         'children',
-        'excerpt_html'
+        'excerpt_html',
     ];
 
     /**

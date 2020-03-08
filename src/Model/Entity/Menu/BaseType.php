@@ -30,7 +30,6 @@ abstract class BaseType implements MenuTypeInterface
      */
     public function setEntity(EntityInterface $entity)
     {
-
     }
 
     /**

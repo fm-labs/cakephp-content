@@ -34,7 +34,7 @@ class FrontendComponent extends Component
         'viewClass' => 'Content.Content',
         'refscope' => 'Content.Pages',
         'theme' => null,
-        'layout' => null
+        'layout' => null,
     ];
 
     /**

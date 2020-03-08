@@ -12,7 +12,7 @@ class RootType extends BaseType
     public function __construct(EntityInterface $entity)
     {
         $this->_defaultConfig = [
-            'label' => __('Root')
+            'label' => __('Root'),
         ];
         parent::__construct($entity);
     }

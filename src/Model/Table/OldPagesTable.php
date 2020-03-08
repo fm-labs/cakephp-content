@@ -45,46 +45,46 @@ class OldPagesTable extends BaseTable
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
         $this->addBehavior('Tree.Tree', [
-            'level' => 'level'
+            'level' => 'level',
         ]);
         $this->addBehavior('Content.ContentModule', [
             'alias' => 'ContentModules',
-            'scope' => 'Content.Pages'
+            'scope' => 'Content.Pages',
         ]);
         $this->addBehavior('Banana.Copyable', [
-            'excludeFields' => ['lft', 'rght', 'slug']
+            'excludeFields' => ['lft', 'rght', 'slug'],
         ]);
         $this->addBehavior('Banana.Sluggable');
         $this->addBehavior('Banana.Publishable');
 
         $this->addBehavior('Backend.JsTree', [
-            'dataFields' => ['slug', 'type']
+            'dataFields' => ['slug', 'type'],
         ]);
 
         $this->belongsTo('ParentPages', [
             'className' => 'Content.OldPages',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
         $this->hasMany('ChildPages', [
             'className' => 'Content.OldPages',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
 
         $this->belongsTo('PageLayouts', [
             'className' => 'Content.PageLayouts',
-            'foreignKey' => 'page_layout_id'
+            'foreignKey' => 'page_layout_id',
         ]);
 
         $this->hasMany('Posts', [
             'className' => 'Content.Posts',
             'foreignKey' => 'refid',
             'conditions' => ['refscope' => 'Content.Pages'],
-            'order' => ['Posts.pos' => 'DESC', 'Posts.id' => 'ASC']
+            'order' => ['Posts.pos' => 'DESC', 'Posts.id' => 'ASC'],
         ]);
 
         $this->addBehavior('Translate', [
             'fields' => ['title', 'slug'],
-            'translationTable' => 'bc_i18n'
+            'translationTable' => 'bc_i18n',
         ]);
 
         //$this->addBehavior('Banana.InputSchema');
@@ -99,7 +99,7 @@ class OldPagesTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['title']
+                    'field' => ['title'],
                 ])
                 ->add('title', 'Search.Like', [
                     'before' => true,
@@ -108,10 +108,10 @@ class OldPagesTable extends BaseTable
                     'comparison' => 'LIKE',
                     'wildcardAny' => '*',
                     'wildcardOne' => '?',
-                    'field' => ['title']
+                    'field' => ['title'],
                 ])
                 ->value('is_published', [
-                    'filterEmpty' => true
+                    'filterEmpty' => true,
                 ]);
         }
 
@@ -418,7 +418,7 @@ class OldPagesTable extends BaseTable
             ->find('published')
             ->where([
                 'parent_id IS NULL',
-                'type' => 'root'
+                'type' => 'root',
             ])
             ->first();
 
@@ -445,7 +445,7 @@ class OldPagesTable extends BaseTable
             ->where([
                 'type' => 'root',
                 'parent_id IS NULL',
-                'title' => $host
+                'title' => $host,
             ])
             ->first();
 
@@ -466,7 +466,7 @@ class OldPagesTable extends BaseTable
             ->find()
             ->find('published')
             ->where([
-                'slug' => $slug
+                'slug' => $slug,
             ])
             ->contain([])
             ->first();
@@ -483,7 +483,7 @@ class OldPagesTable extends BaseTable
         $page = $this
             ->find()
             ->where([
-                'slug' => $slug
+                'slug' => $slug,
             ])
             ->select('id')
             ->contain([])

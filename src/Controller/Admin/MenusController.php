@@ -11,7 +11,7 @@ class MenusController extends AppController
 
     public $actions = [
         'add' => 'Backend.Add',
-        'sort' => 'Backend.TreeSort'
+        'sort' => 'Backend.TreeSort',
     ];
 
     /**
@@ -57,7 +57,6 @@ class MenusController extends AppController
             }
 
             $this->set(compact('menuItem'));
-
         } elseif ($this->request->getQuery('add')) {
             $menuItem = $this->Menus->newEntity(['type' => 'root', 'parent_id' => null]);
 
@@ -75,7 +74,6 @@ class MenusController extends AppController
                     debug($menuItem->getErrors());
                 }
             }
-
         }
 
         $menuTypes = $this->Menus->getTypeList();

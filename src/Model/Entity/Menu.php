@@ -18,15 +18,13 @@ class Menu extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true
+        '*' => true,
     ];
 
     /**
      * @var array
      */
     protected $_virtual = [];
-
-
 
     /**
      * @return \Content\Model\Entity\Menu\MenuTypeInterface
