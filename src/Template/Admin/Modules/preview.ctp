@@ -1,7 +1,7 @@
 <?php
 //use Cake\Core\Configure;
 //Configure::write('debug', false);
-//debug($this->request->query);
+//debug($this->request->getQuery());
 //debug($moduleClass);
 //debug($moduleParams);
 

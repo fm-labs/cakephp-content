@@ -32,7 +32,7 @@ class CategoriesController extends AppController
     {
         $this->viewBuilder()->setClassName('Content.Category');
         $category = $this->Categories->get($id, [
-            'contain' => ['Posts'],
+            'contain' => ['Articles'],
         ]);
         $this->set('category', $category);
         $this->set('_serialize', ['category']);
@@ -47,7 +47,7 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
-            $category = $this->Categories->patchEntity($category, $this->request->data);
+            $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
 
@@ -73,7 +73,7 @@ class CategoriesController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $category = $this->Categories->patchEntity($category, $this->request->data);
+            $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'category')));
 

@@ -84,14 +84,4 @@ abstract class BaseType implements MenuTypeInterface
 
         return $item;
     }
-
-    /***** Model functions *****/
-
-    /**
-     * @return bool
-     */
-    public function validate()
-    {
-        return true;
-    }
 }

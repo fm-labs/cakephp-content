@@ -41,6 +41,6 @@ try {
 </div>
 <hr />
 <?php
-debug($this->request->data);
+debug($this->request->getData());
 debug($module);
 ?>

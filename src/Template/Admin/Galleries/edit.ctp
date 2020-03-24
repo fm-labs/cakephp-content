@@ -47,14 +47,14 @@
 
     <?php
     if ($gallery->source == "posts"):
-    $this->Tabs->add(__d('content', 'Posts'), []);
+    $this->Tabs->add(__d('content', 'Articles'), []);
     ?>
 
     <div class="related">
         <?= $this->cell('Backend.DataTable', [[
             'paginate' => false,
-            'model' => 'Content.Posts' ,
-            'data' => $galleryPosts->toArray(),
+            'model' => 'Content.Articles' ,
+            'data' => $galleryArticles->toArray(),
             'sortable' => true,
             'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
             'fieldsWhitelist' => true,
@@ -91,8 +91,8 @@
         ]]);
         ?>
         <div class="actions">
-            <?= $this->Ui->link(__d('content','Add Gallery Post'),
-                ['action' => 'addPost', $gallery->id],
+            <?= $this->Ui->link(__d('content','Add Gallery Article'),
+                ['action' => 'addArticle', $gallery->id],
                 ['class' => 'btn btn-default', 'data-icon' => 'plus']
             ) ?>
 
@@ -100,7 +100,7 @@
             <?= $this->Html->link(
                 __d('content', 'Reorder (asc)'),
                 [
-                    'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
+                    'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                     'field' => 'pos',  'order' => 'asc',
                     'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                 ],
@@ -109,7 +109,7 @@
             <?= $this->Html->link(
                 __d('content', 'Reorder (desc)'),
                 [
-                    'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
+                    'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                     'field' => 'pos',  'order' => 'desc',
                     'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                 ],
@@ -124,7 +124,7 @@
 
     <?php $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]); ?>
     <?php debug($gallery); ?>
-    <?php debug($galleryPosts->toArray()); ?>
+    <?php debug($galleryArticles->toArray()); ?>
 
     <?= $this->Tabs->render(); ?>
 

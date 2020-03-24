@@ -5,11 +5,11 @@
     -->
 
     <div class="posts">
-        <?php foreach($posts as $post): ?>
-            <?= $this->element('Content.Posts/request_teaser', ['post' => $post]); ?>
+        <?php foreach($articles as $article): ?>
+            <?= $this->element('Content.Articles/request_teaser', ['post' => $article]); ?>
         <?php endforeach; ?>
     </div>
 </div>
 
 <?php debug($category); ?>
-<?php debug($posts); ?>
+<?php debug($articles); ?>

@@ -1,5 +1,5 @@
 <?php
-$shopCategoriesTree = \Cake\ORM\TableRegistry::get('Shop.ShopCategories')->find('treelist');
+$shopCategoriesTree = \Cake\ORM\TableRegistry::getTableLocator()->get('Shop.ShopCategories')->find('treelist');
 
 echo $this->Form->control('type_params.title', [
     'label' => __d('content', 'Custom Title'),

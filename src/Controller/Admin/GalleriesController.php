@@ -7,7 +7,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
-use Content\Lib\ContentManager;
+use Content\ContentManager;
 
 /**
  * Galleries Controller
@@ -103,7 +103,7 @@ class GalleriesController extends AppController
     public function view($id = null)
     {
         $gallery = $this->Galleries->get($id, [
-            'contain' => ['Posts'],
+            'contain' => ['Articles'],
         ]);
         $this->set('gallery', $gallery);
         $this->set('_serialize', ['gallery']);
@@ -127,7 +127,7 @@ class GalleriesController extends AppController
     {
         $gallery = $this->Galleries->newEntity();
         if ($this->request->is('post')) {
-            $gallery = $this->Galleries->patchEntity($gallery, $this->request->data);
+            $gallery = $this->Galleries->patchEntity($gallery, $this->request->getData());
             if ($this->Galleries->save($gallery)) {
                 $this->Flash->success(__d('content', 'The gallery has been saved.'));
 
@@ -150,22 +150,22 @@ class GalleriesController extends AppController
      * @param null $id
      * @return \Cake\Http\Response|null
      */
-    public function addPost($id = null)
+    public function addArticle($id = null)
     {
         $gallery = $this->Galleries->get($id, [
             'contain' => [],
         ]);
 
-        $post = $this->Galleries->Posts->newEntity([
+        $article = $this->Galleries->Articles->newEntity([
             'refscope' => 'Content.Galleries',
             'refid' => $id,
         ]);
         if ($this->request->is('post')) {
-            $post = $this->Galleries->Posts->patchEntity($post, $this->request->data);
-            if ($this->Galleries->Posts->save($post)) {
+            $article = $this->Galleries->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Galleries->Articles->save($article)) {
                 $this->Flash->success(__d('content', 'The gallery post has been saved.'));
 
-                return $this->redirect(['action' => 'editPost', $post->id]);
+                return $this->redirect(['action' => 'editArticle', $article->id]);
             } else {
                 $this->Flash->error(__d('content', 'The gallery could not be saved. Please, try again.'));
             }
@@ -184,7 +184,7 @@ class GalleriesController extends AppController
             'contain' => ['Parent'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $gallery = $this->Galleries->patchEntity($gallery, $this->request->data);
+            $gallery = $this->Galleries->patchEntity($gallery, $this->request->getData());
             if ($this->Galleries->save($gallery)) {
                 $this->Flash->success(__d('content', 'The gallery has been saved.'));
 
@@ -198,14 +198,14 @@ class GalleriesController extends AppController
         $sources = $this->Galleries->getSources();
         $sourceFolders = $this->Galleries->getSourceFolders();
         $viewTemplates = ContentManager::getAvailableGalleryTemplates();
-        $galleryPosts = $this->Galleries->Posts->find('sorted')->where(['refid' => $id]);
+        $galleryArticles = $this->Galleries->Articles->find('sorted')->where(['refid' => $id]);
 
         $modules = TableRegistry::getTableLocator()->get('Content.Modules')->find()->where([
             'path' => 'flexslider',
             'params' => json_encode(['gallery_id' => (int)$id]),
         ])->all()->toArray();
 
-        $this->set(compact('gallery', 'parents', 'sources', 'sourceFolders', 'viewTemplates', 'galleryPosts', 'modules'));
+        $this->set(compact('gallery', 'parents', 'sources', 'sourceFolders', 'viewTemplates', 'galleryArticles', 'modules'));
         $this->set('_serialize', ['gallery']);
     }
 
@@ -222,35 +222,35 @@ class GalleriesController extends AppController
     }
 
     /**
-     * @param null $postId
+     * @param null $articleId
      * @return \Cake\Http\Response|null
      */
-    public function editPost($postId = null)
+    public function editArticle($articleId = null)
     {
-        $post = $this->Galleries->Posts->get($postId, [
+        $article = $this->Galleries->Articles->get($articleId, [
             'contain' => ['ContentModules' => ['Modules']],
             'media' => true,
         ]);
 
-        $gallery = $this->Galleries->get($post->refid);
+        $gallery = $this->Galleries->get($article->refid);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $post = $this->Galleries->Posts->patchEntity($post, $this->request->data);
-            if ($this->Galleries->Posts->save($post)) {
+            $article = $this->Galleries->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Galleries->Articles->save($article)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content')));
 
-                return $this->redirect(['action' => 'edit_post', $post->id]);
+                return $this->redirect(['action' => 'edit_post', $article->id]);
             } else {
                 $this->Flash->error(__d('content', 'The {0} could not be saved. Please, try again.', __d('content', 'content')));
             }
         }
 
-        $templates = ContentManager::getAvailablePostTemplates();
+        $templates = ContentManager::getAvailableArticleTemplates();
 
         // HtmlEditor config
         $editor = Configure::read('HtmlEditor.content');
-        $editor['body_class'] = $post->cssclass;
-        $editor['body_id'] = $post->cssid;
+        $editor['body_class'] = $article->cssclass;
+        $editor['body_id'] = $article->cssid;
 
         $this->set(compact('post', 'templates', 'editor', 'gallery'));
         $this->set('_serialize', ['post', 'gallery']);

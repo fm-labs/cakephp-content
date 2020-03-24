@@ -1,11 +1,14 @@
-<?php $this->Breadcrumbs->add(__d('content','Posts')); ?>
-<div class="index container">
-    <?php foreach ($posts as $post) : ?>
-        <div class="post-listing">
+<?php $this->Breadcrumbs->add(__d('content','Articles')); ?>
+<div class="index">
+    <?php foreach ($articles as $article) : ?>
+        <div class="article-listing">
             <article>
-                <h1><?= $this->Html->link($post->title, $post->getUrl()); ?></h1>
+                <h1><?= $this->Html->link($article->title, $article->getUrl()); ?></h1>
+                <div class="meta well">
+                    <?= h($article->created); ?>
+                </div>
                 <div class="teaser">
-                    <?= $post->excerpt_html; ?>
+                    <?= $article->excerpt_html; ?>
                 </div>
             </article>
             <hr />
@@ -14,4 +17,4 @@
 
 
     <?= $this->element('Pagination/default'); ?>
-<div>
+</div>

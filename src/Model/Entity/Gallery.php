@@ -75,9 +75,9 @@ class Gallery extends Entity
     /**
      * @return mixed
      */
-    protected function _getPublishedPosts()
+    protected function _getPublishedArticles()
     {
-        return TableRegistry::getTableLocator()->get('Content.Posts')
+        return TableRegistry::getTableLocator()->get('Content.Articles')
             ->find('all', ['media' => true])
             ->find('sorted')
             ->find('published')

@@ -5,7 +5,7 @@ namespace Content\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
-use Content\Lib\ContentManager;
+use Content\ContentManager;
 use Media\Lib\Media\MediaManager;
 
 /**

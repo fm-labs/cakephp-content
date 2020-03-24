@@ -12,6 +12,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
+use Content\MenuManager;
 
 /**
  * Menus Model
@@ -28,7 +29,7 @@ class MenusTable extends BaseTable
      */
     public function initialize(array $config)
     {
-        $this->setTable(self::$tablePrefix . 'pages');
+        $this->setTable('menus');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');
@@ -65,52 +66,7 @@ class MenusTable extends BaseTable
      */
     public function getTypes()
     {
-        $types = [
-            'root' => [
-                'label' => __('Root Page'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\RootType',
-                'content' => false,
-                'menu' => true,
-            ],
-            'content' => [
-                'label' => __('Page'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\PageType',
-                'content' => ['page'],
-                'menu' => true,
-            ],
-            'shop_category' => [
-                'label' => __('Shop Category'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\ShopCategoryType',
-                'content' => false,
-                'menu' => true,
-            ],
-            'static' => [
-                'label' => __('Static Page'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\RootType',
-                'content' => false,
-                'menu' => true,
-            ],
-            'controller' => [
-                'label' => __('Custom Controller'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\ControllerType',
-                'content' => false,
-                'menu' => true,
-            ],
-            'redirect' => [
-                'label' => __('Redirect'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\LinkType',
-                'content' => false,
-                'menu' => true,
-            ],
-            'link' => [
-                'label' => __('Custom Link'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\LinkType',
-                'content' => false,
-                'menu' => true,
-            ],
-        ];
-
-        return $types;
+        return MenuManager::types();
     }
 
     /**
@@ -123,7 +79,10 @@ class MenusTable extends BaseTable
             return $v['label'];
         });
 
-        return $list->toArray();
+        $arr = $list->toArray();
+        asort($arr);
+
+        return $arr;
     }
 
     /**
@@ -330,6 +289,11 @@ class MenusTable extends BaseTable
                 /* @var \Content\Page\TypeInterface $handler */
                 //$handler = $handlerBuilder($child);
                 //$item = $handler->toMenuItem($maxDepth);
+
+                if (!$child->isVisibleInMenu() && !$includeHidden) {
+                    continue;
+                }
+
                 $item = $child->toMenuItem($maxDepth);
 
                 /*

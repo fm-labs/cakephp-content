@@ -1,13 +1,13 @@
-<article class="page view <?= $post->cssclass; ?>" id="<?= $post->cssid ?>">
+<article class="page view <?= $article->cssclass; ?>" id="<?= $article->cssid ?>">
     <h1 class="title">
-        <?= h($post->title); ?>
+        <?= h($article->title); ?>
     </h1>
     <div class="image">
-        <?php if ($post->image): ?>
-            <?= $this->Html->image($post->image->url); ?>
+        <?php if ($article->image): ?>
+            <?= $this->Html->image($article->image->url); ?>
         <?php endif; ?>
     </div>
     <div class="body">
-        <?= $this->Content->userHtml($post->body_html); ?>
+        <?= $this->Content->userHtml($article->body_html); ?>
     </div>
 </article>

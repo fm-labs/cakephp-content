@@ -94,6 +94,8 @@ class ContentView extends View
 
     protected function _loadPageModules($section = null, $refscope = null, $refid = null)
     {
+        return [];
+
         // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
         return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
             ->where(['section' => $section, 'refscope' => $refscope, 'refid' => $refid])
@@ -103,6 +105,8 @@ class ContentView extends View
 
     protected function _loadLayoutModules($section = null, $refscope = null, $refid = null)
     {
+        return [];
+
         // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
         return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
             ->where(['section' => $section, 'refid IS NULL', 'or' => ['refscope' => $refscope, 'refscope IS NULL']])

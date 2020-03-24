@@ -1,5 +1,5 @@
 <?php
-namespace Banana\Controller\Admin;
+namespace Content\Controller\Admin;
 
 /**
  * Class InfoController
@@ -12,6 +12,8 @@ class InfoController extends AppController
      * @var bool|null|string
      */
     public $modelClass = false;
+
+    public $actions = [];
 
     /**
      *

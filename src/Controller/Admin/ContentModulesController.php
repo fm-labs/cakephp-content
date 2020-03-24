@@ -52,7 +52,7 @@ class ContentModulesController extends AppController
     {
         $contentModule = $this->ContentModules->newEntity();
         if ($this->request->is('post')) {
-            $contentModule = $this->ContentModules->patchEntity($contentModule, $this->request->data);
+            $contentModule = $this->ContentModules->patchEntity($contentModule, $this->request->getData());
             if ($this->ContentModules->save($contentModule)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content module')));
 
@@ -79,7 +79,7 @@ class ContentModulesController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $contentModule = $this->ContentModules->patchEntity($contentModule, $this->request->data);
+            $contentModule = $this->ContentModules->patchEntity($contentModule, $this->request->getData());
             if ($this->ContentModules->save($contentModule)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'content module')));
 
@@ -156,7 +156,7 @@ class ContentModulesController extends AppController
             ['validate' => false]
         );
         if ($this->request->is(['put', 'post'])) {
-            $this->ContentModules->patchEntity($contentModule, $this->request->data);
+            $this->ContentModules->patchEntity($contentModule, $this->request->getData());
             if ($this->ContentModules->save($contentModule)) {
                 $this->Flash->success(__d('content', 'The content module has been saved for {0} {1}.', $model, $modelId));
             } else {

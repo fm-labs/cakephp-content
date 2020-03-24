@@ -1,15 +1,15 @@
-<div class="view container">
-    <article class="post <?= $page->cssclass; ?>" id="<?= $page->cssid ?>">
+<div class="view">
+    <article class="post <?= $article->cssclass; ?>" id="<?= $article->cssid ?>">
         <h1 class="title">
-            <?= h($page->title); ?>
+            <?= h($article->title); ?>
         </h1>
         <div class="image">
-            <?php if ($page->image): ?>
-                <?= $this->Html->image($page->image->url); ?>
+            <?php if ($article->image): ?>
+                <?= $this->Html->image($article->image->url); ?>
             <?php endif; ?>
         </div>
         <div class="body">
-            <?= $this->Content->userHtml($page->body_html); ?>
+            <?= $this->Content->userHtml($article->body_html); ?>
         </div>
     </article>
 </div>

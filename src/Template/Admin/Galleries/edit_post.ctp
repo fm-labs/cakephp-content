@@ -3,18 +3,18 @@
 // Toolbar
 $this->Toolbar->addLink([
     'title' => __d('content','View'),
-    'url' => ['action' => 'view', $post->id],
+    'url' => ['action' => 'view', $article->id],
     'attr' => ['data-icon' => 'eye']
 ]);
 $this->Toolbar->addLink([
-    'title' => __d('content','List {0}', __d('content','Posts')),
+    'title' => __d('content','List {0}', __d('content','Articles')),
     'url' => ['action' => 'index'],
     'attr' => ['data-icon' => 'list']
 ]);
 $this->Toolbar->addPostLink([
     'title' => __d('content','Delete'),
-    'url' => ['action' => 'delete', $post->id],
-    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $post->id)],
+    'url' => ['action' => 'delete', $article->id],
+    'attr' => ['data-icon' => 'trash', 'confirm' => __d('content','Are you sure you want to delete # {0}?', $article->id)],
 ]);
 ?>
 <?php
@@ -22,7 +22,7 @@ $this->assign('title', __d('content', 'Galleries'));
 $this->assign('heading', $gallery->title);
 $this->assign('subheading', 'Gallery post');
 ?>
-<?= $this->Form->create($post); ?>
+<?= $this->Form->create($article); ?>
 <div class="clearfix clear-fix" style="clear: both;"></div>
 <div class="row">
     <div class="col-md-9">
@@ -32,7 +32,7 @@ $this->assign('subheading', 'Gallery post');
         echo $this->Form->hidden('slug', ['value' => null]);
         //echo $this->Form->control('subheading');
         ?>
-        <?= $this->Html->link(__d('content', 'Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $post->refid]); ?>
+        <?= $this->Html->link(__d('content', 'Edit parent gallery'), ['controller' => 'Galleries', 'action' => 'manage', $article->refid]); ?>
 
         <?= $this->Form->fieldsetStart(['legend' => 'Content', 'collapsed' => false]);  ?>
         <?php

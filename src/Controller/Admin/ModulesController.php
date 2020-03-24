@@ -4,7 +4,7 @@ namespace Content\Controller\Admin;
 use Banana\Lib\ClassRegistry;
 use Cake\Core\Configure;
 use Cake\Routing\Router;
-use Content\Lib\ContentManager;
+use Content\ContentManager;
 
 /**
  * Modules Controller
@@ -66,7 +66,7 @@ class ModulesController extends AppController
         //}
 
         if ($this->request->is(['put', 'post'])) {
-            $params = $this->request->data();
+            $params = $this->request->getData();
 
             $save = false;
             if (isset($params['_save']) && $params['_save']) {
@@ -121,7 +121,7 @@ class ModulesController extends AppController
     {
         $module = $this->Modules->newEntity();
         if ($this->request->is('post')) {
-            $module = $this->Modules->patchEntity($module, $this->request->data);
+            $module = $this->Modules->patchEntity($module, $this->request->getData());
             if ($this->Modules->save($module)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'module')));
 
@@ -148,7 +148,7 @@ class ModulesController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $module = $this->Modules->patchEntity($module, $this->request->data);
+            $module = $this->Modules->patchEntity($module, $this->request->getData());
             if ($this->Modules->save($module)) {
                 $this->Flash->success(__d('content', 'The {0} has been saved.', __d('content', 'module')));
 

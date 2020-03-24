@@ -55,16 +55,16 @@
         ?>
 
         <?php
-        $this->Tabs->add(__d('content', 'Posts'), [
-            //'url' => ['action' => 'relatedPosts', $content->id]
+        $this->Tabs->add(__d('content', 'Articles'), [
+            //'url' => ['action' => 'relatedArticles', $content->id]
         ]);
         ?>
 
         <div class="related">
             <?= $this->cell('Backend.DataTable', [[
                 'paginate' => false,
-                'model' => 'Content.Posts',
-                'data' => isset($galleryPosts) ? $galleryPosts : [],
+                'model' => 'Content.Articles',
+                'data' => isset($galleryArticles) ? $galleryArticles : [],
                 'sortable' => true,
                 'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
                 'fields' => [
@@ -106,7 +106,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (asc)'),
                     [
-                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                         'field' => 'pos',  'order' => 'asc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
@@ -115,7 +115,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
-                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Posts',
+                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                         'field' => 'pos',  'order' => 'desc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],

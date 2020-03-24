@@ -8,7 +8,7 @@ use Cake\Event\Event;
  *
  * @package Content\Controller
  */
-class ModulesController extends ContentController
+class ModulesController extends AppController
 {
     /**
      * @param Event $event
@@ -26,7 +26,7 @@ class ModulesController extends ContentController
     public function view($id = null)
     {
         if ($this->request->getQuery('iframe') === true) {
-            $this->viewBuilder()->layout("Content.iframe/module");
+            $this->viewBuilder()->setLayout("Content.iframe/module");
         }
 
         $module = $this->Modules->get($id, [

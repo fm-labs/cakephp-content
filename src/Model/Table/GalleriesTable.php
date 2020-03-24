@@ -8,7 +8,7 @@ use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
-use Content\Lib\ContentManager;
+use Content\ContentManager;
 use Content\Model\Entity\Gallery;
 use Media\Lib\Media\MediaManager;
 
@@ -38,8 +38,8 @@ class GalleriesTable extends BaseTable
             'foreignKey' => 'parent_id',
         ]);
 
-        $this->hasMany('Posts', [
-            'className' => 'Content.Posts',
+        $this->hasMany('Articles', [
+            'className' => 'Content.Articles',
             'foreignKey' => 'refid',
             'conditions' => ['refscope' => 'Content.Galleries'],
         ]);
@@ -127,7 +127,7 @@ class GalleriesTable extends BaseTable
     {
         return [
             'folder' => __d('content', 'Folder'),
-            'posts' => __d('content', 'Posts'),
+            'posts' => __d('content', 'Articles'),
         ];
     }
 

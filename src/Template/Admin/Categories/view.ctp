@@ -23,13 +23,13 @@
 ) ?>
 <?php $this->Toolbar->startGroup(__d('content', 'More')); ?>
 <?php $this->Toolbar->addLink(
-    __d('content', 'List {0}', __d('content', 'Posts')),
-    ['controller' => 'Posts', 'action' => 'index'],
+    __d('content', 'List {0}', __d('content', 'Articles')),
+    ['controller' => 'Articles', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __d('content', 'New {0}', __d('content', 'Post')),
-    ['controller' => 'Posts', 'action' => 'add'],
+    __d('content', 'New {0}', __d('content', 'Article')),
+    ['controller' => 'Articles', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?php $this->Toolbar->endGroup(); ?>
@@ -73,7 +73,7 @@
 -->
 <div class="related" style="overflow-x: scroll;">
     <div class="ui basic segment">
-    <h4 class="ui header"><?= __d('content', 'Related {0}', __d('content', 'Posts')) ?></h4>
+    <h4 class="ui header"><?= __d('content', 'Related {0}', __d('content', 'Articles')) ?></h4>
     <?php if (!empty($category->posts)): ?>
     <table class="ui table">
         <tr>
@@ -111,47 +111,47 @@
             <th><?= __d('content', 'Created') ?></th>
             <th class="actions"><?= __d('content', 'Actions') ?></th>
         </tr>
-        <?php foreach ($category->posts as $posts): ?>
+        <?php foreach ($category->posts as $articles): ?>
         <tr>
-            <td><?= h($posts->id) ?></td>
-            <td><?= h($posts->site_id) ?></td>
-            <td><?= h($posts->refscope) ?></td>
-            <td><?= h($posts->refid) ?></td>
-            <td><?= h($posts->parent_id) ?></td>
-            <td><?= h($posts->type) ?></td>
-            <td><?= h($posts->type_params) ?></td>
-            <td><?= h($posts->title) ?></td>
-            <td><?= h($posts->slug) ?></td>
-            <td><?= h($posts->subheading) ?></td>
-            <td><?= h($posts->use_teaser) ?></td>
-            <td><?= h(\Cake\Utility\Text::truncate($posts->teaser_html)) ?></td>
-            <td><?= h($posts->teaser_link_href) ?></td>
-            <td><?= h($posts->teaser_link_caption) ?></td>
-            <td><?= h($posts->teaser_image_file) ?></td>
-            <td><?= h($posts->teaser_template) ?></td>
-            <td><?= h(\Cake\Utility\Text::truncate($posts->body_html)) ?></td>
-            <td><?= h($posts->image_link_href) ?></td>
-            <td><?= h($posts->image_link_target) ?></td>
-            <td><?= h($posts->image_desc) ?></td>
-            <td><?= h($posts->template) ?></td>
-            <td><?= h($posts->cssclass) ?></td>
-            <td><?= h($posts->cssid) ?></td>
-            <td><?= h($posts->is_published) ?></td>
-            <td><?= h($posts->publish_start_datetime) ?></td>
-            <td><?= h($posts->publish_end_datetime) ?></td>
-            <td><?= h($posts->pos) ?></td>
-            <td><?= h($posts->section) ?></td>
-            <td><?= h($posts->is_home) ?></td>
-            <td><?= h($posts->is_archived) ?></td>
-            <td><?= h($posts->modified) ?></td>
-            <td><?= h($posts->created) ?></td>
+            <td><?= h($articles->id) ?></td>
+            <td><?= h($articles->site_id) ?></td>
+            <td><?= h($articles->refscope) ?></td>
+            <td><?= h($articles->refid) ?></td>
+            <td><?= h($articles->parent_id) ?></td>
+            <td><?= h($articles->type) ?></td>
+            <td><?= h($articles->type_params) ?></td>
+            <td><?= h($articles->title) ?></td>
+            <td><?= h($articles->slug) ?></td>
+            <td><?= h($articles->subheading) ?></td>
+            <td><?= h($articles->use_teaser) ?></td>
+            <td><?= h(\Cake\Utility\Text::truncate($articles->teaser_html)) ?></td>
+            <td><?= h($articles->teaser_link_href) ?></td>
+            <td><?= h($articles->teaser_link_caption) ?></td>
+            <td><?= h($articles->teaser_image_file) ?></td>
+            <td><?= h($articles->teaser_template) ?></td>
+            <td><?= h(\Cake\Utility\Text::truncate($articles->body_html)) ?></td>
+            <td><?= h($articles->image_link_href) ?></td>
+            <td><?= h($articles->image_link_target) ?></td>
+            <td><?= h($articles->image_desc) ?></td>
+            <td><?= h($articles->template) ?></td>
+            <td><?= h($articles->cssclass) ?></td>
+            <td><?= h($articles->cssid) ?></td>
+            <td><?= h($articles->is_published) ?></td>
+            <td><?= h($articles->publish_start_datetime) ?></td>
+            <td><?= h($articles->publish_end_datetime) ?></td>
+            <td><?= h($articles->pos) ?></td>
+            <td><?= h($articles->section) ?></td>
+            <td><?= h($articles->is_home) ?></td>
+            <td><?= h($articles->is_archived) ?></td>
+            <td><?= h($articles->modified) ?></td>
+            <td><?= h($articles->created) ?></td>
 
             <td class="actions">
-                <?= $this->Html->link(__d('content', 'View'), ['controller' => 'Posts', 'action' => 'view', $posts->id]) ?>
+                <?= $this->Html->link(__d('content', 'View'), ['controller' => 'Articles', 'action' => 'view', $articles->id]) ?>
 
-                <?= $this->Html->link(__d('content', 'Edit'), ['controller' => 'Posts', 'action' => 'edit', $posts->id]) ?>
+                <?= $this->Html->link(__d('content', 'Edit'), ['controller' => 'Articles', 'action' => 'edit', $articles->id]) ?>
 
-                <?= $this->Form->postLink(__d('content', 'Delete'), ['controller' => 'Posts', 'action' => 'delete', $posts->id], ['confirm' => __d('content', 'Are you sure you want to delete # {0}?', $posts->id)]) ?>
+                <?= $this->Form->postLink(__d('content', 'Delete'), ['controller' => 'Articles', 'action' => 'delete', $articles->id], ['confirm' => __d('content', 'Are you sure you want to delete # {0}?', $articles->id)]) ?>
 
             </td>
         </tr>

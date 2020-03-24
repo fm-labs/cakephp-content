@@ -2,9 +2,9 @@
 
 namespace Content\Controller\Admin;
 
-use Banana\Menu\Menu;
-use Cake\Collection\Collection;
-
+/**
+ * @property \Content\Model\Table\MenusTable $Menus
+ */
 class MenusController extends AppController
 {
     public $modelClass = "Content.Menus";
@@ -31,7 +31,7 @@ class MenusController extends AppController
         $menuId = $this->request->getQuery('menu_id');
         if ($menuId) {
             $menu = $this->Menus->getMenu($menuId);
-            //$menu = \Content\Lib\ContentManager::getMenuById(8);
+            //$menu = \Content\ContentManager::getMenuById(8);
             //debug($menu);
             $this->set(compact('menu'));
         }
@@ -41,9 +41,9 @@ class MenusController extends AppController
             $menuItem = $this->Menus->get($menuItemId);
 
             if ($this->request->is(['put', 'post'])) {
-                //debug($this->request->data);
+                //debug($this->request->getData());
 
-                $data = $this->request->data;
+                $data = $this->request->getData();
                 $menuItem = $this->Menus->patchEntity($menuItem, $data);
 
                 if ($this->Menus->save($menuItem)) {
@@ -58,12 +58,12 @@ class MenusController extends AppController
 
             $this->set(compact('menuItem'));
         } elseif ($this->request->getQuery('add')) {
-            $menuItem = $this->Menus->newEntity(['type' => 'root', 'parent_id' => null]);
+            $menuItem = $this->Menus->newEntity();
 
             if ($this->request->is(['put', 'post'])) {
-                //debug($this->request->data);
+                //debug($this->request->getData());
 
-                $data = $this->request->data;
+                $data = $this->request->getData();
                 $menuItem = $this->Menus->patchEntity($menuItem, $data);
 
                 if ($this->Menus->save($menuItem)) {
@@ -79,6 +79,14 @@ class MenusController extends AppController
         $menuTypes = $this->Menus->getTypeList();
         $this->set(compact('menuItem', 'menuTypes'));
 
-        //debug($this->Menus->getTypeList());
+
+
+        // ----------
+
+        $menuRoots = $this->Menus->find()
+            ->where(['parent_id IS NULL'])
+            ->all();
+
+        $this->set('menuRoots', $menuRoots);
     }
 }

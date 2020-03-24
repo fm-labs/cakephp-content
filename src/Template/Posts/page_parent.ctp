@@ -1,13 +1,13 @@
-<?php //$this->Breadcrumbs->add($post->title, $post->view_url); ?>
-<div class="page parent view <?= $post->cssclass ?>" id="<?= $post->cssid; ?>">
+<?php //$this->Breadcrumbs->add($article->title, $article->view_url); ?>
+<div class="page parent view <?= $article->cssclass ?>" id="<?= $article->cssid; ?>">
 
-    <?php if ($post->title): ?>
-    <h1 class="title"><?= h($post->title); ?></h1>
+    <?php if ($article->title): ?>
+    <h1 class="title"><?= h($article->title); ?></h1>
     <?php endif; ?>
 
-    <div class="posts">
-        <?php foreach($post->getChildren()->find('published')->all()->toArray() as $_post): ?>
-        <?= $this->element('Content.Posts/view', ['post' => $_post]); ?>
+    <div class="articles">
+        <?php foreach($article->getChildren()->find('published')->all()->toArray() as $_article): ?>
+        <?= $this->element('Content.Articles/view', ['article' => $_article]); ?>
         <?php endforeach; ?>
     </div>
 </div>

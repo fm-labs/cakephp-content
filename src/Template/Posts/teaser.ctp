@@ -1,16 +1,16 @@
-<article class="post teaser">
+<article class="article teaser">
     <div class="image">
-        <?php if ($post->teaser_image): ?>
-        <?= $this->Html->image($post->teaser_image->url); ?>
+        <?php if ($article->teaser_image): ?>
+        <?= $this->Html->image($article->teaser_image->url); ?>
         <?php endif; ?>
     </div>
     <h1 class="title">
-        <?= h($post->title); ?>
+        <?= h($article->title); ?>
     </h1>
     <div class="text">
-        <?= $this->Content->userHtml($post->teaser_html); ?>
+        <?= $this->Content->userHtml($article->teaser_html); ?>
     </div>
     <div class="action">
-        <?= $this->Html->link($post->teaser_link_title, $post->teaser_link_url); ?>
+        <?= $this->Html->link($article->teaser_link_title, $article->teaser_link_url); ?>
     </div>
 </article>

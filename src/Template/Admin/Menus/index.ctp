@@ -20,10 +20,17 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
 </style>
 <div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
+            <ul>
+            <?php foreach ($menuRoots as $root): ?>
+                <li><?= $this->Html->link($root->title, ['action' => 'index', 'menu_id' => $root->id]); ?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="col-md-3">
             <?= $this->element('Content.Admin/Menus/tree_form', ['items' => $menusThreaded]); ?>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
 
             <?php
             if (isset($menu)) :
@@ -46,7 +53,7 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
                     <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Menu Item'), 'collapsed' => false]); ?>
                     <?= $this->Form->control('parent_id', ['empty' => true, 'options' => $menuTreeList]); ?>
                     <?= $this->Form->control('title'); ?>
-                    <?= $this->Form->control('type', ['options' => $this->get('menuTypes')]); ?>
+                    <?= $this->Form->control('type', ['empty' => true, 'options' => $this->get('menuTypes')]); ?>
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->fieldsetStart(['legend' => \Cake\Utility\Inflector::humanize($menuItem->type), 'collapsed' => false]); ?>
@@ -59,21 +66,6 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
                         //echo $this->Form->fieldsetEnd();
                     }
                     ?>
-                    <?= $this->Form->fieldsetEnd(); ?>
-
-                    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Advanced'), 'collapsed' => false]); ?>
-                    <?= $this->Form->control('cssid'); ?>
-                    <?= $this->Form->control('cssclass'); ?>
-                    <?= $this->Form->control('hide_in_nav'); ?>
-                    <?= $this->Form->control('hide_in_sitemap'); ?>
-                    <?= $this->Form->fieldsetEnd(); ?>
-
-                    <?= $this->Form->fieldsetStart(['legend' => __d('content', 'Legacy'), 'collapsed' => true]); ?>
-                    <?= $this->Form->control('redirect_location'); ?>
-                    <?= $this->Form->control('redirect_controller'); ?>
-                    <?= $this->Form->control('redirect_page_id', ['type' => 'text']); ?>
-                    <?= $this->Form->control('redirect_status'); ?>
-                    <?= $this->Form->control('slug'); ?>
                     <?= $this->Form->fieldsetEnd(); ?>
 
                     <?= $this->Form->submit(); ?>

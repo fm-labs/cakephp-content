@@ -5,7 +5,7 @@ use Banana\Menu\MenuItem;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Post;
+use Content\Model\Entity\Article;
 use Content\Page\TypeInterface;
 
 /**
@@ -19,20 +19,20 @@ class PageType extends BaseType
 
     protected $_defaultConfig = [
         'title' => null,
-        'post_id' => null,
+        'article_id' => null,
         'hide_in_nav' => false,
         'hide_in_sitemap' => false,
     ];
 
     /**
-     * @var \Content\Model\Entity\Post
+     * @var \Content\Model\Entity\Article
      */
-    protected $_post;
+    protected $_article;
 
     public function __construct(EntityInterface $entity)
     {
         parent::__construct($entity);
-        $this->_post = $this->_getPost($this->getConfig('post_id'));
+        $this->_article = $this->_getArticle($this->getConfig('article_id'));
     }
 
     /**
@@ -54,13 +54,13 @@ class PageType extends BaseType
     public function getUrl()
     {
         /*
-        if ($this->_post->get('slug')) {
+        if ($this->_article->get('slug')) {
             return [
                 'prefix' => false,
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                'slug' => $this->_post->get('slug')
+                'slug' => $this->_article->get('slug')
             ];
         }
 
@@ -69,10 +69,10 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'view',
-            'id' => $this->getConfig('post_id')
+            'id' => $this->getConfig('article_id')
         ];
         */
-        return $this->_post->getUrl();
+        return $this->_article->getUrl();
     }
 
     /**
@@ -86,10 +86,10 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Main',
             'action' => 'index',
-            'query' => ['p' => $this->getConfig('post_id')]
+            'query' => ['p' => $this->getConfig('article_id')]
         ];
         */
-        return $this->_post->getPermaUrl();
+        return $this->_article->getPermaUrl();
     }
 
     /**
@@ -97,7 +97,7 @@ class PageType extends BaseType
      */
     public function isVisibleInMenu()
     {
-        return true;
+        return $this->_article->is_published;
     }
 
     /**
@@ -105,7 +105,7 @@ class PageType extends BaseType
      */
     public function isVisibleInSitemap()
     {
-        return true;
+        return $this->_article->is_published;
     }
 
     /**
@@ -122,11 +122,11 @@ class PageType extends BaseType
     }
 
     /**
-     * @param int $id Post ID
-     * @return Post
+     * @param int $id Article ID
+     * @return Article
      */
-    protected function _getPost($id)
+    protected function _getArticle($id)
     {
-        return TableRegistry::getTableLocator()->get('Content.Posts')->get($id);
+        return TableRegistry::getTableLocator()->get('Content.Articles')->get($id);
     }
 }

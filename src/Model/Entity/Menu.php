@@ -64,6 +64,16 @@ class Menu extends Entity
         return $this->handler()->getPermaUrl();
     }
 
+    public function isVisibleInMenu()
+    {
+        return $this->handler()->isVisibleInMenu();
+    }
+
+    public function isVisibleInSitemap()
+    {
+        return $this->handler()->isVisibleInSitemap();
+    }
+
     public function toMenuItem($maxDepth = 0)
     {
         return $this->handler()->toMenuItem($maxDepth);

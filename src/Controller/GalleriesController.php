@@ -8,7 +8,7 @@ use Cake\Event\Event;
  *
  * @package Content\Controller
  */
-class GalleriesController extends ContentController
+class GalleriesController extends AppController
 {
     /**
      * @param Event $event
@@ -31,7 +31,7 @@ class GalleriesController extends ContentController
     public function view($id = null)
     {
         $gallery = $this->Galleries->get($id, [
-            'contain' => ['Posts'],
+            'contain' => ['Articles'],
             'media' => true,
         ]);
         $this->set('gallery', $gallery);

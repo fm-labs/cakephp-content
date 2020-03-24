@@ -1,15 +1,15 @@
 <?php
 // Breadcrumbs
-$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index', 'type' => $post->type]);
+$this->Breadcrumbs->add(__d('content', 'Pages'), ['action' => 'index', 'type' => $article->type]);
 $this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Page')));
 // Heading
-$this->assign('title', $post->title);
+$this->assign('title', $article->title);
 ?>
-<?php if ($post->parent_id): ?>
-<?= $this->Html->link(__d('content', 'Show parent post'), ['action' => 'edit', $post->parent_id]); ?>
+<?php if ($article->parent_id): ?>
+<?= $this->Html->link(__d('content', 'Show parent post'), ['action' => 'edit', $article->parent_id]); ?>
 <?php endif; ?>
 <!-- Teaser
-<?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
+<?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($article->use_teaser || $article->teaser_html)]);  ?>
 <?php
 echo $this->Form->control('use_teaser');
 echo $this->Form->control('teaser_html', [

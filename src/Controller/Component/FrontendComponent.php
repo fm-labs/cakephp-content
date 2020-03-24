@@ -42,7 +42,7 @@ class FrontendComponent extends Component
      */
     public function initialize(array $config)
     {
-        $layout = ($this->_config['layout']) ?: 'frontend';
+        $layout = ($this->_config['layout']) ?: Configure::read('Site.layout');
         $theme = ($this->_config['theme']) ?: Configure::read('Site.theme');
         $viewClass = $this->_config['viewClass'];
 
@@ -97,5 +97,22 @@ class FrontendComponent extends Component
     public function getTheme()
     {
         return $this->_config['theme'];
+    }
+
+    /**
+     * Checks if the request has a valid preview key
+     *
+     * @return bool
+     */
+    public function isPreviewMode()
+    {
+        $previewKeyInSession = $this->getController()->getRequest()->getSession()->read('Content.previewKey');
+        $previewKeyInRequest = $this->getController()->getRequest()->getQuery('preview');
+
+        if (!$previewKeyInRequest || !$previewKeyInSession) {
+            return false;
+        }
+
+        return ($previewKeyInRequest === $previewKeyInSession);
     }
 }

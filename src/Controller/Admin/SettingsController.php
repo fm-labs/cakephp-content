@@ -1,0 +1,21 @@
+<?php
+
+namespace Content\Controller\Admin;
+use Settings\Form\SettingsForm;
+
+/**
+ * Class SettingsController
+ *
+ * @package Banana\Controller\Admin
+ *
+ */
+class SettingsController extends AppController
+{
+    /**
+     * @return \Cake\Http\Response|null
+     */
+    public function index()
+    {
+        $form = new SettingsForm();
+    }
+}

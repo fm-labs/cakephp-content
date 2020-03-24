@@ -16,23 +16,17 @@ use Content\Model\Table\PagesTable;
  * @property FrontendComponent $Frontend
  * @property PagesTable $Pages
  */
-class PagesController extends ContentController
+class PagesController extends AppController
 {
     use PagesDisplayActionTrait;
 
     /**
      * @var string
      */
-    public $modelClass = 'Content.Posts';
+    public $modelClass = 'Content.Articles';
 
     /**
-     * @var string
-     * @deprecated
-     */
-    public $viewClass = 'Content.Page';
-
-    /**
-     * Indicates root page
+     * Indicates root article
      * @var bool
      */
     protected $_root = false;
@@ -43,13 +37,12 @@ class PagesController extends ContentController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Paginator');
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Content.Frontend');
+        //$this->loadComponent('Paginator');
+        //$this->loadComponent('RequestHandler');
 
         $this->Frontend->setRefScope('Content.Pages');
 
-        //$this->viewBuilder()->setClassName('Content.Page');
+        $this->viewBuilder()->setClassName('Content.Article');
     }
 
     /**
@@ -71,7 +64,7 @@ class PagesController extends ContentController
     {
         $rootPage = null;
         if (!$rootPage) {
-            throw new NotFoundException(__d('content', "Root page not found"));
+            throw new NotFoundException(__d('content', "Root article not found"));
         }
 
         $this->setAction('view', $rootPage->id);
@@ -81,45 +74,54 @@ class PagesController extends ContentController
      * @param null $id
      * @return \Cake\Http\Response|void
      * @throws \Exception
-     * @deprecated Use 'display' method instead
      */
     public function view($id = null)
     {
         try {
             if ($id === null) {
                 switch (true) {
-                    case $this->request->getQuery('page_id'):
-                        $id = $this->request->getQuery('page_id');
+                    case $this->request->getQuery('id'):
+                        $id = $this->request->getQuery('id');
                         break;
-                    case $this->request->getParam('page_id'):
-                        $id = $this->request->getParam('page_id');
+                    case $this->request->getParam('id'):
+                        $id = $this->request->getParam('id');
                         break;
                     case $this->request->getQuery('slug'):
-                        $id = $this->Posts->findIdBySlug($this->request->getQuery('slug'));
+                        $id = $this->Articles->findIdBySlug($this->request->getQuery('slug'));
                         break;
                     case $this->request->getParam('slug'):
-                        $id = $this->Posts->findIdBySlug($this->request->getParam('slug'));
+                        $id = $this->Articles->findIdBySlug($this->request->getParam('slug'));
                         break;
                     default:
                         //throw new NotFoundException();
                 }
             }
 
-            $page = $this->Posts
-                ->find('published')
-                ->where(['Posts.id' => $id, 'Posts.type' => 'page'])
+            $article = $this->Articles
+                //->find('published')
+                ->find()
+                ->where(['Articles.id' => $id, 'Articles.type' => 'page'])
                 ->contain([])
                 ->first();
 
-            if (!$page) {
+            if (!$article) {
                 throw new NotFoundException(__d('content', "Page not found"));
             }
 
+
+            if (!$article->isPublished()) {
+                if ($this->Frontend->isPreviewMode()) {
+                    $this->Flash->success("Preview mode");
+                } else {
+                    throw new NotFoundException();
+                }
+            }
+
             /*
-            // force canonical url (except root pages)
+            // force canonical url (except root articles)
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($page->getUrl());
+                $canonical = Router::normalize($article->getUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -128,18 +130,18 @@ class PagesController extends ContentController
                 }
             }
 
-            $this->Frontend->setRefId($page->id);
+            $this->Frontend->setRefId($article->id);
 
             //@todo Dispatch Page.beforeExecute()
-            // Execute page
-            $handler = $this->Pages->getTypeHandler($page);
-            $response = $handler->execute($this, $page);
+            // Execute article
+            $handler = $this->Pages->getTypeHandler($article);
+            $response = $handler->execute($this, $article);
             if ($response) {
                 return $response;
             }
             */
 
-            $this->set('page', $page);
+            $this->set('article', $article);
             //@todo Dispatch Page.afterExecute();
         } catch (\Exception $ex) {
             throw $ex;

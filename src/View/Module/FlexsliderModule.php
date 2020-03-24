@@ -3,7 +3,7 @@
 namespace Content\View\Module;
 
 use Cake\ORM\TableRegistry;
-use Content\Lib\ContentManager;
+use Content\ContentManager;
 use Banana\View\ViewModuleSchema;
 use Banana\View\ViewModule;
 
@@ -51,7 +51,7 @@ class FlexsliderModule extends ViewModule
         $template = $this->template;
 
         $gallery = TableRegistry::getTableLocator()->get('Content.Galleries')->get($id, [
-            'contain' => ['Posts'],
+            'contain' => ['Articles'],
             'media' => true,
         ]);
         $this->set('gallery', $gallery);

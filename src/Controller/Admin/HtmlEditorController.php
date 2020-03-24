@@ -75,8 +75,8 @@ class HtmlEditorController extends AppController
 
             $_list = [];
             try {
-                $this->loadModel('Content.Posts');
-                $result = $this->Pages->Posts
+                $this->loadModel('Content.Articles');
+                $result = $this->Pages->Articles
                     ->find()
                     ->where(['refscope' => 'Content.Pages'])
                     ->order(['title' => 'ASC'])
@@ -89,14 +89,14 @@ class HtmlEditorController extends AppController
                     $_list[] = [
                         'title' => str_repeat('_', $entity->level) . $entity->title,
                         //'value' => Router::url($entity->url, true)
-                        'value' => sprintf('{{Content.Posts:%s}}', $entity->id),
+                        'value' => sprintf('{{Content.Articles:%s}}', $entity->id),
                     ];
                 });
             } catch (\Exception $ex) {
                 Log::critical('HtmlEditor::linkList ' . $ex->getMessage(), ['content']);
             }
 
-            $event->getData('list')[] = ['title' => __d('content', 'Posts'), 'menu' => $_list];
+            $event->getData('list')[] = ['title' => __d('content', 'Articles'), 'menu' => $_list];
         });
 
         if (Plugin::isLoaded('Shop')) :

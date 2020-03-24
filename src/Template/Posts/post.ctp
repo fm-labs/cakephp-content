@@ -1,32 +1,30 @@
 <div class="view">
-    <article class="post <?= $post->cssclass; ?>" id="<?= $post->cssid ?>">
+    <article class="article <?= $article->cssclass; ?>" id="<?= $article->cssid ?>">
         <h1 class="title">
-            <?= h($post->title); ?>
+            <?= h($article->title); ?>
         </h1>
         <div class="image">
-            <?php if ($post->image): ?>
-                <?= $this->Html->image($post->image->url); ?>
+            <?php if ($article->image): ?>
+                <?= $this->Html->image($article->image->url); ?>
             <?php endif; ?>
         </div>
+        <div class="meta well">
+            <?= h($article->created); ?>
+        </div>
         <div class="body">
-            <?= $this->Content->userHtml($post->body_html); ?>
+            <?= $this->Content->userHtml($article->body_html); ?>
         </div>
     </article>
 
 
-    <div class="post-info well">
-        <?php
-        $postInfo = [
-            ['label' => __('Perma Url'), 'data' => $post->getPermaUrl()]
-        ]
-        ?>
+    <div class="article-info well">
         <p>
-            <span class="post-info-title">Canonical URL</span>
-            <span class="post-info-data"><?= $this->Html->link($post->getViewUrl()); ?></span>
+            <span class="article-info-title">Canonical URL</span>
+            <span class="article-info-data"><?= $this->Html->link($article->getViewUrl()); ?></span>
         </p>
         <p>
-            <span class="post-info-title">Perma URL</span>
-            <span class="post-info-data"><?= $this->Html->link($post->getPermaUrl()); ?></span>
+            <span class="article-info-title">Perma URL</span>
+            <span class="article-info-data"><?= $this->Html->link($article->getPermaUrl()); ?></span>
         </p>
     </div>
 </div>

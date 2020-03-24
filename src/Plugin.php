@@ -13,6 +13,85 @@ use Settings\SettingsManager;
 
 class Plugin extends BasePlugin implements EventListenerInterface
 {
+
+    public function bootstrap(PluginApplicationInterface $app)
+    {
+        parent::bootstrap($app);
+
+        $eventManager = EventManager::instance();
+        $eventManager->on($this);
+        $eventManager->on(new \Content\Sitemap\SitemapListener());
+    }
+
+    public function routes($routes)
+    {
+        parent::routes($routes);
+//        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+//
+//        // Page by slug and pageId
+//        if (Configure::read('Content.Router.enablePrettyUrls')) {
+//            $routes->connect('/:slug/:page_id/*',
+//                ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
+//                ['page_id' => '\d+', 'pass' => ['page_id'], '_name' => 'page']
+//            );
+//
+//            // Page by pageId
+//            $routes->connect('/:page_id',
+//                ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+//                ['page_id' => '\d+', 'pass' => ['page_id']]
+//            );
+//        }
+//
+//        // Pages with '/page' prefix (@deprecated)
+//        $routes->connect('/page/:slug/:page_id/*',
+//            ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
+//            ['page_id' => '\d+', 'pass' => ['page_id']]
+//        );
+//
+//        $routes->connect('/page/:page_id',
+//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+//            ['page_id' => '\d+', 'pass' => ['page_id']]
+//        );
+//
+//        $routes->connect('/page/:slug',
+//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+//            ['pass' => []]
+//        );
+//
+//        // Articles with '/post' prefix
+//        $routes->connect('/post/:slug/:post_id/*',
+//            ['plugin' => 'Content',  'controller' => 'Articles', 'action' => 'view'],
+//            ['post_id' => '\d+', 'pass' => ['post_id'], '_name' => 'post']
+//        );
+//
+//        $routes->connect('/post/:post_id',
+//            ['plugin' => 'Content', 'controller' => 'Articles', 'action' => 'view'],
+//            ['post_id' => '\d+', 'pass' => ['post_id']]
+//        );
+//
+//        $routes->connect('/post/:slug',
+//            ['plugin' => 'Content', 'controller' => 'Articles', 'action' => 'view'],
+//            ['pass' => [], '_name' => 'postslug']
+//        );
+//
+//
+//        // Page by slug
+//        $routes->connect('/:slug',
+//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
+//            ['pass' => []]
+//        );
+//
+//        $routes->fallbacks('DashedRoute');
+    }
+
+    public function backendRoutes(RouteBuilder $routes)
+    {
+        $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
+        $routes->fallbacks('DashedRoute');
+
+        return $routes;
+    }
+
     /**
      * Returns a list of events this object is implementing. When the class is registered
      * in an event manager, each individual method will be associated with the respective event.
@@ -24,7 +103,9 @@ class Plugin extends BasePlugin implements EventListenerInterface
     public function implementedEvents()
     {
         return [
+            'Settings.build' => 'buildSettings',
             'Backend.Menu.build.admin_primary' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
+            'Backend.Menu.build.admin_system' => ['callable' => 'buildBackendSystemMenu', 'priority' => 5 ],
         ];
     }
 
@@ -67,9 +148,14 @@ class Plugin extends BasePlugin implements EventListenerInterface
             ],
 
             'posts' => [
-                'title' => 'Posts',
-                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
+                'title' => 'Articles',
+                'url' => ['plugin' => 'Content', 'controller' => 'Articles', 'action' => 'index'],
                 'data-icon' => 'file-o',
+            ],
+            'menus' => [
+                'title' => 'Menus',
+                'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+                'data-icon' => 'sitemap',
             ],
 
             'galleries' => [
@@ -78,16 +164,6 @@ class Plugin extends BasePlugin implements EventListenerInterface
                 'data-icon' => 'image',
             ],
 
-            'menus' => [
-                'title' => 'Menus',
-                'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
-                'data-icon' => 'sitemap',
-            ],
-            'pages' => [
-                'title' => 'Pages (Old)',
-                'url' => ['plugin' => 'Content', 'controller' => 'OldPages', 'action' => 'index'],
-                'data-icon' => 'sitemap',
-            ],
 
         ];
     }
@@ -98,11 +174,13 @@ class Plugin extends BasePlugin implements EventListenerInterface
     public function buildSettings(Event $event, SettingsManager $settings)
     {
         $settings->add('Content', [
-            'Router.enablePrettyUrls' => [
+            'Content.Router.enablePrettyUrls' => [
                 'type' => 'boolean',
+                'help' => 'Enables SEO-friendly URIs'
             ],
-            'Router.forceCanonical' => [
+            'Content.Router.forceCanonical' => [
                 'type' => 'boolean',
+                'help' => 'Force redirect to canonical URI'
             ],
         ]);
     }
@@ -117,81 +195,14 @@ class Plugin extends BasePlugin implements EventListenerInterface
         ]);
     }
 
-    public function bootstrap(PluginApplicationInterface $app)
+
+    public function buildBackendSystemMenu(Event $event, \Banana\Menu\Menu $menu)
     {
-        parent::bootstrap($app);
-
-        $eventManager = EventManager::instance();
-        $eventManager->on($this);
-        //$eventManager->on(new \Content\Sitemap\SitemapListener());
-    }
-
-    public function routes($routes)
-    {
-        parent::routes($routes);
-//        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
-//
-//        // Page by slug and pageId
-//        if (Configure::read('Content.Router.enablePrettyUrls')) {
-//            $routes->connect('/:slug/:page_id/*',
-//                ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
-//                ['page_id' => '\d+', 'pass' => ['page_id'], '_name' => 'page']
-//            );
-//
-//            // Page by pageId
-//            $routes->connect('/:page_id',
-//                ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-//                ['page_id' => '\d+', 'pass' => ['page_id']]
-//            );
-//        }
-//
-//        // Pages with '/page' prefix (@deprecated)
-//        $routes->connect('/page/:slug/:page_id/*',
-//            ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
-//            ['page_id' => '\d+', 'pass' => ['page_id']]
-//        );
-//
-//        $routes->connect('/page/:page_id',
-//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-//            ['page_id' => '\d+', 'pass' => ['page_id']]
-//        );
-//
-//        $routes->connect('/page/:slug',
-//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-//            ['pass' => []]
-//        );
-//
-//        // Posts with '/post' prefix
-//        $routes->connect('/post/:slug/:post_id/*',
-//            ['plugin' => 'Content',  'controller' => 'Posts', 'action' => 'view'],
-//            ['post_id' => '\d+', 'pass' => ['post_id'], '_name' => 'post']
-//        );
-//
-//        $routes->connect('/post/:post_id',
-//            ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'view'],
-//            ['post_id' => '\d+', 'pass' => ['post_id']]
-//        );
-//
-//        $routes->connect('/post/:slug',
-//            ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'view'],
-//            ['pass' => [], '_name' => 'postslug']
-//        );
-//
-//
-//        // Page by slug
-//        $routes->connect('/:slug',
-//            ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-//            ['pass' => []]
-//        );
-//
-//        $routes->fallbacks('DashedRoute');
-    }
-
-    public function backendRoutes(RouteBuilder $routes)
-    {
-        $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-        $routes->fallbacks('DashedRoute');
-
-        return $routes;
+        $menu->addItem([
+            'title' => 'Content',
+            'url' => ['plugin' => 'Content', 'controller' => 'Info', 'action' => 'index'],
+            'data-icon' => 'info',
+            'children' => [],
+        ]);
     }
 }

@@ -3,15 +3,15 @@ namespace Content\Controller;
 
 use Cake\Event\Event;
 use Content\Model\Table\CategoriesTable;
-use Content\Model\Table\PostsTable;
+use Content\Model\Table\ArticlesTable;
 
 /**
  * Class CategoriesController
  * @package Content\src\Controller
  * @property CategoriesTable $Categories
- * @property PostsTable $Posts
+ * @property ArticlesTable $Articles
  */
-class CategoriesController extends ContentController
+class CategoriesController extends AppController
 {
     /**
      * @var string
@@ -44,7 +44,7 @@ class CategoriesController extends ContentController
             /*
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($post->getViewUrl());
+                $canonical = Router::normalize($article->getViewUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -57,8 +57,8 @@ class CategoriesController extends ContentController
             $this->Frontend->setRefId($id);
         }
 
-        $this->loadModel('Content.Posts');
-        $posts = $this->Posts->find('published')->where(['refscope' => 'Content.Categories', 'refid' => $id])->all()->toArray();
+        $this->loadModel('Content.Articles');
+        $articles = $this->Articles->find('published')->where(['refscope' => 'Content.Categories', 'refid' => $id])->all()->toArray();
 
         $this->set(compact('category', 'posts'));
     }

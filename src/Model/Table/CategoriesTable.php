@@ -34,10 +34,10 @@ class CategoriesTable extends BaseTable
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('Posts', [
-            'className' => 'Content.Posts',
+        $this->hasMany('Articles', [
+            'className' => 'Content.Articles',
             'foreignKey' => 'refid',
-            'conditions' => ['Posts.refscope' => 'Content.Categories'],
+            'conditions' => ['Articles.refscope' => 'Content.Categories'],
         ]);
     }
 

@@ -3,6 +3,7 @@ use Cake\Core\Configure;
 use Cake\Routing\Router;
 
 // root scope routes
+/*
 Router::scope('/', function (\Cake\Routing\RouteBuilder $routes) {
 
     // map root page to content pages controller
@@ -26,13 +27,15 @@ Router::scope('/', function (\Cake\Routing\RouteBuilder $routes) {
         );
     }
 });
+*/
 
 // content plugin routes
 Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], function ($routes) {
 
-    $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
+    $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Content', 'action' => 'index']);
 
     // Page by slug and pageId
+    /*
     if (Configure::read('Content.Router.enablePrettyUrls')) {
         $routes->connect(
             '/:slug/:page_id/*',
@@ -47,8 +50,10 @@ Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], 
             ['page_id' => '\d+', 'pass' => ['page_id']]
         );
     }
+    */
 
     // Pages with '/page' prefix (@deprecated)
+    /*
     $routes->connect(
         '/page/:slug/:page_id/*',
         ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
@@ -66,8 +71,10 @@ Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], 
         ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
         ['pass' => []]
     );
+    */
 
     // Posts with '/post' prefix
+    /*
     $routes->connect(
         '/post/:slug/:post_id/*',
         ['plugin' => 'Content',  'controller' => 'Posts', 'action' => 'view'],
@@ -85,6 +92,7 @@ Router::scope('/content', ['plugin' => 'Content', '_namePrefix' => 'content:'], 
         ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'view'],
         ['pass' => [], '_name' => 'postslug']
     );
+    */
 
     // Page by slug
     /*

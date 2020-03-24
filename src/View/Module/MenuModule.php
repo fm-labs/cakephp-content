@@ -63,8 +63,6 @@ class MenuModule extends ViewModule
         $startNodeId = $this->_getStartNodeId();
         $list = $this->Menus->getMenuTree($startNodeId, ['maxDepth' => $this->depth]);
 
-        $this->element_path = 'Content.Modules/Menu/select_list';
-
         $this->set('opts', $list);
         $this->set('attrs', $params);
     }

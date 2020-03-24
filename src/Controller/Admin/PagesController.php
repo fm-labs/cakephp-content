@@ -1,16 +1,16 @@
 <?php
 namespace Content\Controller\Admin;
 
-class PagesController extends PostsController
+class PagesController extends ArticlesController
 {
-    protected $postType = 'page';
+    protected $articleType = 'page';
 
-    public $modelClass = "Content.Posts";
+    public $modelClass = "Content.Articles";
 
     public function initialize()
     {
         parent::initialize();
 
-        $this->viewBuilder()->templatePath('Admin/Posts');
+        $this->viewBuilder()->setTemplatePath('Admin/Articles');
     }
 }

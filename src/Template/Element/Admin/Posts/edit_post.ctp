@@ -1,11 +1,11 @@
 <?php
 // Breadcrumbs
-$this->Breadcrumbs->add(__d('content', 'Posts'), ['action' => 'index', 'type' => $post->type]);
-$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Post')));
+$this->Breadcrumbs->add(__d('content', 'Articles'), ['action' => 'index', 'type' => $article->type]);
+$this->Breadcrumbs->add(__d('content','Edit {0}', __d('content', 'Article')));
 // Heading
-$this->assign('title', $post->title);
+$this->assign('title', $article->title);
 ?>
-<?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($post->use_teaser || $post->teaser_html)]);  ?>
+<?= $this->Form->fieldsetStart(['legend' => 'Teaser', 'collapsed' => !($article->use_teaser || $article->teaser_html)]);  ?>
 <?php
 echo $this->Form->control('use_teaser');
 echo $this->Form->control('teaser_html', [
