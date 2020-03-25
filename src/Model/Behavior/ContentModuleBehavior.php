@@ -27,7 +27,7 @@ class ContentModuleBehavior extends Behavior
      * @param array $config Content module configuration
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
     }
 
@@ -71,7 +71,7 @@ class ContentModuleBehavior extends Behavior
      *
      * @return array Implemented events
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         $events = parent::implementedEvents();
         $events['Model.initialize'] = 'modelInitialize';

@@ -14,7 +14,7 @@ class ShortcodeHelper extends Helper
      */
     protected $_registry;
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->_registry = new ShortcodeRegistry($this->_View);
 

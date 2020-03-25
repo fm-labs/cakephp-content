@@ -39,8 +39,8 @@ class Gallery extends Entity
      */
     protected function _getParent()
     {
-        if ($this->_parent === null && isset($this->_properties['parent_id'])) {
-            $this->_parent = TableRegistry::getTableLocator()->get('Content.Galleries')->get($this->_properties['parent_id']);
+        if ($this->_parent === null && isset($this->_fields['parent_id'])) {
+            $this->_parent = TableRegistry::getTableLocator()->get('Content.Galleries')->get($this->_fields['parent_id']);
         }
 
         return $this->_parent;
@@ -55,7 +55,7 @@ class Gallery extends Entity
             return $this->parent->desc_html;
         }
 
-        return (isset($this->_properties['desc_html'])) ? $this->_properties['desc_html'] : null;
+        return (isset($this->_fields['desc_html'])) ? $this->_fields['desc_html'] : null;
     }
 
     /**
@@ -63,12 +63,12 @@ class Gallery extends Entity
      */
     protected function _getImages()
     {
-        switch ($this->_properties['source']) {
+        switch ($this->_fields['source']) {
             case "folder":
                 return $this->_loadImagesFromFolder();
 
             default:
-                throw new \InvalidArgumentException("Gallery: Unknown source: " . $this->_properties['source']);
+                throw new \InvalidArgumentException("Gallery: Unknown source: " . $this->_fields['source']);
         }
     }
 
@@ -95,7 +95,7 @@ class Gallery extends Entity
         $images = [];
 
         if (Plugin::isLoaded('Media')) {
-            $folder = $this->_properties['source_folder'];
+            $folder = $this->_fields['source_folder'];
             $mm = MediaManager::get('default');
             $files = $mm->listFiles($folder);
             array_walk($files, function ($val) use (&$images, &$mm) {

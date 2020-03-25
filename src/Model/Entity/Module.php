@@ -48,9 +48,9 @@ class Module extends Entity
      */
     public function expand()
     {
-        if (isset($this->_properties['params'])) {
-            $this->setParams((array)json_decode($this->_properties['params'], true));
-            $this->set($this->_properties['params_arr']);
+        if (isset($this->_fields['params'])) {
+            $this->setParams((array)json_decode($this->_fields['params'], true));
+            $this->set($this->_fields['params_arr']);
         }
     }
 
@@ -62,12 +62,12 @@ class Module extends Entity
     {
 
         if ($merge) {
-            $this->_properties['params_arr'] = array_merge($this->params_arr, $params);
+            $this->_fields['params_arr'] = array_merge($this->params_arr, $params);
         } else {
-            $this->_properties['params_arr'] = $params;
+            $this->_fields['params_arr'] = $params;
         }
 
-        $this->_properties['params'] = json_encode($this->_properties['params_arr']);
+        $this->_fields['params'] = json_encode($this->_fields['params_arr']);
         $this->setDirty('params', true);
     }
 
@@ -128,7 +128,7 @@ class Module extends Entity
     protected function _setParams($params = null)
     {
         $this->setParams((array)json_decode($params, true));
-        $this->set($this->_properties['params_arr']);
+        $this->set($this->_fields['params_arr']);
     }
 
     /**
@@ -136,11 +136,11 @@ class Module extends Entity
      */
     protected function _getParams()
     {
-        if (!isset($this->_properties['params']) && isset($this->_properties['params_arr'])) {
-            $this->_properties['params'] = json_encode($this->_properties['params_arr']);
+        if (!isset($this->_fields['params']) && isset($this->_fields['params_arr'])) {
+            $this->_fields['params'] = json_encode($this->_fields['params_arr']);
         }
 
-        return (isset($this->_properties['params'])) ? $this->_properties['params'] : null;
+        return (isset($this->_fields['params'])) ? $this->_fields['params'] : null;
     }
 
     /**
@@ -148,11 +148,11 @@ class Module extends Entity
      */
     protected function _getParamsArr()
     {
-        $this->_properties['params_arr'] = (isset($this->_properties['params_arr']))
-            ? $this->_properties['params_arr']
+        $this->_fields['params_arr'] = (isset($this->_fields['params_arr']))
+            ? $this->_fields['params_arr']
             : [];
 
-        return $this->_properties['params_arr'];
+        return $this->_fields['params_arr'];
     }
 
     /**
@@ -168,15 +168,15 @@ class Module extends Entity
         $dirtyParam = false;
         foreach (array_keys((array)$this->params_arr) as $param) {
             if (!$this->has($param)) {
-                $this->_properties[$param] = $this->_properties['params_arr'][$param];
+                $this->_fields[$param] = $this->_fields['params_arr'][$param];
             } elseif ($this->isDirty($param)) {
                 $dirtyParam = true;
-                $this->_properties['params_arr'][$param] = $this->get($param);
+                $this->_fields['params_arr'][$param] = $this->get($param);
             }
         }
 
         if ($dirtyParam) {
-            $this->_properties['params'] = json_encode($this->params_arr);
+            $this->_fields['params'] = json_encode($this->params_arr);
             $this->setDirty('params', true);
         }
     }

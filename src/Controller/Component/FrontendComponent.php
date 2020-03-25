@@ -40,7 +40,7 @@ class FrontendComponent extends Component
     /**
      * @param array $config
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $layout = ($this->_config['layout']) ?: Configure::read('Site.layout');
         $theme = ($this->_config['theme']) ?: Configure::read('Site.theme');
@@ -60,7 +60,7 @@ class FrontendComponent extends Component
         $this->setRefScope($this->_config['refscope']);
     }
 
-    public function beforeRender(Event $event)
+    public function beforeRender(\Cake\Event\EventInterface $event)
     {
     }
 

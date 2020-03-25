@@ -32,7 +32,7 @@ class HtmlModule extends ViewModule
         return $schema;
     }
 
-    public function inputs()
+    public static function inputs()
     {
         return ['htmlstr' => ['type' => 'htmleditor']];
     }

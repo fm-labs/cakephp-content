@@ -39,7 +39,7 @@ class AppController extends \Backend\Controller\Controller
      * @param Event $event The controller event
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         //@TODO Move shop language selection to a component
         $locale = $this->request->getQuery('locale');
@@ -50,7 +50,7 @@ class AppController extends \Backend\Controller\Controller
      * @param Event $event The controller event
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeRender(Event $event)
+    public function beforeRender(\Cake\Event\EventInterface $event)
     {
         $this->set('locale', $this->locale);
     }

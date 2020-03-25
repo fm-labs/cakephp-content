@@ -25,7 +25,7 @@ class GalleriesTable extends BaseTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -89,7 +89,7 @@ class GalleriesTable extends BaseTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): \Cake\Validation\Validator
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
@@ -105,7 +105,7 @@ class GalleriesTable extends BaseTable
         return $validator;
     }
 
-    public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    public function afterSave(\Cake\Event\EventInterface $event, EntityInterface $entity, \ArrayObject $options)
     {
         if ($entity->get('_generate_slider')) {
             $Modules = TableRegistry::getTableLocator()->get('Content.Modules');

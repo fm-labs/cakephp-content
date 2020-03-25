@@ -225,8 +225,8 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
      */
     protected function _getTeaserImage()
     {
-        if (!empty($this->_properties['teaser_image_file'])) {
-            return $this->_properties['teaser_image_file'];
+        if (!empty($this->_fields['teaser_image_file'])) {
+            return $this->_fields['teaser_image_file'];
         }
 
         return $this->image_file;
@@ -275,13 +275,13 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
             return null;
         }
 
-        if (isset($this->_properties['ref'])) {
-            return $this->_properties['ref'];
+        if (isset($this->_fields['ref'])) {
+            return $this->_fields['ref'];
         }
 
         $Model = TableRegistry::getTableLocator()->get($this->refscope);
 
-        return $this->_properties['ref'] = $Model->get($this->refid);
+        return $this->_fields['ref'] = $Model->get($this->refid);
     }
 
     /**
@@ -294,11 +294,11 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
     protected function _getTeaserLinkUrl()
     {
         // customer teaser link
-        if (!empty($this->_properties['teaser_link_href'])) {
-            return $this->_properties['teaser_link_href'];
+        if (!empty($this->_fields['teaser_link_href'])) {
+            return $this->_fields['teaser_link_href'];
         }
 
-        if (!empty($this->_properties['body_html'])) {
+        if (!empty($this->_fields['body_html'])) {
             return $this->_getViewUrl();
         }
 
@@ -311,8 +311,8 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
      */
     protected function _getTeaserLinkTitle()
     {
-        if (!empty($this->_properties['teaser_link_caption'])) {
-            return $this->_properties['teaser_link_caption'];
+        if (!empty($this->_fields['teaser_link_caption'])) {
+            return $this->_fields['teaser_link_caption'];
         }
 
         return __d('content', 'Read more');

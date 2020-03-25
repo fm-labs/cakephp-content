@@ -14,7 +14,7 @@ abstract class AppController extends BaseAppController
     /**
      * Initialize method
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -29,7 +29,7 @@ abstract class AppController extends BaseAppController
      * @param Event $event
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         $this->Auth->setConfig('authorize', 'Controller');
         parent::beforeFilter($event);

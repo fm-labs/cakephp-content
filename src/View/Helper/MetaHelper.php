@@ -104,7 +104,7 @@ class MetaHelper extends Helper
 
     protected $_link = [];
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 

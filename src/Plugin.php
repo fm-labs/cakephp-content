@@ -14,7 +14,7 @@ use Settings\SettingsManager;
 class Plugin extends BasePlugin implements EventListenerInterface
 {
 
-    public function bootstrap(PluginApplicationInterface $app)
+    public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
 
@@ -23,7 +23,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
         $eventManager->on(new \Content\Sitemap\SitemapListener());
     }
 
-    public function routes($routes)
+    public function routes(\Cake\Routing\RouteBuilder $routes): void
     {
         parent::routes($routes);
 //        $routes->connect('/', ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index']);
@@ -100,7 +100,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
      * @return array associative array or event key names pointing to the function
      * that should be called in the object when the respective event is fired
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         return [
             'Settings.build' => 'buildSettings',

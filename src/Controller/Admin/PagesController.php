@@ -7,7 +7,7 @@ class PagesController extends ArticlesController
 
     public $modelClass = "Content.Articles";
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

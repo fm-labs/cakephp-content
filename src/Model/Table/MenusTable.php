@@ -28,7 +28,7 @@ class MenusTable extends BaseTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->setTable('menus');
         $this->setDisplayField('title');
@@ -113,7 +113,7 @@ class MenusTable extends BaseTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): \Cake\Validation\Validator
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
@@ -158,17 +158,16 @@ class MenusTable extends BaseTable
     {
         debug(func_get_args());
         // Get type handler and check params
-
+    
         if ($context['data']['type'] == "root") {
             if (!isset($value['redirect_page_id']) || !$value['redirect_page_id']) {
                 return "Redirect page id not set";
             }
         }
-
+    
         return "Type Params failed";
     }
     */
-
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -176,7 +175,7 @@ class MenusTable extends BaseTable
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): \Cake\ORM\RulesChecker
     {
         $rules->add($rules->existsIn(['parent_id'], 'ParentMenus'));
 
@@ -198,7 +197,7 @@ class MenusTable extends BaseTable
      * @param EntityInterface $entity
      * @param \ArrayObject $options
      */
-    public function beforeSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    public function beforeSave(\Cake\Event\EventInterface $event, EntityInterface $entity, \ArrayObject $options)
     {
         /*
         if ($entity->dirty('type_params') === true) {
@@ -215,7 +214,7 @@ class MenusTable extends BaseTable
      * @param EntityInterface $entity
      * @param \ArrayObject $options
      */
-    public function afterSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    public function afterSave(\Cake\Event\EventInterface $event, EntityInterface $entity, \ArrayObject $options)
     {
     }
 

@@ -11,7 +11,7 @@ class SitemapListener implements EventListenerInterface
     /**
      * Implemented events
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         return [
             'Seo.Sitemap.get' => 'getSitemap',

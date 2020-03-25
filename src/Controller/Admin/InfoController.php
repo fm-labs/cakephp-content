@@ -15,9 +15,6 @@ class InfoController extends AppController
 
     public $actions = [];
 
-    /**
-     *
-     */
     public function index()
     {
     }
