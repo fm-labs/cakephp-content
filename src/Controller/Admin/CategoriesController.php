@@ -1,7 +1,7 @@
 <?php
-namespace Content\Controller\Admin;
+declare(strict_types=1);
 
-use Content\Controller\Admin\AppController;
+namespace Content\Controller\Admin;
 
 /**
  * Categories Controller

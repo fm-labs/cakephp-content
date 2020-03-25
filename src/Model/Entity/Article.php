@@ -1,17 +1,15 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity;
 
-use Banana\Model\EntityTypeHandlerInterface;
 use Banana\Model\EntityTypeHandlerTrait;
 use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
 use Cake\Utility\Text;
 use Content\ArticleManager;
-use Content\Model\Entity\Article\ArticleTypeInterface;
 
 //use Eav\Model\EntityAttributesInterface;
 //use Eav\Model\EntityAttributesTrait;
@@ -61,7 +59,7 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
     ];
 
     /**
-     * @return ArticleTypeInterface
+     * @return \Content\Model\Entity\Article\ArticleTypeInterface
      * @throws \Exception
      */
     public function handler()
@@ -77,6 +75,7 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
             if (!class_exists($class)) {
                 throw new \RuntimeException(sprintf("Class '%s' not found", $class));
             }
+
             return new $class($this);
         }
     }
@@ -167,7 +166,7 @@ class Article extends Entity /*implements EntityTypeHandlerInterface*/
     {
         $children = $this->getChildren();
 
-        return ($children) ? $children->all()->toArray() : [];
+        return $children ? $children->all()->toArray() : [];
     }
 
     /**

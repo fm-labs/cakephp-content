@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity\Menu;
 
 use Banana\Menu\MenuItem;
@@ -37,7 +39,7 @@ abstract class BaseType implements MenuTypeInterface
      */
     public function getLabel()
     {
-        return get_class($this);
+        return static::class;
     }
 
     /**

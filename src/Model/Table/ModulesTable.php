@@ -1,14 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Table;
 
 use Cake\Core\Plugin;
-use Content\Model\Entity\Module;
-use Cake\Core\App;
-use Cake\Event\Event;
 use Cake\Database\Schema;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**

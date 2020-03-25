@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
@@ -19,7 +19,6 @@ use Cake\Validation\Validator;
  */
 class CategoriesTable extends BaseTable
 {
-
     /**
      * Initialize method
      *

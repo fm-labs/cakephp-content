@@ -1,15 +1,14 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Table;
 
 use Banana\Menu\Menu;
-use Cake\Cache\Cache;
 use Cake\Collection\Collection;
-use Cake\Core\Configure;
 use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
@@ -21,7 +20,6 @@ use Content\MenuManager;
  */
 class MenusTable extends BaseTable
 {
-
     /**
      * Initialize method
      *
@@ -158,16 +156,17 @@ class MenusTable extends BaseTable
     {
         debug(func_get_args());
         // Get type handler and check params
-    
+
         if ($context['data']['type'] == "root") {
             if (!isset($value['redirect_page_id']) || !$value['redirect_page_id']) {
                 return "Redirect page id not set";
             }
         }
-    
+
         return "Type Params failed";
     }
     */
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -183,8 +182,8 @@ class MenusTable extends BaseTable
     }
 
     /**
-     * @param Event $event
-     * @param EntityInterface $data
+     * @param \Cake\Event\Event $event
+     * @param \Cake\Datasource\EntityInterface $data
      * @param \ArrayObject $options
      */
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
@@ -193,8 +192,8 @@ class MenusTable extends BaseTable
     }
 
     /**
-     * @param Event $event
-     * @param EntityInterface $entity
+     * @param \Cake\Event\Event $event
+     * @param \Cake\Datasource\EntityInterface $entity
      * @param \ArrayObject $options
      */
     public function beforeSave(\Cake\Event\EventInterface $event, EntityInterface $entity, \ArrayObject $options)
@@ -210,8 +209,8 @@ class MenusTable extends BaseTable
     }
 
     /**
-     * @param Event $event
-     * @param EntityInterface $entity
+     * @param \Cake\Event\Event $event
+     * @param \Cake\Datasource\EntityInterface $entity
      * @param \ArrayObject $options
      */
     public function afterSave(\Cake\Event\EventInterface $event, EntityInterface $entity, \ArrayObject $options)
@@ -226,7 +225,7 @@ class MenusTable extends BaseTable
     public function getMenu($startNodeId, array $options = [])
     {
         $options += ['maxDepth' => null, 'includeHidden' => null];
-        $maxDepth = ($options['maxDepth'] !== null) ? $options['maxDepth'] : -1;
+        $maxDepth = $options['maxDepth'] ?? -1;
         $includeHidden = $options['includeHidden'];
 
         //$cacheKey = sprintf("menus-%s-%s", $startNodeId, md5(serialize($options)));
@@ -254,14 +253,14 @@ class MenusTable extends BaseTable
      * @param int $level
      * @param int $maxDepth
      * @param null $includeHidden
-     * @return Menu
+     * @return \Banana\Menu\Menu
      */
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
         $menu = new Menu();
         foreach ($children as $child) {
             try {
-                /* @var \Content\Model\Entity\Menu $child */
+                /** @var \Content\Model\Entity\Menu $child */
                 if (!$child->isVisibleInMenu() && !$includeHidden) {
                     continue;
                 }
@@ -298,7 +297,7 @@ class MenusTable extends BaseTable
     {
         $tree = [];
         $options += ['maxDepth' => null, 'includeHidden' => null];
-        $maxDepth = ($options['maxDepth']) ?: 1;
+        $maxDepth = $options['maxDepth'] ?: 1;
 
         $cacheKey = sprintf("menus-tree-%s-%s", $startNodeId, md5(serialize($options)));
         //$tree = Cache::read($cacheKey, 'content_menu');
@@ -331,7 +330,7 @@ class MenusTable extends BaseTable
     protected function _buildMenuTree(&$tree, $children, $level = 0, $maxDepth = -1)
     {
         foreach ($children as $child) {
-            /* @var \Content\Model\Entity\Menu $child */
+            /** @var \Content\Model\Entity\Menu $child */
             //$handler = $this->getTypeHandler($child);
             //if (!$handler->isEnabled($child)) {
             //    continue;

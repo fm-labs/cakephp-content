@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Helper;
 
-use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\View\Helper;
 
@@ -44,7 +44,7 @@ class ContentHelper extends Helper
             }
 
             try {
-                list($plugin, $model) = pluginSplit($modelName);
+                [$plugin, $model] = pluginSplit($modelName);
                 $url = ['plugin' => $plugin, 'controller' => $model, 'action' => 'view', $id];
                 $url = Router::url($url);
             } catch (\Exception $ex) {

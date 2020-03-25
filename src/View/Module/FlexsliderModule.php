@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Module;
 
+use Banana\View\ViewModule;
+use Banana\View\ViewModuleSchema;
 use Cake\ORM\TableRegistry;
 use Content\ContentManager;
-use Banana\View\ViewModuleSchema;
-use Banana\View\ViewModule;
 
 /**
  * Class FlexsliderModule
@@ -47,7 +48,7 @@ class FlexsliderModule extends ViewModule
 
     public function display($id = null)
     {
-        $id = ($id) ?: $this->gallery_id;
+        $id = $id ?: $this->gallery_id;
         $template = $this->template;
 
         $gallery = TableRegistry::getTableLocator()->get('Content.Galleries')->get($id, [

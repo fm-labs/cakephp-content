@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Shortcode;
 
@@ -7,7 +8,7 @@ use Cake\View\View;
 abstract class Shortcode
 {
     /**
-     * @var View
+     * @var \Cake\View\View
      */
     protected $_view;
 

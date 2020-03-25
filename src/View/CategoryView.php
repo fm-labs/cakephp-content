@@ -1,16 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View;
 
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
 use Cake\Utility\Text;
 use Content\Model\Entity\Node;
 
 class CategoryView extends ContentView
 {
-
     /**
      * @param null $view
      * @param null $layout
@@ -24,7 +23,7 @@ class CategoryView extends ContentView
 
             $category = $this->get('category');
 
-            $metaTitle = ($category->meta_title) ?: $category->name;
+            $metaTitle = $category->meta_title ?: $category->name;
             $categoryUrl = $this->Html->Url->build($category->url, true);
 
             // category title
@@ -34,16 +33,16 @@ class CategoryView extends ContentView
             $this->Html->meta(['link' => $categoryUrl, 'rel' => 'canonical'], null, ['block' => true]);
 
             // meta tags
-            $metaLang = ($category->meta_lang) ?: I18n::getLocale();
+            $metaLang = $category->meta_lang ?: I18n::getLocale();
             $this->Html->meta(['name' => 'language', 'content' => $metaLang], null, ['block' => true]);
 
             $metaRobots = 'index,follow';
             $this->Html->meta(['name' => 'robots', 'content' => $metaRobots], null, ['block' => true]);
 
-            $metaDescription = ($category->meta_desc) ?: $category->title;
+            $metaDescription = $category->meta_desc ?: $category->title;
             $this->Html->meta(['name' => 'description', 'content' => $metaDescription, 'lang' => $metaLang], null, ['block' => true]);
 
-            $metaKeywords = ($category->meta_keywords) ?: $category->title;
+            $metaKeywords = $category->meta_keywords ?: $category->title;
             $this->Html->meta(['name' => 'keywords', 'content' => $metaKeywords, 'lang' => $metaLang], null, ['block' => true]);
 
             //$this->Html->meta(['name' => 'revisit-after', 'content' => '7 days'], null, ['block' => true]);
@@ -68,12 +67,12 @@ class CategoryView extends ContentView
             $this->Html->meta(['property' => 'og:url', 'content' => $categoryUrl], null, ['block' => true]);
             $this->Html->meta(['property' => 'og:type', 'content' => 'article'], null, ['block' => true]);
 
-            $publishedTime = ($category->publish_start) ?: $category->created;
+            $publishedTime = $category->publish_start ?: $category->created;
             if ($publishedTime) {
                 $this->Html->meta(['property' => 'article:published_time', 'content' => $publishedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
-            $expirationTime = ($category->publish_end);
+            $expirationTime = $category->publish_end;
             if ($expirationTime) {
                 $this->Html->meta(['property' => 'article:expiration_time', 'content' => $expirationTime->format(DATE_ISO8601)], null, ['block' => true]);
             }

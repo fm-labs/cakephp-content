@@ -1,6 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Controller\Admin;
+
 use Settings\Form\SettingsForm;
 
 /**

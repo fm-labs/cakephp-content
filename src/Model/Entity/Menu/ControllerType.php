@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity\Menu;
 
 use Cake\Routing\Exception\MissingRouteException;
@@ -65,14 +67,14 @@ class ControllerType extends BaseType
     protected function _parseUrl($controller, $action = 'index', $prefix = false)
     {
         $controller = explode('::', $controller);
-        $action = ($action) ?: 'index';
+        $action = $action ?: 'index';
         $params = [];
         if (count($controller) == 2) {
-            list($controller, $action) = $controller;
+            [$controller, $action] = $controller;
 
             $action = explode(':', $action);
             if (count($action) == 2) {
-                list($action, $args) = $action;
+                [$action, $args] = $action;
 
                 $args = explode(',', $args);
                 array_walk($args, function ($val, $idx) use (&$params, &$entity) {
@@ -97,7 +99,7 @@ class ControllerType extends BaseType
             throw new \Exception("Malformed controller location");
         }
 
-        list($plugin, $controller) = pluginSplit($controller);
+        [$plugin, $controller] = pluginSplit($controller);
 
         $url = compact('plugin', 'controller', 'action', 'prefix');
         $url = array_merge($params, $url);

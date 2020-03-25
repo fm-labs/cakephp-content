@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Helper;
 
@@ -10,7 +11,7 @@ use Content\View\Shortcode\ShortcodeRegistry;
 class ShortcodeHelper extends Helper
 {
     /**
-     * @var ShortcodeRegistry
+     * @var \Content\View\Shortcode\ShortcodeRegistry
      */
     protected $_registry;
 
@@ -31,7 +32,7 @@ class ShortcodeHelper extends Helper
 
     public function afterRender(Event $event)
     {
-        /* @var \Cake\View\View $view */
+        /** @var \Cake\View\View $view */
         $view = $event->getSubject();
         //$content = $view->Blocks->get('content');
         $content = $view->fetch('content');
@@ -48,13 +49,13 @@ class ShortcodeHelper extends Helper
             $shortcode = $closecode = $content = null;
             $args = "";
             if (count($matches) == 2) {
-                list($match, $shortcode) = $matches;
+                [$match, $shortcode] = $matches;
             } elseif (count($matches) == 3) {
-                list($match, $shortcode, $args) = $matches;
+                [$match, $shortcode, $args] = $matches;
             } elseif (count($matches) == 4) {
-                list($match, $shortcode, $args, $content) = $matches;
+                [$match, $shortcode, $args, $content] = $matches;
             } elseif (count($matches) == 5) {
-                list($match, $shortcode, $args, $content, $closecode) = $matches;
+                [$match, $shortcode, $args, $content, $closecode] = $matches;
             } else {
                 return $matches[0];
             }
@@ -69,7 +70,7 @@ class ShortcodeHelper extends Helper
             array_walk($args, function ($v) use (&$params) {
                 $attr = explode("=", $v);
                 if (count($attr) == 2) {
-                    list($key, $val) = $attr;
+                    [$key, $val] = $attr;
                     $val = trim(trim($val, "\""));
                     $params[$key] = $val;
                 }

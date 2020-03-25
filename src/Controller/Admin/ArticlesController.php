@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller\Admin;
 
-use Cake\Core\Configure;
 use Cake\Routing\Router;
 use Content\ContentManager;
 
@@ -32,7 +33,6 @@ class ArticlesController extends AppController
         'unpublish' => 'Backend.Unpublish',
     ];
 
-
     /**
      * @param null $id
      */
@@ -44,7 +44,7 @@ class ArticlesController extends AppController
         $url = $article->getUrl();
         $url = Router::url($url);
 
-        $url .= (strpos('?', $url) === 0) ? '?' : '&';
+        $url .= strpos('?', $url) === 0 ? '?' : '&';
         $url .= 'preview=' . $previewKey;
         $this->redirect($url);
     }

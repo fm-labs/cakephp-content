@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Controller\Admin;
 
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
 use Content\ContentManager;
 use Media\Lib\Media\MediaManager;
 
@@ -36,18 +36,18 @@ class AppController extends \Backend\Controller\Controller
     ];
 
     /**
-     * @param Event $event The controller event
+     * @param \Cake\Event\Event $event The controller event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         //@TODO Move shop language selection to a component
         $locale = $this->request->getQuery('locale');
-        $this->locale = ($locale) ? $locale : Configure::read('Shop.defaultLocale');
+        $this->locale = $locale ? $locale : Configure::read('Shop.defaultLocale');
     }
 
     /**
-     * @param Event $event The controller event
+     * @param \Cake\Event\Event $event The controller event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeRender(\Cake\Event\EventInterface $event)

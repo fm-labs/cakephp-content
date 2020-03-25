@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Routing\Route;
 
 use Cake\I18n\I18n;

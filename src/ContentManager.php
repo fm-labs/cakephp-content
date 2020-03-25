@@ -1,15 +1,14 @@
 <?php
+declare(strict_types=1);
+
 namespace Content;
 
 use Banana\Lib\ClassRegistry;
 use Banana\Lib\SingletonTrait;
 use Cake\Collection\Collection;
-use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Datasource\EntityInterface;
 use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Page;
 use Content\Model\Entity\Article;
 
 /**
@@ -29,7 +28,7 @@ class ContentManager
     public static $version;
 
     /**
-     * @return ContentManager
+     * @return \Content\ContentManager
      * @deprecated
      */
     public static function getInstance()
@@ -62,7 +61,7 @@ class ContentManager
     }
 
     /**
-     * @return EntityInterface|null
+     * @return \Cake\Datasource\EntityInterface|null
      * @deprecated
      */
     public static function getDefaultPageLayout()
@@ -117,7 +116,7 @@ class ContentManager
 
     public static function getMenuById($menuId)
     {
-        /* @var \Content\Model\Table\MenusTable $Menus */
+        /** @var \Content\Model\Table\MenusTable $Menus */
         $Menus = TableRegistry::getTableLocator()->get('Content.Menus');
 
         return $Menus->getMenu($menuId);
@@ -125,7 +124,7 @@ class ContentManager
 
     public static function getAvailableMenus()
     {
-        /* @var \Content\Model\Table\MenusTable $Menus */
+        /** @var \Content\Model\Table\MenusTable $Menus */
         $Menus = TableRegistry::getTableLocator()->get('Content.Menus');
 
         return $Menus->find('list', ['keyField' => 'id', 'valueField' => 'title'])
@@ -137,7 +136,7 @@ class ContentManager
     /**
      * @param $type
      * @param $typeid
-     * @return EntityInterface|mixed|null
+     * @return \Cake\Datasource\EntityInterface|mixed|null
      * @deprecated
      */
     public static function getArticleByType($type, $typeid)
@@ -171,7 +170,7 @@ class ContentManager
 
         $modulesLoader = function ($dir, $plugin = null) use (&$availableModules) {
             $folder = new Folder($dir);
-            list($namespaces, ) = $folder->read();
+            [$namespaces, ] = $folder->read();
 
             foreach ($namespaces as $ns) {
                 $folder->cd($dir . DS . $ns);
@@ -179,7 +178,7 @@ class ContentManager
                 array_walk($widgets, function ($val) use ($plugin, $dir, &$availableModules) {
                     $val = substr($val, strlen($dir . DS));
                     if (preg_match('/^(.*)Module\.php$/', $val, $matches)) {
-                        $availableModules[] = ($plugin) ? $plugin . "." . $matches[1] : $matches[1];
+                        $availableModules[] = $plugin ? $plugin . "." . $matches[1] : $matches[1];
                     }
                 });
             }
@@ -207,7 +206,7 @@ class ContentManager
 
         $modulesLoader = function ($dir, $plugin = null) use (&$availableModules) {
             $folder = new Folder($dir);
-            list($namespaces, ) = $folder->read();
+            [$namespaces, ] = $folder->read();
 
             foreach ($namespaces as $ns) {
                 $folder->cd($dir . DS . $ns);
@@ -215,7 +214,7 @@ class ContentManager
                 array_walk($widgets, function ($val) use ($plugin, $dir, &$availableModules) {
                     $val = substr($val, strlen($dir . DS));
                     if (preg_match('/^(.*)\.ctp$/', $val, $matches)) {
-                        $availableModules[] = ($plugin) ? $plugin . "." . $matches[1] : $matches[1];
+                        $availableModules[] = $plugin ? $plugin . "." . $matches[1] : $matches[1];
                     }
                 });
             }
@@ -242,12 +241,12 @@ class ContentManager
 
         $layoutLoader = function ($dir, $plugin = null) use (&$availableLayouts) {
             $folder = new Folder($dir);
-            list(, $layouts) = $folder->read();
+            [, $layouts] = $folder->read();
             array_walk($layouts, function ($val) use ($plugin, $dir, &$availableLayouts) {
                 //$val = substr($val, strlen($dir . DS));
                 $val = basename($val, '.ctp');
                 if (preg_match('/^frontend(\_(.*))?$/', $val, $matches)) {
-                    $availableLayouts[] = ($plugin) ? $plugin . "." . $val : $val;
+                    $availableLayouts[] = $plugin ? $plugin . "." . $val : $val;
                 }
             });
         };
@@ -266,7 +265,7 @@ class ContentManager
     }
 
     /**
-     * @return Collection
+     * @return \Cake\Collection\Collection
      */
     public static function getThemesAvailable()
     {
@@ -342,12 +341,12 @@ class ContentManager
 
             return true;
         };
-        $filter = ($filter) ?: $defaultFilter;
+        $filter = $filter ?: $defaultFilter;
 
         // finder
         $filesFinder = function ($dir, $plugin) use (&$available, $filter) {
             $folder = new Folder($dir);
-            list(, $files) = $folder->read();
+            [, $files] = $folder->read();
 
             // apply filter
             if ($filter && is_callable($filter)) {
@@ -423,7 +422,7 @@ class ContentManager
         $modulesLoader = function ($dir, $plugin = null) {
             $list = [];
             $folder = new Folder($dir);
-            list(, $files) = $folder->read();
+            [, $files] = $folder->read();
 
             array_walk($files, function ($val) use ($plugin, $dir, &$list) {
                 if (preg_match('/^teaser_([\w\_]+)\.ctp$/', $val, $matches)) {
@@ -464,7 +463,7 @@ class ContentManager
         $modulesLoader = function ($dir, $plugin = null) {
             $list = [];
             $folder = new Folder($dir);
-            list(, $files) = $folder->read();
+            [, $files] = $folder->read();
 
             array_walk($files, function ($val) use ($plugin, $dir, &$list) {
                 if (preg_match('/^\_/', $val)) {

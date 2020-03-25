@@ -1,38 +1,39 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\View;
 
 use Banana\View\ViewModuleTrait;
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\Http\ServerRequest as Request;
-use Cake\Http\Response;
 use Cake\Event\EventManager;
+use Cake\Http\Response;
+use Cake\Http\ServerRequest as Request;
 use Cake\ORM\TableRegistry;
 use Cake\View\View;
 use Content\Model\Entity\ContentModule;
-use Content\View\Helper\BreadcrumbsHelper;
 
 /**
  * Class FrontendView
  *
  * @package App\View
  *
- * @property BreadcrumbsHelper $Breadcrumbs
+ * @property \Content\View\Helper\BreadcrumbsHelper $Breadcrumbs
  */
 class ContentView extends View
 {
     use ViewModuleTrait;
 
     /**
-     * @param Request $request
-     * @param Response $response
-     * @param EventManager $eventManager
+     * @param \Cake\Http\ServerRequest $request
+     * @param \Cake\Http\Response $response
+     * @param \Cake\Event\EventManager $eventManager
      * @param array $viewOptions
      */
     public function __construct(
-        Request $request = null,
-        Response $response = null,
-        EventManager $eventManager = null,
+        ?Request $request = null,
+        ?Response $response = null,
+        ?EventManager $eventManager = null,
         array $viewOptions = []
     ) {
         parent::__construct($request, $response, $eventManager, $viewOptions);
@@ -177,7 +178,7 @@ class ContentView extends View
         // render short codes
         //$content = $this->renderShortCodes($content);
 
-        return ($content) ?: $default;
+        return $content ?: $default;
     }
 
     public function render($view = null, $layout = null)

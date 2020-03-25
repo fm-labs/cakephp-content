@@ -1,7 +1,7 @@
 <?php
-namespace Content\Controller;
+declare(strict_types=1);
 
-use Cake\Event\Event;
+namespace Content\Controller;
 
 /**
  * Class GalleriesController
@@ -11,7 +11,7 @@ use Cake\Event\Event;
 class GalleriesController extends AppController
 {
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -37,7 +37,7 @@ class GalleriesController extends AppController
         $this->set('gallery', $gallery);
         $this->set('_serialize', ['gallery']);
 
-        $view = ($gallery->view_template) ?: null;
+        $view = $gallery->view_template ?: null;
 
         $this->render($view);
     }

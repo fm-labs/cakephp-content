@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Shortcode;
 
@@ -13,7 +14,7 @@ class ShortcodeRegistry
     protected $_shortcodes = [];
 
     /**
-     * @var View
+     * @var \Cake\View\View
      */
     protected $_view;
 

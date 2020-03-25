@@ -1,14 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
-use Content\Model\Entity\Page;
-use Content\Model\Table\PagesTable;
 
 /**
  * Class FrontendComponent
@@ -18,12 +15,12 @@ use Content\Model\Table\PagesTable;
 class FrontendComponent extends Component
 {
     /**
-     * @var Controller
+     * @var \Cake\Controller\Controller
      */
     public $controller;
 
     /**
-     * @var PagesTable
+     * @var \Content\Model\Table\PagesTable
      */
     public $Pages;
 
@@ -42,8 +39,8 @@ class FrontendComponent extends Component
      */
     public function initialize(array $config): void
     {
-        $layout = ($this->_config['layout']) ?: Configure::read('Site.layout');
-        $theme = ($this->_config['theme']) ?: Configure::read('Site.theme');
+        $layout = $this->_config['layout'] ?: Configure::read('Site.layout');
+        $theme = $this->_config['theme'] ?: Configure::read('Site.theme');
         $viewClass = $this->_config['viewClass'];
 
         // check if theme plugin is loaded
@@ -113,6 +110,6 @@ class FrontendComponent extends Component
             return false;
         }
 
-        return ($previewKeyInRequest === $previewKeyInSession);
+        return $previewKeyInRequest === $previewKeyInSession;
     }
 }

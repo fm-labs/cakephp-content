@@ -1,7 +1,7 @@
 <?php
-namespace Content\Controller;
+declare(strict_types=1);
 
-use Cake\Event\Event;
+namespace Content\Controller;
 
 /**
  * Class ModulesController
@@ -11,7 +11,7 @@ use Cake\Event\Event;
 class ModulesController extends AppController
 {
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)

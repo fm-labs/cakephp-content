@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\View\Cell;
 
-use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
-use Cake\Log\Log;
-use Cake\Http\ServerRequest as Request;
 use Cake\Http\Response;
+use Cake\Http\ServerRequest as Request;
+use Cake\Log\Log;
 use Cake\View\Cell;
 
 abstract class ModuleCell extends Cell implements EventListenerInterface
@@ -49,14 +50,14 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
      * @param array $cellOptions Cell options to apply.
      */
     public function __construct(
-        Request $request = null,
-        Response $response = null,
-        EventManager $eventManager = null,
+        ?Request $request = null,
+        ?Response $response = null,
+        ?EventManager $eventManager = null,
         array $cellOptions = []
     ) {
         parent::__construct($request, $response, $eventManager, $cellOptions);
 
-        $this->params = ($this->module)
+        $this->params = $this->module
             ? array_merge(static::$defaultParams, $this->params, $this->module->params_arr)
             : array_merge(static::$defaultParams, $this->params);
 
@@ -73,7 +74,7 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
 
             return $rendered;
         } catch (\Exception $ex) {
-            Log::error('ModuleCell: ' . get_class($this) . ': ' . $ex->getMessage());
+            Log::error('ModuleCell: ' . static::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

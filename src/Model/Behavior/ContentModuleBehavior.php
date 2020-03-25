@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Model\Behavior;
 
@@ -32,7 +33,7 @@ class ContentModuleBehavior extends Behavior
     }
 
     /**
-     * @param Event $event The 'Model.initialize' event handler
+     * @param \Cake\Event\Event $event The 'Model.initialize' event handler
      * @return void
      */
     public function modelInitialize(Event $event)
@@ -53,7 +54,7 @@ class ContentModuleBehavior extends Behavior
     /**
      * Create model associations
      *
-     * @param Table $table The model table
+     * @param \Cake\ORM\Table $table The model table
      * @return void
      */
     protected function _prepareTable(Table $table)

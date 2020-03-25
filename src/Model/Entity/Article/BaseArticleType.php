@@ -1,16 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Model\Entity\Article;
 
-use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Article;
 
 abstract class BaseArticleType implements ArticleTypeInterface
 {
     /**
-     * @var Article
+     * @var \Content\Model\Entity\Article
      */
     protected $article;
 
@@ -20,7 +18,7 @@ abstract class BaseArticleType implements ArticleTypeInterface
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param \Cake\Datasource\EntityInterface $entity
      * @return mixed
      * @deprcated Use constructor instead
      */

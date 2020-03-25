@@ -1,17 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View;
 
 use Cake\Core\Plugin;
 use Cake\I18n\I18n;
-use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
-use Cake\Utility\Security;
 use Cake\Utility\Text;
 
 class ArticleView extends ContentView
 {
-
     /**
      * @param null $view
      * @param null $layout
@@ -31,9 +28,9 @@ class ArticleView extends ContentView
                 }
             }
 
-            $metaTitle = ($article->meta_title) ?: $article->title;
-            $metaDescription = ($article->meta_desc) ?: Text::truncate(strip_tags($article->teaser_html), 150, ['exact' => false]);
-            $metaDescription = ($metaDescription) ?: Text::truncate(strip_tags($article->body_html), 150, ['exact' => false]);
+            $metaTitle = $article->meta_title ?: $article->title;
+            $metaDescription = $article->meta_desc ?: Text::truncate(strip_tags($article->teaser_html), 150, ['exact' => false]);
+            $metaDescription = $metaDescription ?: Text::truncate(strip_tags($article->body_html), 150, ['exact' => false]);
             $articleUrl = $this->Html->Url->build($article->getUrl(), true);
 
             // post title
@@ -43,7 +40,7 @@ class ArticleView extends ContentView
             $this->Html->meta(['link' => $articleUrl, 'rel' => 'canonical'], null, ['block' => true]);
 
             // meta tags
-            $metaLang = ($article->meta_lang) ?: I18n::getLocale();
+            $metaLang = $article->meta_lang ?: I18n::getLocale();
             $this->Html->meta(['name' => 'language', 'content' => $metaLang], null, ['block' => true]);
 
             $metaRobots = 'index,follow';
@@ -51,7 +48,7 @@ class ArticleView extends ContentView
 
             $this->Html->meta(['name' => 'description', 'content' => $metaDescription, 'lang' => $metaLang], null, ['block' => true]);
 
-            $metaKeywords = ($article->meta_keywords) ?: $article->title;
+            $metaKeywords = $article->meta_keywords ?: $article->title;
             $this->Html->meta(['name' => 'keywords', 'content' => $metaKeywords, 'lang' => $metaLang], null, ['block' => true]);
 
             //$this->Html->meta(['name' => 'revisit-after', 'content' => '7 days'], null, ['block' => true]);
@@ -76,12 +73,12 @@ class ArticleView extends ContentView
             $this->Html->meta(['property' => 'og:url', 'content' => $articleUrl], null, ['block' => true]);
             $this->Html->meta(['property' => 'og:type', 'content' => 'article'], null, ['block' => true]);
 
-            $publishedTime = ($article->publish_start) ?: $article->created;
+            $publishedTime = $article->publish_start ?: $article->created;
             if ($publishedTime) {
                 $this->Html->meta(['property' => 'article:published_time', 'content' => $publishedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
-            $expirationTime = ($article->publish_end);
+            $expirationTime = $article->publish_end;
             if ($expirationTime) {
                 $this->Html->meta(['property' => 'article:expiration_time', 'content' => $expirationTime->format(DATE_ISO8601)], null, ['block' => true]);
             }

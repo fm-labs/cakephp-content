@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller;
 
-use Cake\Core\Configure;
-use Cake\Event\Event;
 use Cake\Http\Exception\NotFoundException;
 
 /**
@@ -19,7 +19,7 @@ class PostsController extends AppController
     public $modelClass = "Content.Articles";
 
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -74,7 +74,7 @@ class PostsController extends AppController
             /** @var \Content\Model\Entity\Article $article */
             $article = $this->Articles->get($id, [
                 'media' => true,
-                'attributes' => true
+                'attributes' => true,
             ]);
 
             if (!$article->isPublished()) {
@@ -112,9 +112,9 @@ class PostsController extends AppController
         $this->set('_serialize', ['article']);
 
         //$template = ($article->template) ?: ((!$article->parent_id) ? $article->type . '_parent' : $article->type);
-        $template = ($article->template) ?: $article->type;
-        $template = ($this->request->getQuery('template')) ?: $template;
-        $template = ($template) ?: null;
+        $template = $article->template ?: $article->type;
+        $template = $this->request->getQuery('template') ?: $template;
+        $template = $template ?: null;
 
         $this->viewBuilder()
             ->setClassName('Content.Article')
@@ -123,5 +123,4 @@ class PostsController extends AppController
 
         //$this->render($template);
     }
-
 }

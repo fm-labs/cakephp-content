@@ -1,21 +1,16 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\View\Module;
 
 use Banana\Menu\Menu;
-use Cake\Cache\Cache;
-use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
-use Cake\View\Cell;
-use Content\Model\Table\MenusTable;
-use Content\Model\Table\PagesTable;
 use Banana\View\ViewModule;
 
 /**
  * Class MenuModule
  *
  * @package Content\View\Module
- * @property MenusTable $Menus
+ * @property \Content\Model\Table\MenusTable $Menus
  */
 class MenuModule extends ViewModule
 {
@@ -40,7 +35,7 @@ class MenuModule extends ViewModule
             $this->loadModel('Content.Menus');
             $startNodeId = $this->_getStartNodeId();
             $menu = $this->Menus->getMenu($startNodeId, ['maxDepth' => $this->depth]);
-            $menu = ($menu instanceof Menu) ? $menu->toArray() : (array)$menu;
+            $menu = $menu instanceof Menu ? $menu->toArray() : (array)$menu;
             $this->menu = $menu;
         }
 

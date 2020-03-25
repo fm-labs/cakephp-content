@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content;
 
@@ -25,7 +26,7 @@ class ArticleManager
     public static function registerType($alias, array $config = [])
     {
         if (is_array($alias)) {
-            array_walk($alias, function($_config, $_alias) {
+            array_walk($alias, function ($_config, $_alias) {
                 self::registerType($_alias, $_config);
             });
 
@@ -52,6 +53,6 @@ class ArticleManager
      */
     public static function getType($alias)
     {
-        return (self::$types[$alias]) ?? null;
+        return self::$types[$alias] ?? null;
     }
 }

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Table;
 
 use Cake\Core\Plugin;
 use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
 use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
@@ -18,7 +19,6 @@ use Media\Lib\Media\MediaManager;
  */
 class GalleriesTable extends BaseTable
 {
-
     /**
      * Initialize method
      *

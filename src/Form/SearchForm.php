@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Form;
 
 use Cake\Form\Form;
@@ -13,7 +15,7 @@ use Cake\Validation\Validator;
 class SearchForm extends Form
 {
     /**
-     * @param Schema $schema
+     * @param \Cake\Form\Schema $schema
      * @return $this
      */
     protected function _buildSchema(Schema $schema)
@@ -22,7 +24,7 @@ class SearchForm extends Form
     }
 
     /**
-     * @param Validator $validator
+     * @param \Cake\Validation\Validator $validator
      * @return $this
      */
     protected function _buildValidator(Validator $validator)

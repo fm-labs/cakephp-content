@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity;
 
 use Banana\Lib\ClassRegistry;
@@ -140,7 +142,7 @@ class Module extends Entity
             $this->_fields['params'] = json_encode($this->_fields['params_arr']);
         }
 
-        return (isset($this->_fields['params'])) ? $this->_fields['params'] : null;
+        return $this->_fields['params'] ?? null;
     }
 
     /**
@@ -148,9 +150,7 @@ class Module extends Entity
      */
     protected function _getParamsArr()
     {
-        $this->_fields['params_arr'] = (isset($this->_fields['params_arr']))
-            ? $this->_fields['params_arr']
-            : [];
+        $this->_fields['params_arr'] = $this->_fields['params_arr'] ?? [];
 
         return $this->_fields['params_arr'];
     }

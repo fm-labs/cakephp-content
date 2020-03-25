@@ -1,12 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity\Menu;
 
 use Banana\Menu\MenuItem;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Article;
-use Content\Page\TypeInterface;
 
 /**
  * Class PageType
@@ -42,7 +42,7 @@ class PageType extends BaseType
     {
         $label = $this->getConfig('title');
         if (!$label) {
-            $label = get_class($this);
+            $label = static::class;
         }
 
         return $label;
@@ -123,7 +123,7 @@ class PageType extends BaseType
 
     /**
      * @param int $id Article ID
-     * @return Article
+     * @return \Content\Model\Entity\Article
      */
     protected function _getArticle($id)
     {

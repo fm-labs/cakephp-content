@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Content;
 
 use Banana\Plugin\BasePlugin;
-use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
@@ -13,7 +13,6 @@ use Settings\SettingsManager;
 
 class Plugin extends BasePlugin implements EventListenerInterface
 {
-
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
@@ -164,23 +163,22 @@ class Plugin extends BasePlugin implements EventListenerInterface
                 'data-icon' => 'image',
             ],
 
-
         ];
     }
 
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      */
     public function buildSettings(Event $event, SettingsManager $settings)
     {
         $settings->add('Content', [
             'Content.Router.enablePrettyUrls' => [
                 'type' => 'boolean',
-                'help' => 'Enables SEO-friendly URIs'
+                'help' => 'Enables SEO-friendly URIs',
             ],
             'Content.Router.forceCanonical' => [
                 'type' => 'boolean',
-                'help' => 'Force redirect to canonical URI'
+                'help' => 'Force redirect to canonical URI',
             ],
         ]);
     }
@@ -194,7 +192,6 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'children' => $this->_getMenuItems(),
         ]);
     }
-
 
     public function buildBackendSystemMenu(Event $event, \Banana\Menu\Menu $menu)
     {

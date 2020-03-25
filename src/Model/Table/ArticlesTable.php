@@ -1,16 +1,13 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Table;
 
-use Cake\Datasource\EntityInterface;
+use Cake\Core\Plugin;
 use Cake\Datasource\ResultSetDecorator;
-use Cake\Event\Event;
+use Cake\Log\Log;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
-use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Article;
-use Cake\Core\Plugin;
-use Cake\Log\Log;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
@@ -19,7 +16,6 @@ use Cake\Validation\Validator;
  */
 class ArticlesTable extends BaseTable
 {
-
     /**
      * Initialize method
      *
@@ -42,7 +38,7 @@ class ArticlesTable extends BaseTable
         $this->addBehavior('Banana.Attributes', [
             //'attributesTableClass' => 'Content.Options',
             'attributesTableName' => 'content_options',
-            'attributesField' => 'options'
+            'attributesField' => 'options',
         ]);
 
         $this->addBehavior('Translate', [
@@ -142,8 +138,7 @@ class ArticlesTable extends BaseTable
 
     public function findWithUri(Query $query)
     {
-        $query->formatResults(function (ResultSetDecorator $results)
-        {
+        $query->formatResults(function (ResultSetDecorator $results) {
             $results = $results->map(function (Entity $row) {
 
                 $row->my_fancy_view_url = "blub";

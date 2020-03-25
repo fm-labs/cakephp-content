@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\View\Helper;
 
-use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
 use Cake\Utility\Inflector;
@@ -138,12 +139,12 @@ class MetaHelper extends Helper
     {
         if (preg_match('/^setLink([\w]+)$/', $method, $matches)) {
             $name = Text::slug(Inflector::underscore($matches[1]));
-            $content = (isset($args[0])) ? $args[0] : null;
+            $content = $args[0] ?? null;
 
             return $this->_setLink($name, $content);
         } elseif (preg_match('/^set([\w]+)$/', $method, $matches)) {
             $name = Text::slug(Inflector::underscore($matches[1]));
-            $content = (isset($args[0])) ? $args[0] : null;
+            $content = $args[0] ?? null;
 
             return $this->_setMeta($name, $content);
         }
@@ -189,7 +190,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('description', [
             'name' => 'description',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::getLocale(),
+            'lang' => $lang ?: I18n::getLocale(),
         ]);
     }
 
@@ -198,7 +199,7 @@ class MetaHelper extends Helper
         return $this->_setMeta('keywords', [
             'name' => 'keywords',
             'content' => $value,
-            'lang' => ($lang) ?: I18n::getLocale(),
+            'lang' => $lang ?: I18n::getLocale(),
         ]);
     }
 

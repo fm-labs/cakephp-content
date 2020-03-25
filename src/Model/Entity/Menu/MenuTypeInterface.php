@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Model\Entity\Menu;
 
-use Banana\Menu\MenuItem;
 use Banana\Model\EntityTypeInterface;
 
 /**
@@ -39,7 +39,7 @@ interface MenuTypeInterface extends EntityTypeInterface
 
     /**
      * @param int $maxDepth Maximum number of nested menus (Default: 0)
-     * @return MenuItem
+     * @return \Banana\Menu\MenuItem
      */
     public function toMenuItem($maxDepth = 0);
 }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity;
 
 use Cake\Core\Plugin;
@@ -16,7 +18,7 @@ use Media\Lib\Media\MediaManager;
 class Gallery extends Entity
 {
     /**
-     * @var Gallery
+     * @var \Content\Model\Entity\Gallery
      */
     protected $_parent;
 
@@ -35,7 +37,7 @@ class Gallery extends Entity
     ];
 
     /**
-     * @return \Cake\Datasource\EntityInterface|Gallery|mixed|null
+     * @return \Cake\Datasource\EntityInterface|\Content\Model\Entity\Gallery|mixed|null
      */
     protected function _getParent()
     {
@@ -55,7 +57,7 @@ class Gallery extends Entity
             return $this->parent->desc_html;
         }
 
-        return (isset($this->_fields['desc_html'])) ? $this->_fields['desc_html'] : null;
+        return $this->_fields['desc_html'] ?? null;
     }
 
     /**

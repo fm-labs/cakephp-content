@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Helper;
 
@@ -12,7 +13,6 @@ use Cake\View\Helper;
  */
 class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
 {
-
     /**
      * Default config for the helper.
      *

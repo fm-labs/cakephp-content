@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Model\Entity;
 
-use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 

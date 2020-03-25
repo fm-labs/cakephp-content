@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller\Admin;
 
 class PagesController extends ArticlesController

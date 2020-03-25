@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Controller\Admin;
 
@@ -78,8 +79,6 @@ class MenusController extends AppController
 
         $menuTypes = $this->Menus->getTypeList();
         $this->set(compact('menuItem', 'menuTypes'));
-
-
 
         // ----------
 

@@ -1,18 +1,16 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller;
 
-use Cake\Core\Configure;
-use Cake\Event\Event;
 use Cake\Http\Exception\NotFoundException;
-use Content\Controller\Component\FrontendComponent;
-use Content\Model\Table\ArticlesTable;
 
 /**
  * Class FrontendController
  * @package App\Controller
  *
- * @property FrontendComponent $Frontend
- * @property ArticlesTable $Pages
+ * @property \Content\Controller\Component\FrontendComponent $Frontend
+ * @property \Content\Model\Table\ArticlesTable $Pages
  */
 class PagesController extends AppController
 {
@@ -40,7 +38,7 @@ class PagesController extends AppController
     }
 
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -96,7 +94,6 @@ class PagesController extends AppController
             if (!$article) {
                 throw new NotFoundException(__d('content', "Page not found"));
             }
-
 
             if (!$article->isPublished()) {
                 if ($this->Frontend->isPreviewMode()) {

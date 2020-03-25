@@ -1,15 +1,13 @@
 <?php
-namespace Content\Controller;
+declare(strict_types=1);
 
-use Cake\Event\Event;
-use Content\Model\Table\CategoriesTable;
-use Content\Model\Table\ArticlesTable;
+namespace Content\Controller;
 
 /**
  * Class CategoriesController
  * @package Content\src\Controller
- * @property CategoriesTable $Categories
- * @property ArticlesTable $Articles
+ * @property \Content\Model\Table\CategoriesTable $Categories
+ * @property \Content\Model\Table\ArticlesTable $Articles
  */
 class CategoriesController extends AppController
 {
@@ -19,7 +17,7 @@ class CategoriesController extends AppController
     public $modelClass = "Content.Categories";
 
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)

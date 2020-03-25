@@ -1,20 +1,16 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\View\Module;
 
 use Banana\Menu\Menu;
-use Cake\Cache\Cache;
-use Cake\ORM\TableRegistry;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
-use Cake\View\Cell;
-use Content\Model\Table\PagesTable;
 use Banana\View\ViewModule;
 
 /**
  * Class PagesMenuModule
  *
  * @package Content\View\Module
- * @property PagesTable $Pages
+ * @property \Content\Model\Table\PagesTable $Pages
  */
 class PagesMenuModule extends ViewModule
 {
@@ -39,11 +35,11 @@ class PagesMenuModule extends ViewModule
             $this->loadModel('Content.Pages');
             $startNodeId = $this->_getStartNodeId();
             $menu = $this->Pages->getMenu($startNodeId, ['maxDepth' => $this->depth]);
-            $menu = ($menu instanceof Menu) ? $menu->toArray() : (array)$menu;
+            $menu = $menu instanceof Menu ? $menu->toArray() : (array)$menu;
             $this->menu = $menu;
         }
 
-        $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/menu_list';
+        $this->element_path = $this->element_path ?: 'Content.Modules/PagesMenu/menu_list';
 
         $this->set('menu', $this->menu);
         $this->set('level', $this->level);
@@ -63,7 +59,7 @@ class PagesMenuModule extends ViewModule
         $startNodeId = $this->_getStartNodeId();
         $list = $this->Pages->getMenuTree($startNodeId, ['maxDepth' => $this->depth]);
 
-        $this->element_path = ($this->element_path) ?: 'Content.Modules/PagesMenu/select_list';
+        $this->element_path = $this->element_path ?: 'Content.Modules/PagesMenu/select_list';
 
         $this->set('opts', $list);
         $this->set('attrs', $params);

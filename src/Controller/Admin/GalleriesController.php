@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller\Admin;
 
 use Backend\Controller\JsTreeAwareTrait;
 use Banana\Controller\PrimaryModelAwareTrait;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Content\ContentManager;
 
@@ -33,7 +34,7 @@ class GalleriesController extends AppController
     ];
 
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)

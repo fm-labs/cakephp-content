@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace Content\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Event\Event;
 use Cake\I18n\I18n;
 
 /**
@@ -13,7 +14,7 @@ use Cake\I18n\I18n;
 class LocaleComponent extends Component
 {
     /**
-     * @param Event $event
+     * @param \Cake\Event\Event $event
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {

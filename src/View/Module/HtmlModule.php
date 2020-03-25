@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\View\Module;
 
-use Banana\View\ViewModuleSchema;
 use Banana\View\ViewModule;
+use Banana\View\ViewModuleSchema;
 
 /**
  * Class HtmlModule

@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Content\Model\Entity\Article;
 
 use Banana\Model\EntityTypeInterface;
-use Cake\ORM\Query;
 
 interface ArticleTypeInterface extends EntityTypeInterface
 {
@@ -23,12 +23,12 @@ interface ArticleTypeInterface extends EntityTypeInterface
     public function getAdminUrl();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublished();
 
     /**
-     * @return Query
+     * @return \Cake\ORM\Query
      * @TODO This method should return an resultset instead of an query
      */
     public function getChildren();

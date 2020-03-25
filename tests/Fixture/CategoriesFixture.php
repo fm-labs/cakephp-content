@@ -9,7 +9,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class CategoriesFixture extends TestFixture
 {
-
     /**
      * Table name
      *

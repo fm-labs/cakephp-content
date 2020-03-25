@@ -9,7 +9,6 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class I18nFixture extends TestFixture
 {
-
     /**
      * Table name
      *
