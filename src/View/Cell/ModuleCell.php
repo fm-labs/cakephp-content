@@ -64,7 +64,7 @@ abstract class ModuleCell extends Cell implements EventListenerInterface
         $this->getEventManager()->on($this);
     }
 
-    public function render($template = null)
+    public function render(?string $template = null): string
     {
         $this->viewBuilder()
             ->setClassName('Content.Content');

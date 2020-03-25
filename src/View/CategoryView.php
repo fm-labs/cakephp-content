@@ -16,7 +16,7 @@ class CategoryView extends ContentView
      * @return null|string
      * @TODO Skip meta for inline categorys
      */
-    public function render($view = null, $layout = null)
+    public function render(?string $template = null, $layout = null): string
     {
         if ($this->get('category')) {
             $this->loadHelper('Media.Media');

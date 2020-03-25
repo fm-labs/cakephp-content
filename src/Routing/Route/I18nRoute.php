@@ -8,7 +8,7 @@ use Cake\Routing\Route\Route;
 
 class I18nRoute extends Route
 {
-    public function parseRequest($url)
+    public function parseRequest($url): array
     {
         $params = parent::parseRequest($url);
         //if (!$params) {
@@ -23,7 +23,7 @@ class I18nRoute extends Route
         return $params;
     }
 
-    public function match(array $url, array $context = [])
+    public function match(array $url, array $context = []): ?string
     {
         //debug($url);
         if (!isset($url['locale'])) {

@@ -5,6 +5,7 @@ namespace Content\Model\Table;
 
 use Cake\Core\Plugin;
 use Cake\Database\Schema;
+use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Validation\Validator;
 
 /**
@@ -13,10 +14,10 @@ use Cake\Validation\Validator;
  */
 class ModulesTable extends BaseTable
 {
-    protected function _initializeSchema(Schema\Table $table)
+    protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
         //$table->setColumnType('params', 'json');
-        return $table;
+        return $schema;
     }
 
     /**

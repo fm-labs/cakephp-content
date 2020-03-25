@@ -6,6 +6,7 @@ namespace Content\Model\Table;
 use Banana\Menu\Menu;
 use Cake\Collection\Collection;
 use Cake\Database\Schema\TableSchema;
+use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
@@ -53,7 +54,7 @@ class MenusTable extends BaseTable
         */
     }
 
-    protected function _initializeSchema(TableSchema $schema)
+    protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
         $schema->setColumnType('type_params', 'json');
 

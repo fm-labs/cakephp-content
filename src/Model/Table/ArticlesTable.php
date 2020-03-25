@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Content\Model\Table;
 
 use Cake\Core\Plugin;
+use Cake\Database\Schema\TableSchema;
+use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Datasource\ResultSetDecorator;
 use Cake\Log\Log;
 use Cake\ORM\Entity;
@@ -124,7 +126,7 @@ class ArticlesTable extends BaseTable
      * @param \Cake\Database\Schema\TableSchema $schema
      * @return \Cake\Database\Schema\TableSchema
      */
-    protected function _initializeSchema(\Cake\Database\Schema\TableSchema $schema)
+    protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
         //$schema->setColumnType('image_files', 'media_file');
         return $schema;

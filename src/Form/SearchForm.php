@@ -18,7 +18,7 @@ class SearchForm extends Form
      * @param \Cake\Form\Schema $schema
      * @return $this
      */
-    protected function _buildSchema(Schema $schema)
+    protected function _buildSchema(Schema $schema): Schema
     {
         return $schema->addField('query', 'string');
     }
@@ -39,7 +39,7 @@ class SearchForm extends Form
      * @param array $data
      * @return bool
      */
-    protected function _execute(array $data)
+    protected function _execute(array $data): bool
     {
         // Send an email.
         return true;

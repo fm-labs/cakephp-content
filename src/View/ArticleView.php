@@ -15,7 +15,7 @@ class ArticleView extends ContentView
      * @return null|string
      * @TODO Skip meta for inline posts
      */
-    public function render($view = null, $layout = null)
+    public function render(?string $template = null, $layout = null): string
     {
         if ($this->get('article')) {
             $article = $this->get('article');

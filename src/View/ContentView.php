@@ -39,7 +39,7 @@ class ContentView extends View
         parent::__construct($request, $response, $eventManager, $viewOptions);
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadHelper('Content.Breadcrumbs');
         $this->loadHelper('Content.Content');
@@ -159,10 +159,10 @@ class ContentView extends View
             'data-content-module-id' => $contentModule->id,
         ], $wrapperAttrs);
 
-        return $this->Html->div(null, $moduleHtml, $wrapperAttrs);
+        return $this->Html->div(null, (string)$moduleHtml, $wrapperAttrs);
     }
 
-    public function fetch($name, $default = '')
+    public function fetch(string $name, string $default = ''): string
     {
         $content = parent::fetch($name);
 
@@ -181,8 +181,8 @@ class ContentView extends View
         return $content ?: $default;
     }
 
-    public function render($view = null, $layout = null)
+    public function render(?string $template = null, $layout = null): string
     {
-        return parent::render($view, $layout);
+        return parent::render($template, $layout);
     }
 }
