@@ -11,7 +11,7 @@ use Content\Model\Entity\Node;
 class CategoryView extends ContentView
 {
     /**
-     * @param null $view
+     * @param null $template
      * @param null $layout
      * @return null|string
      * @TODO Skip meta for inline categorys

@@ -10,7 +10,7 @@ use Cake\Utility\Text;
 class ArticleView extends ContentView
 {
     /**
-     * @param null $view
+     * @param null $template
      * @param null $layout
      * @return null|string
      * @TODO Skip meta for inline posts

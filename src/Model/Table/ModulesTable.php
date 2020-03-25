@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Content\Model\Table;
 
 use Cake\Core\Plugin;
-use Cake\Database\Schema;
 use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Validation\Validator;
 

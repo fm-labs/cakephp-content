@@ -5,7 +5,6 @@ namespace Content\Model\Table;
 
 use Banana\Menu\Menu;
 use Cake\Collection\Collection;
-use Cake\Database\Schema\TableSchema;
 use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
