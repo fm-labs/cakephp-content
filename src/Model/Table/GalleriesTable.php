@@ -93,14 +93,14 @@ class GalleriesTable extends BaseTable
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->notEmptyString('title');
 
         $validator
-            ->allowEmpty('desc_html');
+            ->allowEmptyString('desc_html');
 
         return $validator;
     }

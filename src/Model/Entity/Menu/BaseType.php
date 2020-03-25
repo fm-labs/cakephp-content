@@ -77,6 +77,8 @@ abstract class BaseType implements MenuTypeInterface
      */
     public function toMenuItem($maxDepth = 0)
     {
+        $url = $this->getUrl();
+
         $item = new MenuItem(
             $this->getLabel(),
             $this->getUrl()

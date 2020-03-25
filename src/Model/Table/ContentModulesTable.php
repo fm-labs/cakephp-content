@@ -46,22 +46,22 @@ class ContentModulesTable extends BaseTable
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
-            ->allowEmpty('refscope');
+            ->allowEmptyString('refscope');
 
         $validator
             ->add('refid', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('refid');
+            ->allowEmptyString('refid');
 
         $validator
             //->add('template', 'valid', ['rule' => 'alphanumeric'])
-            ->allowEmpty('template');
+            ->allowEmptyString('template');
 
         $validator
             ->add('section', 'valid', ['rule' => 'alphanumeric'])
-            ->allowEmpty('section');
+            ->allowEmptyString('section');
 
         return $validator;
     }

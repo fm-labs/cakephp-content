@@ -4,22 +4,18 @@ namespace Content\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Http\Exception\NotFoundException;
-use Cake\Routing\Router;
 use Content\Controller\Component\FrontendComponent;
-use Content\Controller\Traits\PagesDisplayActionTrait;
-use Content\Model\Table\PagesTable;
+use Content\Model\Table\ArticlesTable;
 
 /**
  * Class FrontendController
  * @package App\Controller
  *
  * @property FrontendComponent $Frontend
- * @property PagesTable $Pages
+ * @property ArticlesTable $Pages
  */
 class PagesController extends AppController
 {
-    use PagesDisplayActionTrait;
-
     /**
      * @var string
      */
@@ -37,8 +33,6 @@ class PagesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        //$this->loadComponent('Paginator');
-        //$this->loadComponent('RequestHandler');
 
         $this->Frontend->setRefScope('Content.Pages');
 
@@ -62,12 +56,7 @@ class PagesController extends AppController
      */
     public function index()
     {
-        $rootPage = null;
-        if (!$rootPage) {
-            throw new NotFoundException(__d('content', "Root article not found"));
-        }
-
-        $this->setAction('view', $rootPage->id);
+        throw new NotFoundException(__d('content', "Index page not found"));
     }
 
     /**

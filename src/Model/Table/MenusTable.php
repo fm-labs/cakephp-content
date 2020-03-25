@@ -10,6 +10,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\MenuManager;
@@ -116,30 +117,30 @@ class MenusTable extends BaseTable
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('lft');
+            ->allowEmptyString('lft');
 
         $validator
             ->add('rght', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('rght');
+            ->allowEmptyString('rght');
 
         $validator
             ->add('level', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('level');
+            ->allowEmptyString('level');
 
         $validator
             ->add('parent_id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('parent_id');
+            ->allowEmptyString('parent_id');
 
         $validator
             ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->notEmptyString('title');
 
         $validator
-            ->allowEmpty('type');
+            ->allowEmptyString('type');
 
         /*
         $validator
@@ -258,68 +259,31 @@ class MenusTable extends BaseTable
      */
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
-        /*
-        $types = $this->getTypes();
-        $handlerBuilder = function (EntityInterface $entity) use ($types) {
-            $type = $entity->get('type');
-            $params = (array)$entity->get('type_params');
-
-            if (!isset($types[$type])) {
-                throw new \Exception('Unknown menu type: ' . $type);
-            }
-
-            $className = $types[$type]['className'];
-            if (!class_exists($className)) {
-                throw new \Exception('Class not found: ' . $className);
-            }
-
-            $params += $entity->extract(['type', 'title', 'hide_in_nav', 'hide_in_sitemap', 'cssid', 'cssclass']);
-            $handler = new $className($params);
-
-            return $handler;
-        };
-        */
-
         $menu = new Menu();
         foreach ($children as $child) {
-            /* @var \Content\Model\Entity\Menu $child */
             try {
-                //$handler = $this->getTypeHandler($child);
-                //$handler = $handlerBuilder($child->type, $child->type_params);
-                /* @var \Content\Page\TypeInterface $handler */
-                //$handler = $handlerBuilder($child);
-                //$item = $handler->toMenuItem($maxDepth);
-
+                /* @var \Content\Model\Entity\Menu $child */
                 if (!$child->isVisibleInMenu() && !$includeHidden) {
                     continue;
                 }
 
+                // check the url, skip item if a route does not exist
+                // Router::url() will throw MissingRouteException
+                Router::url($child->getUrl());
+
                 $item = $child->toMenuItem($maxDepth);
 
-                /*
-                if (!$includeHidden && !$handler->isEnabled($child)) {
-                    continue;
-                }
-
-                if (($maxDepth < 0 || $level < $maxDepth) && $handler->findChildren($child)) {
-                    $_children = $this->_buildMenu($handler->findChildren($child), $level + 1, $maxDepth);
-                    $item->setChildren($_children);
-                }
-                */
                 if (($maxDepth < 0 || $level < $maxDepth) && isset($child['children'])) {
                     $_submenu = $this->_buildMenu($child['children'], $level + 1, $maxDepth);
                     $item->addChildren($_submenu->getItems());
                 }
 
                 $menu->addItem($item);
-            /*
-            } catch (MissingMenuTypeHandlerException $ex) {
-                //@todo handle exception
-                debug($ex->getMessage());
-            */
+            } catch (MissingRouteException $ex) {
+                continue;
             } catch (\Exception $ex) {
-                //@todo handle exception
                 debug($ex->getMessage());
+                continue;
             }
         }
 

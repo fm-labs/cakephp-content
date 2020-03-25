@@ -68,7 +68,7 @@ class Module extends Entity
         }
 
         $this->_properties['params'] = json_encode($this->_properties['params_arr']);
-        $this->dirty('params', true);
+        $this->setDirty('params', true);
     }
 
     /**
@@ -169,7 +169,7 @@ class Module extends Entity
         foreach (array_keys((array)$this->params_arr) as $param) {
             if (!$this->has($param)) {
                 $this->_properties[$param] = $this->_properties['params_arr'][$param];
-            } elseif ($this->dirty($param)) {
+            } elseif ($this->isDirty($param)) {
                 $dirtyParam = true;
                 $this->_properties['params_arr'][$param] = $this->get($param);
             }
@@ -177,7 +177,7 @@ class Module extends Entity
 
         if ($dirtyParam) {
             $this->_properties['params'] = json_encode($this->params_arr);
-            $this->dirty('params', true);
+            $this->setDirty('params', true);
         }
     }
 }

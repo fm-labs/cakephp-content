@@ -6,9 +6,9 @@ use Cake\Routing\Route\Route;
 
 class I18nRoute extends Route
 {
-    public function parse($url)
+    public function parseRequest($url)
     {
-        $params = parent::parse($url);
+        $params = parent::parseRequest($url);
         //if (!$params) {
         //    return false;
         //}

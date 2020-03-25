@@ -51,21 +51,21 @@ class CategoriesTable extends BaseTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
+            ->notEmptyString('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->requirePresence('slug', 'create')
-            ->notEmpty('slug');
+            ->notEmptyString('slug');
 
         $validator
             ->boolean('is_published')
             ->requirePresence('is_published', 'create')
-            ->notEmpty('is_published');
+            ->notEmptyString('is_published');
 
         return $validator;
     }

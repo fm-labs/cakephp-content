@@ -133,7 +133,7 @@ class ArticlesController extends AppController
     public function quick()
     {
         if ($this->request->is(['post', 'put'])) {
-            $id = $this->request->data('id');
+            $id = $this->request->getData('id');
             if ($id) {
                 $this->redirect(['action' => 'edit', $id]);
 

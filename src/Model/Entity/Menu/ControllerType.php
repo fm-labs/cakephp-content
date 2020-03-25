@@ -1,6 +1,9 @@
 <?php
 namespace Content\Model\Entity\Menu;
 
+use Cake\Routing\Exception\MissingRouteException;
+use Cake\Routing\Router;
+
 class ControllerType extends BaseType
 {
     protected $_defaultConfig = [
@@ -75,7 +78,7 @@ class ControllerType extends BaseType
                 array_walk($args, function ($val, $idx) use (&$params, &$entity) {
                     $val = trim($val);
                     if (preg_match('/^[\{](.*)[\}]$/', $val, $matches)) {
-                        $val = $this->config($matches[1]);
+                        $val = $this->getConfig($matches[1]);
                         $params[$matches[1]] = $val;
                     } else {
                         $params[] = $val;
@@ -98,6 +101,19 @@ class ControllerType extends BaseType
 
         $url = compact('plugin', 'controller', 'action', 'prefix');
         $url = array_merge($params, $url);
+
+        return $url;
+    }
+
+    protected function _checkUrl($url)
+    {
+        try {
+            if (is_array($url)) {
+                $url = Router::url($url);
+            }
+        } catch (MissingRouteException $ex) {
+            $url = false;
+        }
 
         return $url;
     }

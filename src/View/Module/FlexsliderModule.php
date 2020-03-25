@@ -59,6 +59,6 @@ class FlexsliderModule extends ViewModule
         $template = $template ?: $gallery->view_template;
         $this->viewBuilder()
             ->setClassName('Content.Content')
-            ->template($template);
+            ->setTemplate($template);
     }
 }

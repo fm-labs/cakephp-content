@@ -29,7 +29,7 @@ class ContentLocaleSelectorFilter extends LocaleSelectorFilter
                 return;
             }
 
-            I18n::locale($locale);
+            I18n::setLocale($locale);
         }
 
         /*

@@ -69,21 +69,21 @@ class ModulesTable extends BaseTable
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmptyString('name');
 
         $validator
-            ->allowEmpty('title');
+            ->allowEmptyString('title');
 
         $validator
             ->requirePresence('path', 'create')
-            ->notEmpty('path');
+            ->notEmptyString('path');
 
         $validator
-            ->allowEmpty('params');
+            ->allowEmptyString('params');
 
         return $validator;
     }

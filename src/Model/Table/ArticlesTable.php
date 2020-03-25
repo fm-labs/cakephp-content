@@ -198,7 +198,7 @@ class ArticlesTable extends BaseTable
 
         $validator
             ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->notEmptyString('title');
 
         $validator
             ->allowEmptyString('slug');

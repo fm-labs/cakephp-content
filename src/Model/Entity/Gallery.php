@@ -102,7 +102,7 @@ class Gallery extends Entity
                 if (preg_match('/^_/', basename($val))) {
                     return;
                 }
-                $images[] = $mm->getFileUrl($val);
+                $images[] = $mm->buildFileUrl($val);
             });
         }
 
