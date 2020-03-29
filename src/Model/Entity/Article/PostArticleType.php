@@ -41,7 +41,7 @@ class PostArticleType extends BaseArticleType
     public function getAdminUrl()
     {
         return [
-            'prefix' => 'admin',
+            'prefix' => 'Admin',
             'plugin' => 'Content',
             'controller' => 'Articles',
             'action' => 'manage',

@@ -42,7 +42,7 @@ class Category extends Entity
      */
     public function getAdminUrl()
     {
-        return ['prefix' => 'admin', 'plugin' => 'Content', 'controller' => 'Categories', 'action' => 'edit', $this->id];
+        return ['prefix' => 'Admin', 'plugin' => 'Content', 'controller' => 'Categories', 'action' => 'edit', $this->id];
     }
 
     /**

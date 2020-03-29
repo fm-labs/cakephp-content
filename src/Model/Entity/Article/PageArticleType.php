@@ -70,7 +70,7 @@ class PageArticleType extends BaseArticleType
     public function getAdminUrl()
     {
         return [
-            'prefix' => 'admin',
+            'prefix' => 'Admin',
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'edit',

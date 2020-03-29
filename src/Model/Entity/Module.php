@@ -91,7 +91,7 @@ class Module extends Entity
 
         $url = [
             'plugin' => 'Content',
-            'prefix' => 'admin',
+            'prefix' => 'Admin',
             'controller' => 'Modules',
             'action' => 'preview',
             'path' => $this->path,

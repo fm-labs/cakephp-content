@@ -9,7 +9,6 @@ use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest as Request;
-use Cake\ORM\TableRegistry;
 use Cake\View\View;
 use Content\Model\Entity\ContentModule;
 
@@ -25,10 +24,7 @@ class ContentView extends View
     use ViewModuleTrait;
 
     /**
-     * @param \Cake\Http\ServerRequest $request
-     * @param \Cake\Http\Response $response
-     * @param \Cake\Event\EventManager $eventManager
-     * @param array $viewOptions
+     * {@inheritDoc}
      */
     public function __construct(
         ?Request $request = null,
@@ -39,6 +35,9 @@ class ContentView extends View
         parent::__construct($request, $response, $eventManager, $viewOptions);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(): void
     {
         $this->loadHelper('Content.Breadcrumbs');
@@ -54,7 +53,14 @@ class ContentView extends View
         $this->getEventManager()->dispatch($event);
     }
 
-    public function section($section, array $options = [])
+    /**
+     * Render a section.
+     *
+     * @param string $section Section name
+     * @param array $options Section options
+     * @return string|null
+     */
+    public function section(string $section, array $options = [])
     {
         // skip section rendering when '_bare' view flag is set
         if ($this->get('_bare')) {
@@ -93,26 +99,32 @@ class ContentView extends View
         return $sectionHtml;
     }
 
+    /**
+     * @deprecated
+     */
     protected function _loadPageModules($section = null, $refscope = null, $refid = null)
     {
         return [];
 
-        // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
-        return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
-            ->where(['section' => $section, 'refscope' => $refscope, 'refid' => $refid])
-            ->contain(['Modules'])
-            ->all();
+        // To Optimize performance -> Do not request modules for every section. Cache for refscope instead
+        //return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
+        //    ->where(['section' => $section, 'refscope' => $refscope, 'refid' => $refid])
+        //    ->contain(['Modules'])
+        //    ->all();
     }
 
+    /**
+     * @deprecated
+     */
     protected function _loadLayoutModules($section = null, $refscope = null, $refid = null)
     {
         return [];
 
-        // @TODO Optimize performance -> Do not request modules for every section. Cache for refscope instead
-        return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
-            ->where(['section' => $section, 'refid IS NULL', 'or' => ['refscope' => $refscope, 'refscope IS NULL']])
-            ->contain(['Modules'])
-            ->all();
+        // To Optimize performance -> Do not request modules for every section. Cache for refscope instead
+        //return TableRegistry::getTableLocator()->get('Content.ContentModules')->find()
+        //    ->where(['section' => $section, 'refid IS NULL', 'or' => ['refscope' => $refscope, 'refscope IS NULL']])
+        //    ->contain(['Modules'])
+        //    ->all();
     }
 
     /*
@@ -131,6 +143,12 @@ class ContentView extends View
     }
     */
 
+    /**
+     * @param \Content\Model\Entity\ContentModule $contentModule Content module instance
+     * @param array $moduleData Module data
+     * @param array $wrapperAttrs Wrapper attributes
+     * @return \Banana\View\ViewModule|string|null
+     */
     public function contentModule(ContentModule $contentModule, array $moduleData = [], array $wrapperAttrs = [])
     {
         if (!$contentModule->module) {
@@ -162,6 +180,9 @@ class ContentView extends View
         return $this->Html->div(null, (string)$moduleHtml, $wrapperAttrs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function fetch(string $name, string $default = ''): string
     {
         $content = parent::fetch($name);
@@ -181,6 +202,9 @@ class ContentView extends View
         return $content ?: $default;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function render(?string $template = null, $layout = null): string
     {
         return parent::render($template, $layout);
