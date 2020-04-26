@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Content\View;
 
-use Banana\View\ViewModuleTrait;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
@@ -21,8 +20,6 @@ use Content\Model\Entity\ContentModule;
  */
 class ContentView extends View
 {
-    use ViewModuleTrait;
-
     /**
      * {@inheritDoc}
      */
@@ -44,9 +41,6 @@ class ContentView extends View
         $this->loadHelper('Content.Content');
         $this->loadHelper('Content.Meta');
         $this->loadHelper('Content.Shortcode');
-        /*$this->loadHelper('Form', [
-            'className' => 'Bootstrap\View\Helper\FormHelper',
-        ]);*/
 
         // collect additional helpers
         $event = new Event('Content.View.initialize', $this);
@@ -180,6 +174,11 @@ class ContentView extends View
         return $this->Html->div(null, (string)$moduleHtml, $wrapperAttrs);
     }
 
+    public function module($moduleName, $data, array $options = [])
+    {
+        return sprintf("[ %s:%s ] ", $moduleName, json_encode($options));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -189,7 +188,7 @@ class ContentView extends View
 
         if ($this->getCurrentType() == 'layout') {
             if ($name !== 'content'/* && !$content */) {
-                $elementPath = 'Layout/' . $this->layout . '/' . $name;
+                $elementPath = 'layout/' . $this->layout . '/' . $name;
                 if ($this->elementExists($elementPath)) {
                     $content .= $this->element($elementPath);
                 }
@@ -207,6 +206,27 @@ class ContentView extends View
      */
     public function render(?string $template = null, $layout = null): string
     {
+        if (Configure::read('debug')) {
+            $this->set('__debugInfo', $this->__debugInfo());
+        }
+
         return parent::render($template, $layout);
+    }
+
+    /**
+     * Debug Info
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return [
+            'type' => $this->getCurrentType(),
+            'theme' => $this->getTheme(),
+            'layout' => $this->getLayout(),
+            'template' => $this->getTemplate(),
+            'templatePath' => $this->getTemplatePath(),
+            'layoutPath' => $this->getLayoutPath(),
+            'subDir' => $this->getSubDir(),
+        ];
     }
 }

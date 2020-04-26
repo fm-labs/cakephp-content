@@ -3,25 +3,46 @@ declare(strict_types=1);
 
 namespace Content;
 
-use Banana\Plugin\BasePlugin;
+use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
+use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Seo\Sitemap\Sitemap;
 use Settings\SettingsManager;
 
+/**
+ * Class Plugin
+ * @package Content
+ */
 class Plugin extends BasePlugin implements EventListenerInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
 
         $eventManager = EventManager::instance();
         $eventManager->on($this);
-        $eventManager->on(new \Content\Sitemap\SitemapListener());
+
+        if (\Cake\Core\Plugin::isLoaded('Seo')) {
+            Sitemap::setConfig('content', [
+                'className' => 'Content.Sitemap',
+            ]);
+        }
+
+        //if (\Cake\Core\Plugin::isLoaded('Banana')) {
+        //    \Banana\Banana::register($this);
+        //}
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function routes(\Cake\Routing\RouteBuilder $routes): void
     {
         parent::routes($routes);
@@ -83,21 +104,24 @@ class Plugin extends BasePlugin implements EventListenerInterface
 //        $routes->fallbacks('DashedRoute');
     }
 
-    public function backendRoutes(RouteBuilder $routes)
+    /**
+     * @param RouteBuilder $routes
+     * @return RouteBuilder
+     */
+    public function backendRoutes(RouteBuilder $routes): RouteBuilder
     {
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
-        $routes->fallbacks('DashedRoute');
+
+        $routeClass = DashedRoute::class;
+        $routes->connect('/{controller}', ['action' => 'index'], compact('routeClass'));
+        $routes->connect('/{controller}/{action}/*', [], compact('routeClass'));
+        $routes->connect('/{controller}/{action}', [], compact('routeClass'));
 
         return $routes;
     }
 
     /**
-     * Returns a list of events this object is implementing. When the class is registered
-     * in an event manager, each individual method will be associated with the respective event.
-     *
-     * @see EventListenerInterface::implementedEvents()
-     * @return array associative array or event key names pointing to the function
-     * that should be called in the object when the respective event is fired
+     * {@inheritDoc}
      */
     public function implementedEvents(): array
     {
@@ -105,10 +129,18 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'Settings.build' => 'buildSettings',
             'Backend.Menu.build.admin_primary' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
             'Backend.Menu.build.admin_system' => ['callable' => 'buildBackendSystemMenu', 'priority' => 5 ],
+            'Controller.initialize' => function (Event $event) {
+                if ($event->getSubject() instanceof \App\Controller\AppController) {
+                    $event->getSubject()->loadComponent('Content.Frontend');
+                }
+            },
         ];
     }
 
-    protected function _getDesignMenuItems()
+    /**
+     * @return array|array[]
+     */
+    protected function _getDesignMenuItems(): array
     {
         return [
             'page_layouts' => [
@@ -129,10 +161,12 @@ class Plugin extends BasePlugin implements EventListenerInterface
         ];
     }
 
-    protected function _getMenuItems()
+    /**
+     * @return array|array[]
+     */
+    protected function _getMenuItems(): array
     {
         return [
-
             /*
             'categories' => [
                 'title' => 'Categories',
@@ -168,8 +202,10 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
     /**
      * @param \Cake\Event\Event $event
+     * @param \Settings\SettingsManager $settings
+     * @return void
      */
-    public function buildSettings(Event $event, SettingsManager $settings)
+    public function buildSettings(Event $event, SettingsManager $settings): void
     {
         $settings->add('Content', [
             'Content.Router.enablePrettyUrls' => [
@@ -183,7 +219,12 @@ class Plugin extends BasePlugin implements EventListenerInterface
         ]);
     }
 
-    public function buildBackendMenu(Event $event, \Banana\Menu\Menu $menu)
+    /**
+     * @param Event $event
+     * @param \Banana\Menu\Menu $menu
+     * @return void
+     */
+    public function buildBackendMenu(Event $event, \Banana\Menu\Menu $menu): void
     {
         $menu->addItem([
             'title' => 'Content',
@@ -193,7 +234,12 @@ class Plugin extends BasePlugin implements EventListenerInterface
         ]);
     }
 
-    public function buildBackendSystemMenu(Event $event, \Banana\Menu\Menu $menu)
+    /**
+     * @param Event $event
+     * @param \Banana\Menu\Menu $menu
+     * @return void
+     */
+    public function buildBackendSystemMenu(Event $event, \Banana\Menu\Menu $menu): void
     {
         $menu->addItem([
             'title' => 'Content',

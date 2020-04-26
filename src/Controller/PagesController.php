@@ -20,31 +20,19 @@ class PagesController extends AppController
     public $modelClass = 'Content.Articles';
 
     /**
-     * Indicates root article
-     * @var bool
+     * @var string[]
      */
-    protected $_root = false;
+    public $allowedActions = ['index', 'view'];
 
     /**
-     * Initialize method
+     * {@inheritDoc}
      */
     public function initialize(): void
     {
         parent::initialize();
 
-        $this->Frontend->setRefScope('Content.Pages');
-
         $this->viewBuilder()->setClassName('Content.Article');
-    }
-
-    /**
-     * @param \Cake\Event\Event $event
-     * @return \Cake\Http\Response|null|void
-     */
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow();
+        $this->Frontend->setRefScope('Content.Pages');
     }
 
     /**
@@ -52,13 +40,13 @@ class PagesController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         throw new NotFoundException(__d('content', "Index page not found"));
     }
 
     /**
-     * @param null $id
+     * @param int|null $id Article ID
      * @return \Cake\Http\Response|void
      * @throws \Exception
      */

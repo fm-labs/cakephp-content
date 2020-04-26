@@ -172,7 +172,7 @@ class ArticlesController extends AppController
 
                     if ($this->Modules->save($module)) {
                         $this->loadModel('Content.ContentModules');
-                        $contentModule = $this->ContentModules->newEntity();
+                        $contentModule = $this->ContentModules->newEmptyEntity();
                         $contentModule->refscope = $refscope;
                         $contentModule->refid = $refid;
                         $contentModule->module_id = $module->id;

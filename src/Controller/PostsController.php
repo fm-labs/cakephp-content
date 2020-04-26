@@ -19,14 +19,9 @@ class PostsController extends AppController
     public $modelClass = "Content.Articles";
 
     /**
-     * @param \Cake\Event\Event $event
-     * @return \Cake\Http\Response|null|void
+     * @var string[]
      */
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow(['index', 'view']);
-    }
+    public $allowedActions = ['index', 'view'];
 
     /**
      * Index method
@@ -46,7 +41,8 @@ class PostsController extends AppController
     }
 
     /**
-     * @param null $id
+     * @param null|int $id Article ID
+     * @return \Cake\Http\Response|void
      * @throws \Exception
      */
     public function view($id = null)

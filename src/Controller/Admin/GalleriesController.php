@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Content\Controller\Admin;
 
 use Backend\Controller\JsTreeAwareTrait;
-use Banana\Controller\PrimaryModelAwareTrait;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
@@ -18,7 +17,6 @@ use Content\ContentManager;
 class GalleriesController extends AppController
 {
     use JsTreeAwareTrait;
-    use PrimaryModelAwareTrait;
 
     /**
      * @var array
@@ -123,7 +121,7 @@ class GalleriesController extends AppController
      */
     public function add()
     {
-        $gallery = $this->Galleries->newEntity();
+        $gallery = $this->Galleries->newEmptyEntity();
         if ($this->request->is('post')) {
             $gallery = $this->Galleries->patchEntity($gallery, $this->request->getData());
             if ($this->Galleries->save($gallery)) {

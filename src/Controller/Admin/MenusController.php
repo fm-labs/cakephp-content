@@ -59,7 +59,7 @@ class MenusController extends AppController
 
             $this->set(compact('menuItem'));
         } elseif ($this->request->getQuery('add')) {
-            $menuItem = $this->Menus->newEntity();
+            $menuItem = $this->Menus->newEmptyEntity();
 
             if ($this->request->is(['put', 'post'])) {
                 //debug($this->request->getData());

@@ -3,6 +3,12 @@
 <?php
 $this->Toolbar->addLink("Add", ['action' => 'index', 'add' => 1]);
 $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
+
+/** @var \Banana\Menu\Menu $menu */
+$menu = $this->get('menu');
+$menuRoots = $this->get('menuRoots');
+$menusThreaded = $this->get('menusThreaded');
+$menuTreeList = $this->get('menuTreeList');
 ?>
 <style>
     .menu-tree-items {
@@ -22,7 +28,7 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
     <div class="row">
         <div class="col-md-2">
             <ul>
-            <?php foreach ($menuRoots as $root): ?>
+            <?php foreach ($menuRoots as $root) : ?>
                 <li><?= $this->Html->link($root->title, ['action' => 'index', 'menu_id' => $root->id]); ?></li>
             <?php endforeach; ?>
             </ul>
@@ -34,15 +40,13 @@ $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
 
             <?php
             if (isset($menu)) :
-                /* @var \Banana\Menu\Menu $menu */
                 echo $this->Menu->create([
-                    'items' => $menu->getItems()
+                    'items' => $menu->getItems(),
                 ])->render();
             endif;
             ?>
 
             <?php if (isset($menuItem)) : ?>
-
                 <div class="form">
                     <?= $this->Form->create($menuItem); ?>
                     <?= $this->Form->hidden('id'); ?>

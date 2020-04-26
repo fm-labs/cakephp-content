@@ -62,12 +62,12 @@ class ArticlesTable extends BaseTable
         ]);
         */
 
-        $this->addBehavior('Banana.Copyable', [
+        $this->addBehavior('Banana.Copy', [
             'excludeFields' => ['is_published'],
         ]);
 
-        $this->addBehavior('Banana.Sluggable');
-        $this->addBehavior('Banana.Publishable', []);
+        $this->addBehavior('Banana.Slug');
+        $this->addBehavior('Banana.Publish', []);
 
         //$this->addBehavior('Eav.Attributes');
 
@@ -76,7 +76,7 @@ class ArticlesTable extends BaseTable
             $this->addBehavior('Media.Media', [
                 'fields' => [
                     'image_file' => [
-                        'config' => 'images',
+                        //'config' => 'images',
                     ],
                 ],
             ]);

@@ -15,27 +15,17 @@ use Cake\Core\Plugin;
 class FrontendComponent extends Component
 {
     /**
-     * @var \Cake\Controller\Controller
-     */
-    public $controller;
-
-    /**
-     * @var \Content\Model\Table\PagesTable
-     */
-    public $Pages;
-
-    /**
      * @var array
      */
     protected $_defaultConfig = [
         'viewClass' => 'Content.Content',
-        'refscope' => 'Content.Pages',
+        'refscope' => null,
         'theme' => null,
         'layout' => null,
     ];
 
     /**
-     * @param array $config
+     * {@inheritDoc}
      */
     public function initialize(array $config): void
     {
@@ -45,63 +35,54 @@ class FrontendComponent extends Component
 
         // check if theme plugin is loaded
         if ($theme && !Plugin::isLoaded($theme)) {
-            debug("Warning: Configured site theme '$theme' is not loaded. Is the plugin loaded?");
-            $theme = null;
+            triggerWarning("Warning: Configured site theme '$theme' is not loaded. Is the plugin loaded?");
+            //$theme = null;
         }
 
-        $this->getController()->loadComponent('Flash');
         $this->getController()->viewBuilder()->setClassName($viewClass);
         $this->getController()->viewBuilder()->setLayout($layout);
         $this->getController()->viewBuilder()->setTheme($theme);
 
         $this->setRefScope($this->_config['refscope']);
-    }
-
-    public function beforeRender(\Cake\Event\EventInterface $event)
-    {
+        $this->setRefId(null);
     }
 
     /**
-     * @param $scope
+     * @param string $scope Ref Scope
+     * @return $this
      */
     public function setRefScope($scope)
     {
         $this->getController()->set('refscope', $scope);
+
+        return $this;
     }
 
     /**
-     * @param $id
+     * @param int $id Ref ID
+     * @return $this
      */
     public function setRefId($id)
     {
         $this->getController()->set('refid', $id);
+
+        return $this;
     }
 
     /**
-     * @param $pageId
-     * @deprecated
+     * @return string
      */
-    public function setPageId($pageId)
-    {
-        $this->getController()->set('page_id', $pageId);
-        $this->setRefScope('Content.Pages');
-        $this->setRefId($pageId);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTheme()
+    public function getTheme(): string
     {
         return $this->_config['theme'];
     }
 
     /**
      * Checks if the request has a valid preview key
-     *
+     * @todo Move PreviewMode to separate Component
      * @return bool
      */
-    public function isPreviewMode()
+    public function isPreviewMode(): bool
     {
         $previewKeyInSession = $this->getController()->getRequest()->getSession()->read('Content.previewKey');
         $previewKeyInRequest = $this->getController()->getRequest()->getQuery('preview');

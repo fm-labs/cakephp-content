@@ -109,7 +109,7 @@ class GalleriesTable extends BaseTable
     {
         if ($entity->get('_generate_slider')) {
             $Modules = TableRegistry::getTableLocator()->get('Content.Modules');
-            $module = $Modules->newEntity();
+            $module = $Modules->newEmptyEntity();
             $module->name = sprintf("Mod %s", $entity->title);
             $module->path = "flexslider";
             $module->params = json_encode(['gallery_id' => $entity->id]);

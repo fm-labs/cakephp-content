@@ -1,13 +1,13 @@
 <div class="view">
     <article class="article <?= $article->cssclass; ?>" id="<?= $article->cssid ?>">
+        <div class="image">
+            <?php if ($article->image): ?>
+                <?= $this->Html->image($article->image->url, ['class' => 'img-responsive']); ?>
+            <?php endif; ?>
+        </div>
         <h1 class="title">
             <?= h($article->title); ?>
         </h1>
-        <div class="image">
-            <?php if ($article->image): ?>
-                <?= $this->Html->image($article->image->url); ?>
-            <?php endif; ?>
-        </div>
         <div class="meta well">
             <?= h($article->created); ?>
         </div>
