@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Content\View\Module;
 
-use Banana\Menu\Menu;
-use Banana\View\ViewModule;
+use Cupcake\Menu\Menu;
+use Cupcake\View\ViewModule;
 
 /**
  * Class PagesMenuModule

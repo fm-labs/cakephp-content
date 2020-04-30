@@ -45,8 +45,8 @@ $defaultJsTree = [
 ];
 $jsTree = $this->get('jsTree', $defaultJsTree);
 ?>
-<?= $this->Html->css('/backend/css/jstree/themes/backend/style.min', ['block' => true]); ?>
-<?= $this->Html->script('/backend/libs/jstree/jstree.min', ['block' => true]); ?>
+<?= $this->Html->css('/admin/css/jstree/themes/admin/style.min', ['block' => true]); ?>
+<?= $this->Html->script('/admin/libs/jstree/jstree.min', ['block' => true]); ?>
 <div class="index index-tree">
     <?php if ($this->fetch('heading')): ?>
         <div class="page-heading">
@@ -141,7 +141,7 @@ echo $this->fetch('jsTreeScript');
 
                     if (url) {
 
-                        Backend.Ajax.loadHtml($container, url, {
+                        Admin.Ajax.loadHtml($container, url, {
                             data: {'selected': r },
                         }).always(function(ev) {
 

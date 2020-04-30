@@ -61,7 +61,7 @@
         ?>
 
         <div class="related">
-            <?= $this->cell('Backend.DataTable', [[
+            <?= $this->cell('Admin.DataTable', [[
                 'paginate' => false,
                 'model' => 'Content.Articles',
                 'data' => isset($galleryArticles) ? $galleryArticles : [],
@@ -106,7 +106,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (asc)'),
                     [
-                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
+                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                         'field' => 'pos',  'order' => 'asc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
@@ -115,7 +115,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
-                        'plugin' => 'Backend', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
+                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
                         'field' => 'pos',  'order' => 'desc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],

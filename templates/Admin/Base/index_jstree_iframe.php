@@ -16,8 +16,8 @@ $jsTree = (isset($jsTree)) ? $jsTree : $defaultJsTree;
 unset($defaultJsTree);
 
 ?>
-<?= $this->Html->css('Backend.jstree/themes/backend/style.min', ['block' => true]); ?>
-<?= $this->Html->script('Backend.jstree/jstree.min', ['block' => true]); ?>
+<?= $this->Html->css('Admin.jstree/themes/admin/style.min', ['block' => true]); ?>
+<?= $this->Html->script('Admin.jstree/jstree.min', ['block' => true]); ?>
 <div class="index index-tree">
 
     <?php if ($this->fetch('heading')): ?>
@@ -119,10 +119,10 @@ unset($defaultJsTree);
                             dataType: 'html',
                             data: {'selected': r },
                             beforeSend: function() {
-                                Backend.Loader.show();
+                                Admin.Loader.show();
                             },
                             complete: function() {
-                                Backend.Loader.hide();
+                                Admin.Loader.hide();
                             },
                             success: function(data) {
 
@@ -133,7 +133,7 @@ unset($defaultJsTree);
                                 }
 
                                 $container.html(data);
-                                Backend.beautify();
+                                Admin.beautify();
                             }
                         });
                         */

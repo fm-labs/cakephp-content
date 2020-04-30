@@ -1,7 +1,7 @@
 <?php
 $this->assign('title', 'Content Manager');
 $this->loadHelper('Bootstrap.Menu');
-$this->loadHelper('Backend.Box');
+$this->loadHelper('Admin.Box');
 ?>
 <div class="index content-manager">
 

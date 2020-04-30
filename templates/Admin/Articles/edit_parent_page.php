@@ -1,6 +1,6 @@
 <?php
-$this->loadHelper('Backend.Box');
-$this->loadHelper('Backend.DataTable');
+$this->loadHelper('Admin.Box');
+$this->loadHelper('Admin.DataTable');
 $this->loadHelper('Bootstrap.Tabs');
 
 // Toolbar
@@ -46,7 +46,7 @@ $this->Toolbar->addPostLink([
         <?= $this->Form->fieldsetStart(['legend' => 'Articles', 'collapsed' => false]);  ?>
         <div class="child-posts">
 
-            <?= $this->cell('Backend.DataTable', [[
+            <?= $this->cell('Admin.DataTable', [[
                 'paginate' => false,
                 'sortable' => true,
                 'model' => 'Content.Articles',

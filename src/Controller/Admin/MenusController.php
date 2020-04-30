@@ -11,8 +11,8 @@ class MenusController extends AppController
     public $modelClass = "Content.Menus";
 
     public $actions = [
-        'add' => 'Backend.Add',
-        'sort' => 'Backend.TreeSort',
+        'add' => 'Admin.Add',
+        'sort' => 'Admin.TreeSort',
     ];
 
     /**

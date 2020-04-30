@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Entity\Article;
 
-use Banana\Model\EntityTypeInterface;
+use Cupcake\Model\EntityTypeInterface;
 
 interface ArticleTypeInterface extends EntityTypeInterface
 {

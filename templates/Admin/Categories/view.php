@@ -1,6 +1,6 @@
 <?php $this->Breadcrumbs->add(__d('content', 'Categories'), ['action' => 'index']); ?>
 <?php $this->Breadcrumbs->add($category->name); ?>
-<?php $this->loadHelper('Backend.Toolbar'); ?>
+<?php $this->loadHelper('Admin.Toolbar'); ?>
 <?php $this->Toolbar->addLink(
     __d('content', 'Edit {0}', __d('content', 'Category')),
     ['action' => 'edit', $category->id],
@@ -39,7 +39,7 @@
     </h2>
 
     <?php
-    echo $this->cell('Backend.EntityView', [ $category ], [
+    echo $this->cell('Admin.EntityView', [ $category ], [
         'title' => $category->title,
         'model' => 'Content.Categories',
     ]);

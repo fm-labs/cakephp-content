@@ -41,11 +41,11 @@ $this->assign('title', __d('content','Articles'));
     </div>
 
 
-    <?php $this->loadHelper('Backend.DataTableJs'); ?>
+    <?php $this->loadHelper('Admin.DataTableJs'); ?>
     <?= '' //$this->DataTableJs->create('Content.Articles')->render(); ?>
 
 
-    <?= $this->cell('Backend.DataTable', [[
+    <?= $this->cell('Admin.DataTable', [[
         'paginate' => true,
         'model' => 'Content.Articles',
         'data' => $articles,

@@ -24,14 +24,14 @@ $this->assign('title', $article->title);
     <!-- Details -->
     <?php $this->Tabs->add(__d('content', 'Details'));
     ?>
-    <?= $this->cell('Backend.EntityView', [ $article ], [
+    <?= $this->cell('Admin.EntityView', [ $article ], [
         'title' => false,
         'model' => 'Content.Articles'
     ]); ?>
 
     <!-- Meta -->
     <?php $this->Tabs->add(__d('content', 'Meta')); ?>
-    <?= $this->cell('Backend.EntityView', [ $article ], [
+    <?= $this->cell('Admin.EntityView', [ $article ], [
         'title' => false,
         'model' => 'Content.Articles',
         'fields' => [

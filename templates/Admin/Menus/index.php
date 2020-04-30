@@ -1,10 +1,10 @@
 <?php $this->loadHelper('Bootstrap.Menu'); ?>
-<?php $this->loadHelper('Backend.Toolbar'); ?>
+<?php $this->loadHelper('Admin.Toolbar'); ?>
 <?php
 $this->Toolbar->addLink("Add", ['action' => 'index', 'add' => 1]);
 $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
 
-/** @var \Banana\Menu\Menu $menu */
+/** @var \Cupcake\Menu\Menu $menu */
 $menu = $this->get('menu');
 $menuRoots = $this->get('menuRoots');
 $menusThreaded = $this->get('menusThreaded');

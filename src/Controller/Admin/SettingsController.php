@@ -8,7 +8,7 @@ use Settings\Form\SettingsForm;
 /**
  * Class SettingsController
  *
- * @package Banana\Controller\Admin
+ * @package Cupcake\Controller\Admin
  *
  */
 class SettingsController extends AppController

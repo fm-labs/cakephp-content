@@ -2,7 +2,7 @@
 <div class="contentModules index">
 
 
-    <?= $this->cell('Backend.DataTable', [[
+    <?= $this->cell('Admin.DataTable', [[
         'paginate' => true,
         'model' => 'Content.ContentModules',
         'data' => $contentModules,

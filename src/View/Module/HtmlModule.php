@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Content\View\Module;
 
-use Banana\View\ViewModule;
-use Banana\View\ViewModuleSchema;
+use Cupcake\View\ViewModule;
+use Cupcake\View\ViewModuleSchema;
 
 /**
  * Class HtmlModule

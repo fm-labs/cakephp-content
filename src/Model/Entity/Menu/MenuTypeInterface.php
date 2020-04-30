@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Entity\Menu;
 
-use Banana\Model\EntityTypeInterface;
+use Cupcake\Model\EntityTypeInterface;
 
 /**
  * Interface TypeInterface
@@ -39,7 +39,7 @@ interface MenuTypeInterface extends EntityTypeInterface
 
     /**
      * @param int $maxDepth Maximum number of nested menus (Default: 0)
-     * @return \Banana\Menu\MenuItem
+     * @return \Cupcake\Menu\MenuItem
      */
     public function toMenuItem($maxDepth = 0);
 }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Entity;
 
-use Banana\Lib\ClassRegistry;
+use Cupcake\Lib\ClassRegistry;
 use Cake\ORM\Entity;
 
 /**

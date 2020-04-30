@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Controller\Admin;
 
-use Backend\Controller\JsTreeAwareTrait;
+use Admin\Controller\JsTreeAwareTrait;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
@@ -22,13 +22,13 @@ class GalleriesController extends AppController
      * @var array
      */
     public $actions = [
-        'index'     => 'Backend.Index',
-        'view'      => 'Backend.View',
-        'add'       => 'Backend.Add',
-        'edit'      => 'Backend.Edit',
-        'delete'    => 'Backend.Delete',
-        'publish'   => 'Backend.Publish',
-        'unpublish' => 'Backend.Unpublish',
+        'index'     => 'Admin.Index',
+        'view'      => 'Admin.View',
+        'add'       => 'Admin.Add',
+        'edit'      => 'Admin.Edit',
+        'delete'    => 'Admin.Delete',
+        'publish'   => 'Admin.Publish',
+        'unpublish' => 'Admin.Unpublish',
     ];
 
     /**

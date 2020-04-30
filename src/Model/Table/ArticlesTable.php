@@ -36,7 +36,7 @@ class ArticlesTable extends BaseTable
 
         $this->addBehavior('Timestamp');
 
-        $this->addBehavior('Banana.Attributes', [
+        $this->addBehavior('Cupcake.Attributes', [
             //'attributesTableClass' => 'Content.Options',
             'attributesTableName' => 'content_options',
             'attributesField' => 'options',
@@ -62,12 +62,12 @@ class ArticlesTable extends BaseTable
         ]);
         */
 
-        $this->addBehavior('Banana.Copy', [
+        $this->addBehavior('Cupcake.Copy', [
             'excludeFields' => ['is_published'],
         ]);
 
-        $this->addBehavior('Banana.Slug');
-        $this->addBehavior('Banana.Publish', []);
+        $this->addBehavior('Cupcake.Slug');
+        $this->addBehavior('Cupcake.Publish', []);
 
         //$this->addBehavior('Eav.Attributes');
 
@@ -131,7 +131,7 @@ class ArticlesTable extends BaseTable
         return $schema;
     }
 
-    public function buildInputs(\Banana\Model\TableInputSchema $inputs)
+    public function buildInputs(\Cupcake\Model\TableInputSchema $inputs)
     {
         //$inputs->addField('teaser_html', ['type' => 'Html']);
         return $inputs;

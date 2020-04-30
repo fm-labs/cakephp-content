@@ -1,5 +1,5 @@
 <?php $this->Breadcrumbs->add(__d('content', 'Categories')); ?>
-<?php $this->loadHelper('Backend.Toolbar'); ?>
+<?php $this->loadHelper('Admin.Toolbar'); ?>
 <?php $this->Toolbar->addLink(__d('content', 'New {0}', __d('content', 'Category')), ['action' => 'add'], ['data-icon' => 'plus']); ?>
 <?php $this->Toolbar->addLink(
     __d('content', 'List {0}', __d('content', 'Articles')),
@@ -15,7 +15,7 @@
 
     <?php $fields = [
     'id','name','slug','is_published',    ] ?>
-    <?= $this->cell('Backend.DataTable', [[
+    <?= $this->cell('Admin.DataTable', [[
         'paginate' => true,
         'model' => 'Content.Categories',
         'data' => $categories,

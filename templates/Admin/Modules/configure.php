@@ -1,8 +1,8 @@
 <?php
-use Banana\View\Form\ViewModuleContext;
+use Cupcake\View\Form\ViewModuleContext;
 
 $this->Form->addContextProvider('viewmodule', function($request, $context) {
-    if ($context['entity'] instanceof \Banana\View\ViewModule) {
+    if ($context['entity'] instanceof \Cupcake\View\ViewModule) {
         return new ViewModuleContext($request, $context);
     }
 });

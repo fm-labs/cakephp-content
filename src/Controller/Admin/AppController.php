@@ -13,19 +13,19 @@ use Media\Lib\Media\MediaManager;
  *
  * @package Content\Controller\Admin
  */
-class AppController extends \Backend\Controller\Controller
+class AppController extends \Admin\Controller\Controller
 {
     /**
      * @var array
      */
     public $actions = [
-        'index' => 'Backend.Index',
-        'view' => 'Backend.View',
-        'add' => 'Backend.Add',
-        'edit' => 'Backend.Edit',
-        'delete' => 'Backend.Delete',
-        //'publish'   => 'Backend.Publish',
-        //'unpublish' => 'Backend.Unpublish'
+        'index' => 'Admin.Index',
+        'view' => 'Admin.View',
+        'add' => 'Admin.Add',
+        'edit' => 'Admin.Edit',
+        'delete' => 'Admin.Delete',
+        //'publish'   => 'Admin.Publish',
+        //'unpublish' => 'Admin.Unpublish'
     ];
 
     /**

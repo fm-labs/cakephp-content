@@ -35,8 +35,8 @@ class Plugin extends BasePlugin implements EventListenerInterface
             ]);
         }
 
-        //if (\Cake\Core\Plugin::isLoaded('Banana')) {
-        //    \Banana\Banana::register($this);
+        //if (\Cake\Core\Plugin::isLoaded('Cupcake')) {
+        //    \Cupcake\Cupcake::register($this);
         //}
     }
 
@@ -108,7 +108,7 @@ class Plugin extends BasePlugin implements EventListenerInterface
      * @param RouteBuilder $routes
      * @return RouteBuilder
      */
-    public function backendRoutes(RouteBuilder $routes): RouteBuilder
+    public function adminRoutes(RouteBuilder $routes): RouteBuilder
     {
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index'], ['_name' => 'index']);
 
@@ -127,8 +127,8 @@ class Plugin extends BasePlugin implements EventListenerInterface
     {
         return [
             'Settings.build' => 'buildSettings',
-            'Backend.Menu.build.admin_primary' => ['callable' => 'buildBackendMenu', 'priority' => 5 ],
-            'Backend.Menu.build.admin_system' => ['callable' => 'buildBackendSystemMenu', 'priority' => 5 ],
+            'Admin.Menu.build.admin_primary' => ['callable' => 'buildAdminMenu', 'priority' => 5 ],
+            'Admin.Menu.build.admin_system' => ['callable' => 'buildAdminSystemMenu', 'priority' => 5 ],
             'Controller.initialize' => function (Event $event) {
                 if ($event->getSubject() instanceof \App\Controller\AppController) {
                     $event->getSubject()->loadComponent('Content.Frontend');
@@ -221,10 +221,10 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
     /**
      * @param Event $event
-     * @param \Banana\Menu\Menu $menu
+     * @param \Cupcake\Menu\Menu $menu
      * @return void
      */
-    public function buildBackendMenu(Event $event, \Banana\Menu\Menu $menu): void
+    public function buildAdminMenu(Event $event, \Cupcake\Menu\Menu $menu): void
     {
         $menu->addItem([
             'title' => 'Content',
@@ -236,10 +236,10 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
     /**
      * @param Event $event
-     * @param \Banana\Menu\Menu $menu
+     * @param \Cupcake\Menu\Menu $menu
      * @return void
      */
-    public function buildBackendSystemMenu(Event $event, \Banana\Menu\Menu $menu): void
+    public function buildAdminSystemMenu(Event $event, \Cupcake\Menu\Menu $menu): void
     {
         $menu->addItem([
             'title' => 'Content',

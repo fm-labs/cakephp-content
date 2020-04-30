@@ -136,7 +136,7 @@ endif;
         <?= $this->Form->fieldsetStart(['legend' => 'Articles', 'collapsed' => false]);  ?>
         <div class="child-posts">
 
-            <?= $this->cell('Backend.DataTable', [[
+            <?= $this->cell('Admin.DataTable', [[
                 'paginate' => false,
                 'sortable' => true,
                 'model' => 'Content.Articles',
@@ -168,7 +168,7 @@ endif;
 
     <!-- Debug -->
     <?php $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]); ?>
-    <?= $this->cell('Backend.EntityView', [$article], ['model' => 'Content.Articles']); ?>
+    <?= $this->cell('Admin.EntityView', [$article], ['model' => 'Content.Articles']); ?>
     <?php debug($article); ?>
 
     <?php echo $this->Tabs->render(); ?>

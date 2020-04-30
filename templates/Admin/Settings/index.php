@@ -1,4 +1,4 @@
-<?php $this->loadHelper('Backend.Box'); ?>
+<?php $this->loadHelper('Admin.Box'); ?>
 <?php $this->loadHelper('Bootstrap.Ui'); ?>
 <div class="index">
     <?php

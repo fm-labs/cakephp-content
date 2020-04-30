@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Entity\Menu;
 
-use Banana\Menu\MenuItem;
+use Cupcake\Menu\MenuItem;
 use Cake\Datasource\EntityInterface;
 
 class RootType extends BaseType

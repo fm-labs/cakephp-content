@@ -141,7 +141,7 @@ class ContentView extends View
      * @param \Content\Model\Entity\ContentModule $contentModule Content module instance
      * @param array $moduleData Module data
      * @param array $wrapperAttrs Wrapper attributes
-     * @return \Banana\View\ViewModule|string|null
+     * @return \Cupcake\View\ViewModule|string|null
      */
     public function contentModule(ContentModule $contentModule, array $moduleData = [], array $wrapperAttrs = [])
     {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Table;
 
-use Banana\Menu\Menu;
+use Cupcake\Menu\Menu;
 use Cake\Collection\Collection;
 use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Datasource\EntityInterface;
@@ -253,7 +253,7 @@ class MenusTable extends BaseTable
      * @param int $level
      * @param int $maxDepth
      * @param null $includeHidden
-     * @return \Banana\Menu\Menu
+     * @return \Cupcake\Menu\Menu
      */
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {

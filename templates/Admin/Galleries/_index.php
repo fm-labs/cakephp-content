@@ -16,7 +16,7 @@
     <?= $this->Form->end(); ?>
 
     <!-- Data table -->
-    <?= $this->cell('Backend.DataTable', [[
+    <?= $this->cell('Admin.DataTable', [[
         'paginate' => true,
         'model' => 'Content.Galleries',
         'data' => $galleries,

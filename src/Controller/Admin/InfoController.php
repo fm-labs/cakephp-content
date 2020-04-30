@@ -6,7 +6,7 @@ namespace Content\Controller\Admin;
 /**
  * Class InfoController
  *
- * @package Banana\Controller\Admin
+ * @package Cupcake\Controller\Admin
  */
 class InfoController extends AppController
 {

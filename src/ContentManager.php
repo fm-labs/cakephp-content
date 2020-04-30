@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Content;
 
-use Banana\Lib\ClassRegistry;
-use Banana\Lib\SingletonTrait;
+use Cupcake\Lib\ClassRegistry;
+use Cupcake\Lib\SingletonTrait;
 use Cake\Collection\Collection;
 use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;

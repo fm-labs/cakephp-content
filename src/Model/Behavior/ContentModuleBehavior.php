@@ -11,7 +11,7 @@ use Cake\Utility\Inflector;
 /**
  * Class ContentModuleBehavior
  *
- * @package Banana\Model\Behavior
+ * @package Cupcake\Model\Behavior
  */
 class ContentModuleBehavior extends Behavior
 {
