@@ -13,26 +13,26 @@ use Cake\ORM\TableRegistry;
  *
  * @package Content\Model\Entity\Menu
  */
-class PageType extends BaseType
+class PageType extends AbstractType
 {
     use InstanceConfigTrait;
 
     protected $_defaultConfig = [
         'title' => null,
-        'article_id' => null,
+        'page_id' => null,
         'hide_in_nav' => false,
         'hide_in_sitemap' => false,
     ];
 
     /**
-     * @var \Content\Model\Entity\Article
+     * @var \Content\Model\Entity\Page
      */
-    protected $_article;
+    protected $_page;
 
     public function __construct(EntityInterface $entity)
     {
         parent::__construct($entity);
-        $this->_article = $this->_getArticle($this->getConfig('article_id'));
+        $this->_page = $this->_getPage($this->getConfig('page_id'));
     }
 
     /**
@@ -54,13 +54,13 @@ class PageType extends BaseType
     public function getUrl()
     {
         /*
-        if ($this->_article->get('slug')) {
+        if ($this->_page->get('slug')) {
             return [
                 'prefix' => false,
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                'slug' => $this->_article->get('slug')
+                'slug' => $this->_page->get('slug')
             ];
         }
 
@@ -69,10 +69,10 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Pages',
             'action' => 'view',
-            'id' => $this->getConfig('article_id')
+            'id' => $this->getConfig('page_id')
         ];
         */
-        return $this->_article->getUrl();
+        return $this->_page->getUrl();
     }
 
     /**
@@ -86,10 +86,10 @@ class PageType extends BaseType
             'plugin' => 'Content',
             'controller' => 'Main',
             'action' => 'index',
-            'query' => ['p' => $this->getConfig('article_id')]
+            'query' => ['p' => $this->getConfig('page_id')]
         ];
         */
-        return $this->_article->getPermaUrl();
+        return $this->_page->getPermaUrl();
     }
 
     /**
@@ -97,7 +97,7 @@ class PageType extends BaseType
      */
     public function isVisibleInMenu()
     {
-        return $this->_article->is_published;
+        return $this->_page->is_published;
     }
 
     /**
@@ -105,7 +105,7 @@ class PageType extends BaseType
      */
     public function isVisibleInSitemap()
     {
-        return $this->_article->is_published;
+        return $this->_page->is_published;
     }
 
     /**
@@ -122,11 +122,11 @@ class PageType extends BaseType
     }
 
     /**
-     * @param int $id Article ID
-     * @return \Content\Model\Entity\Article
+     * @param int $id Page ID
+     * @return \Content\Model\Entity\Page
      */
-    protected function _getArticle($id)
+    protected function _getPage($id)
     {
-        return TableRegistry::getTableLocator()->get('Content.Articles')->get($id);
+        return TableRegistry::getTableLocator()->get('Content.Pages')->get($id);
     }
 }

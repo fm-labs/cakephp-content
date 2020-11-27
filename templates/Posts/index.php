@@ -1,16 +1,16 @@
-<?php $this->Breadcrumbs->add(__d('content','Articles')); ?>
+<?php $this->Breadcrumbs->add(__d('content', 'Pages')); ?>
 <div class="index">
-    <?php foreach ($articles as $article) : ?>
-        <div class="article-listing">
-            <article>
-                <h1><?= $this->Html->link($article->title, $article->getUrl()); ?></h1>
+    <?php foreach ($pages as $page) : ?>
+        <div class="page-listing">
+            <page>
+                <h1><?= $this->Html->link($page->title, $page->getUrl()); ?></h1>
                 <div class="meta well">
-                    <?= h($article->created); ?>
+                    <?= h($page->created); ?>
                 </div>
                 <div class="teaser">
-                    <?= $article->excerpt_html; ?>
+                    <?= $page->excerpt ?>
                 </div>
-            </article>
+            </page>
             <hr />
         </div>
     <?php endforeach; ?>

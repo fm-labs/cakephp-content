@@ -5,11 +5,12 @@ namespace Content\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
+use Content\Model\Entity\Menu\TypeInterface;
 
 /**
  * Menu Entity.
  */
-class Menu extends Entity
+class Menu extends Entity implements TypeInterface
 {
     //use TranslateTrait;
 
@@ -28,9 +29,9 @@ class Menu extends Entity
     protected $_virtual = [];
 
     /**
-     * @return \Content\Model\Entity\Menu\MenuTypeInterface
+     * @return \Content\Model\Entity\Menu\TypeInterface
      */
-    protected function handler()
+    protected function handler(): TypeInterface
     {
         $types = TableRegistry::getTableLocator()->get('Content.Menus')->getTypes();
 
@@ -48,6 +49,9 @@ class Menu extends Entity
             }
 
             $handler = new $className($entity);
+            if (!($handler instanceof TypeInterface)) {
+                throw new \Exception('Invalid type handler: MUST implement MenuTypeInterface');
+            }
 
             return $handler;
         };
@@ -78,5 +82,13 @@ class Menu extends Entity
     public function toMenuItem($maxDepth = 0)
     {
         return $this->handler()->toMenuItem($maxDepth);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->handler()->getLabel();
     }
 }

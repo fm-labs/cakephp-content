@@ -32,7 +32,7 @@ class CategoriesController extends AppController
     {
         $this->viewBuilder()->setClassName('Content.Category');
         $category = $this->Categories->get($id, [
-            'contain' => ['Articles'],
+            'contain' => ['Pages'],
         ]);
         $this->set('category', $category);
         $this->set('_serialize', ['category']);

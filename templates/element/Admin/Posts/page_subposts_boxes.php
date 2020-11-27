@@ -1,5 +1,5 @@
 
-<?php foreach($article->children as $_post): ?>
+<?php foreach($page->children as $_post): ?>
 
     <?= $this->Box->create(['collapsed' => true]); ?>
     <!-- Box Heading -->
@@ -10,7 +10,7 @@
         0 => [__d('content', 'Unpublished'), 'default'],
         1 => [__d('content', 'Published'), 'success']
     ]); ?>
-    <?= $this->Html->link('Edit Article', ['plugin' => 'content', 'controller' => 'Articles', 'action' => 'edit', $_post->id], ['class' => 'btn btn-sm']); ?>
+    <?= $this->Html->link('Edit Page', ['plugin' => 'content', 'controller' => 'Pages', 'action' => 'edit', $_post->id], ['class' => 'btn btn-sm']); ?>
 
     <!-- Box Body -->
     <?= $this->Box->body(); ?>
@@ -19,7 +19,7 @@
     <?php $this->Tabs->create(); ?>
     <?php $this->Tabs->add('Quick Edit'); ?>
 
-    <?= $this->Form->create($_post, ['data-ajax' => 1, 'url' => ['action' => 'edit', 'parent_id' => $article->id, '_ext' => 'json']]); ?>
+    <?= $this->Form->create($_post, ['data-ajax' => 1, 'url' => ['action' => 'edit', 'parent_id' => $page->id, '_ext' => 'json']]); ?>
     <?= $this->Form->hidden('id'); ?>
     <?= $this->Form->hidden('type'); ?>
     <?= $this->Form->control('title'); ?>

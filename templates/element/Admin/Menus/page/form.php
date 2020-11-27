@@ -1,10 +1,10 @@
 <?php
-$pages = \Cake\ORM\TableRegistry::getTableLocator()->get('Content.Articles')
+$pages = \Cake\ORM\TableRegistry::getTableLocator()->get('Content.Pages')
     ->find('list', ['keyPath' => 'id', 'valuePath' => 'title'])
-    ->where(['Articles.type' => 'page'])
+    ->where(['Pages.type' => 'page'])
     ->toArray();
 
-echo $this->Form->control('type_params.article_id', [
+echo $this->Form->control('type_params.page_id', [
     'label' => __d('content', 'Page'),
     'options' => $pages,
     'empty' => __('Select page'),

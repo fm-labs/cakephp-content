@@ -10,6 +10,7 @@ use Cake\View\Helper;
  *
  * @package Content\View\Helper
  * @since CakePHP 3.3.6
+ * @deprecated Use CakePHP built-in BreadcrumbsHelper instead
  */
 class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
 {
@@ -41,7 +42,6 @@ class BreadcrumbsHelper extends Helper\BreadcrumbsHelper
      */
     public function getCrumbList(array $options = [], $startText = false)
     {
-
         $this->templater()->add([
             'breadcrumb_list' => '<ol{{attrs}}>{{items}}</ol>',
             'breadcrumb_item' => '<li{{attrs}}>{{content}}</li>',

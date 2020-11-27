@@ -7,14 +7,14 @@
 ) ?>
 <?php $this->Toolbar->startGroup('More'); ?>
 <?php $this->Toolbar->addLink(
-    __d('content', 'List {0}', __d('content', 'Articles')),
-    ['controller' => 'Articles', 'action' => 'index'],
+    __d('content', 'List {0}', __d('content', 'Pages')),
+    ['controller' => 'Pages', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 
 <?php $this->Toolbar->addLink(
-    __d('content', 'New {0}', __d('content', 'Article')),
-    ['controller' => 'Articles', 'action' => 'add'],
+    __d('content', 'New {0}', __d('content', 'Page')),
+    ['controller' => 'Pages', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?php $this->Toolbar->endGroup(); ?>

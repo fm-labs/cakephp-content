@@ -43,6 +43,8 @@ class FrontendComponent extends Component
         $this->getController()->viewBuilder()->setLayout($layout);
         $this->getController()->viewBuilder()->setTheme($theme);
 
+        $this->getController()->viewBuilder()->setVar('_frontend', compact('layout', 'theme', 'viewClass'));
+
         $this->setRefScope($this->_config['refscope']);
         $this->setRefId(null);
     }

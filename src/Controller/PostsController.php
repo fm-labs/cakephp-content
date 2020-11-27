@@ -8,7 +8,7 @@ use Cake\Http\Exception\NotFoundException;
 /**
  * Posts Controller
  *
- * @property \Content\Model\Table\ArticlesTable $Articles
+ * @property \Content\Model\Table\PagesTable $Pages
  * @property \Content\Controller\Component\FrontendComponent $Frontend
  */
 class PostsController extends AppController
@@ -16,7 +16,7 @@ class PostsController extends AppController
     /**
      * @var string
      */
-    public $modelClass = "Content.Articles";
+    public $modelClass = "Content.Pages";
 
     /**
      * @var string[]
@@ -30,18 +30,18 @@ class PostsController extends AppController
      */
     public function index()
     {
-        $articles = $this->Articles->find()
+        $pages = $this->Pages->find()
             ->find('published')
-            ->where(['Articles.type' => 'post'])
+            ->where(['Pages.type' => 'post'])
             ->orderDesc('id');
 
-        $articles = $this->paginate($articles);
+        $pages = $this->paginate($pages);
 
-        $this->set('articles', $articles);
+        $this->set('pages', $pages);
     }
 
     /**
-     * @param null|int $id Article ID
+     * @param null|int $id Page ID
      * @return \Cake\Http\Response|void
      * @throws \Exception
      */
@@ -56,10 +56,10 @@ class PostsController extends AppController
                     $id = $this->request->getParam('id');
                     break;
                 case $this->request->getQuery('slug'):
-                    $id = $this->Articles->findIdBySlug($this->request->getQuery('slug'));
+                    $id = $this->Pages->findIdBySlug($this->request->getQuery('slug'));
                     break;
                 case $this->request->getParam('slug'):
-                    $id = $this->Articles->findIdBySlug($this->request->getParam('slug'));
+                    $id = $this->Pages->findIdBySlug($this->request->getParam('slug'));
                     break;
                 default:
                     //throw new NotFoundException();
@@ -67,13 +67,13 @@ class PostsController extends AppController
         }
 
         try {
-            /** @var \Content\Model\Entity\Article $article */
-            $article = $this->Articles->get($id, [
+            /** @var \Content\Model\Entity\Page $page */
+            $page = $this->Pages->get($id, [
                 'media' => true,
                 'attributes' => true,
             ]);
 
-            if (!$article->isPublished()) {
+            if (!$page->isPublished()) {
                 if ($this->Frontend->isPreviewMode()) {
                     $this->Flash->success("Preview mode");
                 } else {
@@ -90,7 +90,7 @@ class PostsController extends AppController
             /*
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($article->getViewUrl());
+                $canonical = Router::normalize($page->getViewUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -100,21 +100,21 @@ class PostsController extends AppController
             }
             */
 
-            $this->Frontend->setRefScope('Content.Articles');
+            $this->Frontend->setRefScope('Content.Pages');
             $this->Frontend->setRefId($id);
         }
 
-        $this->set('article', $article);
-        $this->set('_serialize', ['article']);
+        $this->set('page', $page);
+        $this->set('_serialize', ['page']);
 
-        //$template = ($article->template) ?: ((!$article->parent_id) ? $article->type . '_parent' : $article->type);
-        $template = $article->template ?: $article->type;
+        //$template = ($page->template) ?: ((!$page->parent_id) ? $page->type . '_parent' : $page->type);
+        $template = $page->template ?: $page->type;
         $template = $this->request->getQuery('template') ?: $template;
         $template = $template ?: null;
 
         $this->viewBuilder()
-            ->setClassName('Content.Article')
-            //->setTemplatePath(ucfirst(Inflector::camelize($this->getName())) . '/' . ucfirst(Inflector::camelize($article->type)))
+            ->setClassName('Content.Page')
+            //->setTemplatePath(ucfirst(Inflector::camelize($this->getName())) . '/' . ucfirst(Inflector::camelize($page->type)))
             ->setTemplate($template);
 
         //$this->render($template);

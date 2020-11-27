@@ -3,21 +3,23 @@ declare(strict_types=1);
 
 namespace Content\Controller;
 
+use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
+use Cupcake\Cupcake;
 
 /**
  * Class FrontendController
- * @package App\Controller
  *
+ * @package App\Controller
  * @property \Content\Controller\Component\FrontendComponent $Frontend
- * @property \Content\Model\Table\ArticlesTable $Pages
+ * @property \Content\Model\Table\PagesTable $Pages
  */
 class PagesController extends AppController
 {
     /**
      * @var string
      */
-    public $modelClass = 'Content.Articles';
+    public $modelClass = 'Content.Pages';
 
     /**
      * @var string[]
@@ -25,13 +27,13 @@ class PagesController extends AppController
     public $allowedActions = ['index', 'view'];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function initialize(): void
     {
         parent::initialize();
 
-        $this->viewBuilder()->setClassName('Content.Article');
+        $this->viewBuilder()->setClassName('Content.Page');
         $this->Frontend->setRefScope('Content.Pages');
     }
 
@@ -46,7 +48,7 @@ class PagesController extends AppController
     }
 
     /**
-     * @param int|null $id Article ID
+     * @param int|null $id Page ID
      * @return \Cake\Http\Response|void
      * @throws \Exception
      */
@@ -62,40 +64,50 @@ class PagesController extends AppController
                         $id = $this->request->getParam('id');
                         break;
                     case $this->request->getQuery('slug'):
-                        $id = $this->Articles->findIdBySlug($this->request->getQuery('slug'));
+                        $id = $this->Pages->findIdBySlug($this->request->getQuery('slug'));
                         break;
                     case $this->request->getParam('slug'):
-                        $id = $this->Articles->findIdBySlug($this->request->getParam('slug'));
+                        $id = $this->Pages->findIdBySlug($this->request->getParam('slug'));
                         break;
                     default:
                         //throw new NotFoundException();
                 }
             }
 
-            $article = $this->Articles
-                //->find('published')
+            $page = $this->Pages
                 ->find()
-                ->where(['Articles.id' => $id, 'Articles.type' => 'page'])
+                ->find('published')
+                ->find('withAttributes')
+                ->where(['Pages.id' => $id, 'Pages.type' => 'page'])
                 ->contain([])
                 ->first();
 
-            if (!$article) {
+            if (!$page) {
                 throw new NotFoundException(__d('content', "Page not found"));
             }
 
-            if (!$article->isPublished()) {
+            $filtered = Cupcake::doFilter('content_page_view_filter', ['page' => $page]);
+            $page = $filtered['page'];
+
+            if (!$page->isPublished()) {
                 if ($this->Frontend->isPreviewMode()) {
                     $this->Flash->success("Preview mode");
                 } else {
-                    throw new NotFoundException();
+                    throw new ForbiddenException();
+                }
+            }
+
+            if ($page->isProtected()) {
+                if (!$this->Authentication->getIdentity()) {
+                    throw new ForbiddenException();
                 }
             }
 
             /*
-            // force canonical url (except root articles)
+            // force canonical url (except root pages)
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($article->getUrl());
+                $canonical = Router::normalize($page->getUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -104,18 +116,18 @@ class PagesController extends AppController
                 }
             }
 
-            $this->Frontend->setRefId($article->id);
+            $this->Frontend->setRefId($page->id);
 
             //@todo Dispatch Page.beforeExecute()
-            // Execute article
-            $handler = $this->Pages->getTypeHandler($article);
-            $response = $handler->execute($this, $article);
+            // Execute page
+            $handler = $this->Pages->getTypeHandler($page);
+            $response = $handler->execute($this, $page);
             if ($response) {
                 return $response;
             }
             */
 
-            $this->set('article', $article);
+            $this->set('page', $page);
             //@todo Dispatch Page.afterExecute();
         } catch (\Exception $ex) {
             throw $ex;

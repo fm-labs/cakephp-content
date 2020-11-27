@@ -6,7 +6,7 @@ namespace Content\Model\Entity\Menu;
 use Cupcake\Menu\MenuItem;
 use Cake\Datasource\EntityInterface;
 
-class RootType extends BaseType
+class RootType extends AbstractType
 {
     /**
      * {@inheritDoc}

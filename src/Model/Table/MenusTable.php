@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Content\Model\Table;
 
-use Cupcake\Menu\Menu;
 use Cake\Collection\Collection;
 use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Datasource\EntityInterface;
@@ -12,19 +11,17 @@ use Cake\ORM\RulesChecker;
 use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
+use Content\ContentManager;
 use Content\MenuManager;
+use Cupcake\Menu\MenuItemCollection;
 
 /**
  * Menus Model
- *
  */
 class MenusTable extends BaseTable
 {
     /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
+     * @inheritDoc
      */
     public function initialize(array $config): void
     {
@@ -53,6 +50,9 @@ class MenusTable extends BaseTable
         */
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
         $schema->setColumnType('type_params', 'json');
@@ -65,7 +65,7 @@ class MenusTable extends BaseTable
      */
     public function getTypes()
     {
-        return MenuManager::types();
+        return ContentManager::getAvailableMenuTypes();
     }
 
     /**
@@ -253,11 +253,11 @@ class MenusTable extends BaseTable
      * @param int $level
      * @param int $maxDepth
      * @param null $includeHidden
-     * @return \Cupcake\Menu\Menu
+     * @return \Cupcake\Menu\MenuItemCollection
      */
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
-        $menu = new Menu();
+        $menu = new MenuItemCollection();
         foreach ($children as $child) {
             try {
                 /** @var \Content\Model\Entity\Menu $child */

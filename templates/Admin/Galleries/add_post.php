@@ -2,14 +2,14 @@
 $this->loadHelper('Media.Media');
 ?>
 <?php $this->Breadcrumbs->add(__d('content','Galleries'), ['action' => 'index']); ?>
-<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery Article'))); ?>
+<?php $this->Breadcrumbs->add(__d('content','New {0}', __d('content','Gallery Page'))); ?>
 <?php
 $this->assign('title', __d('content', 'Galleries'));
 $this->assign('heading', $gallery->title);
 $this->assign('subheading', 'New gallery post');
 ?>
 <div class="posts">
-    <?= $this->Form->create($article); ?>
+    <?= $this->Form->create($page); ?>
     <div class="ui form">
         <?php
         echo $this->Form->control('title');

@@ -13,6 +13,8 @@ use Cake\View\Helper;
  */
 class ContentHelper extends Helper
 {
+    public $helpers = ['Html', 'Content.Shortcode'];
+
     /**
      * @var array
      */
@@ -65,6 +67,7 @@ class ContentHelper extends Helper
     public function userHtml($text)
     {
         $text = $this->parseUrlPlaceholders($text);
+        $text = $this->Shortcode->renderShortCodes($text);
 
         return $text;
     }

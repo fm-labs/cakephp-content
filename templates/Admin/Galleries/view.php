@@ -22,13 +22,13 @@
 ) ?>
 <?php $this->Toolbar->startGroup(__d('content','More')); ?>
 <?php $this->Toolbar->addLink(
-    __d('content','List {0}', __d('content','Articles')),
-    ['controller' => 'Articles', 'action' => 'index'],
+    __d('content','List {0}', __d('content','Pages')),
+    ['controller' => 'Pages', 'action' => 'index'],
     ['data-icon' => 'list']
 ) ?>
 <?php $this->Toolbar->addLink(
-    __d('content','New {0}', __d('content','Article')),
-    ['controller' => 'Articles', 'action' => 'add'],
+    __d('content','New {0}', __d('content','Page')),
+    ['controller' => 'Pages', 'action' => 'add'],
     ['data-icon' => 'plus']
 ) ?>
 <?php $this->Toolbar->endGroup(); ?>
@@ -79,7 +79,7 @@
 </div>
 <div class="related">
     <div class="ui basic segment">
-    <h4 class="ui header"><?= __d('content','Related {0}', __d('content','Articles')) ?></h4>
+    <h4 class="ui header"><?= __d('content','Related {0}', __d('content','Pages')) ?></h4>
     <?php if (!empty($gallery->posts)): ?>
     <table class="ui table">
         <tr>
@@ -92,23 +92,23 @@
             <th><?= __d('content','Published') ?></th>
             <th class="actions"><?= __d('content','Actions') ?></th>
         </tr>
-        <?php foreach ($gallery->posts as $articles): ?>
+        <?php foreach ($gallery->posts as $pages): ?>
         <tr>
-            <td><?= h($articles->id) ?></td>
-            <td><?= h($articles->title) ?></td>
-            <td><?= h($articles->image_file) ?></td>
-            <td><?= h($articles->template) ?></td>
-            <td><?= h($articles->cssclass) ?></td>
-            <td><?= h($articles->cssid) ?></td>
-            <td><?= h($articles->is_published) ?></td>
+            <td><?= h($pages->id) ?></td>
+            <td><?= h($pages->title) ?></td>
+            <td><?= h($pages->image_file) ?></td>
+            <td><?= h($pages->template) ?></td>
+            <td><?= h($pages->cssclass) ?></td>
+            <td><?= h($pages->cssid) ?></td>
+            <td><?= h($pages->is_published) ?></td>
 
             <td class="actions">
-                <?= $this->Html->link(__d('content','View'), ['controller' => 'Articles', 'action' => 'view', $articles->id]) ?>
+                <?= $this->Html->link(__d('content','View'), ['controller' => 'Pages', 'action' => 'view', $pages->id]) ?>
 
-                <?= $this->Html->link(__d('content','Edit'), ['controller' => 'Articles', 'action' => 'edit', $articles->id]) ?>
-                <?= $this->Html->link(__d('content','Copy'), ['controller' => 'Articles', 'action' => 'copy', $articles->id]) ?>
+                <?= $this->Html->link(__d('content','Edit'), ['controller' => 'Pages', 'action' => 'edit', $pages->id]) ?>
+                <?= $this->Html->link(__d('content','Copy'), ['controller' => 'Pages', 'action' => 'copy', $pages->id]) ?>
 
-                <?= $this->Form->postLink(__d('content','Delete'), ['controller' => 'Articles', 'action' => 'delete', $articles->id], ['confirm' => __d('content','Are you sure you want to delete # {0}?', $articles->id)]) ?>
+                <?= $this->Form->postLink(__d('content','Delete'), ['controller' => 'Pages', 'action' => 'delete', $pages->id], ['confirm' => __d('content','Are you sure you want to delete # {0}?', $pages->id)]) ?>
 
             </td>
         </tr>

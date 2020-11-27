@@ -13,13 +13,13 @@ class SitemapProvider implements \IteratorAggregate
      */
     public function getIterator()
     {
-        $Articles = TableRegistry::getTableLocator()->get('Content.Articles');
-        foreach ($Articles->find()->where(['Articles.type' => 'page'])->find('published') as $article) {
-            yield new SitemapUrl($article->url, 0.5, $article->modified);
+        $Pages = TableRegistry::getTableLocator()->get('Content.Pages');
+        foreach ($Pages->find()->where(['Pages.type' => 'page'])->find('published') as $page) {
+            yield new SitemapUrl($page->url, 0.5, $page->modified);
         }
 
-        foreach ($Articles->find()->where(['Articles.type' => 'post'])->find('published') as $article) {
-            yield new SitemapUrl($article->url, 0.5, $article->modified);
+        foreach ($Pages->find()->where(['Pages.type' => 'post'])->find('published') as $page) {
+            yield new SitemapUrl($page->url, 0.5, $page->modified);
         }
     }
 }

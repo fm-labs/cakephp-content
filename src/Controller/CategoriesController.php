@@ -7,7 +7,7 @@ namespace Content\Controller;
  * Class CategoriesController
  * @package Content\src\Controller
  * @property \Content\Model\Table\CategoriesTable $Categories
- * @property \Content\Model\Table\ArticlesTable $Articles
+ * @property \Content\Model\Table\PagesTable $Pages
  */
 class CategoriesController extends AppController
 {
@@ -25,7 +25,7 @@ class CategoriesController extends AppController
         parent::beforeFilter($event);
 
         if ($this->components()->has('Auth')) {
-            $this->Auth->allow(['view']);
+            $this->Authentication->allowUnauthenticated(['view']);
         }
     }
 
@@ -42,7 +42,7 @@ class CategoriesController extends AppController
             /*
             if (Configure::read('Content.Router.forceCanonical') && !$this->_root) {
                 $here = Router::normalize($this->request->here);
-                $canonical = Router::normalize($article->getViewUrl());
+                $canonical = Router::normalize($page->getViewUrl());
 
                 if ($here != $canonical) {
                     $this->redirect($canonical, 301);
@@ -55,8 +55,8 @@ class CategoriesController extends AppController
             $this->Frontend->setRefId($id);
         }
 
-        $this->loadModel('Content.Articles');
-        $articles = $this->Articles->find('published')->where(['refscope' => 'Content.Categories', 'refid' => $id])->all()->toArray();
+        $this->loadModel('Content.Pages');
+        $pages = $this->Pages->find('published')->where(['refscope' => 'Content.Categories', 'refid' => $id])->all()->toArray();
 
         $this->set(compact('category', 'posts'));
     }

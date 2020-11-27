@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Content;
 
-use Cupcake\Lib\ClassRegistry;
-use Cupcake\Lib\SingletonTrait;
 use Cake\Collection\Collection;
 use Cake\Core\Plugin;
 use Cake\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
-use Content\Model\Entity\Article;
+use Cupcake\Lib\ClassRegistry;
+use Cupcake\Lib\SingletonTrait;
+use Cupcake\Menu\MenuItemCollection;
+use Cupcake\Model\EntityTypeRegistry;
 
 /**
  * Class ContentManager
@@ -18,23 +19,12 @@ use Content\Model\Entity\Article;
  */
 class ContentManager
 {
-    use SingletonTrait {
-        SingletonTrait::getInstance as getStaticInstance;
-    }
+    use SingletonTrait;
 
     /**
      * @var string
      */
     public static $version;
-
-    /**
-     * @return \Content\ContentManager
-     * @deprecated
-     */
-    public static function getInstance()
-    {
-        return self::getStaticInstance();
-    }
 
     /**
      * @return string Content plugin version nummer
@@ -50,71 +40,18 @@ class ContentManager
     }
 
     /**
-     * @return \Cake\Datasource\ResultSetInterface
-     * @deprecated
-     */
-    public static function getAvailablePageLayouts()
-    {
-        $PageLayouts = TableRegistry::getTableLocator()->get('Content.PageLayouts');
-
-        return $PageLayouts->find('list')->all();
-    }
-
-    /**
-     * @return \Cake\Datasource\EntityInterface|null
-     * @deprecated
-     */
-    public static function getDefaultPageLayout()
-    {
-        $PageLayouts = TableRegistry::getTableLocator()->get('Content.PageLayouts');
-        $pageLayout = $PageLayouts->find()->where(['is_default' => true])->first();
-
-        return $pageLayout;
-    }
-
-    /**
      * @return array
      */
-    public static function getAvailablePageTypes()
+    public static function getAvailablePageTypes(): array
     {
-        return ArticleManager::types();
+        return PageManager::types();
     }
 
     /**
-     * @param $article
-     * @return object
-     * @deprecated
+     * @param $menuId
+     * @return \Cupcake\Menu\MenuItemCollection
      */
-    public static function getArticleHandlerInstance(Article $article)
-    {
-        $articleType = $article->type;
-        $instance = ClassRegistry::get('ArticleType', $articleType);
-        $instance->setEntity($article);
-
-        return $instance;
-    }
-
-    /**
-     * @param $type
-     * @return null
-     * @deprecated
-     */
-    public static function getArticleModelByType($type)
-    {
-        $map = [
-            'page' => 'Content.Articles',
-            'post' => 'Content.Articles',
-            'shop_category' => 'Shop.ShopCategories',
-        ];
-
-        if (isset($map[$type])) {
-            return $map[$type];
-        }
-
-        return null;
-    }
-
-    public static function getMenuById($menuId)
+    public static function getMenuById($menuId): MenuItemCollection
     {
         /** @var \Content\Model\Table\MenusTable $Menus */
         $Menus = TableRegistry::getTableLocator()->get('Content.Menus');
@@ -122,7 +59,10 @@ class ContentManager
         return $Menus->getMenu($menuId);
     }
 
-    public static function getAvailableMenus()
+    /**
+     * @return array
+     */
+    public static function getAvailableMenus(): array
     {
         /** @var \Content\Model\Table\MenusTable $Menus */
         $Menus = TableRegistry::getTableLocator()->get('Content.Menus');
@@ -133,20 +73,29 @@ class ContentManager
             ->toArray();
     }
 
+    public static function getAvailableMenuTypes(): array
+    {
+        return EntityTypeRegistry::registered('Content.Menu');
+    }
+
     /**
      * @param $type
-     * @param $typeid
-     * @return \Cake\Datasource\EntityInterface|mixed|null
+     * @return null
      * @deprecated
      */
-    public static function getArticleByType($type, $typeid)
+    public static function getPageModelByType($type)
     {
-        $modelClass = self::getArticleModelByType($type);
-        if (!$modelClass) {
-            return null;
+        $map = [
+            'page' => 'Content.Pages',
+            'post' => 'Content.Pages',
+            'shop_category' => 'Shop.ShopCategories',
+        ];
+
+        if (isset($map[$type])) {
+            return $map[$type];
         }
 
-        return TableRegistry::getTableLocator()->get($modelClass)->get($typeid);
+        return null;
     }
 
     /**
@@ -233,6 +182,7 @@ class ContentManager
 
     /**
      * @return array
+     * @deprecated
      */
     public static function getLayoutsAvailable()
     {
@@ -266,6 +216,7 @@ class ContentManager
 
     /**
      * @return \Cake\Collection\Collection
+     * @deprecated
      */
     public static function getThemesAvailable()
     {
@@ -324,9 +275,11 @@ class ContentManager
 
     /**
      * Find content view templates in app, plugins and themes templates
+     *
      * @param $path
      * @param null $filter
      * @return array
+     * @deprecated
      */
     public static function getAvailableViewTemplates($path, $filter = null)
     {
@@ -399,24 +352,24 @@ class ContentManager
         return self::getAvailableViewTemplates('Module/Flexslider');
     }
 
-    /**
-     * @return array
-     * @deprecated
-     */
-    public static function getAvailablePageTemplates()
-    {
-        return self::getAvailableViewTemplates('Pages');
-    }
+//    /**
+//     * @return array
+//     * @deprecated
+//     */
+//    public static function getAvailablePageTemplates()
+//    {
+//        return self::getAvailableViewTemplates('Pages');
+//    }
 
     /**
      * @return array
-     * @deprecated Use getAvailableArticleTemplates() instead
+     * @deprecated Use getAvailablePageTemplates() instead
      */
-    public static function getAvailableArticleTeaserTemplates()
+    public static function getAvailablePageTeaserTemplates()
     {
-        return self::getAvailableArticleTemplates();
+        return self::getAvailablePageTemplates();
 
-        $path = 'Template' . DS . 'Articles';
+        $path = 'Template' . DS . 'Pages';
         $available = [];
 
         $modulesLoader = function ($dir, $plugin = null) {
@@ -455,9 +408,9 @@ class ContentManager
      * @return array
      * @deprecated
      */
-    public static function getAvailableArticleTemplates()
+    public static function getAvailablePageTemplates()
     {
-        $path = 'Template' . DS . 'Articles';
+        $path = 'Template' . DS . 'Pages';
         $available = [];
 
         $modulesLoader = function ($dir, $plugin = null) {

@@ -15,13 +15,12 @@ use Content\Model\Entity\ContentModule;
  * Class FrontendView
  *
  * @package App\View
- *
  * @property \Content\View\Helper\BreadcrumbsHelper $Breadcrumbs
  */
 class ContentView extends View
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function __construct(
         ?Request $request = null,
@@ -33,14 +32,13 @@ class ContentView extends View
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function initialize(): void
     {
         $this->loadHelper('Content.Breadcrumbs');
         $this->loadHelper('Content.Content');
         $this->loadHelper('Content.Meta');
-        $this->loadHelper('Content.Shortcode');
 
         // collect additional helpers
         $event = new Event('Content.View.initialize', $this);
@@ -180,7 +178,7 @@ class ContentView extends View
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function fetch(string $name, string $default = ''): string
     {
@@ -195,14 +193,11 @@ class ContentView extends View
             }
         }
 
-        // render short codes
-        //$content = $this->renderShortCodes($content);
-
         return $content ?: $default;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function render(?string $template = null, $layout = null): string
     {
@@ -215,6 +210,7 @@ class ContentView extends View
 
     /**
      * Debug Info
+     *
      * @return array
      */
     public function __debugInfo(): array

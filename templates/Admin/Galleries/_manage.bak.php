@@ -55,16 +55,16 @@
         ?>
 
         <?php
-        $this->Tabs->add(__d('content', 'Articles'), [
-            //'url' => ['action' => 'relatedArticles', $content->id]
+        $this->Tabs->add(__d('content', 'Pages'), [
+            //'url' => ['action' => 'relatedPages', $content->id]
         ]);
         ?>
 
         <div class="related">
             <?= $this->cell('Admin.DataTable', [[
                 'paginate' => false,
-                'model' => 'Content.Articles',
-                'data' => isset($galleryArticles) ? $galleryArticles : [],
+                'model' => 'Content.Pages',
+                'data' => isset($galleryPages) ? $galleryPages : [],
                 'sortable' => true,
                 'sortUrl' => ['plugin' => 'Content', 'controller' => 'Sort', 'action' => 'tableSort'],
                 'fields' => [
@@ -106,7 +106,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (asc)'),
                     [
-                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
+                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Pages',
                         'field' => 'pos',  'order' => 'asc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],
@@ -115,7 +115,7 @@
                 <?= $this->Html->link(
                     __d('content', 'Reorder (desc)'),
                     [
-                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Articles',
+                        'plugin' => 'Admin', 'controller' => 'DataTable', 'action' => 'reorder', 'model' => 'Content.Pages',
                         'field' => 'pos',  'order' => 'desc',
                         'scope' => ['refscope' => 'Content.Galleries', 'refid' => $gallery->id]
                     ],

@@ -6,6 +6,10 @@ namespace Content\View\Shortcode;
 use Cake\Core\App;
 use Cake\View\View;
 
+/**
+ * Class ShortcodeRegistry
+ * @package Content\View\Shortcode
+ */
 class ShortcodeRegistry
 {
     /**
@@ -18,33 +22,53 @@ class ShortcodeRegistry
      */
     protected $_view;
 
-    public function __construct(View $view)
+    /**
+     * ShortcodeRegistry constructor.
+     * @param View $view
+     * @param array $shortcodes
+     */
+    public function __construct(View $view, array $shortcodes = [])
     {
         $this->_view = $view;
+        $this->_shortcodes = $shortcodes;
     }
 
-    public function register($shortcode, $callable)
+    /**
+     * @param string $shortcode
+     * @param callable $callable
+     * @return $this
+     */
+    public function register(string $shortcode, $callable)
     {
-        if (is_string($callable)) {
-            $callable = $this->_resolveShortcode($callable);
-        }
-        $this->_shortcodes[$shortcode] = ['callable' => $callable];
+        $this->_shortcodes[$shortcode] = ['className' => $callable];
+
+        return $this;
     }
 
-    public function get($shortcode)
+    /**
+     * @param string $shortcode
+     * @return callable|null
+     */
+    public function get(string $shortcode): ?callable
     {
         if (isset($this->_shortcodes[$shortcode])) {
-            return $this->_shortcodes[$shortcode]['callable'];
+            $className = $this->_shortcodes[$shortcode]['className'];
+            if (is_string($className)) {
+                $this->_shortcodes[$shortcode]['className'] = $this->_resolveClass($className);
+            }
+            return $this->_shortcodes[$shortcode]['className'];
         }
 
         return null;
     }
 
-    protected function _resolveShortcode($className)
+    /**
+     * @param string $className
+     * @return Shortcode
+     */
+    protected function _resolveClass(string $className): Shortcode
     {
         $class = App::className($className, 'View\Shortcode', 'Shortcode');
-        $obj = new $class($this->_view);
-
-        return $obj;
+        return new $class($this->_view);
     }
 }

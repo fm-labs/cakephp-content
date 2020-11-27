@@ -1,30 +1,34 @@
+<?php
+$page = $this->get('page');
+?>
 <div class="view">
-    <article class="article <?= $article->cssclass; ?>" id="<?= $article->cssid ?>">
+    <page class="page <?= $page->cssclass; ?>" id="<?= $page->cssid ?>">
         <div class="image">
-            <?php if ($article->image): ?>
-                <?= $this->Html->image($article->image->url, ['class' => 'img-responsive']); ?>
+            <?php if ($page->image) : ?>
+                <?= $this->Html->image($page->image->url, ['class' => 'img-responsive']); ?>
             <?php endif; ?>
         </div>
         <h1 class="title">
-            <?= h($article->title); ?>
+            <?= h($page->title); ?>
         </h1>
-        <div class="meta well">
-            <?= h($article->created); ?>
+        <div class="meta">
+            <?= h($page->created); ?>
         </div>
+        <hr />
         <div class="body">
-            <?= $this->Content->userHtml($article->body_html); ?>
+            <?= $this->Content->userHtml($page->body_html); ?>
         </div>
-    </article>
+    </page>
 
 
-    <div class="article-info well">
+    <div class="page-info well">
         <p>
-            <span class="article-info-title">Canonical URL</span>
-            <span class="article-info-data"><?= $this->Html->link($article->getViewUrl()); ?></span>
+            <span class="page-info-title">Canonical URL</span>
+            <span class="page-info-data"><?= $this->Html->link($page->getViewUrl()); ?></span>
         </p>
         <p>
-            <span class="article-info-title">Perma URL</span>
-            <span class="article-info-data"><?= $this->Html->link($article->getPermaUrl()); ?></span>
+            <span class="page-info-title">Perma URL</span>
+            <span class="page-info-data"><?= $this->Html->link($page->getPermaUrl()); ?></span>
         </p>
     </div>
 </div>

@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace Content\View\Helper;
 
-use Cake\Event\Event;
-use Cake\Event\EventManager;
 use Cake\View\Helper;
 use Content\View\Shortcode\ShortcodeRegistry;
+use Cupcake\Cupcake;
 
+/**
+ * Class ShortcodeHelper
+ * @package Content\View\Helper
+ */
 class ShortcodeHelper extends Helper
 {
     /**
@@ -15,33 +18,115 @@ class ShortcodeHelper extends Helper
      */
     protected $_registry;
 
+    /**
+     * @param array $config
+     */
     public function initialize(array $config): void
     {
-        $this->_registry = new ShortcodeRegistry($this->_View);
-
-        $this->add('echo', 'Content.Echo');
-        $this->add('test_short_code', 'Content.Test');
-
-        EventManager::instance()->dispatch(new Event('View.Shortcode.init', null, ['registry' => $this->_registry]));
+        $shortcodes = Cupcake::doFilter('content_shortcodes_init', []);
+        $this->_registry = new ShortcodeRegistry($this->_View, $shortcodes);
     }
 
-    public function add($name, $callable)
+    /**
+     * Register new shortcode at runtime.
+     *
+     * @param string $name
+     * @param $callable
+     */
+    public function add(string $name, $callable)
     {
         $this->_registry->register($name, $callable);
     }
 
-    public function afterRender(Event $event)
-    {
-        /** @var \Cake\View\View $view */
-        $view = $event->getSubject();
-        //$content = $view->Blocks->get('content');
-        $content = $view->fetch('content');
+//    public function afterLayout(Event $event)
+//    {
+//        /** @var \Cake\View\View $view */
+//        $view = $event->getSubject();
+//        //$content = $view->Blocks->get('content');
+//        $content = $view->fetch('content');
+//
+//        $content = $this->renderShortCodes($content);
+//        $view->assign('content', $content);
+//    }
 
-        $content = $this->renderShortCodes($content);
-        $view->assign('content', $content);
+    /**
+     * Parse shortcodes in html text.
+     *
+     * @param string $html
+     * @return string
+     */
+    public function renderShortCodes(string $html): string
+    {
+        $pattern = "/\[([\w]+)\s?(.*)?(\/)?\]/m"; // matches [foo...]
+
+        $paramsParser = function($paramsStr) {
+            $pattern = '/([\w]+)=\"([^"]+)\"/'; // matches foo="bar"
+            preg_match_all($pattern, $paramsStr, $matches);
+
+            //debug($paramsStr);
+            //debug($matches);
+            $params = [];
+            for ($i = 0; $i < count($matches[0]); $i++) {
+                $key = $matches[1][$i];
+                $val = $matches[2][$i];
+                $params[$key] = $val;
+            }
+
+            return $params;
+        };
+
+        $callback = function ($matches) use ($paramsParser) {
+            //debug($matches);
+            $shortcode = $closecode = null;
+            $content = $args = "";
+            if (count($matches) == 2) {
+                [$match, $shortcode] = $matches;
+            } elseif (count($matches) == 3) {
+                [$match, $shortcode, $args] = $matches;
+            } else {
+                $match = $matches[0];
+            }
+
+            // parse shortcode params and handle shortcode
+            $params = $paramsParser($args);
+            $rendered = $this->doShortcode($shortcode, $params, $content);
+            if ($rendered) {
+                return $rendered;
+            }
+
+            return $match;
+        };
+        $html = preg_replace_callback($pattern, $callback, $html);
+
+        return $html;
     }
 
-    public function renderShortCodes($html)
+    /**
+     * @param string $shortcode
+     * @param array $params
+     * @param string $content
+     * @return mixed|null
+     */
+    protected function doShortcode(string $shortcode, array $params = [], string $content = "")
+    {
+        $handler = $this->_registry->get($shortcode);
+        if ($handler) {
+            return call_user_func($handler, $shortcode, $params, $content);
+        }
+
+        // recursively render short codes by default
+        //return $this->renderShortCodes($content);
+
+        return null;
+    }
+
+    /**
+     * @param $html
+     * @return string|string[]|null
+     * @throws \Exception
+     * @deprecated
+     */
+    public function renderShortCodesOld($html)
     {
         $callback = function ($matches) {
             //debug($matches);
@@ -86,7 +171,8 @@ class ShortcodeHelper extends Helper
         };
 
         // short code with body: [short_code_name arg1="foo" args2="bar"]custom content[/short_code_name]
-        $pattern = '/\[([\w]+)\s?([\w\s\"\=]+)?\](.*)\[\/([\w]+)\]/m';
+        //$pattern = '/\[([\w]+)\s?([\w\s\"\=]+)?\](.*)\[\/([\w]+)\]/m';
+        $pattern = '/\[([\w]+)\s?(.*)\](.*)\[\/([\w]+)\]/m';
         $html = preg_replace_callback($pattern, $callback, $html);
 
         // short code without body: [short_code_name arg1="foot" arg2="bar"/]
@@ -94,19 +180,5 @@ class ShortcodeHelper extends Helper
         $html = preg_replace_callback($pattern2, $callback, $html);
 
         return $html;
-    }
-
-    protected function doShortcode($shortcode, $params = [], $content = "")
-    {
-        $handler = $this->_registry->get($shortcode);
-
-        if ($handler) {
-            return call_user_func($handler, $shortcode, $params, $content);
-        }
-
-        // recursively render short codes by default
-        //return $this->renderShortCodes($content);
-
-        return null;
     }
 }

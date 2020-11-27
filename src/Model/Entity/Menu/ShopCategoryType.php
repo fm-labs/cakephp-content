@@ -13,7 +13,7 @@ use Cake\ORM\TableRegistry;
  *
  * @package Content\Model\Entity\Menu
  */
-class ShopCategoryType extends BaseType
+class ShopCategoryType extends AbstractType
 {
     use InstanceConfigTrait;
 

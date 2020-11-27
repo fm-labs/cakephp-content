@@ -65,21 +65,21 @@ class CategoryView extends ContentView
             $this->Html->meta(['property' => 'og:title', 'content' => $metaTitle], null, ['block' => true]);
             $this->Html->meta(['property' => 'og:description', 'content' => $metaDescription], null, ['block' => true]);
             $this->Html->meta(['property' => 'og:url', 'content' => $categoryUrl], null, ['block' => true]);
-            $this->Html->meta(['property' => 'og:type', 'content' => 'article'], null, ['block' => true]);
+            $this->Html->meta(['property' => 'og:type', 'content' => 'page'], null, ['block' => true]);
 
             $publishedTime = $category->publish_start ?: $category->created;
             if ($publishedTime) {
-                $this->Html->meta(['property' => 'article:published_time', 'content' => $publishedTime->format(DATE_ISO8601)], null, ['block' => true]);
+                $this->Html->meta(['property' => 'page:published_time', 'content' => $publishedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
             $expirationTime = $category->publish_end;
             if ($expirationTime) {
-                $this->Html->meta(['property' => 'article:expiration_time', 'content' => $expirationTime->format(DATE_ISO8601)], null, ['block' => true]);
+                $this->Html->meta(['property' => 'page:expiration_time', 'content' => $expirationTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
             $modifiedTime = $category->modified;
             if ($modifiedTime) {
-                $this->Html->meta(['property' => 'article:modified_time', 'content' => $modifiedTime->format(DATE_ISO8601)], null, ['block' => true]);
+                $this->Html->meta(['property' => 'page:modified_time', 'content' => $modifiedTime->format(DATE_ISO8601)], null, ['block' => true]);
             }
 
             //@TODO Wrap in try/catch block
@@ -101,6 +101,7 @@ class CategoryView extends ContentView
             // @TODO Use some category <-> menuitem mapping cache (performance)
             // @TODO Fallback to auto-detection, which nodes arle linked with this category, fetch path of first match
             // @TODO Skip breadcrumbs for inline categorys
+            /*
             $nodeId = $this->request->getQuery('node_id');
             if ($nodeId) {
                 $node = TableRegistry::getTableLocator()->get('Content.Nodes')->get($nodeId);
@@ -114,8 +115,9 @@ class CategoryView extends ContentView
             } else {
                 $this->Breadcrumbs->add($category->title, $categoryUrl);
             }
+            */
         }
 
-        return parent::render($view, $layout);
+        return parent::render($template, $layout);
     }
 }

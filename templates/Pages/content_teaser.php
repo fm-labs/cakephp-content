@@ -1,11 +1,11 @@
-<div class="article view container <?= $article->cssclass ?>" id="<?= $article->cssid; ?>">
+<div class="page view container <?= $page->cssclass ?>" id="<?= $page->cssid; ?>">
     <!--
-    <h1 class="title"><?= h($article->title); ?></h1>
+    <h1 class="title"><?= h($page->title); ?></h1>
     -->
 
     <div class="posts">
-        <?php foreach($article->published_posts as $article): ?>
-            <?= $this->element('Content.Articles/request_teaser', ['post' => $article]); ?>
+        <?php foreach($page->published_posts as $page): ?>
+            <?= $this->element('Content.Pages/request_teaser', ['post' => $page]); ?>
         <?php endforeach; ?>
     </div>
 </div>

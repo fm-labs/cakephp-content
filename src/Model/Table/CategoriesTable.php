@@ -29,14 +29,14 @@ class CategoriesTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->setTable(self::$tablePrefix . 'categories');
+        $this->setTable('categories');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('Articles', [
-            'className' => 'Content.Articles',
+        $this->hasMany('Pages', [
+            'className' => 'Content.Pages',
             'foreignKey' => 'refid',
-            'conditions' => ['Articles.refscope' => 'Content.Categories'],
+            'conditions' => ['Pages.refscope' => 'Content.Categories'],
         ]);
     }
 
