@@ -77,48 +77,8 @@ class Admin extends BaseAdminPlugin implements EventListenerInterface
     }
 
     /**
-     * @return array|array[]
-     */
-    protected function _getMenuItems(): array
-    {
-        return [
-            /*
-            'categories' => [
-                'title' => 'Categories',
-                'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
-                'data-icon' => 'folder-o',
-            ],
-            */
-            'pages' => [
-                'title' => 'Pages',
-                'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
-                'data-icon' => 'file-o',
-            ],
-
-            'posts' => [
-                'title' => 'Posts',
-                'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
-                'data-icon' => 'file-o',
-            ],
-            'menus' => [
-                'title' => 'Menus',
-                'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
-                'data-icon' => 'sitemap',
-            ],
-            /*
-            'galleries' => [
-                'title' => 'Galleries',
-                'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
-                'data-icon' => 'image',
-            ],
-            */
-
-        ];
-    }
-
-    /**
-     * @param \Cake\Event\Event $event
-     * @param \Cupcake\Menu\MenuItemCollection $menu
+     * @param \Cake\Event\Event $event Event
+     * @param \Cupcake\Menu\MenuItemCollection $menu Menu
      * @return void
      */
     public function buildAdminMenu(Event $event, \Cupcake\Menu\MenuItemCollection $menu): void
@@ -127,7 +87,39 @@ class Admin extends BaseAdminPlugin implements EventListenerInterface
             'title' => 'Content',
             'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
             'data-icon' => 'book',
-            'children' => $this->_getMenuItems(),
+            'children' => [
+                /*
+                'categories' => [
+                    'title' => 'Categories',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Categories', 'action' => 'index'],
+                    'data-icon' => 'folder-o',
+                ],
+                */
+                'pages' => [
+                    'title' => 'Pages',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'index'],
+                    'data-icon' => 'file-o',
+                ],
+
+                'posts' => [
+                    'title' => 'Posts',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
+                    'data-icon' => 'file-o',
+                ],
+                'menus' => [
+                    'title' => 'Menus',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Menus', 'action' => 'index'],
+                    'data-icon' => 'sitemap',
+                ],
+                /*
+                'galleries' => [
+                    'title' => 'Galleries',
+                    'url' => ['plugin' => 'Content', 'controller' => 'Galleries', 'action' => 'index'],
+                    'data-icon' => 'image',
+                ],
+                */
+
+            ],
         ]);
     }
 
@@ -138,11 +130,13 @@ class Admin extends BaseAdminPlugin implements EventListenerInterface
      */
     public function buildAdminSystemMenu(Event $event, \Cupcake\Menu\MenuItemCollection $menu): void
     {
+        /*
         $menu->addItem([
             'title' => 'Content',
             'url' => ['plugin' => 'Content', 'controller' => 'Info', 'action' => 'index'],
             'data-icon' => 'info',
             'children' => [],
         ]);
+        */
     }
 }

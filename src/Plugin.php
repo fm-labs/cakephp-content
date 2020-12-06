@@ -78,52 +78,59 @@ class Plugin extends BasePlugin implements EventListenerInterface
             ],
         ]);
 
-
         /**
          * Shortcodes
          */
-        \Cupcake\Cupcake::addFilter('content_shortcodes_init', function($shortcodes) {
+        \Cupcake\Cupcake::addFilter('content_shortcodes_init', function ($shortcodes) {
             $shortcodes['echo'] = [
                 'name' => 'Echo',
-                'className' => 'Content.Echo'
+                'className' => 'Content.Echo',
             ];
             $shortcodes['test'] = [
                 'name' => 'Test',
-                'className' => 'Content.Test'
+                'className' => 'Content.Test',
             ];
             $shortcodes['mathjax'] = [
                 'name' => 'MathJax',
-                'className' => 'Content.Mathjax'
+                'className' => 'Content.Mathjax',
             ];
             $shortcodes['mathjax_block'] = [
                 'name' => 'MathJax Block',
-                'className' => 'Content.Mathjax'
+                'className' => 'Content.Mathjax',
             ];
+
             return $shortcodes;
         });
 
-        ## Seo / Sitemap hooks
+        /**
+         * Seo plugin
+         */
         if (\Cake\Core\Plugin::isLoaded('Seo')) {
             \Seo\Sitemap\Sitemap::setConfig('content', [
                 'className' => 'Content.Sitemap',
             ]);
         }
-        Cupcake::addFilter('seo_sitemap_init', function($name, $data, $options) {
+        Cupcake::addFilter('seo_sitemap_init', function ($name, $data, $options) {
             $data['content'] = [
                 'name' => 'Content Sitemap',
-                'className' => 'Content.Sitemap'
+                'className' => 'Content.Sitemap',
             ];
+
             return $data;
         });
 
+        /**
+         * Admin plugin
+         */
         if (\Cake\Core\Plugin::isLoaded('Admin')) {
             \Admin\Admin::addPlugin(new \Content\Admin());
         }
-        Cupcake::addFilter('admin_init', function($name, $data) {
+        Cupcake::addFilter('admin_init', function ($name, $data) {
             $data['content'] = [
                 'name' => 'Content Plugin Administration',
                 'className' => \Content\Admin::class,
             ];
+
             return $data;
         });
 
