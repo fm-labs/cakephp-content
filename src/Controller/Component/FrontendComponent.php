@@ -11,9 +11,12 @@ use Cake\Core\Plugin;
  * Class FrontendComponent
  *
  * @package Content\Controller\Component
+ * @property \Cake\Controller\Component\FlashComponent $Flash
  */
 class FrontendComponent extends Component
 {
+    public $components = ['Flash'];
+
     /**
      * @var array
      */
@@ -25,7 +28,7 @@ class FrontendComponent extends Component
     ];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function initialize(array $config): void
     {
@@ -35,15 +38,15 @@ class FrontendComponent extends Component
 
         // check if theme plugin is loaded
         if ($theme && !Plugin::isLoaded($theme)) {
-            triggerWarning("Warning: Configured site theme '$theme' is not loaded. Is the plugin loaded?");
-            //$theme = null;
+            $this->Flash->warning("Warning: Configured site theme '$theme' is not enabled.");
+            $theme = null;
         }
 
         $this->getController()->viewBuilder()->setClassName($viewClass);
         $this->getController()->viewBuilder()->setLayout($layout);
         $this->getController()->viewBuilder()->setTheme($theme);
-
-        $this->getController()->viewBuilder()->setVar('_frontend', compact('layout', 'theme', 'viewClass'));
+        $this->getController()->viewBuilder()
+            ->setVar('_frontend', compact('layout', 'theme', 'viewClass'));
 
         $this->setRefScope($this->_config['refscope']);
         $this->setRefId(null);
@@ -81,6 +84,7 @@ class FrontendComponent extends Component
 
     /**
      * Checks if the request has a valid preview key
+     *
      * @todo Move PreviewMode to separate Component
      * @return bool
      */
