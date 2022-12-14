@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Content\Model\Entity\Menu;
 
-class LinkType extends AbstractType
+class LinkMenuType extends AbstractMenuType
 {
     protected $_defaultConfig = [
         'title' => null,

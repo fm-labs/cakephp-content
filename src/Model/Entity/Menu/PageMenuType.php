@@ -13,7 +13,7 @@ use Cake\ORM\TableRegistry;
  *
  * @package Content\Model\Entity\Menu
  */
-class PageType extends AbstractType
+class PageMenuType extends AbstractMenuType
 {
     use InstanceConfigTrait;
 

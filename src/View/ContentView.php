@@ -119,22 +119,6 @@ class ContentView extends View
         //    ->all();
     }
 
-    /*
-    public function module(Module $module, $cellData = [], $template = null)
-    {
-        $cell = $module->cellClass;
-
-        try {
-            $template = ($template) ?: null;
-            $moduleHtml = $this->cell($cell , $cellData, compact('module'))->render($template);
-        } catch (\Exception $ex) {
-            $moduleHtml = sprintf('Unable to render content module %s [%s]: %s', $module->name, $module->path, $ex->getMessage());
-        }
-
-        return $moduleHtml;
-    }
-    */
-
     /**
      * @param \Content\Model\Entity\ContentModule $contentModule Content module instance
      * @param array $moduleData Module data
@@ -172,9 +156,39 @@ class ContentView extends View
         return $this->Html->div(null, (string)$moduleHtml, $wrapperAttrs);
     }
 
+
+    /*
+    public function module(Module $module, $cellData = [], $template = null)
+    {
+        $cell = $module->cellClass;
+
+        try {
+            $template = ($template) ?: null;
+            $moduleHtml = $this->cell($cell , $cellData, compact('module'))->render($template);
+        } catch (\Exception $ex) {
+            $moduleHtml = sprintf('Unable to render content module %s [%s]: %s', $module->name, $module->path, $ex->getMessage());
+        }
+
+        return $moduleHtml;
+    }
+    */
+
     public function module($moduleName, $data, array $options = [])
     {
-        return sprintf("[ %s:%s ] ", $moduleName, json_encode($options));
+        //echo sprintf("[ %s:%s ] ", $moduleName, json_encode($options));
+        //print_r($data);
+
+        $cell = $moduleName;
+        $template = null;
+
+        try {
+            $template = ($template) ?: null;
+            $moduleHtml = $this->cell($cell , $data , $options)->render($template);
+        } catch (\Exception $ex) {
+            $moduleHtml = sprintf('Unable to render content module %s [%s]', $moduleName, $ex->getMessage());
+        }
+
+        return $moduleHtml;
     }
 
     /**

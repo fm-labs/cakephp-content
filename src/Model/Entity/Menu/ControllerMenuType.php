@@ -6,7 +6,7 @@ namespace Content\Model\Entity\Menu;
 use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Router;
 
-class ControllerType extends AbstractType
+class ControllerMenuType extends AbstractMenuType
 {
     protected $_defaultConfig = [
         'title' => null,

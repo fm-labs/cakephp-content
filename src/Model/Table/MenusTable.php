@@ -12,7 +12,7 @@ use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
 use Content\ContentManager;
-use Content\MenuManager;
+use Cupcake\Menu\MenuItem;
 use Cupcake\Menu\MenuItemCollection;
 
 /**
@@ -278,9 +278,11 @@ class MenusTable extends BaseTable
 
                 $menu->addItem($item);
             } catch (MissingRouteException $ex) {
+                $menu->addItem(new MenuItem($child['title'] . "BROKEN", "#error.html?err=" . $ex->getMessage()));
                 continue;
             } catch (\Exception $ex) {
-                debug($ex->getMessage());
+                //debug($ex->getMessage());
+                $menu->addItem(new MenuItem("BROKEN", "#error.html?err=" . $ex->getMessage()));
                 continue;
             }
         }

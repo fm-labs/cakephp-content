@@ -20,6 +20,7 @@ class MenusController extends AppController
      */
     public function index()
     {
+        $this->Menus = $this->loadModel("Content.Menus");
         $menuTreeList = $this->Menus->find('treeList');
         $menusThreaded = $this->Menus->find()
             ->find('threaded')

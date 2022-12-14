@@ -37,11 +37,11 @@ class PagesTable extends BaseTable
 
         $this->addBehavior('Timestamp');
 
-        $this->addBehavior('Cupcake.Attributes', [
-            //'attributesTableClass' => 'Content.Options',
-            'attributesTableName' => 'content_options',
-            'attributesField' => 'options',
-        ]);
+//        $this->addBehavior('Cupcake.Attributes', [
+//            'attributesTableClass' => 'Content.Options',
+//            'attributesTableName' => 'content_options',
+//            'attributesField' => 'options',
+//        ]);
 
         $this->addBehavior('Translate', [
             'fields' => ['title', 'slug', 'excerpt_text', 'body_html'],

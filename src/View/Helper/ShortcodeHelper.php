@@ -9,6 +9,7 @@ use Cupcake\Cupcake;
 
 /**
  * Class ShortcodeHelper
+ *
  * @package Content\View\Helper
  */
 class ShortcodeHelper extends Helper
@@ -59,7 +60,7 @@ class ShortcodeHelper extends Helper
     {
         $pattern = "/\[([\w]+)\s?(.*)?(\/)?\]/m"; // matches [foo...]
 
-        $paramsParser = function($paramsStr) {
+        $paramsParser = function ($paramsStr) {
             $pattern = '/([\w]+)=\"([^"]+)\"/'; // matches foo="bar"
             preg_match_all($pattern, $paramsStr, $matches);
 
@@ -78,7 +79,7 @@ class ShortcodeHelper extends Helper
         $callback = function ($matches) use ($paramsParser) {
             //debug($matches);
             $shortcode = $closecode = null;
-            $content = $args = "";
+            $content = $args = '';
             if (count($matches) == 2) {
                 [$match, $shortcode] = $matches;
             } elseif (count($matches) == 3) {
@@ -107,7 +108,7 @@ class ShortcodeHelper extends Helper
      * @param string $content
      * @return mixed|null
      */
-    protected function doShortcode(string $shortcode, array $params = [], string $content = "")
+    protected function doShortcode(string $shortcode, array $params = [], string $content = '')
     {
         $handler = $this->_registry->get($shortcode);
         if ($handler) {
@@ -132,7 +133,7 @@ class ShortcodeHelper extends Helper
             //debug($matches);
 
             $shortcode = $closecode = $content = null;
-            $args = "";
+            $args = '';
             if (count($matches) == 2) {
                 [$match, $shortcode] = $matches;
             } elseif (count($matches) == 3) {
@@ -150,13 +151,13 @@ class ShortcodeHelper extends Helper
             }
 
             // parse shortcode params
-            $args = explode(" ", trim($args));
+            $args = explode(' ', trim($args));
             $params = [];
             array_walk($args, function ($v) use (&$params) {
-                $attr = explode("=", $v);
+                $attr = explode('=', $v);
                 if (count($attr) == 2) {
                     [$key, $val] = $attr;
-                    $val = trim(trim($val, "\""));
+                    $val = trim(trim($val, '"'));
                     $params[$key] = $val;
                 }
             });

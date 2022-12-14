@@ -29,7 +29,7 @@ $menuTreeList = $this->get('menuTreeList');
         <div class="col-md-2">
             <ul>
             <?php foreach ($menuRoots as $root) : ?>
-                <li><?= $this->Html->link($root->title, ['action' => 'index', 'menu_id' => $root->id]); ?></li>
+                <li><?= $this->Html->link($root->title, ['action' => 'index', '?' => ['menu_id' => $root->id]]); ?></li>
             <?php endforeach; ?>
             </ul>
         </div>
@@ -80,6 +80,7 @@ $menuTreeList = $this->get('menuTreeList');
         </div>
     </div>
 
+    <?php debug($menuTreeList->toArray()); ?>
 
 </div>
 <?php $this->append('script'); ?>

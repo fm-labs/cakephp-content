@@ -5,7 +5,10 @@ namespace Content\View\Shortcode;
 
 class TestShortcode extends Shortcode
 {
-    public function __invoke($name, $params, $content)
+    /**
+     * @inheritDoc
+     */
+    public function __invoke(string $name, array $params, ?string $content = null): string
     {
         return "I'm a test <strong>short code :)</strong> with content $content";
     }

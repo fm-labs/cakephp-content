@@ -10,7 +10,7 @@ use Cupcake\Model\EntityTypeInterface;
  *
  * @package Content\Model\Entity\Menu\Type
  */
-interface TypeInterface extends EntityTypeInterface
+interface MenuTypeInterface extends EntityTypeInterface
 {
     /**
      * @return string

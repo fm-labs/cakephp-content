@@ -13,7 +13,7 @@ use Cake\ORM\TableRegistry;
  *
  * @package Content\Model\Entity\Menu
  */
-class ShopCategoryType extends AbstractType
+class ShopCategoryMenuType extends AbstractMenuType
 {
     use InstanceConfigTrait;
 
@@ -67,7 +67,7 @@ class ShopCategoryType extends AbstractType
             'plugin' => 'Shop',
             'controller' => 'Shop',
             'action' => 'index',
-            'query' => ['c' => $this->getConfig('shop_category_id')],
+            '?' => ['c' => $this->getConfig('shop_category_id')],
         ];
     }
 
@@ -120,7 +120,7 @@ class ShopCategoryType extends AbstractType
 
     protected function _buildUrl(EntityInterface $category)
     {
-        if ($category->get('slug')) {
+        if (\Cake\Core\Configure::read('Shop.Router.enablePrettyUrls') && $category->get('slug')) {
             return [
                 'prefix' => false,
                 'plugin' => 'Shop',

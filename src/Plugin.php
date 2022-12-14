@@ -11,6 +11,7 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cupcake\Cupcake;
+use Cupcake\Menu\MenuManager;
 use Cupcake\Model\EntityTypeRegistry;
 
 /**
@@ -62,21 +63,26 @@ class Plugin extends BasePlugin implements EventListenerInterface
         EntityTypeRegistry::registerMultiple('Content.Menu', [
             'root' => [
                 'label' => __('Root'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\RootType',
+                'className' => '\\Content\\Model\\Entity\\Menu\\RootMenuType',
             ],
             'page' => [
                 'label' => __('Page'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\PageType',
+                'className' => '\\Content\\Model\\Entity\\Menu\\PageMenuType',
             ],
             'controller' => [
                 'label' => __('Custom Controller'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\ControllerType',
+                'className' => '\\Content\\Model\\Entity\\Menu\\ControllerMenuType',
             ],
             'link' => [
                 'label' => __('Custom Link'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\LinkType',
+                'className' => '\\Content\\Model\\Entity\\Menu\\LinkMenuType',
             ],
         ]);
+
+        /**
+         * Menus
+         */
+        //MenuManager::setConfig('__main__', ['className' => '']);
 
         /**
          * Shortcodes

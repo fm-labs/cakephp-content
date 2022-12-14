@@ -7,7 +7,7 @@ use Cake\Core\InstanceConfigTrait;
 use Cake\Datasource\EntityInterface;
 use Cupcake\Menu\MenuItem;
 
-abstract class AbstractType implements TypeInterface
+abstract class AbstractMenuType implements MenuTypeInterface
 {
     use InstanceConfigTrait;
 

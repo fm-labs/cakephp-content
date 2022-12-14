@@ -37,7 +37,7 @@ class OptionsTable extends BaseTable
     {
         parent::initialize($config);
 
-        $this->setTable('options');
+        $this->setTable('content_options');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
     }

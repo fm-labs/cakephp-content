@@ -5,6 +5,7 @@ namespace Content\Controller\Admin;
 
 use Cake\Routing\Router;
 use Content\ContentManager;
+use Content\Model\Table\PagesTable;
 
 /**
  * Pages Controller
@@ -26,12 +27,17 @@ class PagesController extends AppController
     public $actions = [
         'index' => 'Admin.Index',
         'view' => 'Admin.View',
-        //'add' => 'Admin.Add',
+        'add' => 'Admin.Add',
         //'edit' => 'Admin.Edit',
         'delete' => 'Admin.Delete',
         'publish' => 'Admin.Publish',
         'unpublish' => 'Admin.Unpublish',
     ];
+
+    /**
+     * @var PagesTable
+     */
+    public $Pages;
 
     /**
      * @param null $id
@@ -79,7 +85,13 @@ class PagesController extends AppController
                 return $out;
             }],
         ]);
-        $this->set('queryObj', $this->Pages->find()->find('withUri')->find('withAttributes'));
+
+        $this->Pages = $this->loadModel("Content.Pages");
+        $queryObj = $this->Pages->find(); //->find('withUri');
+        if ($this->Pages->behaviors()->has('Attributes')) {
+            $queryObj = $queryObj->find('withAttributres');
+        }
+        $this->set('queryObj', $queryObj);
 
         $this->Action->execute();
     }
@@ -150,8 +162,9 @@ class PagesController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function _add()
     {
+        $this->Pages = $this->loadModel("Content.Pages");
         $page = $this->Pages->newEntity($this->request->getQuery(), ['validate' => false]);
         $page->type = $this->pageType;
 

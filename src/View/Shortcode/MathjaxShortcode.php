@@ -5,7 +5,10 @@ namespace Content\View\Shortcode;
 
 class MathjaxShortcode extends Shortcode
 {
-    public function __invoke($name, $params, $content)
+    /**
+     * @inheritDoc
+     */
+    public function __invoke(string $name, array $params, ?string $content = null): string
     {
         $this->_view->loadHelper('Content.Mathjax');
 

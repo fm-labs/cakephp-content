@@ -48,10 +48,10 @@ class ContentManager
     }
 
     /**
-     * @param $menuId
+     * @param string $menuId Menu ID
      * @return \Cupcake\Menu\MenuItemCollection
      */
-    public static function getMenuById($menuId): MenuItemCollection
+    public static function getMenuById(string $menuId): MenuItemCollection
     {
         /** @var \Content\Model\Table\MenusTable $Menus */
         $Menus = TableRegistry::getTableLocator()->get('Content.Menus');

@@ -14,13 +14,8 @@ use App\Controller\AppController as BaseAppController;
 abstract class AppController extends BaseAppController
 {
     /**
-     * @var string[]
-     */
-    public $allowedActions = ['index', 'view'];
-
-    /**
-     * {@inheritDoc}
      * @throws \Exception
+     * @return void
      */
     public function initialize(): void
     {
@@ -29,9 +24,5 @@ abstract class AppController extends BaseAppController
         $this->loadComponent('Flash');
         $this->loadComponent('Content.Frontend');
         $this->loadComponent('Content.Locale');
-
-        if ($this->Authentication && !empty($this->allowedActions)) {
-            $this->Authentication->allowUnauthenticated($this->allowedActions);
-        }
     }
 }
