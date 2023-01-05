@@ -43,10 +43,10 @@ class PagesTable extends BaseTable
 //            'attributesField' => 'options',
 //        ]);
 
-        $this->addBehavior('Translate', [
-            'fields' => ['title', 'slug', 'excerpt_text', 'body_html'],
-            'translationTable' => 'content_i18n',
-        ]);
+//        $this->addBehavior('Translate', [
+//            'fields' => ['title', 'slug', 'excerpt_text', 'body_html'],
+//            'translationTable' => 'content_i18n',
+//        ]);
 
         /*
         $this->addBehavior('Content.ContentModule', [

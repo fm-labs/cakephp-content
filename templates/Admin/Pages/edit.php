@@ -164,8 +164,8 @@ endif;
 
     <!-- Debug -->
     <?php $this->Tabs->add(__d('content', 'Debug'), ['debugOnly' => true]); ?>
-    <?= $this->cell('Admin.EntityView', [$page], ['model' => 'Content.Pages']); ?>
-    <?php debug($page); ?>
+    <?php echo '' //$this->cell('Admin.EntityView', [$page], ['model' => 'Content.Pages']); ?>
+    <?php //debug($page); ?>
 
     <?php echo $this->Tabs->render(); ?>
 

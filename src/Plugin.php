@@ -59,6 +59,11 @@ class Plugin extends BasePlugin implements EventListenerInterface
             'className' => 'Content.Page',
         ]);
 
+        EntityTypeRegistry::register('Content.Page', 'default', [
+            'label' => 'Page',
+            'className' => 'Content.Page',
+        ]);
+
         //EntityTypeRegistry::registerNs('Content.Menu');
         EntityTypeRegistry::registerMultiple('Content.Menu', [
             'root' => [
@@ -172,18 +177,17 @@ class Plugin extends BasePlugin implements EventListenerInterface
         }
         */
 
-        // Pages with '/page' prefix (@deprecated)
-        /*
+        // Pages with '/page' prefix
         $routes->connect(
-            '/page/:slug/:page_id/*',
+            '/page/:slug/:id/*',
             ['plugin' => 'Content',  'controller' => 'Pages', 'action' => 'view'],
-            ['page_id' => '\d+', 'pass' => ['page_id']]
+            ['id' => '\d+', 'pass' => ['id']]
         );
 
         $routes->connect(
-            '/page/:page_id',
+            '/page/:id',
             ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
-            ['page_id' => '\d+', 'pass' => ['page_id']]
+            ['id' => '\d+', 'pass' => ['id']]
         );
 
         $routes->connect(
@@ -191,7 +195,6 @@ class Plugin extends BasePlugin implements EventListenerInterface
             ['plugin' => 'Content', 'controller' => 'Pages', 'action' => 'view'],
             ['pass' => []]
         );
-        */
 
         // Posts with '/post' prefix
         /*

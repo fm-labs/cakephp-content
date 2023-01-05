@@ -18,7 +18,6 @@ class LocaleComponent extends Component
      */
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        print_r("LocaleComponent:beforeFilter");
         $currentLocale = $requestLocale = I18n::getLocale();
         $request = $this->getController()->getRequest();
         if ($request->getParam('locale')) {

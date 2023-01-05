@@ -123,61 +123,61 @@ class Page extends Entity implements Page\TypeInterface
         return trim($val);
     }
 
-    /**
-     * @return array|string
-     * @throws \Exception
-     */
-    protected function _getViewUrl()
-    {
-        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
-        return $this->getViewUrl();
-    }
+//    /**
+//     * @return array|string
+//     * @throws \Exception
+//     */
+//    protected function _getViewUrl()
+//    {
+//        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
+//        return $this->getViewUrl();
+//    }
 
-    /**
-     * @return array|string
-     * @throws \Exception
-     */
-    protected function _getAdminUrl()
-    {
-        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
-        return $this->getAdminUrl();
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    protected function _getChildren()
-    {
-        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
-        $children = $this->getChildren();
-
-        return $children ? $children->all()->toArray() : [];
-    }
-
-    /**
-     * Virtual Field 'url'
-     *
-     * @throws \Exception
-     * @deprecated Use _getViewUrl() instead
-     */
-    protected function _getUrl()
-    {
-        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, "getViewUrl"));
-        return $this->getViewUrl();
-    }
-
-    /**
-     * Virtual Field 'perma_url'
-     *
-     * @return string
-     * @throws \Exception
-     */
-    protected function _getPermaUrl()
-    {
-        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
-        return $this->getPermaUrl();
-    }
+//    /**
+//     * @return array|string
+//     * @throws \Exception
+//     */
+//    protected function _getAdminUrl()
+//    {
+//        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
+//        return $this->getAdminUrl();
+//    }
+//
+//    /**
+//     * @return array
+//     * @throws \Exception
+//     */
+//    protected function _getChildren()
+//    {
+//        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
+//        $children = $this->getChildren();
+//
+//        return $children ? $children->all()->toArray() : [];
+//    }
+//
+//    /**
+//     * Virtual Field 'url'
+//     *
+//     * @throws \Exception
+//     * @deprecated Use _getViewUrl() instead
+//     */
+//    protected function _getUrl()
+//    {
+//        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, "getViewUrl"));
+//        return $this->getViewUrl();
+//    }
+//
+//    /**
+//     * Virtual Field 'perma_url'
+//     *
+//     * @return string
+//     * @throws \Exception
+//     */
+//    protected function _getPermaUrl()
+//    {
+//        deprecationWarning(sprintf("%s::%s is deprecated. Use %s instead", get_class($this), __METHOD__, substr(__METHOD__, 1)));
+//        return $this->getPermaUrl();
+//    }
 
     /**
      * Get page excepert.

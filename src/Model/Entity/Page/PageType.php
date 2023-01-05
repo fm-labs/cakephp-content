@@ -18,7 +18,7 @@ class PageType extends AbstractType
                 'plugin' => 'Content',
                 'controller' => 'Pages',
                 'action' => 'view',
-                $this->page->get('id'),
+                'id' => $this->page->get('id'),
                 'slug' => $this->page->get('slug'),
             ];
         }
@@ -80,10 +80,14 @@ class PageType extends AbstractType
 
     public function getChildren()
     {
-        return TableRegistry::getTableLocator()->get('Content.Pages')
-            ->find()
-            ->where(['parent_id' => $this->page->get('id')])
-            ->order(['pos' => 'ASC']);
+        if ($this->page->get('id')) {
+            return TableRegistry::getTableLocator()->get('Content.Pages')
+                ->find()
+                ->where(['parent_id' => $this->page->get('id')])
+                ->order(['pos' => 'ASC'])
+                ->all();
+        }
+        return [];
     }
 
     public function isPublished()

@@ -2,7 +2,7 @@
 $page = $this->get('page');
 ?>
 <div class="view">
-    <page class="post <?= $page->cssclass; ?>" id="<?= $page->cssid ?>">
+    <article class="post <?= $page->cssclass; ?>" id="<?= $page->cssid ?>">
         <div class="image">
             <?php if ($page->image): ?>
                 <?= $this->Html->image($page->image->url, ['class' => 'img-responsive']); ?>
@@ -14,5 +14,5 @@ $page = $this->get('page');
         <div class="body">
             <?= $this->Content->userHtml($page->body_html); ?>
         </div>
-    </page>
+    </article>
 </div>

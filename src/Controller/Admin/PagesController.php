@@ -5,12 +5,13 @@ namespace Content\Controller\Admin;
 
 use Cake\Routing\Router;
 use Content\ContentManager;
-use Content\Model\Table\PagesTable;
+//use Content\Model\Table\PagesTable;
 
 /**
  * Pages Controller
  *
  * @property \Content\Model\Table\PagesTable $Pages
+ * @property \Admin\Controller\Component\ActionComponent $Action
  */
 class PagesController extends AppController
 {
@@ -28,16 +29,11 @@ class PagesController extends AppController
         'index' => 'Admin.Index',
         'view' => 'Admin.View',
         'add' => 'Admin.Add',
-        //'edit' => 'Admin.Edit',
+        'edit' => 'Admin.Edit',
         'delete' => 'Admin.Delete',
         'publish' => 'Admin.Publish',
         'unpublish' => 'Admin.Unpublish',
     ];
-
-    /**
-     * @var PagesTable
-     */
-    public $Pages;
 
     /**
      * @param null $id
@@ -53,6 +49,18 @@ class PagesController extends AppController
         $url .= strpos('?', $url) === 0 ? '?' : '&';
         $url .= 'preview=' . $previewKey;
         $this->redirect($url);
+    }
+
+    public function add()
+    {
+        $this->set('fields.whitelist', ['type', 'title', 'is_published']);
+        $this->set('fields', [
+            'type' => [
+                'default' => 'page'
+            ]
+        ]);
+        $this->set('redirectUrl', true);
+        $this->Action->execute();
     }
 
     /**
@@ -88,9 +96,9 @@ class PagesController extends AppController
 
         $this->Pages = $this->loadModel("Content.Pages");
         $queryObj = $this->Pages->find(); //->find('withUri');
-        if ($this->Pages->behaviors()->has('Attributes')) {
-            $queryObj = $queryObj->find('withAttributres');
-        }
+//        if ($this->Pages->behaviors()->has('Attributes')) {
+//            $queryObj = $queryObj->find('withAttributres');
+//        }
         $this->set('queryObj', $queryObj);
 
         $this->Action->execute();
@@ -228,7 +236,7 @@ class PagesController extends AppController
                 'contain' => ['Parent'/*, 'ContentModules' => ['Modules']*/],
                 'media' => true,
             ])
-            ->find('withAttributes')
+            //->find('withAttributes')
             ->where(['Pages.id' => $id])
             ->firstOrFail();
 
@@ -264,10 +272,12 @@ class PagesController extends AppController
         }
         */
 
-        $attributes = $this->Pages->getAttributesSchema();
+        $attributes = [];
+        //$attributes = $this->Pages->getAttributesSchema();
 
-        $this->set(compact('page', 'teaserTemplates', 'templates', 'editor', 'attributes'));
-        $this->set('_serialize', 'page');
+        //$this->set(compact('page', 'teaserTemplates', 'templates', 'editor', 'attributes'));
+        $this->set(compact('page', 'editor'));
+        //$this->set('_serialize', 'page');
         //$this->set('typeElement', 'Content.Admin/Pages/' . 'edit_' . $page->type);
 
         //$this->autoRender = false;
