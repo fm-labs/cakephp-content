@@ -4,14 +4,10 @@ declare(strict_types=1);
 namespace Content;
 
 use Admin\Core\BaseAdminPlugin;
-use Cake\Core\BasePlugin;
-use Cake\Core\PluginApplicationInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
-use Cake\Event\EventManager;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
-use Seo\Sitemap\Sitemap;
 use Settings\SettingsManager;
 
 /**

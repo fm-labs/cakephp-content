@@ -11,7 +11,6 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cupcake\Cupcake;
-use Cupcake\Menu\MenuManager;
 use Cupcake\Model\EntityTypeRegistry;
 
 /**
@@ -121,14 +120,14 @@ class Plugin extends BasePlugin implements EventListenerInterface
                 'className' => 'Content.Sitemap',
             ]);
         }
-        Cupcake::addFilter('seo_sitemap_init', function ($name, $data, $options) {
-            $data['content'] = [
-                'name' => 'Content Sitemap',
-                'className' => 'Content.Sitemap',
-            ];
-
-            return $data;
-        });
+//        Cupcake::addFilter('seo_sitemap_init', function ($name, $data, $options) {
+//            $data['content'] = [
+//                'name' => 'Content Sitemap',
+//                'className' => 'Content.Sitemap',
+//            ];
+//
+//            return $data;
+//        });
 
         /**
          * Admin plugin
