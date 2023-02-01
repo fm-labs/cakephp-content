@@ -289,11 +289,11 @@ class Plugin extends BasePlugin implements EventListenerInterface
     public function implementedEvents(): array
     {
         return [
-            'Controller.initialize' => function (Event $event) {
-                if ($event->getSubject() instanceof \App\Controller\AppController) {
-                    $event->getSubject()->loadComponent('Content.Frontend');
-                }
-            },
+//            'Controller.initialize' => function (Event $event) {
+//                if ($event->getSubject() instanceof \App\Controller\AppController) {
+//                    $event->getSubject()->loadComponent('Content.Frontend');
+//                }
+//            },
         ];
     }
 }
