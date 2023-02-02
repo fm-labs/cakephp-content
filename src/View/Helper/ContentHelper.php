@@ -28,6 +28,10 @@ class ContentHelper extends Helper
      */
     public function parseUrlPlaceholders($text)
     {
+        if (!$text) {
+            return $text;
+        }
+
         $text = preg_replace_callback('/\{\{(.*)\}\}/U', function ($matches) {
 
             $placeholder = $matches[1];
@@ -66,8 +70,10 @@ class ContentHelper extends Helper
      */
     public function userHtml($text)
     {
-        $text = $this->parseUrlPlaceholders($text);
-        $text = $this->Shortcode->renderShortCodes($text);
+        if ($text) {
+            $text = $this->parseUrlPlaceholders($text);
+            $text = $this->Shortcode->renderShortCodes($text);
+        }
 
         return $text;
     }

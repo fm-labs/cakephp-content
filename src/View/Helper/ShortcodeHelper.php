@@ -58,6 +58,9 @@ class ShortcodeHelper extends Helper
      */
     public function renderShortCodes(string $html): string
     {
+        if (!$html) {
+            return $html;
+        }
         $pattern = "/\[([\w]+)\s?(.*)?(\/)?\]/m"; // matches [foo...]
 
         $paramsParser = function ($paramsStr) {
