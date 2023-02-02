@@ -1,6 +1,8 @@
 <?php $this->loadHelper('Bootstrap.Menu'); ?>
 <?php $this->loadHelper('Admin.Toolbar'); ?>
 <?php
+/** \Cake\View\View $this **/
+$this->Toolbar->addLink("Preview", ['action' => 'preview', '?' => ['menu_id' => 1]]);
 $this->Toolbar->addLink("Add", ['action' => 'index', '?' => ['add' => 1]]);
 $this->Toolbar->addLink("Tree Sort", ['action' => 'sort']);
 

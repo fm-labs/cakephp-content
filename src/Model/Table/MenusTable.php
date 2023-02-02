@@ -258,27 +258,27 @@ class MenusTable extends BaseTable
     protected function _buildMenu($children, $level = 0, $maxDepth = -1, $includeHidden = null)
     {
         $menu = new MenuItemCollection();
-        foreach ($children as $child) {
+        foreach ($children as $menuEntity) {
             try {
-                /** @var \Content\Model\Entity\Menu $child */
-                if (!$child->isVisibleInMenu() && !$includeHidden) {
+                /** @var \Content\Model\Entity\Menu $menuEntity */
+                if (!$menuEntity->isVisibleInMenu() && !$includeHidden) {
                     continue;
                 }
 
                 // check the url, skip item if a route does not exist
                 // Router::url() will throw MissingRouteException
-                Router::url($child->getUrl());
+                Router::url($menuEntity->getUrl());
 
-                $item = $child->toMenuItem($maxDepth);
+                $item = $menuEntity->toMenuItem($maxDepth);
 
-                if (($maxDepth < 0 || $level < $maxDepth) && isset($child['children'])) {
-                    $_submenu = $this->_buildMenu($child['children'], $level + 1, $maxDepth);
+                if (($maxDepth < 0 || $level < $maxDepth) && isset($menuEntity['children'])) {
+                    $_submenu = $this->_buildMenu($menuEntity['children'], $level + 1, $maxDepth);
                     $item->addChildren($_submenu->getItems());
                 }
 
                 $menu->addItem($item);
             } catch (MissingRouteException $ex) {
-                $menu->addItem(new MenuItem($child['title'] . "BROKEN", "#error.html?err=" . $ex->getMessage()));
+                $menu->addItem(new MenuItem($menuEntity['title'] . "BROKEN", "#error.html?err=" . $ex->getMessage()));
                 continue;
             } catch (\Exception $ex) {
                 //debug($ex->getMessage());
