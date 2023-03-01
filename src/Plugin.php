@@ -27,10 +27,8 @@ class Plugin extends BasePlugin implements EventListenerInterface
     {
         parent::bootstrap($app);
 
-        /**
-         * Load default content config
-         */
-        Configure::load('Content.content');
+        $app->addOptionalPlugin('Seo');
+        $app->addOptionalPlugin('Settings');
 
         /**
          * Setup cache
@@ -111,6 +109,15 @@ class Plugin extends BasePlugin implements EventListenerInterface
 
             return $shortcodes;
         });
+
+        /**
+         * Load default content config
+         */
+        Configure::load('Content.content');
+
+        if (\Cake\Core\Plugin::isLoaded('Settings')) {
+            Configure::load('Content', 'settings');
+        }
 
         /**
          * Seo plugin
