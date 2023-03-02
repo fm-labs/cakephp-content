@@ -14,7 +14,7 @@ class RootMenuType extends AbstractMenuType
     public function __construct(EntityInterface $entity)
     {
         $this->_defaultConfig = [
-            'label' => __('Root'),
+            'label' => __d('content', 'Root'),
         ];
         parent::__construct($entity);
     }

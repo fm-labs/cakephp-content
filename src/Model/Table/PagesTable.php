@@ -126,8 +126,8 @@ class PagesTable extends BaseTable
             'input' => [
                 'options' => [
                     'off' => 'Off',
-                    'password' => __('Password protected'),
-                    'auth' => __('Authenticated Users')
+                    'password' => __d('content', 'Password protected'),
+                    'auth' => __d('content', 'Authenticated Users')
                 ]
             ]
         ];

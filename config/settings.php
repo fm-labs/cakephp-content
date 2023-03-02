@@ -4,7 +4,7 @@ return [
         'Content' => [
             'groups' => [
                 'Content' => [
-                    'label' => __('Content'),
+                    'label' => __d('content', 'Content'),
                 ],
             ],
 

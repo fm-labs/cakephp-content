@@ -15,6 +15,6 @@ echo $this->Form->control('type_params.shop_category_id', [
 echo $this->Form->control('type_params.shop_subcategories_depth', [
     'label' => __d('content', 'Number of subcategories depth'),
     'default' => -1,
-    'options' => [-1 => __('All'), 0, 1, 2, 3, 4, 5],
+    'options' => [-1 => __d('content', 'All'), 0, 1, 2, 3, 4, 5],
     'required' => false
 ]);

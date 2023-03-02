@@ -64,19 +64,19 @@ class Plugin extends BasePlugin implements EventListenerInterface
         //EntityTypeRegistry::registerNs('Content.Menu');
         EntityTypeRegistry::registerMultiple('Content.Menu', [
             'root' => [
-                'label' => __('Root'),
+                'label' => __d('content', 'Root'),
                 'className' => '\\Content\\Model\\Entity\\Menu\\RootMenuType',
             ],
             'page' => [
-                'label' => __('Page'),
+                'label' => __d('content', 'Page'),
                 'className' => '\\Content\\Model\\Entity\\Menu\\PageMenuType',
             ],
             'controller' => [
-                'label' => __('Custom Controller'),
+                'label' => __d('content', 'Custom Controller'),
                 'className' => '\\Content\\Model\\Entity\\Menu\\ControllerMenuType',
             ],
             'link' => [
-                'label' => __('Custom Link'),
+                'label' => __d('content', 'Custom Link'),
                 'className' => '\\Content\\Model\\Entity\\Menu\\LinkMenuType',
             ],
         ]);

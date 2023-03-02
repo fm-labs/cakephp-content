@@ -7,6 +7,6 @@ $pages = \Cake\ORM\TableRegistry::getTableLocator()->get('Content.Pages')
 echo $this->Form->control('type_params.page_id', [
     'label' => __d('content', 'Page'),
     'options' => $pages,
-    'empty' => __('Select page'),
+    'empty' => __d('content', 'Select page'),
     'required' => true
 ]);

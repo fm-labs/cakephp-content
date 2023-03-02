@@ -10,7 +10,7 @@ $this->loadHelper('Bootstrap.Ui');
     <h1>Content Information</h1>
 
     <?= $this->Tabs->create(); ?>
-    <?= $this->Tabs->add(__('Menus')); ?>
+    <?= $this->Tabs->add(__d('content', 'Menus')); ?>
 
     <h3>
         getAvailableMenus
@@ -25,7 +25,7 @@ $this->loadHelper('Bootstrap.Ui');
 
     <?php endforeach; ?>
 
-    <?= $this->Tabs->add(__('Content Manager')); ?>
+    <?= $this->Tabs->add(__d('content', 'Content Manager')); ?>
     <h3>
         getAvailablePageTypes
     </h3>
