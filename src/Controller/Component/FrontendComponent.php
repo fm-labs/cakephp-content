@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace Content\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
 
 /**
  * Class FrontendComponent
@@ -15,16 +13,12 @@ use Cake\Core\Plugin;
  */
 class FrontendComponent extends Component
 {
-    public $components = ['Flash'];
-
     /**
      * @var array
      */
     protected $_defaultConfig = [
         'viewClass' => 'Content.Content',
         'refscope' => null,
-        'theme' => null,
-        'layout' => null,
     ];
 
     /**
@@ -32,21 +26,8 @@ class FrontendComponent extends Component
      */
     public function initialize(array $config): void
     {
-        $layout = $this->_config['layout'] ?: Configure::read('Site.layout');
-        $theme = $this->_config['theme'] ?: Configure::read('Site.theme');
         $viewClass = $this->_config['viewClass'];
-
-        // check if theme plugin is loaded
-        if ($theme && !Plugin::isLoaded($theme)) {
-            $this->Flash->warning("Warning: Configured site theme '$theme' is not enabled.");
-            $theme = null;
-        }
-
         $this->getController()->viewBuilder()->setClassName($viewClass);
-        $this->getController()->viewBuilder()->setLayout($layout);
-        $this->getController()->viewBuilder()->setTheme($theme);
-        $this->getController()->viewBuilder()
-            ->setVar('_frontend', compact('layout', 'theme', 'viewClass'));
 
         $this->setRefScope($this->_config['refscope']);
         $this->setRefId(null);
@@ -72,14 +53,6 @@ class FrontendComponent extends Component
         $this->getController()->set('refid', $id);
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTheme(): string
-    {
-        return $this->_config['theme'];
     }
 
     /**
