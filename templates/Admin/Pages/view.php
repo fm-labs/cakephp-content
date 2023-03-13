@@ -27,10 +27,10 @@ $this->assign('title', $page->title);
     <?= $this->cell('Admin.EntityView', [ $page ], [
         'title' => false,
         'model' => 'Content.Pages'
-    ]); ?>
+    ])->render('table'); ?>
 
     <!-- Meta -->
-    <?php $this->Tabs->add(__d('content', 'Meta')); ?>
+    <?php /* $this->Tabs->add(__d('content', 'Meta')); ?>
     <?= $this->cell('Admin.EntityView', [ $page ], [
         'title' => false,
         'model' => 'Content.Pages',
@@ -41,7 +41,7 @@ $this->assign('title', $page->title);
             'meta_lang'
         ],
         'exclude' => '*'
-    ]); ?>
+    ])->render('table'); */ ?>
 
     <!-- Content Modules -->
     <?php

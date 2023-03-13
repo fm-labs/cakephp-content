@@ -46,7 +46,7 @@ class PagesController extends AppController
         $url = $page->getUrl();
         $url = Router::url($url);
 
-        $url .= strpos('?', $url) === 0 ? '?' : '&';
+        $url .= strpos('?', $url) >= 0 ? '?' : '&';
         $url .= 'preview=' . $previewKey;
         $this->redirect($url);
     }
