@@ -6,7 +6,7 @@ namespace Content\Controller\Admin;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Content\ContentManager;
-use Media\Lib\Media\MediaManager;
+use Media\MediaManager;
 
 /**
  * Class AppController

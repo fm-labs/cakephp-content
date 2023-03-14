@@ -5,7 +5,7 @@ namespace Content\Controller\Admin;
 
 use Cake\Core\Plugin;
 use Cake\Log\Log;
-use Media\Lib\Media\MediaManager;
+use Media\MediaManager;
 
 /**
  * Class HtmlEditorController

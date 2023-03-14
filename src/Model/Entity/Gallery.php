@@ -6,7 +6,7 @@ namespace Content\Model\Entity;
 use Cake\Core\Plugin;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
-use Media\Lib\Media\MediaManager;
+use Media\MediaManager;
 
 /**
  * Gallery Entity.
