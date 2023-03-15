@@ -78,8 +78,9 @@ class PagesController extends AppController
             'maxLimit' => 200,
         ];
 
-        $this->set('fields.whitelist', ['title', 'type', 'slug', 'is_published']);
-        $this->set('fields', [
+        $action = $this->Action->getAction('index');
+        $action->set('fields.whitelist', ['title', 'type', 'slug', 'is_published']);
+        $action->set('fields', [
             'title' => ['formatter' => function ($val, $row, $args, $view) {
                 return $view->Html->link($val, ['action' => 'edit', $row->id]);
             }],
@@ -99,9 +100,8 @@ class PagesController extends AppController
 //        if ($this->Pages->behaviors()->has('Attributes')) {
 //            $queryObj = $queryObj->find('withAttributres');
 //        }
-        $this->set('queryObj', $queryObj);
-
-        $this->Action->execute();
+        $action->set('queryObj', $queryObj);
+        $this->Action->dispatch($action);
     }
 
     /**

@@ -85,8 +85,10 @@ class CategoryView extends ContentView
             //@TODO Wrap in try/catch block
             if ($category->image) {
                 $thumb = $this->Media->thumbnailUrl($category->image->filepath, ['width' => 200, 'height' => 200], true);
-                $this->Html->meta(['property' => 'og:image', 'content' => $thumb], null, ['block' => true]);
-                $this->Html->meta(['property' => 'twitter:image', 'content' => $thumb], null, ['block' => true]);
+                if ($thumb) {
+                    $this->Html->meta(['property' => 'og:image', 'content' => $thumb], null, ['block' => true]);
+                    $this->Html->meta(['property' => 'twitter:image', 'content' => $thumb], null, ['block' => true]);
+                }
             }
 
             // Twitter Tags (https://dev.twitter.com/cards/markup)
