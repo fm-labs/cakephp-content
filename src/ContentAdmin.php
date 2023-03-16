@@ -8,14 +8,13 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
-use Settings\SettingsManager;
 
 /**
  * Class Plugin
  *
  * @package Content
  */
-class Admin extends BaseAdminPlugin implements EventListenerInterface
+class ContentAdmin extends BaseAdminPlugin implements EventListenerInterface
 {
     /**
      * @inheritDoc
@@ -100,7 +99,7 @@ class Admin extends BaseAdminPlugin implements EventListenerInterface
                 'posts' => [
                     'title' => 'Posts',
                     'url' => ['plugin' => 'Content', 'controller' => 'Posts', 'action' => 'index'],
-                    'data-icon' => 'file-o',
+                    'data-icon' => 'file-text-o',
                 ],
                 'menus' => [
                     'title' => 'Menus',

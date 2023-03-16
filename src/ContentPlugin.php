@@ -7,9 +7,12 @@ use Cake\Cache\Cache;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
-use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
+use Content\Model\Entity\Menu\ControllerMenuType;
+use Content\Model\Entity\Menu\LinkMenuType;
+use Content\Model\Entity\Menu\PageMenuType;
+use Content\Model\Entity\Menu\RootMenuType;
 use Cupcake\Cupcake;
 use Cupcake\Model\EntityTypeRegistry;
 
@@ -65,19 +68,19 @@ class ContentPlugin extends BasePlugin implements EventListenerInterface
         EntityTypeRegistry::registerMultiple('Content.Menu', [
             'root' => [
                 'label' => __d('content', 'Root'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\RootMenuType',
+                'className' => RootMenuType::class,
             ],
             'page' => [
                 'label' => __d('content', 'Page'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\PageMenuType',
+                'className' => PageMenuType::class,
             ],
             'controller' => [
                 'label' => __d('content', 'Custom Controller'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\ControllerMenuType',
+                'className' => ControllerMenuType::class,
             ],
             'link' => [
                 'label' => __d('content', 'Custom Link'),
-                'className' => '\\Content\\Model\\Entity\\Menu\\LinkMenuType',
+                'className' => LinkMenuType::class,
             ],
         ]);
 
@@ -140,12 +143,12 @@ class ContentPlugin extends BasePlugin implements EventListenerInterface
          * Admin plugin
          */
         if (\Cake\Core\Plugin::isLoaded('Admin')) {
-            \Admin\Admin::addPlugin(new \Content\Admin());
+            \Admin\Admin::addPlugin(new \Content\ContentAdmin());
         }
         Cupcake::addFilter('admin_init', function ($name, $data) {
             $data['content'] = [
                 'name' => 'Content Plugin Administration',
-                'className' => \Content\Admin::class,
+                'className' => \Content\ContentAdmin::class,
             ];
 
             return $data;
