@@ -14,13 +14,13 @@ class Initial extends AbstractMigration
      * https://book.cakephp.org/phinx/0/en/migrations.html#the-up-method
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         $this->table('content_i18n')
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
             ])
             ->addPrimaryKey(['id'])
@@ -36,7 +36,7 @@ class Initial extends AbstractMigration
             ])
             ->addColumn('foreign_key', 'integer', [
                 'default' => null,
-                'limit' => 10,
+                'limit' => null,
                 'null' => false,
             ])
             ->addColumn('field', 'string', [
@@ -71,32 +71,32 @@ class Initial extends AbstractMigration
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
                 'signed' => false,
             ])
             ->addPrimaryKey(['id'])
             ->addColumn('lft', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
             ->addColumn('rght', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
             ->addColumn('level', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
             ->addColumn('parent_id', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
@@ -147,54 +147,11 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('content_options')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
-            ->addColumn('model', 'string', [
-                'default' => null,
-                'limit' => 255,
-                'null' => true,
-            ])
-            ->addColumn('foreign_key', 'integer', [
-                'default' => null,
-                'limit' => 10,
-                'null' => true,
-                'signed' => false,
-            ])
-            ->addColumn('name', 'string', [
-                'default' => null,
-                'limit' => 255,
-                'null' => true,
-            ])
-            ->addColumn('value', 'text', [
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addIndex(
-                [
-                    'model',
-                ]
-            )
-            ->addIndex(
-                [
-                    'model',
-                    'foreign_key',
-                ]
-            )
-            ->create();
-
         $this->table('content_pages')
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
                 'signed' => false,
             ])
@@ -206,13 +163,13 @@ class Initial extends AbstractMigration
             ])
             ->addColumn('refid', 'integer', [
                 'default' => null,
-                'limit' => 10,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
             ->addColumn('parent_id', 'integer', [
                 'default' => null,
-                'limit' => 10,
+                'limit' => null,
                 'null' => true,
                 'signed' => false,
             ])
@@ -222,7 +179,7 @@ class Initial extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('title', 'string', [
-                'default' => null,
+                'default' => '',
                 'limit' => 255,
                 'null' => false,
             ])
@@ -288,7 +245,7 @@ class Initial extends AbstractMigration
             ])
             ->addColumn('pos', 'integer', [
                 'default' => '0',
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('is_archived', 'boolean', [
@@ -312,6 +269,51 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->create();
+
+
+        $this->table('content_options')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+                'limit' => 10,
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+            ->addColumn('model', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => true,
+            ])
+            ->addColumn('foreign_key', 'integer', [
+                'default' => null,
+                'limit' => 10,
+                'null' => true,
+                'signed' => false,
+            ])
+            ->addColumn('name', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => true,
+            ])
+            ->addColumn('value', 'text', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addIndex(
+                [
+                    'model',
+                ]
+            )
+            ->addIndex(
+                [
+                    'model',
+                    'foreign_key',
+                ]
+            )
+            ->create();
+
     }
 
     /**
@@ -321,11 +323,11 @@ class Initial extends AbstractMigration
      * https://book.cakephp.org/phinx/0/en/migrations.html#the-down-method
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         $this->table('content_i18n')->drop()->save();
         $this->table('content_menus')->drop()->save();
-        $this->table('content_options')->drop()->save();
         $this->table('content_pages')->drop()->save();
+        $this->table('content_options')->drop()->save();
     }
 }

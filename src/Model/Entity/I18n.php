@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property string $field
  * @property string|null $content
  */
-class I18N extends Entity
+class I18n extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

@@ -11,21 +11,21 @@ use Cake\Validation\Validator;
 /**
  * ContentI18n Model
  *
- * @method \Content\Model\Entity\I18N newEmptyEntity()
- * @method \Content\Model\Entity\I18N newEntity(array $data, array $options = [])
- * @method \Content\Model\Entity\I18N[] newEntities(array $data, array $options = [])
- * @method \Content\Model\Entity\I18N get($primaryKey, $options = [])
- * @method \Content\Model\Entity\I18N findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \Content\Model\Entity\I18N patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Content\Model\Entity\I18N[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \Content\Model\Entity\I18N|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Content\Model\Entity\I18N saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Content\Model\Entity\I18N[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \Content\Model\Entity\I18N[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \Content\Model\Entity\I18N[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \Content\Model\Entity\I18N[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \Content\Model\Entity\I18n newEmptyEntity()
+ * @method \Content\Model\Entity\I18n newEntity(array $data, array $options = [])
+ * @method \Content\Model\Entity\I18n[] newEntities(array $data, array $options = [])
+ * @method \Content\Model\Entity\I18n get($primaryKey, $options = [])
+ * @method \Content\Model\Entity\I18n findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \Content\Model\Entity\I18n patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Content\Model\Entity\I18n[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Content\Model\Entity\I18n|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Content\Model\Entity\I18n saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Content\Model\Entity\I18n[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \Content\Model\Entity\I18n[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \Content\Model\Entity\I18n[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \Content\Model\Entity\I18n[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class I18NTable extends BaseTable
+class I18nTable extends BaseTable
 {
     /**
      * Initialize method
