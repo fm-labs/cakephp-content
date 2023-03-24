@@ -1,5 +1,7 @@
 <?php
-$this->Breadcrumbs->add('Page not found');
+$this->Breadcrumbs->add(__('Page not found'));
+
+$this->assign('title', __('Page not found'))
 ?>
 <div class="container">
     404 - PAGE NOT FOUND

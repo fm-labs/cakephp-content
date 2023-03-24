@@ -9,7 +9,7 @@ use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest as Request;
 use Cake\View\View;
-use Content\Model\Entity\ContentModule;
+//use Content\Model\Entity\ContentModule;
 
 /**
  * Class FrontendView
@@ -38,7 +38,7 @@ class ContentView extends View
     {
         $this->loadHelper('Content.Breadcrumbs');
         $this->loadHelper('Content.Content');
-        $this->loadHelper('Content.Meta');
+        $this->loadHelper('Cupcake.Meta');
 
         // collect additional helpers
         $event = new Event('Content.View.initialize', $this);

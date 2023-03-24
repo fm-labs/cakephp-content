@@ -6,6 +6,9 @@ namespace Content\View\Helper;
 use Cake\View\Helper;
 use Cake\View\View;
 
+/**
+ * @deprecated
+ */
 class ScriptHelper extends Helper
 {
     public static $scriptBlockHead = "script";

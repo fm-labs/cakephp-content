@@ -10,7 +10,7 @@ class MathjaxShortcode extends Shortcode
      */
     public function __invoke(string $name, array $params, ?string $content = null): string
     {
-        $this->_view->loadHelper('Content.Mathjax');
+        $this->_view->loadHelper('Sugar.Mathjax');
 
         $params += ['exp' => null];
 

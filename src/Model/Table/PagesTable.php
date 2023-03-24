@@ -182,7 +182,7 @@ class PagesTable extends BaseTable
      * @param null $slug
      * @return mixed Model Id or null
      */
-    public function findIdBySlug($slug = null)
+    public function findIdBySlug($slug = null): mixed
     {
         $page = $this
             ->find()
@@ -194,7 +194,7 @@ class PagesTable extends BaseTable
             ->enableHydration(false)
             ->first();
 
-        return $page['id'];
+        return $page['id'] ?? null;
     }
 
     /**

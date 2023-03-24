@@ -6,7 +6,7 @@ namespace Content\View;
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Text;
-use Content\Model\Entity\Node;
+//use Content\Model\Entity\Node;
 
 class CategoryView extends ContentView
 {
