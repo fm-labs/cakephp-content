@@ -12,7 +12,7 @@ class SitemapProvider implements SitemapProviderInterface
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): \Generator|iterable
     {
         $Pages = TableRegistry::getTableLocator()->get('Content.Pages');
         foreach ($Pages->find()->where(['Pages.type' => 'page'])->find('published') as $page) {
